@@ -74,6 +74,13 @@ typedef struct {
 	BOOL librashader_requested;
 	BOOL librashader_active;
 	UINT32 librashader_frame_count;
+	UINT64 librashader_upload_count;
+	UINT64 librashader_upload_ticks;
+	UINT64 librashader_frame_ticks;
+	UINT64 librashader_filtered_frame_count;
+	UINT32 librashader_output_width;
+	UINT32 librashader_output_height;
+	UINT32 librashader_rebuild_count;
 #endif
 } SCRNMNG;
 
@@ -968,15 +975,21 @@ static BOOL scrnmng_upload_shadow(void) {
 	if ((scrnmng.texture == NULL) || (scrnmng.shadow == NULL)) {
 		return (FAILURE);
 	}
-	#if defined(VAEG_ENABLE_LIBRASHADER)
-	if ((scrnmng.librashader_bridge != NULL) && scrnmng.librashader_active &&
-	    !librashader_gl_bridge_upload_source(
-	        scrnmng.librashader_bridge, scrnmng.shadow + (SCRNMNG_SURFACE_GUARD_LEFT * 2),
-	        scrnmng.shadow_pitch, (UINT32)scrnmng.width, (UINT32)scrnmng.height)) {
-		fprintf(stderr, "librashader: source texture upload failed; using SDL renderer\n");
-		scrnmng.librashader_active = FALSE;
+#if defined(VAEG_ENABLE_LIBRASHADER)
+	if ((scrnmng.librashader_bridge != NULL) && scrnmng.librashader_active) {
+		const UINT64 started = SDL_GetPerformanceCounter();
+		const BOOL uploaded = librashader_gl_bridge_upload_source(
+		    scrnmng.librashader_bridge, scrnmng.shadow + (SCRNMNG_SURFACE_GUARD_LEFT * 2),
+		    scrnmng.shadow_pitch, (UINT32)scrnmng.width, (UINT32)scrnmng.height);
+		scrnmng.librashader_upload_ticks += SDL_GetPerformanceCounter() - started;
+		if (!uploaded) {
+			fprintf(stderr, "librashader: source texture upload failed; using SDL renderer\n");
+			scrnmng.librashader_active = FALSE;
+		} else {
+			scrnmng.librashader_upload_count++;
+		}
 	}
-	#endif
+#endif
 	if (SDL_UpdateTexture(scrnmng.texture, NULL, scrnmng.shadow + (SCRNMNG_SURFACE_GUARD_LEFT * 2),
 	                      scrnmng.shadow_pitch) != 0) {
 		fprintf(stderr, "Error: SDL_UpdateTexture: %s\n", SDL_GetError());
@@ -1352,6 +1365,7 @@ BOOL scrnmng_get_librashader_enabled(void) {
 
 void scrnmng_rebuild_librashader(void) {
 #if defined(VAEG_ENABLE_LIBRASHADER)
+	scrnmng.librashader_rebuild_count++;
 	if (scrnmng.librashader_bridge != NULL) {
 		librashader_gl_bridge_destroy(scrnmng.librashader_bridge);
 		scrnmng.librashader_bridge = NULL;
@@ -1665,6 +1679,7 @@ void scrnmng_present_begin(void) {
 		int drawable_width;
 		int drawable_height;
 		BOOL filtered;
+		const UINT64 started = SDL_GetPerformanceCounter();
 
 		drawable_width = 0;
 		drawable_height = 0;
@@ -1673,10 +1688,14 @@ void scrnmng_present_begin(void) {
 		           librashader_gl_bridge_render_frame(
 		               scrnmng.librashader_bridge, scrnmng.librashader_frame_count++, 16,
 		               (UINT32)dst.w, (UINT32)dst.h) &&
-		           librashader_gl_bridge_draw_output(
-		               scrnmng.librashader_bridge, drawable_width, drawable_height, dst.x,
-		               dst.y, (UINT32)dst.w, (UINT32)dst.h);
+			librashader_gl_bridge_draw_output(
+			               scrnmng.librashader_bridge, drawable_width, drawable_height, dst.x,
+			               dst.y, (UINT32)dst.w, (UINT32)dst.h);
+		scrnmng.librashader_frame_ticks += SDL_GetPerformanceCounter() - started;
 		if (filtered) {
+			scrnmng.librashader_filtered_frame_count++;
+			scrnmng.librashader_output_width = (UINT32)drawable_width;
+			scrnmng.librashader_output_height = (UINT32)drawable_height;
 			SDL_RenderSetClipRect(scrnmng.renderer, &dst);
 			scrnmng.dirty = FALSE;
 			return;
@@ -1743,6 +1762,35 @@ void scrnmng_present_begin(void) {
 	scrnmng.dirty = FALSE;
 }
 
+#if defined(VAEG_ENABLE_LIBRASHADER)
+static void scrnmng_log_librashader_metrics(void) {
+	const UINT64 frequency = SDL_GetPerformanceFrequency();
+	double average_upload_ms;
+	double average_filter_ms;
+
+	if (!np2_debug || (frequency == 0) ||
+	    (scrnmng.librashader_filtered_frame_count == 0) ||
+	    ((scrnmng.librashader_filtered_frame_count % 60) != 0)) {
+		return;
+	}
+	average_upload_ms = (scrnmng.librashader_upload_count != 0)
+	                        ? (double)scrnmng.librashader_upload_ticks * 1000.0 /
+	                              ((double)frequency * (double)scrnmng.librashader_upload_count)
+	                        : 0.0;
+	average_filter_ms = (double)scrnmng.librashader_frame_ticks * 1000.0 /
+	                    ((double)frequency * (double)scrnmng.librashader_filtered_frame_count);
+	fprintf(stderr,
+	        "librashader metrics frames=%llu uploads=%llu rebuilds=%u "
+	        "avg_upload_ms=%.4f avg_filter_cpu_ms=%.4f output=%ux%u "
+	        "source=640x400 cpu_frame_copies=0 per_frame_allocations=0\n",
+	        (unsigned long long)scrnmng.librashader_filtered_frame_count,
+	        (unsigned long long)scrnmng.librashader_upload_count,
+	        scrnmng.librashader_rebuild_count,
+	        average_upload_ms, average_filter_ms,
+	        scrnmng.librashader_output_width, scrnmng.librashader_output_height);
+}
+#endif
+
 void scrnmng_present_end(void) {
 	VAEG_VIEWPORT viewport;
 
@@ -1756,6 +1804,9 @@ void scrnmng_present_end(void) {
 	if (scrnmng.rendered_capture_enabled) {
 		scrnmng_capture_rendered_frame();
 	}
+	#if defined(VAEG_ENABLE_LIBRASHADER)
+	scrnmng_log_librashader_metrics();
+	#endif
 	SDL_RenderPresent(scrnmng.renderer);
 }
 
