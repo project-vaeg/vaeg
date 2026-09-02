@@ -50,6 +50,19 @@ windows)
 	;;
 esac
 
+# GitHub's Windows Rust action installs cargo for the native runner shell.
+# When this script is invoked from an MSYS2 shell, expose that same toolchain
+# explicitly before the pinned upstream build is started.
+if [ "$platform" = windows ] && ! command -v cargo >/dev/null 2>&1 \
+	&& [ -n "${USERPROFILE:-}" ] && command -v cygpath >/dev/null 2>&1; then
+	PATH="$(cygpath -u "$USERPROFILE")/.cargo/bin:$PATH"
+	export PATH
+fi
+if ! command -v cargo >/dev/null 2>&1; then
+	echo "cargo is required to build the pinned librashader runtime" >&2
+	exit 1
+fi
+
 source_dir=$(mktemp -d "${TMPDIR:-/tmp}/vaeg-librashader.XXXXXX")
 trap 'rm -rf "$source_dir"' EXIT HUP INT TERM
 

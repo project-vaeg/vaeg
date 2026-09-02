@@ -252,6 +252,10 @@ jobs:
             mingw-w64-x86_64-pkgconf
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
+      - name: Expose Rust to MSYS2
+        shell: msys2 {0}
+        run: |
+          echo "PATH=$(cygpath -u \"${USERPROFILE}\")/.cargo/bin:$PATH" >> "$GITHUB_ENV"
       - name: Configure feature-on build
         run: cmake --preset mingw-ci -DVAEG_ENABLE_LIBRASHADER=ON
       - name: Build feature-on target
