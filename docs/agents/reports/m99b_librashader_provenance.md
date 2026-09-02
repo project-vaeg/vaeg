@@ -61,7 +61,8 @@ shader repository is not vendored.
 
 | File | SHA-256 |
 | --- | --- |
-| `crt/crt-lottes-fast.slangp` | `0992238001c519503d9e8e750b37b32d30ff380e74a40287863605ae69f9fff0` |
+| Upstream `crt/crt-lottes-fast.slangp` | `0992238001c519503d9e8e750b37b32d30ff380e74a40287863605ae69f9fff0` |
+| VAeg `assets/shaders/crt/vaeg_crt_lottes_fast.slangp` | `8489d84dce043c5f68b7b6c7b7e3721bcad82b9b3498a8320f00fba7d6135835` |
 | `crt/shaders/crt-lottes-fast.slang` | `576eddc662ac4f77909c0c14dbd5a16ac4164e50c67527fff634316f4441c482` |
 
 Sources:

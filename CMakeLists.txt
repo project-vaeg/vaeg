@@ -755,6 +755,13 @@ if(VAEG_ENABLE_TESTS)
     set(VAEG_SSTS_V20_ROOT "" CACHE PATH
         "Verified external SingleStepTests V20 checkout for uPD9002 comparison")
 
+    add_test(NAME vaeg_librashader_pipeline_static
+        COMMAND "${Python3_EXECUTABLE}"
+            "${CMAKE_CURRENT_SOURCE_DIR}/tests/frontend/librashader/test_librashader_pipeline.py"
+            --root "${CMAKE_CURRENT_SOURCE_DIR}")
+    set_tests_properties(vaeg_librashader_pipeline_static PROPERTIES
+        LABELS "frontend;librashader;romless")
+
     if(TARGET hostfat_sys)
         add_test(NAME vaeg_hostfat_driver
             COMMAND "${Python3_EXECUTABLE}"
