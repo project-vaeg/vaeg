@@ -335,6 +335,10 @@ set(VAEG_SDL2_SOURCES
     sdl2/commng.c
     sdl2/fontmng.c
     sdl2/gui/gui.cpp)
+if(VAEG_ENABLE_LIBRASHADER)
+    list(APPEND VAEG_SDL2_SOURCES
+        sdl2/librashader/librashader_loader.cpp)
+endif()
 if(VAEG_ENABLE_TESTS)
     list(APPEND VAEG_SDL2_SOURCES
         tests/idp/m69_status_composition.c
@@ -571,6 +575,11 @@ target_include_directories(vaeg_sdl2 PRIVATE
     "${CMAKE_CURRENT_SOURCE_DIR}/external/imgui"
     "${CMAKE_CURRENT_SOURCE_DIR}/external/imgui/backends"
     "${CMAKE_CURRENT_SOURCE_DIR}/external/ymfm/src")
+if(VAEG_ENABLE_LIBRASHADER)
+    target_include_directories(vaeg_sdl2 PRIVATE
+        "${CMAKE_CURRENT_SOURCE_DIR}/third_party/librashader/include")
+    target_compile_definitions(vaeg_sdl2 PRIVATE LIBRA_RUNTIME_OPENGL=1)
+endif()
 target_link_libraries(vaeg_sdl2 PRIVATE vaeg_core vaeg_va vaeg_common
     vaeg_core vaeg_va ${VAEG_SDL2_LIBS})
 if(VAEG_ENABLE_LIBRASHADER)
@@ -722,6 +731,9 @@ if(MINGW)
 endif()
 if(UNIX)
     target_link_libraries(vaeg_sdl2 PRIVATE m)
+endif()
+if(VAEG_ENABLE_LIBRASHADER)
+    target_link_libraries(vaeg_sdl2 PRIVATE ${CMAKE_DL_LIBS})
 endif()
 if(WIN32 AND VAEG_FETCH_SDL2 AND NOT VAEG_STATIC_SDL2)
     add_custom_command(TARGET vaeg_sdl2 POST_BUILD
