@@ -81,6 +81,8 @@ void scrnmng_set_scaling(int scaling);
 int scrnmng_get_scaling(void);
 void scrnmng_set_effect(int effect);
 int scrnmng_get_effect(void);
+void scrnmng_set_librashader_enabled(BOOL enabled);
+BOOL scrnmng_get_librashader_enabled(void);
 BOOL scrnmng_get_viewport(VAEG_VIEWPORT *viewport);
 BOOL scrnmng_map_window_point(int window_x, int window_y, int *guest_x, int *guest_y);
 BOOL scrnmng_set_display_mode(int mode, int monitor, UINT width, UINT height, UINT refresh,

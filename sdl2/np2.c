@@ -2107,6 +2107,16 @@ int main(int argc, char **argv) {
 	scrnmng_set_display(np2oscfg.gui_scale, np2oscfg.gui_aspect);
 	scrnmng_set_scaling(np2oscfg.gui_scaling);
 	scrnmng_set_effect(np2oscfg.gui_effect);
+#if defined(VAEG_ENABLE_LIBRASHADER)
+	{
+		const char *crt_filter = getenv("VAEG_CRT_FILTER");
+		const BOOL crt_enabled =
+		    (crt_filter != NULL) &&
+		    ((!strcmp(crt_filter, "1")) || (!strcmp(crt_filter, "on")) ||
+		     (!strcmp(crt_filter, "true")));
+		scrnmng_set_librashader_enabled(crt_enabled);
+	}
+#endif
 	SDL_Log("Display config: window=%ux%u mode=%u monitor=%d scaling=%u effect=%u",
 	        np2oscfg.gui_window_width, np2oscfg.gui_window_height, np2oscfg.gui_display_mode,
 	        np2oscfg.gui_monitor, np2oscfg.gui_scaling, np2oscfg.gui_effect);

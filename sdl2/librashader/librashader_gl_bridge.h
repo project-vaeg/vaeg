@@ -28,10 +28,7 @@ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <SDL.h>
 #include <SDL_opengl.h>
 
-#ifndef LIBRA_RUNTIME_OPENGL
-#define LIBRA_RUNTIME_OPENGL
-#endif
-#include "librashader.h"
+#include "librashader_loader.h"
 
 class LibrashaderGlBridge {
 public:
@@ -42,6 +39,12 @@ public:
     bool upload_source(const void *pixels, int pitch, uint32_t width,
                        uint32_t height);
     bool ensure_output(uint32_t width, uint32_t height);
+    bool load_preset(const char *path);
+    bool render_frame(uint32_t frame_count, uint32_t frame_time_ms,
+                      uint32_t width, uint32_t height);
+    bool draw_output(int drawable_width, int drawable_height, int x, int y,
+                     uint32_t width, uint32_t height);
+    void disable_filter();
 
     libra_image_gl_t source_image() const;
     libra_image_gl_t output_image() const;
@@ -56,6 +59,13 @@ private:
     uint32_t source_height_;
     uint32_t output_width_;
     uint32_t output_height_;
+    SDL_Renderer *renderer_;
+    LibrashaderLoader loader_;
+    libra_gl_filter_chain_t chain_;
+    bool chain_ready_;
+    struct GlApi *api_;
 };
+
+#include "librashader_gl_bridge_c.h"
 
 #endif

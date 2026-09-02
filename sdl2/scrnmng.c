@@ -37,6 +37,9 @@
 #include "fddfile.h"
 #include "appicon.h"
 #include "framedisp.h"
+#if defined(VAEG_ENABLE_LIBRASHADER)
+#include "librashader/librashader_gl_bridge_c.h"
+#endif
 
 typedef struct {
 	BOOL enable;
@@ -66,6 +69,12 @@ typedef struct {
 	VAEG_FRAMEDISP framedisp;
 	BOOL rendered_capture_enabled;
 	SDL_Surface *rendered_frame;
+#if defined(VAEG_ENABLE_LIBRASHADER)
+	void *librashader_bridge;
+	BOOL librashader_requested;
+	BOOL librashader_active;
+	UINT32 librashader_frame_count;
+#endif
 } SCRNMNG;
 
 typedef struct {
@@ -95,6 +104,17 @@ static VAEG_SPEEDMETER speedmeter;
 static BOOL scrnmng_calculate_viewport(VAEG_VIEWPORT *viewport);
 static void scrnmng_draw_video_info_overlay(const VAEG_VIEWPORT *viewport);
 static void scrnmng_draw_framebuffer_info_overlay(const VAEG_VIEWPORT *viewport);
+
+#if defined(VAEG_ENABLE_LIBRASHADER)
+static const char *scrnmng_librashader_preset_path(void) {
+	const char *path = getenv("VAEG_CRT_PRESET");
+
+	if ((path != NULL) && (path[0] != '\0')) {
+		return path;
+	}
+	return "assets/shaders/crt/vaeg_crt_lottes_fast.slangp";
+}
+#endif
 
 static void scrnmng_capture_dummy_frame(void) {
 	VAEG_VIEWPORT viewport;
@@ -929,6 +949,15 @@ static BOOL scrnmng_upload_shadow(void) {
 	if ((scrnmng.texture == NULL) || (scrnmng.shadow == NULL)) {
 		return (FAILURE);
 	}
+	#if defined(VAEG_ENABLE_LIBRASHADER)
+	if ((scrnmng.librashader_bridge != NULL) && scrnmng.librashader_active &&
+	    !librashader_gl_bridge_upload_source(
+	        scrnmng.librashader_bridge, scrnmng.shadow + (SCRNMNG_SURFACE_GUARD_LEFT * 2),
+	        scrnmng.shadow_pitch, (UINT32)scrnmng.width, (UINT32)scrnmng.height)) {
+		fprintf(stderr, "librashader: source texture upload failed; using SDL renderer\n");
+		scrnmng.librashader_active = FALSE;
+	}
+	#endif
 	if (SDL_UpdateTexture(scrnmng.texture, NULL, scrnmng.shadow + (SCRNMNG_SURFACE_GUARD_LEFT * 2),
 	                      scrnmng.shadow_pitch) != 0) {
 		fprintf(stderr, "Error: SDL_UpdateTexture: %s\n", SDL_GetError());
@@ -1085,6 +1114,14 @@ BOOL scrnmng_create(int width, int height) {
 	SDL_GetWindowPosition(scrnmng.window, &scrnmng.window_x, &scrnmng.window_y);
 	scrnmng.window_width = width;
 	scrnmng.window_height = height;
+#if defined(VAEG_ENABLE_LIBRASHADER)
+	if (scrnmng.librashader_requested) {
+		(void)SDL_SetHint(SDL_HINT_RENDER_DRIVER, "opengl");
+		(void)SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
+		(void)SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
+		(void)SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+	}
+#endif
 	scrnmng.renderer = SDL_CreateRenderer(scrnmng.window, -1, SDL_RENDERER_ACCELERATED);
 	if (scrnmng.renderer == NULL) {
 		scrnmng.renderer = SDL_CreateRenderer(scrnmng.window, -1, SDL_RENDERER_SOFTWARE);
@@ -1109,6 +1146,21 @@ BOOL scrnmng_create(int width, int height) {
 	scrnmng.height = SCRNMNG_CANVAS_HEIGHT;
 	scrnmng.shadow_pitch = (SCRNMNG_CANVAS_WIDTH + SCRNMNG_SURFACE_GUARD_LEFT) * 2;
 	scrnmng.shadow = (BYTE *)calloc(SCRNMNG_CANVAS_HEIGHT, scrnmng.shadow_pitch);
+	#if defined(VAEG_ENABLE_LIBRASHADER)
+	if (scrnmng.librashader_requested) {
+		scrnmng.librashader_bridge = librashader_gl_bridge_create(scrnmng.renderer);
+		if (scrnmng.librashader_bridge == NULL) {
+			fprintf(stderr, "librashader: OpenGL bridge unavailable; using SDL renderer\n");
+		} else if (librashader_gl_bridge_load_preset(scrnmng.librashader_bridge,
+	                                             scrnmng_librashader_preset_path())) {
+			scrnmng.librashader_active = TRUE;
+			fprintf(stderr, "librashader: CRT filter enabled preset=%s\n",
+			        scrnmng_librashader_preset_path());
+		} else {
+			fprintf(stderr, "librashader: preset unavailable; using SDL renderer\n");
+		}
+	}
+	#endif
 	{
 		const char *rendered_path;
 
@@ -1137,6 +1189,13 @@ void scrnmng_show(void) {
 void scrnmng_destroy(void) {
 	scrnmng.enable = FALSE;
 	scrnmng.visible = FALSE;
+	#if defined(VAEG_ENABLE_LIBRASHADER)
+	if (scrnmng.librashader_bridge != NULL) {
+		librashader_gl_bridge_destroy(scrnmng.librashader_bridge);
+		scrnmng.librashader_bridge = NULL;
+		scrnmng.librashader_active = FALSE;
+	}
+	#endif
 	if (scrnmng.texture) {
 		SDL_DestroyTexture(scrnmng.texture);
 		scrnmng.texture = NULL;
@@ -1260,6 +1319,32 @@ void scrnmng_set_effect(int effect) {
 
 int scrnmng_get_effect(void) {
 	return (scrnmng.effect);
+}
+
+void scrnmng_set_librashader_enabled(BOOL enabled) {
+#if defined(VAEG_ENABLE_LIBRASHADER)
+	scrnmng.librashader_requested = enabled ? TRUE : FALSE;
+	if (!scrnmng.librashader_requested) {
+		if (scrnmng.librashader_bridge != NULL) {
+			librashader_gl_bridge_disable_filter(scrnmng.librashader_bridge);
+		}
+		scrnmng.librashader_active = FALSE;
+	} else if ((scrnmng.librashader_bridge != NULL) &&
+	           librashader_gl_bridge_load_preset(scrnmng.librashader_bridge,
+                                               scrnmng_librashader_preset_path())) {
+		scrnmng.librashader_active = TRUE;
+	}
+#else
+	(void)enabled;
+#endif
+}
+
+BOOL scrnmng_get_librashader_enabled(void) {
+#if defined(VAEG_ENABLE_LIBRASHADER)
+	return scrnmng.librashader_active;
+#else
+	return FALSE;
+#endif
 }
 
 BOOL scrnmng_get_viewport(VAEG_VIEWPORT *viewport) {
@@ -1492,6 +1577,32 @@ void scrnmng_present_begin(void) {
 	dst.y = viewport.y;
 	dst.w = viewport.width;
 	dst.h = viewport.height;
+#if defined(VAEG_ENABLE_LIBRASHADER)
+	if (scrnmng.librashader_active && (scrnmng.librashader_bridge != NULL)) {
+		int drawable_width;
+		int drawable_height;
+		BOOL filtered;
+
+		drawable_width = 0;
+		drawable_height = 0;
+		filtered = (SDL_GetRendererOutputSize(scrnmng.renderer, &drawable_width,
+		                                     &drawable_height) == 0) &&
+		           librashader_gl_bridge_render_frame(
+		               scrnmng.librashader_bridge, scrnmng.librashader_frame_count++, 16,
+		               (UINT32)dst.w, (UINT32)dst.h) &&
+		           librashader_gl_bridge_draw_output(
+		               scrnmng.librashader_bridge, drawable_width, drawable_height, dst.x,
+		               dst.y, (UINT32)dst.w, (UINT32)dst.h);
+		if (filtered) {
+			SDL_RenderSetClipRect(scrnmng.renderer, &dst);
+			scrnmng.dirty = FALSE;
+			return;
+		}
+		fprintf(stderr, "librashader: frame failed; disabling CRT filter\n");
+		scrnmng.librashader_active = FALSE;
+		librashader_gl_bridge_disable_filter(scrnmng.librashader_bridge);
+	}
+#endif
 	SDL_RenderCopy(scrnmng.renderer, scrnmng.texture, NULL, &dst);
 	SDL_RenderSetClipRect(scrnmng.renderer, &dst);
 	if (((scrnmng.effect == VAEG_EFFECT_SCANLINE) || (scrnmng.effect == VAEG_EFFECT_CRT_LITE)) &&
