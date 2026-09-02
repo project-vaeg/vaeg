@@ -58,9 +58,9 @@ git -C "$source_dir" fetch --depth 1 origin "$revision"
 git -C "$source_dir" checkout --detach "$revision"
 test "$(git -C "$source_dir" rev-parse HEAD)" = "$revision"
 
-cargo build --locked --package librashader-capi --profile optimized \
-	--no-default-features --features runtime-opengl \
-	--manifest-path "$source_dir/Cargo.toml"
+(cd "$source_dir" && \
+	cargo run --locked --package librashader-build-script -- \
+		--profile optimized -- --no-default-features --features runtime-opengl)
 
 runtime_path="$source_dir/target/optimized/$runtime_name"
 test -f "$runtime_path"
