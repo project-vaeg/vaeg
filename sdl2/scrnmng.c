@@ -1329,10 +1329,8 @@ void scrnmng_set_librashader_enabled(BOOL enabled) {
 			librashader_gl_bridge_disable_filter(scrnmng.librashader_bridge);
 		}
 		scrnmng.librashader_active = FALSE;
-	} else if ((scrnmng.librashader_bridge != NULL) &&
-	           librashader_gl_bridge_load_preset(scrnmng.librashader_bridge,
-                                               scrnmng_librashader_preset_path())) {
-		scrnmng.librashader_active = TRUE;
+	} else {
+		(void)scrnmng_set_librashader_preset(scrnmng_librashader_preset_path());
 	}
 #else
 	(void)enabled;
@@ -1343,6 +1341,72 @@ BOOL scrnmng_get_librashader_enabled(void) {
 #if defined(VAEG_ENABLE_LIBRASHADER)
 	return scrnmng.librashader_active;
 #else
+	return FALSE;
+#endif
+}
+
+BOOL scrnmng_set_librashader_preset(const char *path) {
+#if defined(VAEG_ENABLE_LIBRASHADER)
+	if ((path == NULL) || (path[0] == '\0') || (scrnmng.librashader_bridge == NULL)) {
+		return FALSE;
+	}
+	scrnmng.librashader_requested = TRUE;
+	if (!librashader_gl_bridge_load_preset(scrnmng.librashader_bridge, path)) {
+		scrnmng.librashader_active = FALSE;
+		return FALSE;
+	}
+	scrnmng.librashader_active = TRUE;
+	return TRUE;
+#else
+	(void)path;
+	return FALSE;
+#endif
+}
+
+UINT32 scrnmng_librashader_parameter_count(void) {
+#if defined(VAEG_ENABLE_LIBRASHADER)
+	if ((scrnmng.librashader_bridge == NULL) || !scrnmng.librashader_active) {
+		return 0;
+	}
+	return librashader_gl_bridge_parameter_count(scrnmng.librashader_bridge);
+#else
+	return 0;
+#endif
+}
+
+BOOL scrnmng_librashader_parameter_info(UINT32 index,
+                                        SCRNLIBRASHADER_PARAMETER *info) {
+#if defined(VAEG_ENABLE_LIBRASHADER)
+	VAEG_LIBRASHADER_PARAMETER bridge_info;
+
+	if ((scrnmng.librashader_bridge == NULL) || !scrnmng.librashader_active ||
+	    (info == NULL)) {
+		return FALSE;
+	}
+	if (!librashader_gl_bridge_parameter_info(scrnmng.librashader_bridge, index,
+	                                          &bridge_info)) {
+		return FALSE;
+	}
+	memcpy(info, &bridge_info, sizeof(*info));
+	return TRUE;
+#else
+	(void)index;
+	(void)info;
+	return FALSE;
+#endif
+}
+
+BOOL scrnmng_set_librashader_parameter(const char *name, float value) {
+#if defined(VAEG_ENABLE_LIBRASHADER)
+	if ((scrnmng.librashader_bridge == NULL) || !scrnmng.librashader_active) {
+		return FALSE;
+	}
+	return librashader_gl_bridge_set_parameter(scrnmng.librashader_bridge, name, value)
+	               ? TRUE
+	               : FALSE;
+#else
+	(void)name;
+	(void)value;
 	return FALSE;
 #endif
 }

@@ -161,6 +161,11 @@ struct BrowserEntry {
 	bool is_dir = false;
 };
 
+struct CrtParameterEdit {
+	SCRNLIBRASHADER_PARAMETER info{};
+	float value = 0.0f;
+};
+
 struct GuiState {
 	bool initialized = false;
 	bool text_input_active = false;
@@ -178,6 +183,12 @@ struct GuiState {
 	std::string fdd_status;
 	std::string font_status;
 	std::string screenshot_status;
+	bool crt_filter_open = false;
+	bool crt_filter_request = false;
+	bool crt_pending_enabled = false;
+	int crt_pending_preset = 1;
+	std::vector<CrtParameterEdit> crt_parameters;
+	std::string crt_filter_status;
 	bool new_fdd_open = false;
 	bool new_fdd_refresh = false;
 	int new_fdd_format = NEWDISK_FDD_MSDOS_2HD;
@@ -2834,6 +2845,128 @@ static void load_default_va_font(void) {
 	g_gui.font_status += filename;
 }
 
+static const char *crt_recommended_preset_path(void) {
+	return "assets/shaders/crt/vaeg_crt_lottes_fast.slangp";
+}
+
+static void refresh_crt_parameter_edits(void) {
+	g_gui.crt_parameters.clear();
+	const UINT32 count = scrnmng_librashader_parameter_count();
+	for (UINT32 index = 0; index < count; ++index) {
+		CrtParameterEdit parameter;
+		if (scrnmng_librashader_parameter_info(index, &parameter.info)) {
+			parameter.value = parameter.info.value;
+			g_gui.crt_parameters.push_back(parameter);
+		}
+	}
+}
+
+static void open_crt_filter_dialog(void) {
+	g_gui.crt_pending_enabled = scrnmng_get_librashader_enabled() ? true : false;
+	g_gui.crt_pending_preset = g_gui.crt_pending_enabled ? 1 : 0;
+	g_gui.crt_filter_status.clear();
+	refresh_crt_parameter_edits();
+	g_gui.crt_filter_open = true;
+	g_gui.crt_filter_request = true;
+}
+
+static float quantize_crt_parameter(const CrtParameterEdit &parameter, float value) {
+	if (parameter.info.step > 0.0f) {
+		value = parameter.info.initial +
+		        std::round((value - parameter.info.initial) / parameter.info.step) *
+		            parameter.info.step;
+	}
+	return std::clamp(value, parameter.info.minimum, parameter.info.maximum);
+}
+
+static bool apply_crt_filter_dialog(void) {
+	if (!g_gui.crt_pending_enabled || (g_gui.crt_pending_preset == 0)) {
+		scrnmng_set_librashader_enabled(FALSE);
+		g_gui.crt_filter_status = "CRT filtering disabled.";
+		return true;
+	}
+	if (!scrnmng_set_librashader_preset(crt_recommended_preset_path())) {
+		g_gui.crt_filter_status =
+		    "CRT filtering unavailable: optional librashader, OpenGL, or the preset failed.";
+		return false;
+	}
+	for (const CrtParameterEdit &parameter : g_gui.crt_parameters) {
+		if (!scrnmng_set_librashader_parameter(parameter.info.name, parameter.value)) {
+			g_gui.crt_filter_status = "CRT parameter update failed: ";
+			g_gui.crt_filter_status += parameter.info.name;
+			return false;
+		}
+	}
+	g_gui.crt_filter_status = "CRT filter applied.";
+	return true;
+}
+
+static void draw_crt_filter_dialog(void) {
+	if (g_gui.crt_filter_request) {
+		ImGui::OpenPopup("CRT Filter Settings##crt-filter");
+		g_gui.crt_filter_request = false;
+	}
+	if (!g_gui.crt_filter_open) {
+		return;
+	}
+	const ImGuiViewport *viewport = ImGui::GetMainViewport();
+	ImGui::SetNextWindowPos(viewport->GetCenter(), ImGuiCond_Appearing, ImVec2(0.5f, 0.5f));
+	ImGui::SetNextWindowSize(ImVec2(560.0f, 520.0f), ImGuiCond_Appearing);
+	if (ImGui::BeginPopupModal("CRT Filter Settings##crt-filter", &g_gui.crt_filter_open,
+	                           ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse)) {
+		ImGui::Checkbox("Enable CRT filter", &g_gui.crt_pending_enabled);
+		static const char *presets[] = {"Off", "Recommended"};
+		ImGui::SetNextItemWidth(-1.0f);
+		ImGui::Combo("Preset", &g_gui.crt_pending_preset, presets,
+		             static_cast<int>(std::size(presets)));
+		ImGui::TextDisabled("Recommended: VAeg-owned preset with the audited CRT-Lottes-fast pass.");
+		ImGui::Separator();
+		if (g_gui.crt_parameters.empty()) {
+			ImGui::TextDisabled(
+			    "Filtering is unavailable: no active runtime parameters are available.");
+		} else if (ImGui::BeginChild("crt-parameters", ImVec2(0.0f, 300.0f), true)) {
+			for (CrtParameterEdit &parameter : g_gui.crt_parameters) {
+				ImGui::PushID(parameter.info.name);
+				float value = parameter.value;
+				ImGui::SetNextItemWidth(-1.0f);
+				if (ImGui::SliderFloat(parameter.info.name, &value, parameter.info.minimum,
+				                      parameter.info.maximum, "%.3f")) {
+					parameter.value = quantize_crt_parameter(parameter, value);
+				}
+				ImGui::TextDisabled("%s (range %.3f..%.3f, step %.3f)",
+				                   parameter.info.description, parameter.info.minimum,
+				                   parameter.info.maximum, parameter.info.step);
+				ImGui::PopID();
+			}
+			ImGui::EndChild();
+		}
+		if (!g_gui.crt_filter_status.empty()) {
+			ImGui::TextDisabled("%s", g_gui.crt_filter_status.c_str());
+		}
+		if (ImGui::Button("Reset to Defaults")) {
+			for (CrtParameterEdit &parameter : g_gui.crt_parameters) {
+				parameter.value = parameter.info.initial;
+			}
+		}
+		ImGui::SameLine();
+		const float button_width = 88.0f;
+		ImGui::SetCursorPosX(ImGui::GetWindowContentRegionMax().x - button_width);
+		if (ImGui::Button("Apply", ImVec2(button_width, 0.0f))) {
+			if (apply_crt_filter_dialog()) {
+				g_gui.crt_filter_open = false;
+				ImGui::CloseCurrentPopup();
+			}
+		}
+		ImGui::SameLine();
+		if (ImGui::Button("Close", ImVec2(button_width, 0.0f)) ||
+		    ImGui::IsKeyPressed(ImGuiKey_Escape)) {
+			g_gui.crt_filter_open = false;
+			ImGui::CloseCurrentPopup();
+		}
+		ImGui::EndPopup();
+	}
+}
+
 static void draw_screen_menu(void) {
 	if (ImGui::BeginMenu("画面")) {
 		const char *screenshot_shortcut =
@@ -2848,6 +2981,9 @@ static void draw_screen_menu(void) {
 			ImGui::TextDisabled("%s", g_gui.screenshot_status.c_str());
 		}
 		ImGui::Separator();
+		if (ImGui::MenuItem("CRT Filter Settings...")) {
+			open_crt_filter_dialog();
+		}
 		if (ImGui::BeginMenu("Effect")) {
 			static const char *labels[] = {"Unfiltered", "Linear", "Scanline", "CRT Lite"};
 			for (int value = 0; value < VAEG_EFFECT_COUNT; value++) {
@@ -3596,10 +3732,10 @@ BOOL gui_guest_keyboard_blocked(void) {
 	return (g_gui.fdd_browser_open || g_gui.hdd_browser_open || g_gui.hostfat_browser_open ||
 	        g_gui.new_fdd_open || g_gui.new_sasi_open || g_gui.new_scsi_open ||
 	        g_gui.keyboard_config_open || g_gui.configure_open || g_gui.bms_config_open ||
-	        g_gui.custom_size_open || g_gui.state_error_open || g_gui.hostfat_error_open ||
-	        g_gui.about_open)
-	           ? TRUE
-	           : FALSE;
+	        g_gui.custom_size_open || g_gui.crt_filter_open || g_gui.state_error_open ||
+	        g_gui.hostfat_error_open || g_gui.about_open)
+           ? TRUE
+           : FALSE;
 }
 
 BOOL gui_guest_mouse_blocked(void) {
@@ -3613,10 +3749,10 @@ BOOL gui_guest_mouse_blocked(void) {
 	return (g_gui.fdd_browser_open || g_gui.hdd_browser_open || g_gui.hostfat_browser_open ||
 	        g_gui.new_fdd_open || g_gui.new_sasi_open || g_gui.new_scsi_open ||
 	        g_gui.keyboard_config_open || g_gui.configure_open || g_gui.bms_config_open ||
-	        g_gui.custom_size_open || g_gui.state_error_open || g_gui.hostfat_error_open ||
-	        g_gui.about_open)
-	           ? TRUE
-	           : FALSE;
+	        g_gui.custom_size_open || g_gui.crt_filter_open || g_gui.state_error_open ||
+	        g_gui.hostfat_error_open || g_gui.about_open)
+           ? TRUE
+           : FALSE;
 }
 
 void gui_new_frame(void) {
@@ -3689,6 +3825,7 @@ void gui_draw(void) {
 	draw_ems_config_dialog();
 	draw_custom_size_dialog();
 	draw_sound_buffer_dialog();
+	draw_crt_filter_dialog();
 	draw_about_dialog();
 }
 
