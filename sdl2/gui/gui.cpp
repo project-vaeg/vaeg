@@ -187,6 +187,7 @@ struct GuiState {
 	bool crt_filter_request = false;
 	bool crt_pending_enabled = false;
 	int crt_pending_preset = 1;
+	char crt_pending_custom_path[MAX_PATH] = {};
 	std::vector<CrtParameterEdit> crt_parameters;
 	std::string crt_filter_status;
 	bool new_fdd_open = false;
@@ -2864,6 +2865,13 @@ static void refresh_crt_parameter_edits(void) {
 static void open_crt_filter_dialog(void) {
 	g_gui.crt_pending_enabled = scrnmng_get_librashader_enabled() ? true : false;
 	g_gui.crt_pending_preset = g_gui.crt_pending_enabled ? 1 : 0;
+	const char *custom_path = std::getenv("VAEG_CRT_PRESET");
+	if ((custom_path != nullptr) && (custom_path[0] != '\0') &&
+	    (std::strcmp(custom_path, crt_recommended_preset_path()) != 0)) {
+		milstr_ncpy(g_gui.crt_pending_custom_path, custom_path,
+		            sizeof(g_gui.crt_pending_custom_path));
+		g_gui.crt_pending_preset = 2;
+	}
 	g_gui.crt_filter_status.clear();
 	refresh_crt_parameter_edits();
 	g_gui.crt_filter_open = true;
@@ -2885,7 +2893,23 @@ static bool apply_crt_filter_dialog(void) {
 		g_gui.crt_filter_status = "CRT filtering disabled.";
 		return true;
 	}
-	if (!scrnmng_set_librashader_preset(crt_recommended_preset_path())) {
+	const char *preset_path = crt_recommended_preset_path();
+	if (g_gui.crt_pending_preset == 2) {
+		const std::string custom_path(g_gui.crt_pending_custom_path);
+		const std::string extension = fs::path(custom_path).extension().string();
+		std::error_code filesystem_error;
+		const bool regular_file =
+		    !custom_path.empty() &&
+		    fs::is_regular_file(fs::path(custom_path), filesystem_error);
+		if (custom_path.empty() || (extension != ".slangp") ||
+		    !regular_file || filesystem_error) {
+			g_gui.crt_filter_status =
+			    "Custom preset must be an existing local .slangp file.";
+			return false;
+		}
+		preset_path = g_gui.crt_pending_custom_path;
+	}
+	if (!scrnmng_set_librashader_preset(preset_path)) {
 		g_gui.crt_filter_status =
 		    "CRT filtering unavailable: optional librashader, OpenGL, or the preset failed.";
 		return false;
@@ -2915,11 +2939,19 @@ static void draw_crt_filter_dialog(void) {
 	if (ImGui::BeginPopupModal("CRT Filter Settings##crt-filter", &g_gui.crt_filter_open,
 	                           ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse)) {
 		ImGui::Checkbox("Enable CRT filter", &g_gui.crt_pending_enabled);
-		static const char *presets[] = {"Off", "Recommended"};
+		static const char *presets[] = {"Off", "Recommended", "Custom..."};
 		ImGui::SetNextItemWidth(-1.0f);
 		ImGui::Combo("Preset", &g_gui.crt_pending_preset, presets,
 		             static_cast<int>(std::size(presets)));
-		ImGui::TextDisabled("Recommended: VAeg-owned preset with the audited CRT-Lottes-fast pass.");
+		if (g_gui.crt_pending_preset == 1) {
+			ImGui::TextDisabled(
+			    "Recommended: bundled VAeg preset with the audited CRT-Lottes-fast pass.");
+		} else if (g_gui.crt_pending_preset == 2) {
+			ImGui::TextDisabled("Custom: user-selected local preset; no online discovery is used.");
+			ImGui::SetNextItemWidth(-1.0f);
+			ImGui::InputText("Local .slangp path", g_gui.crt_pending_custom_path,
+			                 sizeof(g_gui.crt_pending_custom_path));
+		}
 		ImGui::Separator();
 		if (g_gui.crt_parameters.empty()) {
 			ImGui::TextDisabled(
