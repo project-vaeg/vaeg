@@ -455,7 +455,7 @@ static BOOL copy_screen_text(void) {
 	return (SUCCESS);
 }
 
-static BOOL save_screenshot(BOOL with_graphics_analysis) {
+static BOOL save_screenshot(BOOL with_graphics_analysis, BOOL presented) {
 	_SYSTIME systime;
 	char path[MAX_PATH];
 	UINT attempt;
@@ -469,7 +469,8 @@ static BOOL save_screenshot(BOOL with_graphics_analysis) {
 		return (FAILURE);
 	}
 	for (attempt = 0; attempt < 1000; attempt++) {
-		std::snprintf(path, sizeof(path), "vaeg-%04u%02u%02u-%02u%02u%02u-%010u-%03u.png",
+		std::snprintf(path, sizeof(path), "%s%04u%02u%02u-%02u%02u%02u-%010u-%03u.png",
+		              presented ? "vaeg-presented-" : "vaeg-",
 		              systime.year, systime.month, systime.day, systime.hour, systime.minute,
 		              systime.second, static_cast<unsigned int>(ticks), attempt);
 		if (file_attr(path) < 0) {
@@ -480,15 +481,18 @@ static BOOL save_screenshot(BOOL with_graphics_analysis) {
 		g_gui.screenshot_status = "スクリーンショット名を確保できません。";
 		return (FAILURE);
 	}
-	if ((with_graphics_analysis ? scrnmng_save_guest_frame_with_analysis(path)
-	                            : scrnmng_save_guest_frame(path)) != SUCCESS) {
+	if ((presented ? scrnmng_save_rendered_frame(path)
+	              : (with_graphics_analysis ? scrnmng_save_guest_frame_with_analysis(path)
+	                                        : scrnmng_save_guest_frame(path))) != SUCCESS) {
 		g_gui.screenshot_status = "スクリーンショット保存に失敗しました: ";
 		g_gui.screenshot_status += SDL_GetError();
 		return (FAILURE);
 	}
-	g_gui.screenshot_status = with_graphics_analysis
-	                              ? "分析付きスクリーンショットを保存しました: "
-	                              : "スクリーンショットを保存しました: ";
+	g_gui.screenshot_status = presented
+	                              ? "Presented screenshot saved: "
+	                              : (with_graphics_analysis
+	                                     ? "分析付きスクリーンショットを保存しました: "
+	                                     : "スクリーンショットを保存しました: ");
 	g_gui.screenshot_status += path;
 	std::fprintf(stderr, "screenshot saved path=%s\n", path);
 	return (SUCCESS);
@@ -3104,10 +3108,13 @@ static void draw_screen_menu(void) {
 		const char *screenshot_shortcut =
 		    (np2oscfg.F12KEY == KBDMAP_F12_SCREENSHOT) ? "PrintScreen / F12" : "PrintScreen";
 		if (ImGui::MenuItem("スクリーンショットを保存", screenshot_shortcut)) {
-			save_screenshot(FALSE);
+			save_screenshot(FALSE, FALSE);
 		}
 		if (ImGui::MenuItem("スクリーンショットを保存 (graphics分析あり)")) {
-			save_screenshot(TRUE);
+			save_screenshot(TRUE, FALSE);
+		}
+		if (ImGui::MenuItem("Capture Presented Frame")) {
+			save_screenshot(FALSE, TRUE);
 		}
 		if (!g_gui.screenshot_status.empty()) {
 			ImGui::TextDisabled("%s", g_gui.screenshot_status.c_str());
@@ -3739,7 +3746,7 @@ extern "C" BOOL gui_copy_screen_text(void) {
 }
 
 extern "C" BOOL gui_save_screenshot(void) {
-	return save_screenshot(FALSE);
+	return save_screenshot(FALSE, FALSE);
 }
 
 BOOL gui_initialize(void *window, void *renderer, const char *argv0) {
