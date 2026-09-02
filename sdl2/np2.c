@@ -157,6 +157,11 @@ NP2OSCFG np2oscfg = {0,
                      0,
                      0,
                      0,
+                     "",
+                     VAEG_LIBRASHADER_SETTINGS_VERSION,
+                     0,
+                     "recommended",
+                     "",
                      ""};
 BOOL np2_debug = FALSE;
 
@@ -1779,6 +1784,76 @@ static void wait_startup_splash(UINT32 started) {
 	}
 }
 
+#if defined(VAEG_ENABLE_LIBRASHADER)
+static void np2_apply_librashader_overrides(void) {
+	const char *cursor;
+	const char *identity;
+	char entries[NP2OSCFG_LIBRASHADER_OVERRIDES_SIZE];
+	const size_t identity_length = strlen(np2oscfg.librashader_preset_id);
+	const size_t prefix_length = identity_length + 1;
+
+	if (!scrnmng_get_librashader_enabled() || (identity_length == 0)) {
+		return;
+	}
+	identity = np2oscfg.librashader_preset_id;
+	cursor = np2oscfg.librashader_overrides;
+	entries[0] = '\0';
+	while (*cursor != '\0') {
+		const char *end = strchr(cursor, '|');
+		size_t length = (end != NULL) ? (size_t)(end - cursor) : strlen(cursor);
+
+		if ((length > prefix_length) && !strncmp(cursor, identity, identity_length) &&
+		    (cursor[identity_length] == '|')) {
+			length -= prefix_length;
+			if (length >= sizeof(entries)) {
+				length = sizeof(entries) - 1;
+			}
+			memcpy(entries, cursor + prefix_length, length);
+			entries[length] = '\0';
+			break;
+		}
+		cursor += (end != NULL) ? (length + 1) : length;
+	}
+	if (entries[0] == '\0') {
+		return;
+	}
+	cursor = entries;
+	while (*cursor != '\0') {
+		const char *entry_end = strchr(cursor, ';');
+		const char *equals = strchr(cursor, '=');
+		const size_t entry_length = (entry_end != NULL) ? (size_t)(entry_end - cursor)
+		                                               : strlen(cursor);
+		if ((equals != NULL) && (equals > cursor) &&
+		    ((size_t)(equals - cursor) < entry_length) &&
+		    ((size_t)(equals - cursor) < sizeof(entries))) {
+			char name[64];
+			char value[64];
+			char *value_end;
+			size_t name_length = (size_t)(equals - cursor);
+			size_t value_length = entry_length - name_length - 1;
+
+			if (name_length >= sizeof(name)) {
+				name_length = sizeof(name) - 1;
+			}
+			if (value_length >= sizeof(value)) {
+				value_length = sizeof(value) - 1;
+			}
+			memcpy(name, cursor, name_length);
+			name[name_length] = '\0';
+			memcpy(value, equals + 1, value_length);
+			value[value_length] = '\0';
+			{
+				const float parsed = strtof(value, &value_end);
+				if ((value_end != value) && (*value_end == '\0')) {
+					(void)scrnmng_set_librashader_parameter(name, parsed);
+				}
+			}
+		}
+		cursor += (entry_end != NULL) ? (entry_length + 1) : entry_length;
+	}
+}
+#endif
+
 int main(int argc, char **argv) {
 	BOOL smoke_detect_screen;
 	BOOL splash_visible;
@@ -2111,9 +2186,10 @@ int main(int argc, char **argv) {
 	{
 		const char *crt_filter = getenv("VAEG_CRT_FILTER");
 		const BOOL crt_enabled =
-		    (crt_filter != NULL) &&
-		    ((!strcmp(crt_filter, "1")) || (!strcmp(crt_filter, "on")) ||
-		     (!strcmp(crt_filter, "true")));
+		    (crt_filter != NULL)
+		        ? ((!strcmp(crt_filter, "1")) || (!strcmp(crt_filter, "on")) ||
+		           (!strcmp(crt_filter, "true")))
+		        : (np2oscfg.librashader_enabled ? TRUE : FALSE);
 		scrnmng_set_librashader_enabled(crt_enabled);
 	}
 #endif
@@ -2123,6 +2199,9 @@ int main(int argc, char **argv) {
 	if (scrnmng_create(np2oscfg.gui_window_width, np2oscfg.gui_window_height) != SUCCESS) {
 		goto np2main_err2;
 	}
+#if defined(VAEG_ENABLE_LIBRASHADER)
+	np2_apply_librashader_overrides();
+#endif
 	scrnmng_set_framedisp((np2oscfg.DISPCLK & VAEG_DISPINFO_FRAME) ? TRUE : FALSE);
 	if (gui_initialize(scrnmng_get_window(), scrnmng_get_renderer(), argv[0]) != SUCCESS) {
 		goto np2main_err3;

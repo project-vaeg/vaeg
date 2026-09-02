@@ -30,6 +30,9 @@ enum {
 	NP2OSCFG_KEYBOARD_CUSTOM_MAP_SIZE = 8192,
 	NP2OSCFG_OPN_BACKEND_NAME_SIZE = 8,
 	NP2OSCFG_YMFM_FIDELITY_NAME_SIZE = 8,
+	NP2OSCFG_LIBRASHADER_PRESET_ID_SIZE = 16,
+	NP2OSCFG_LIBRASHADER_OVERRIDES_SIZE = 8192,
+	VAEG_LIBRASHADER_SETTINGS_VERSION = 1,
 	VAEG_PACING_MS_MAX = 1000
 };
 
@@ -85,6 +88,11 @@ typedef struct {
 	UINT16 pacing_ms;
 	BYTE hostfat_enabled;
 	char hostfat_dir[MAX_PATH];
+	BYTE librashader_settings_version;
+	BYTE librashader_enabled;
+	char librashader_preset_id[NP2OSCFG_LIBRASHADER_PRESET_ID_SIZE];
+	char librashader_custom_path[MAX_PATH];
+	char librashader_overrides[NP2OSCFG_LIBRASHADER_OVERRIDES_SIZE];
 } NP2OSCFG;
 
 #if defined(SIZE_QVGA)

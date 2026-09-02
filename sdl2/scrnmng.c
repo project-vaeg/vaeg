@@ -112,6 +112,10 @@ static const char *scrnmng_librashader_preset_path(void) {
 	if ((path != NULL) && (path[0] != '\0')) {
 		return path;
 	}
+	if (!milstr_cmp(np2oscfg.librashader_preset_id, "custom") &&
+	    (np2oscfg.librashader_custom_path[0] != '\0')) {
+		return np2oscfg.librashader_custom_path;
+	}
 	return "assets/shaders/crt/vaeg_crt_lottes_fast.slangp";
 }
 #endif
@@ -1115,12 +1119,10 @@ BOOL scrnmng_create(int width, int height) {
 	scrnmng.window_width = width;
 	scrnmng.window_height = height;
 #if defined(VAEG_ENABLE_LIBRASHADER)
-	if (scrnmng.librashader_requested) {
-		(void)SDL_SetHint(SDL_HINT_RENDER_DRIVER, "opengl");
-		(void)SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
-		(void)SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
-		(void)SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
-	}
+	(void)SDL_SetHint(SDL_HINT_RENDER_DRIVER, "opengl");
+	(void)SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
+	(void)SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
+	(void)SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 #endif
 	scrnmng.renderer = SDL_CreateRenderer(scrnmng.window, -1, SDL_RENDERER_ACCELERATED);
 	if (scrnmng.renderer == NULL) {
@@ -1147,18 +1149,17 @@ BOOL scrnmng_create(int width, int height) {
 	scrnmng.shadow_pitch = (SCRNMNG_CANVAS_WIDTH + SCRNMNG_SURFACE_GUARD_LEFT) * 2;
 	scrnmng.shadow = (BYTE *)calloc(SCRNMNG_CANVAS_HEIGHT, scrnmng.shadow_pitch);
 	#if defined(VAEG_ENABLE_LIBRASHADER)
-	if (scrnmng.librashader_requested) {
-		scrnmng.librashader_bridge = librashader_gl_bridge_create(scrnmng.renderer);
-		if (scrnmng.librashader_bridge == NULL) {
-			fprintf(stderr, "librashader: OpenGL bridge unavailable; using SDL renderer\n");
-		} else if (librashader_gl_bridge_load_preset(scrnmng.librashader_bridge,
-	                                             scrnmng_librashader_preset_path())) {
-			scrnmng.librashader_active = TRUE;
-			fprintf(stderr, "librashader: CRT filter enabled preset=%s\n",
-			        scrnmng_librashader_preset_path());
-		} else {
-			fprintf(stderr, "librashader: preset unavailable; using SDL renderer\n");
-		}
+	scrnmng.librashader_bridge = librashader_gl_bridge_create(scrnmng.renderer);
+	if (scrnmng.librashader_bridge == NULL) {
+		fprintf(stderr, "librashader: OpenGL bridge unavailable; using SDL renderer\n");
+	} else if (scrnmng.librashader_requested &&
+	           librashader_gl_bridge_load_preset(scrnmng.librashader_bridge,
+                                             scrnmng_librashader_preset_path())) {
+		scrnmng.librashader_active = TRUE;
+		fprintf(stderr, "librashader: CRT filter enabled preset=%s\n",
+		        scrnmng_librashader_preset_path());
+	} else if (scrnmng.librashader_requested) {
+		fprintf(stderr, "librashader: preset unavailable; using SDL renderer\n");
 	}
 	#endif
 	{

@@ -2863,8 +2863,19 @@ static void refresh_crt_parameter_edits(void) {
 }
 
 static void open_crt_filter_dialog(void) {
-	g_gui.crt_pending_enabled = scrnmng_get_librashader_enabled() ? true : false;
-	g_gui.crt_pending_preset = g_gui.crt_pending_enabled ? 1 : 0;
+	g_gui.crt_pending_enabled = (np2oscfg.librashader_enabled != 0) ||
+	                            (scrnmng_get_librashader_enabled() ? true : false);
+	if (!std::strcmp(np2oscfg.librashader_preset_id, "custom")) {
+		g_gui.crt_pending_preset = 2;
+	} else if (!std::strcmp(np2oscfg.librashader_preset_id, "recommended")) {
+		g_gui.crt_pending_preset = 1;
+	} else {
+		g_gui.crt_pending_preset = 0;
+	}
+	if (g_gui.crt_pending_preset == 2) {
+		milstr_ncpy(g_gui.crt_pending_custom_path, np2oscfg.librashader_custom_path,
+		            sizeof(g_gui.crt_pending_custom_path));
+	}
 	const char *custom_path = std::getenv("VAEG_CRT_PRESET");
 	if ((custom_path != nullptr) && (custom_path[0] != '\0') &&
 	    (std::strcmp(custom_path, crt_recommended_preset_path()) != 0)) {
@@ -2887,9 +2898,80 @@ static float quantize_crt_parameter(const CrtParameterEdit &parameter, float val
 	return std::clamp(value, parameter.info.minimum, parameter.info.maximum);
 }
 
+static const char *crt_pending_preset_identity(void) {
+	if (g_gui.crt_pending_preset == 0) {
+		return "off";
+	}
+	if (g_gui.crt_pending_preset == 2) {
+		return "custom";
+	}
+	return "recommended";
+}
+
+static bool save_crt_parameter_overrides(const char *identity) {
+	std::string replacement(identity);
+	replacement += '|';
+	for (const CrtParameterEdit &parameter : g_gui.crt_parameters) {
+		char value[32];
+
+		std::snprintf(value, sizeof(value), "%.9g", parameter.value);
+		replacement += parameter.info.name;
+		replacement += '=';
+		replacement += value;
+		replacement += ';';
+	}
+
+	std::string updated;
+	const std::string stored(np2oscfg.librashader_overrides);
+	std::size_t start = 0;
+	while (start < stored.size()) {
+		const std::size_t end = stored.find('|', start);
+		const std::size_t length =
+		    (end == std::string::npos) ? stored.size() - start : end - start;
+		const std::string item = stored.substr(start, length);
+		const std::string prefix = std::string(identity) + '|';
+		if (!item.empty() && (item.rfind(prefix, 0) != 0)) {
+			if (!updated.empty()) {
+				updated += '|';
+			}
+			updated += item;
+		}
+		if (end == std::string::npos) {
+			break;
+		}
+		start = end + 1;
+	}
+	if (replacement.size() > 1) {
+		if (!updated.empty()) {
+			updated += '|';
+		}
+		updated += replacement;
+	}
+	if (updated.size() >= sizeof(np2oscfg.librashader_overrides)) {
+		g_gui.crt_filter_status = "CRT parameter settings are too large to save.";
+		return false;
+	}
+	milstr_ncpy(np2oscfg.librashader_overrides, updated.c_str(),
+	            sizeof(np2oscfg.librashader_overrides));
+	return true;
+}
+
 static bool apply_crt_filter_dialog(void) {
+	const char *identity = crt_pending_preset_identity();
+	if (g_gui.crt_pending_preset == 2) {
+		milstr_ncpy(np2oscfg.librashader_custom_path, g_gui.crt_pending_custom_path,
+		            sizeof(np2oscfg.librashader_custom_path));
+	}
 	if (!g_gui.crt_pending_enabled || (g_gui.crt_pending_preset == 0)) {
 		scrnmng_set_librashader_enabled(FALSE);
+		np2oscfg.librashader_settings_version = VAEG_LIBRASHADER_SETTINGS_VERSION;
+		np2oscfg.librashader_enabled = 0;
+		milstr_ncpy(np2oscfg.librashader_preset_id, identity,
+		            sizeof(np2oscfg.librashader_preset_id));
+		if (!save_crt_parameter_overrides(identity)) {
+			return false;
+		}
+		sysmng_update(SYS_UPDATEOSCFG);
 		g_gui.crt_filter_status = "CRT filtering disabled.";
 		return true;
 	}
@@ -2914,6 +2996,16 @@ static bool apply_crt_filter_dialog(void) {
 		    "CRT filtering unavailable: optional librashader, OpenGL, or the preset failed.";
 		return false;
 	}
+	const std::vector<CrtParameterEdit> pending_parameters = g_gui.crt_parameters;
+	refresh_crt_parameter_edits();
+	for (CrtParameterEdit &parameter : g_gui.crt_parameters) {
+		for (const CrtParameterEdit &pending : pending_parameters) {
+			if (!std::strcmp(parameter.info.name, pending.info.name)) {
+				parameter.value = quantize_crt_parameter(parameter, pending.value);
+				break;
+			}
+		}
+	}
 	for (const CrtParameterEdit &parameter : g_gui.crt_parameters) {
 		if (!scrnmng_set_librashader_parameter(parameter.info.name, parameter.value)) {
 			g_gui.crt_filter_status = "CRT parameter update failed: ";
@@ -2921,6 +3013,14 @@ static bool apply_crt_filter_dialog(void) {
 			return false;
 		}
 	}
+	np2oscfg.librashader_settings_version = VAEG_LIBRASHADER_SETTINGS_VERSION;
+	np2oscfg.librashader_enabled = 1;
+	milstr_ncpy(np2oscfg.librashader_preset_id, identity,
+	            sizeof(np2oscfg.librashader_preset_id));
+	if (!save_crt_parameter_overrides(identity)) {
+		return false;
+	}
+	sysmng_update(SYS_UPDATEOSCFG);
 	g_gui.crt_filter_status = "CRT filter applied.";
 	return true;
 }

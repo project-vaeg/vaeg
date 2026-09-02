@@ -422,6 +422,14 @@ static const INITBL iniitem[] = {
     {"fscrn_cx", INITYPE_UINT16, &np2oscfg.fscrn_cx, 0},
     {"fscrn_cy", INITYPE_UINT16, &np2oscfg.fscrn_cy, 0},
     {"fscrnmod", INITYPE_HEX8, &np2oscfg.fscrnmod, 0},
+    {"librashader_settings_version", INITYPE_UINT8, &np2oscfg.librashader_settings_version, 0},
+    {"librashader_enabled", INITYPE_BOOL, &np2oscfg.librashader_enabled, 0},
+    {"librashader_preset_id", INITYPE_STR, np2oscfg.librashader_preset_id,
+     sizeof(np2oscfg.librashader_preset_id)},
+    {"librashader_custom_path", INITYPE_STR, np2oscfg.librashader_custom_path,
+     sizeof(np2oscfg.librashader_custom_path)},
+    {"librashader_overrides", INITYPE_STR, np2oscfg.librashader_overrides,
+     sizeof(np2oscfg.librashader_overrides)},
 };
 
 #define INIITEMS (sizeof(iniitem) / sizeof(INITBL))
@@ -542,6 +550,27 @@ void initload(void) {
 	}
 	np2oscfg.keyboard_auto_kana_lock = np2oscfg.keyboard_auto_kana_lock ? 1 : 0;
 	np2oscfg.keyboard_tenkey_overlay = np2oscfg.keyboard_tenkey_overlay ? 1 : 0;
+	if (np2oscfg.librashader_settings_version != VAEG_LIBRASHADER_SETTINGS_VERSION) {
+		SDL_LogWarn(SDL_LOG_CATEGORY_APPLICATION,
+		            "Unsupported librashader settings version=%u; using version %u defaults",
+		            np2oscfg.librashader_settings_version,
+		            VAEG_LIBRASHADER_SETTINGS_VERSION);
+		np2oscfg.librashader_settings_version = VAEG_LIBRASHADER_SETTINGS_VERSION;
+		np2oscfg.librashader_enabled = 0;
+		milstr_ncpy(np2oscfg.librashader_preset_id, "recommended",
+		            sizeof(np2oscfg.librashader_preset_id));
+		np2oscfg.librashader_custom_path[0] = '\0';
+		np2oscfg.librashader_overrides[0] = '\0';
+	}
+	np2oscfg.librashader_enabled = np2oscfg.librashader_enabled ? 1 : 0;
+	if (milstr_cmp(np2oscfg.librashader_preset_id, "off") &&
+	    milstr_cmp(np2oscfg.librashader_preset_id, "recommended") &&
+	    milstr_cmp(np2oscfg.librashader_preset_id, "custom")) {
+		SDL_LogWarn(SDL_LOG_CATEGORY_APPLICATION,
+		            "Invalid librashader preset identity; using recommended");
+		milstr_ncpy(np2oscfg.librashader_preset_id, "recommended",
+		            sizeof(np2oscfg.librashader_preset_id));
+	}
 	opngen_setbackend(opngen_parsebackend(np2oscfg.opn_backend));
 	milstr_ncpy(np2oscfg.opn_backend, opngen_backendname(opngen_getbackend()),
 	            sizeof(np2oscfg.opn_backend));
