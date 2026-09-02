@@ -26,6 +26,14 @@ This directory contains the unmodified librashader C API and dynamic-loader
 headers from tag `librashader-v0.12.0`, dereferenced at commit
 `87e8a97b50516d997defeaa168173dcd185d4022`.
 
+Corresponding upstream source:
+`https://github.com/SnowflakePowered/librashader/tree/87e8a97b50516d997defeaa168173dcd185d4022`
+The release tag is
+`https://github.com/SnowflakePowered/librashader/releases/tag/librashader-v0.12.0`.
+The runtime used by VAeg release packaging is built from that commit with
+Cargo's locked dependency set, the `optimized` profile, and only the
+`runtime-opengl` feature.
+
 The headers are MIT-licensed under their retained upstream notices. The
 implementation is not copied into VAeg and is not statically linked. A
 separately distributed librashader runtime must use the MPL-2.0 licensing
@@ -35,3 +43,7 @@ The loader searches the platform's normal runtime name (`librashader.dylib`,
 `librashader.so`, or `librashader.dll`). The VAeg integration checks the
 runtime ABI, API, and required OpenGL symbols before using it. A missing or
 incompatible runtime leaves the existing renderer active.
+
+VAeg carries no modifications to the MPL-covered librashader implementation;
+there is therefore no VAeg patch source to provide. The runtime is loaded
+through the official C dynamic-loader API and is not statically linked.

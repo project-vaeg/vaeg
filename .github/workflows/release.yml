@@ -52,9 +52,12 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y cmake ninja-build pkg-config libsdl2-dev libarchive-dev gcc g++ nasm
+          sudo apt-get install -y cmake ninja-build pkg-config libsdl2-dev libarchive-dev \
+            libgl1-mesa-dev gcc g++ nasm
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
       - name: Configure
-        run: cmake --preset linux-ci-gcc
+        run: cmake --preset linux-ci-gcc -DVAEG_ENABLE_LIBRASHADER=ON
       - name: Build
         run: cmake --build --preset linux-ci-gcc
       - name: Smoke
@@ -81,13 +84,30 @@ jobs:
           test -f "${release_notes}"
           rm -rf dist-package "${asset}"
           mkdir -p "dist-package/${package}/assets" \
-            "dist-package/${package}/licenses"
+            "dist-package/${package}/licenses" \
+            "dist-package/${package}/shaders/crt/licenses"
           install -m 755 build/linux-ci-gcc/sdl2/vaeg "dist-package/${package}/vaeg"
+          tools/release/build-librashader-runtime.sh linux \
+            "dist-package/${package}"
           cp -R build/pc88va-guest-drivers/. "dist-package/${package}/"
           install -m 644 assets/OFL.txt "dist-package/${package}/assets/"
           install -m 644 assets/NOTICE.md "dist-package/${package}/assets/"
           install -m 644 external/suzukiplan-z80/LICENSE.txt \
             "dist-package/${package}/licenses/suzukiplan-z80.txt"
+          install -m 644 third_party/librashader/license-mpl-2.0.txt \
+            "dist-package/${package}/licenses/LIBRASHADER_MPL-2.0.txt"
+          install -m 644 third_party/librashader/readme.vaeg.md \
+            "dist-package/${package}/licenses/LIBRASHADER_SOURCE.txt"
+          install -m 644 assets/NOTICE.md \
+            "dist-package/${package}/licenses/THIRD_PARTY_NOTICES.md"
+          install -m 644 assets/shaders/crt/vaeg_crt_lottes_fast.slangp \
+            "dist-package/${package}/shaders/crt/"
+          install -m 644 assets/shaders/crt/shaders/crt-lottes-fast.slang \
+            "dist-package/${package}/shaders/crt/"
+          install -m 644 assets/shaders/crt/licenses/crt_lottes_fast_unlicense.txt \
+            "dist-package/${package}/shaders/crt/licenses/CRT_LOTTES_FAST_LICENSE.txt"
+          install -m 644 assets/shaders/crt/licenses/crt_lottes_fast_provenance.md \
+            "dist-package/${package}/shaders/crt/licenses/CRT_LOTTES_FAST_PROVENANCE.md"
           install -m 644 "${release_notes}" "dist-package/${package}/"
           install -m 644 dist/readme-dist.txt "dist-package/${package}/README-dist.txt"
           tar -C dist-package -czf "${asset}" "${package}"
@@ -145,8 +165,10 @@ jobs:
             mingw-w64-x86_64-gcc
             mingw-w64-x86_64-pkgconf
             nasm
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
       - name: Configure
-        run: cmake --preset mingw-ci
+        run: cmake --preset mingw-ci -DVAEG_ENABLE_LIBRASHADER=ON
       - name: Build
         run: cmake --build --preset mingw-ci
       - name: Smoke
@@ -201,7 +223,7 @@ jobs:
           while IFS= read -r dll; do
             lower="$(printf '%s' "${dll}" | tr '[:upper:]' '[:lower:]')"
             case "${lower}" in
-              kernel32.dll|msvcrt.dll|user32.dll|gdi32.dll|advapi32.dll|shell32.dll|ole32.dll|oleaut32.dll|imm32.dll|version.dll|winmm.dll|setupapi.dll|uuid.dll|ws2_32.dll|bcrypt.dll|crypt32.dll|comdlg32.dll|comctl32.dll|shlwapi.dll|rpcrt4.dll|dwmapi.dll|hid.dll|cfgmgr32.dll|api-ms-win-*.dll|ext-ms-*.dll)
+              kernel32.dll|msvcrt.dll|user32.dll|gdi32.dll|advapi32.dll|shell32.dll|ole32.dll|oleaut32.dll|imm32.dll|version.dll|winmm.dll|setupapi.dll|uuid.dll|ws2_32.dll|bcrypt.dll|crypt32.dll|comdlg32.dll|comctl32.dll|shlwapi.dll|rpcrt4.dll|dwmapi.dll|hid.dll|cfgmgr32.dll|librashader.dll|api-ms-win-*.dll|ext-ms-*.dll)
                 ;;
               *)
                 echo "unexpected non-system DLL import: ${dll}" >&2
@@ -218,13 +240,30 @@ jobs:
           package="vaeg-${release_id}-win-x86_64"
           test -f "${release_notes}"
           rm -rf dist-package
-          mkdir -p "dist-package/${package}/assets" "dist-package/${package}/licenses"
+          mkdir -p "dist-package/${package}/assets" "dist-package/${package}/licenses" \
+            "dist-package/${package}/shaders/crt/licenses"
           cp build/mingw-ci/sdl2/vaeg.exe "dist-package/${package}/"
+          tools/release/build-librashader-runtime.sh windows \
+            "dist-package/${package}"
           cp -R build/pc88va-guest-drivers/. "dist-package/${package}/"
           cp assets/OFL.txt "dist-package/${package}/assets/"
           cp assets/NOTICE.md "dist-package/${package}/assets/"
           cp external/suzukiplan-z80/LICENSE.txt \
             "dist-package/${package}/licenses/suzukiplan-z80.txt"
+          cp third_party/librashader/license-mpl-2.0.txt \
+            "dist-package/${package}/licenses/LIBRASHADER_MPL-2.0.txt"
+          cp third_party/librashader/readme.vaeg.md \
+            "dist-package/${package}/licenses/LIBRASHADER_SOURCE.txt"
+          cp assets/NOTICE.md \
+            "dist-package/${package}/licenses/THIRD_PARTY_NOTICES.md"
+          cp assets/shaders/crt/vaeg_crt_lottes_fast.slangp \
+            "dist-package/${package}/shaders/crt/"
+          cp assets/shaders/crt/shaders/crt-lottes-fast.slang \
+            "dist-package/${package}/shaders/crt/"
+          cp assets/shaders/crt/licenses/crt_lottes_fast_unlicense.txt \
+            "dist-package/${package}/shaders/crt/licenses/CRT_LOTTES_FAST_LICENSE.txt"
+          cp assets/shaders/crt/licenses/crt_lottes_fast_provenance.md \
+            "dist-package/${package}/shaders/crt/licenses/CRT_LOTTES_FAST_PROVENANCE.md"
           cp "${release_notes}" "dist-package/${package}/"
           cp dist/readme-dist.txt "dist-package/${package}/README-dist.txt"
           find "dist-package/${package}" -type f | sort
@@ -258,8 +297,10 @@ jobs:
           fetch-depth: 0
       - name: Install build tools
         run: brew install cmake ninja nasm
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
       - name: Configure
-        run: cmake --preset macos-ci
+        run: cmake --preset macos-ci -DVAEG_ENABLE_LIBRASHADER=ON
       - name: Build
         run: cmake --build --preset macos-ci
       - name: Smoke
@@ -287,13 +328,30 @@ jobs:
           test -f "${release_notes}"
           rm -rf dist-package "${asset}"
           mkdir -p "dist-package/${package}/assets" \
-            "dist-package/${package}/licenses"
+            "dist-package/${package}/licenses" \
+            "dist-package/${package}/shaders/crt/licenses"
           install -m 755 build/macos-ci/sdl2/vaeg "dist-package/${package}/vaeg"
+          tools/release/build-librashader-runtime.sh macos \
+            "dist-package/${package}"
           cp -R build/pc88va-guest-drivers/. "dist-package/${package}/"
           install -m 644 assets/OFL.txt "dist-package/${package}/assets/"
           install -m 644 assets/NOTICE.md "dist-package/${package}/assets/"
           install -m 644 external/suzukiplan-z80/LICENSE.txt \
             "dist-package/${package}/licenses/suzukiplan-z80.txt"
+          install -m 644 third_party/librashader/license-mpl-2.0.txt \
+            "dist-package/${package}/licenses/LIBRASHADER_MPL-2.0.txt"
+          install -m 644 third_party/librashader/readme.vaeg.md \
+            "dist-package/${package}/licenses/LIBRASHADER_SOURCE.txt"
+          install -m 644 assets/NOTICE.md \
+            "dist-package/${package}/licenses/THIRD_PARTY_NOTICES.md"
+          install -m 644 assets/shaders/crt/vaeg_crt_lottes_fast.slangp \
+            "dist-package/${package}/shaders/crt/"
+          install -m 644 assets/shaders/crt/shaders/crt-lottes-fast.slang \
+            "dist-package/${package}/shaders/crt/"
+          install -m 644 assets/shaders/crt/licenses/crt_lottes_fast_unlicense.txt \
+            "dist-package/${package}/shaders/crt/licenses/CRT_LOTTES_FAST_LICENSE.txt"
+          install -m 644 assets/shaders/crt/licenses/crt_lottes_fast_provenance.md \
+            "dist-package/${package}/shaders/crt/licenses/CRT_LOTTES_FAST_PROVENANCE.md"
           install -m 644 "${release_notes}" "dist-package/${package}/"
           install -m 644 dist/readme-dist.txt "dist-package/${package}/README-dist.txt"
 

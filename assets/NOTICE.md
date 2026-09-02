@@ -85,3 +85,24 @@ native executable icon resource.
 
 - SHA-256:
   `a27533f679a31fdb8e2812c1d4906e705e544ba49b976154dde6794ce31a32f4`
+
+## Optional librashader CRT presentation
+
+VAeg optionally loads the librashader OpenGL runtime through its official C
+dynamic-loader API. The VAeg source contains only the upstream C API headers;
+the implementation is not statically linked or copied into this repository.
+
+- Runtime license: Mozilla Public License 2.0
+- Pinned source: `https://github.com/SnowflakePowered/librashader/tree/87e8a97b50516d997defeaa168173dcd185d4022`
+- Release tag: `librashader-v0.12.0`
+- Runtime build: Cargo locked dependencies, `optimized` profile,
+  `--no-default-features --features runtime-opengl`
+- VAeg source record: `third_party/librashader/readme.vaeg.md`
+- Runtime license text: `third_party/librashader/license-mpl-2.0.txt`
+
+The Recommended CRT preset is a VAeg-owned `.slangp` wrapper around the
+audited `crt-lottes-fast.slang` source. Its Unlicense/public-domain notice,
+source commit, dependency-closure audit, and SHA-256 values are kept beside
+the shader under `assets/shaders/crt/licenses/`. CRT-Geom, CRT-Royale, Mega
+Bezel, the complete `slang-shaders` tree, and GPL or unknown-license shaders
+are not bundled or packaged.
