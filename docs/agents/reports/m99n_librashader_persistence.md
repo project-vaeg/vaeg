@@ -33,8 +33,10 @@ Overrides use the version-1 `identity|name=value;` representation. Startup
 loads the selected preset first and applies only the matching identity's
 metadata-backed values, so ranges remain enforced by the runtime API. Unknown
 or malformed override entries are ignored. Invalid schema versions or preset
-identities recover to the disabled recommended configuration, while a missing
-custom preset remains non-fatal and leaves the SDL renderer available.
+identities recover to the disabled recommended configuration. A missing
+custom preset also disables filtering for startup and selects the Recommended
+identity while retaining the last custom path for later recovery; the SDL
+renderer remains available.
 
 The optional build now creates the OpenGL presentation bridge even when the
 filter starts disabled, allowing the settings dialog to enable it without

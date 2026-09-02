@@ -66,6 +66,7 @@
 #include "g75_screen.h"
 #include "headless_input.h"
 #include "debug_harness.h"
+#include <math.h>
 #include <stdlib.h>
 #include "opngen.h"
 #include "ymfmbridge.h"
@@ -1785,6 +1786,28 @@ static void wait_startup_splash(UINT32 started) {
 }
 
 #if defined(VAEG_ENABLE_LIBRASHADER)
+static void np2_validate_librashader_selection(void) {
+	short attr;
+
+	if (milstr_cmp(np2oscfg.librashader_preset_id, "custom") != 0) {
+		return;
+	}
+	attr = (np2oscfg.librashader_custom_path[0] != '\0')
+	           ? file_attr(np2oscfg.librashader_custom_path)
+	           : (short)-1;
+	if ((attr == (short)-1) || (attr & FILEATTR_DIRECTORY)) {
+		SDL_LogWarn(SDL_LOG_CATEGORY_APPLICATION,
+		            "Missing librashader custom preset; disabling filter and "
+		            "using Recommended (%s)",
+		            np2oscfg.librashader_custom_path[0] != '\0'
+		                ? np2oscfg.librashader_custom_path
+		                : "path is empty");
+		np2oscfg.librashader_enabled = 0;
+		milstr_ncpy(np2oscfg.librashader_preset_id, "recommended",
+		            sizeof(np2oscfg.librashader_preset_id));
+	}
+}
+
 static void np2_apply_librashader_overrides(void) {
 	const char *cursor;
 	const char *identity;
@@ -1844,7 +1867,7 @@ static void np2_apply_librashader_overrides(void) {
 			value[value_length] = '\0';
 			{
 				const float parsed = strtof(value, &value_end);
-				if ((value_end != value) && (*value_end == '\0')) {
+				if ((value_end != value) && (*value_end == '\0') && isfinite(parsed)) {
 					(void)scrnmng_set_librashader_parameter(name, parsed);
 				}
 			}
@@ -2042,6 +2065,9 @@ int main(int argc, char **argv) {
 		return (run_ok);
 	}
 	initload();
+#if defined(VAEG_ENABLE_LIBRASHADER)
+	np2_validate_librashader_selection();
+#endif
 	if (validate_cli_options(&options) != SUCCESS) {
 		SDL_Quit();
 		dosio_term();
