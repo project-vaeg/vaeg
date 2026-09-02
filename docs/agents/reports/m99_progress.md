@@ -47,9 +47,9 @@ are intentionally not staged.
 | M99p | `58dd1fae` | PASS in code/static scope; context-loss display test deferred | `m99p_librashader_lifecycle.md` |
 | M99q | `6b1e0394` | PASS: bounded presentation instrumentation | `m99q_librashader_performance.md` |
 | M99r | `fb1d0bbe` | PASS: platform package license/source/shader records | `m99r` changes and release workflow |
-| M99s | `0aa7278e` | PASS in workflow definition; hosted matrix pending | `m99s_librashader_platform_matrix.md` |
+| M99s | `0aa7278e`, `70c6a443`, `36a68848` | PASS in workflow definition; hosted feature-on build/runtime fallback checks passed, full suite had unrelated baseline failures | `m99s_librashader_platform_matrix.md` |
 | M99t | `d241a497` | PASS: 7 static QA checks and CTest registration | `m99t_librashader_automated_qa.md` |
-| M99u | pending | Documentation added; final gate pending CI/GPU/archive evidence | this log and M99u docs |
+| M99u | `6bdfea78` | Documentation complete; final gate BLOCKED by unavailable GPU visual evidence and uninspected official release archive | this log and M99u docs |
 
 ## Tests and CI
 
@@ -66,8 +66,17 @@ CTest static test in m99t-lib-off-tests                             PASS
 ```
 
 Repository checks pass: UTF-8, LF EOL, path case, and scoped `git diff
---check`. Hosted CI runs: not yet triggered for the final M99u documentation
-commit; record links and results here after pushing the topic branch.
+--check`. Hosted CI run [`33695887109`](https://github.com/nakatamaho/vaeg/actions/runs/33695887109)
+completed with overall failure from unrelated baseline tests. The M99-specific
+jobs all reached the relevant checks: Ubuntu, Windows, and macOS feature-on
+builds passed; runtime-absent and runtime-present SDL dummy-device smokes
+passed; the pinned runtime was built successfully on all three platforms; and
+`vaeg_librashader_pipeline_static` passed on all three platforms. The Windows
+runtime build took 5m23s, and the macOS runtime build took 2m56s. The Windows
+release-artifact job also passed. The full CTest failures were the existing
+`M98aa_ida_64_animation.md` milestone-name rejection and missing external
+differential traces; macOS additionally stopped at the existing compiled-M75
+test. These failures did not report an M99 test failure.
 
 ## Decisions and deferred evidence
 
@@ -79,13 +88,20 @@ commit; record links and results here after pushing the topic branch.
   `slang-shaders` tree, GPL, and unknown-license shaders are excluded.
 - Raw deterministic captures stay before presentation filtering. Presented
   captures are separately named and are not goldens.
-- Local macOS has no usable SDL display/OpenGL context; local Rust/Cargo is
-  absent. Physical GPU rendering, resize/fullscreen/HiDPI, context recovery,
-  runtime-present visual output, and final archive inspection are deferred to
-  hosted or maintainer hardware evidence.
+- Local macOS has no usable SDL display/OpenGL context (`glxinfo -B` reports
+  `unable to open display`); Xvfb and Weston are unavailable. Local Rust/Cargo
+  is also absent. Hosted smokes use SDL's dummy/software renderer and therefore
+  do not prove shader rendering, non-black filtered output, resize/fullscreen/
+  HiDPI behavior, context recovery, presented-frame capture, or performance.
+  The official release workflow was not invoked because it would publish a
+  release; consequently, final release-archive inspection remains deferred.
 
-Current gate status: G99-1 PASS by reports M99a-M99c. G99-2 through G99-4
-remain DEFERRED until runtime-present rendering and final platform/archive
-evidence are obtained. Known risk is platform-specific OpenGL context and
-runtime packaging behavior; the existing renderer remains the required
-fallback.
+Current gate status: G99-1 PASS by reports M99a-M99c. G99-2 is BLOCKED on
+actual pass-through and CRT-Lottes-fast GPU rendering. G99-3 is DEFERRED on
+physical UI, resize/fullscreen, and persistence inspection. G99-4 is BLOCKED
+on GPU lifecycle/performance evidence and final archive inspection. The exact
+remaining action is to run the feature-on binary with a usable OpenGL 3.3+
+display, exercise both bundled presets and the settings/lifecycle paths, then
+inspect a staged release archive without publishing it. Known risks are
+platform-specific OpenGL context and runtime packaging behavior; the existing
+renderer remains the required fallback.
