@@ -29,6 +29,8 @@ option(VAEG_WERROR "Treat warnings as errors" OFF)
 option(VAEG_WINDOWS_CONSOLE "Keep a console window for Windows SDL2 builds" OFF)
 option(VAEG_FETCH_SDL2 "Fetch pinned SDL2 instead of using system SDL2" OFF)
 option(VAEG_STATIC_SDL2 "Link SDL2 statically" OFF)
+option(VAEG_ENABLE_LIBRASHADER
+    "Enable optional librashader OpenGL CRT presentation" OFF)
 option(VAEG_ENABLE_ARCHIVE_DROP
     "Enable archive disk-image drag and drop when LibArchive is available" ON)
 option(VAEG_FETCH_LIBARCHIVE
@@ -571,6 +573,12 @@ target_include_directories(vaeg_sdl2 PRIVATE
     "${CMAKE_CURRENT_SOURCE_DIR}/external/ymfm/src")
 target_link_libraries(vaeg_sdl2 PRIVATE vaeg_core vaeg_va vaeg_common
     vaeg_core vaeg_va ${VAEG_SDL2_LIBS})
+if(VAEG_ENABLE_LIBRASHADER)
+    target_compile_definitions(vaeg_sdl2 PRIVATE VAEG_ENABLE_LIBRASHADER=1)
+    message(STATUS "librashader CRT presentation: enabled")
+else()
+    message(STATUS "librashader CRT presentation: disabled")
+endif()
 if(VAEG_ENABLE_TESTS)
     target_compile_definitions(vaeg_sdl2 PRIVATE
         VAEG_UPD9002_M42_TESTING=1
