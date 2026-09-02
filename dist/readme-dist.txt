@@ -50,6 +50,21 @@ The SCSI guide covers support-D88 preparation, target IDs, image attachment,
 and SCFORM. The HOSTFAT guide covers `DEVICE=HOSTFAT.SYS`, the
 `--hostfat-dir` option, GUI rebuild/reset, and read-only behavior.
 
+Optional CRT presentation
+--------------------------
+
+Release packages include the optional OpenGL `librashader` runtime and the
+Recommended `crt-lottes-fast` preset under `shaders/crt/`. The runtime is
+MPL-2.0 and its pinned source record is under `licenses/`; the bundled shader
+notice and provenance are under `shaders/crt/licenses/`. If the runtime or
+GPU path is unavailable, vaeg uses the existing renderer. `Custom...` presets
+must be selected from an explicit local `.slangp` path and remain the user's
+licensing responsibility. No GPL CRT shader is included.
+
+Use `Capture Presented Frame` only for inspecting post-filter output. Raw
+`--screenshot` and guest-frame captures remain deterministic, pre-filter
+captures for QA.
+
 
 Keep this relative layout after unpacking:
 
@@ -62,8 +77,15 @@ Keep this relative layout after unpacking:
 - assets/OFL.txt
 - assets/NOTICE.md
 - licenses/HOSTFAT.txt
+- licenses/LIBRASHADER_MPL-2.0.txt
+- licenses/LIBRASHADER_SOURCE.txt
+- licenses/THIRD_PARTY_NOTICES.md
 - licenses/SQEMM98.txt
 - licenses/suzukiplan-z80.txt
+- shaders/crt/vaeg_crt_lottes_fast.slangp
+- shaders/crt/crt-lottes-fast.slang
+- shaders/crt/licenses/CRT_LOTTES_FAST_LICENSE.txt
+- shaders/crt/licenses/CRT_LOTTES_FAST_PROVENANCE.md
 - README-dist.txt
 
 The Dear ImGui Japanese font, historical VAEG startup graphic, historical
