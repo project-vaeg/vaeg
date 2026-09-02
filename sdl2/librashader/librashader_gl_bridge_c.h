@@ -27,6 +27,16 @@ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <SDL.h>
 
+typedef struct {
+	char name[64];
+	char description[128];
+	float initial;
+	float minimum;
+	float maximum;
+	float step;
+	float value;
+} VAEG_LIBRASHADER_PARAMETER;
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -44,6 +54,11 @@ int librashader_gl_bridge_draw_output(void *bridge, int drawable_width,
                                       int drawable_height, int x, int y,
                                       uint32_t width, uint32_t height);
 void librashader_gl_bridge_disable_filter(void *bridge);
+uint32_t librashader_gl_bridge_parameter_count(void *bridge);
+int librashader_gl_bridge_parameter_info(void *bridge, uint32_t index,
+                                         VAEG_LIBRASHADER_PARAMETER *info);
+int librashader_gl_bridge_set_parameter(void *bridge, const char *name,
+                                        float value);
 
 #ifdef __cplusplus
 }

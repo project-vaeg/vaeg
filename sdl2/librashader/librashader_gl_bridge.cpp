@@ -25,6 +25,7 @@ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <cstdio>
 #include <cstring>
 #include <new>
+#include <algorithm>
 #include <vector>
 
 #ifndef APIENTRY
@@ -426,6 +427,24 @@ bool LibrashaderGlBridge::load_preset(const char *path) {
         return false;
     }
 
+    libra_preset_param_list_t parameter_list{};
+    error = instance->preset_get_runtime_params(&preset, &parameter_list);
+    if (error != nullptr) {
+        report_error(instance, "preset parameter enumeration", error);
+        (void)instance->preset_free(&preset);
+        return false;
+    }
+    for (uint64_t i = 0; i < parameter_list.length; ++i) {
+        const libra_preset_param_t &source = parameter_list.parameters[i];
+        if ((source.name == nullptr) || (source.description == nullptr)) {
+            continue;
+        }
+        parameters_.push_back({source.name, source.description, source.initial,
+                               source.minimum, source.maximum, source.step,
+                               source.initial});
+    }
+    (void)instance->preset_free_runtime_params(parameter_list);
+
     filter_chain_gl_opt_t chain_options{};
     chain_options.version = LIBRASHADER_CURRENT_VERSION;
     chain_options.glsl_version = 330;
@@ -523,6 +542,54 @@ void LibrashaderGlBridge::disable_filter() {
         chain_ = nullptr;
     }
     chain_ready_ = false;
+    parameters_.clear();
+}
+
+uint32_t LibrashaderGlBridge::parameter_count() const {
+    return static_cast<uint32_t>(parameters_.size());
+}
+
+bool LibrashaderGlBridge::parameter_info(
+    uint32_t index, VAEG_LIBRASHADER_PARAMETER *info) const {
+    if ((info == nullptr) || (index >= parameters_.size())) {
+        return false;
+    }
+    const Parameter &parameter = parameters_[index];
+    std::snprintf(info->name, sizeof(info->name), "%s", parameter.name.c_str());
+    std::snprintf(info->description, sizeof(info->description), "%s",
+                  parameter.description.c_str());
+    info->initial = parameter.initial;
+    info->minimum = parameter.minimum;
+    info->maximum = parameter.maximum;
+    info->step = parameter.step;
+    info->value = parameter.value;
+    return true;
+}
+
+bool LibrashaderGlBridge::set_parameter(const char *name, float value) {
+    if (!chain_ready_ || (name == nullptr)) {
+        return false;
+    }
+    Parameter *selected = nullptr;
+    for (Parameter &parameter : parameters_) {
+        if (parameter.name == name) {
+            selected = &parameter;
+            break;
+        }
+    }
+    if (selected == nullptr) {
+        return false;
+    }
+    value = std::max(selected->minimum, std::min(selected->maximum, value));
+    const libra_instance_t *instance = loader_.instance();
+    libra_error_t error = instance->gl_filter_chain_set_param(
+        &chain_, selected->name.c_str(), value);
+    if (error != nullptr) {
+        report_error(instance, "filter-chain parameter update", error);
+        return false;
+    }
+    selected->value = value;
+    return true;
 }
 
 libra_image_gl_t LibrashaderGlBridge::source_image() const {
@@ -583,4 +650,28 @@ extern "C" void librashader_gl_bridge_disable_filter(void *bridge) {
     if (bridge != nullptr) {
         static_cast<LibrashaderGlBridge *>(bridge)->disable_filter();
     }
+}
+
+extern "C" uint32_t librashader_gl_bridge_parameter_count(void *bridge) {
+    return (bridge != nullptr)
+               ? static_cast<LibrashaderGlBridge *>(bridge)->parameter_count()
+               : 0;
+}
+
+extern "C" int librashader_gl_bridge_parameter_info(
+    void *bridge, uint32_t index, VAEG_LIBRASHADER_PARAMETER *info) {
+    return (bridge != nullptr) &&
+                   static_cast<LibrashaderGlBridge *>(bridge)->parameter_info(index,
+                                                                                info)
+               ? 1
+               : 0;
+}
+
+extern "C" int librashader_gl_bridge_set_parameter(void *bridge, const char *name,
+                                                    float value) {
+    return (bridge != nullptr) &&
+                   static_cast<LibrashaderGlBridge *>(bridge)->set_parameter(name,
+                                                                               value)
+               ? 1
+               : 0;
 }

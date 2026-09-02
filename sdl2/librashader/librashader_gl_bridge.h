@@ -24,10 +24,13 @@ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define VAEG_LIBRASHADER_GL_BRIDGE_H
 
 #include <stdint.h>
+#include <string>
+#include <vector>
 
 #include <SDL.h>
 #include <SDL_opengl.h>
 
+#include "librashader_gl_bridge_c.h"
 #include "librashader_loader.h"
 
 class LibrashaderGlBridge {
@@ -45,6 +48,10 @@ public:
     bool draw_output(int drawable_width, int drawable_height, int x, int y,
                      uint32_t width, uint32_t height);
     void disable_filter();
+    uint32_t parameter_count() const;
+    bool parameter_info(uint32_t index,
+                        VAEG_LIBRASHADER_PARAMETER *info) const;
+    bool set_parameter(const char *name, float value);
 
     libra_image_gl_t source_image() const;
     libra_image_gl_t output_image() const;
@@ -64,8 +71,16 @@ private:
     libra_gl_filter_chain_t chain_;
     bool chain_ready_;
     struct GlApi *api_;
+    struct Parameter {
+        std::string name;
+        std::string description;
+        float initial;
+        float minimum;
+        float maximum;
+        float step;
+        float value;
+    };
+    std::vector<Parameter> parameters_;
 };
-
-#include "librashader_gl_bridge_c.h"
 
 #endif
