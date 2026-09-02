@@ -200,6 +200,101 @@ jobs:
           git archive --format=tar.gz --output=/tmp/vaeg-source.tar.gz HEAD
           python3 tests/z80_compat/check_zex_archive.py /tmp/vaeg-source.tar.gz
 
+  linux-librashader:
+    name: ubuntu librashader feature-on fallback
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake ninja-build pkg-config libsdl2-dev \
+            libgl1-mesa-dev gcc g++ git
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+      - name: Configure feature-on build
+        run: cmake --preset linux-ci-gcc -DVAEG_ENABLE_LIBRASHADER=ON
+      - name: Build feature-on target
+        run: cmake --build --preset linux-ci-gcc --target vaeg_sdl2
+      - name: Smoke without runtime
+        run: SDL_VIDEODRIVER=dummy SDL_AUDIODRIVER=dummy ./build/linux-ci-gcc/sdl2/vaeg --smoke
+      - name: Build pinned OpenGL runtime
+        run: tools/release/build-librashader-runtime.sh linux build/librashader-runtime
+      - name: Smoke with runtime present
+        run: |
+          export LD_LIBRARY_PATH="$PWD/build/librashader-runtime${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+          SDL_VIDEODRIVER=dummy SDL_AUDIODRIVER=dummy \
+            ./build/linux-ci-gcc/sdl2/vaeg --smoke
+      - name: Unit tests
+        run: ctest --test-dir build/linux-ci-gcc --output-on-failure
+
+  windows-librashader:
+    name: windows librashader feature-on fallback
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: msys2 {0}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: msys2/setup-msys2@v2
+        with:
+          msystem: MINGW64
+          update: true
+          install: >-
+            git
+            mingw-w64-x86_64-cmake
+            mingw-w64-x86_64-ninja
+            mingw-w64-x86_64-gcc
+            mingw-w64-x86_64-pkgconf
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+      - name: Configure feature-on build
+        run: cmake --preset mingw-ci -DVAEG_ENABLE_LIBRASHADER=ON
+      - name: Build feature-on target
+        run: cmake --build --preset mingw-ci --target vaeg_sdl2
+      - name: Smoke without runtime
+        run: SDL_VIDEODRIVER=dummy SDL_AUDIODRIVER=dummy ./build/mingw-ci/sdl2/vaeg.exe --smoke
+      - name: Build pinned OpenGL runtime
+        run: tools/release/build-librashader-runtime.sh windows build/librashader-runtime
+      - name: Smoke with runtime present
+        run: |
+          export PATH="$PWD/build/librashader-runtime:$PATH"
+          SDL_VIDEODRIVER=dummy SDL_AUDIODRIVER=dummy \
+            ./build/mingw-ci/sdl2/vaeg.exe --smoke
+      - name: Unit tests
+        run: ctest --test-dir build/mingw-ci --output-on-failure
+
+  macos-librashader:
+    name: macOS librashader feature-on fallback
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Install build tools
+        run: brew install cmake ninja
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+      - name: Configure feature-on build
+        run: cmake --preset macos-ci -DVAEG_ENABLE_LIBRASHADER=ON
+      - name: Build feature-on target
+        run: cmake --build --preset macos-ci --target vaeg_sdl2
+      - name: Smoke without runtime
+        run: SDL_VIDEODRIVER=dummy SDL_AUDIODRIVER=dummy ./build/macos-ci/sdl2/vaeg --smoke
+      - name: Build pinned OpenGL runtime
+        run: tools/release/build-librashader-runtime.sh macos build/librashader-runtime
+      - name: Smoke with runtime present
+        run: |
+          export DYLD_LIBRARY_PATH="$PWD/build/librashader-runtime${DYLD_LIBRARY_PATH:+:$DYLD_LIBRARY_PATH}"
+          SDL_VIDEODRIVER=dummy SDL_AUDIODRIVER=dummy \
+            ./build/macos-ci/sdl2/vaeg --smoke
+      - name: Unit tests
+        run: ctest --test-dir build/macos-ci --output-on-failure
+
   linux-asan:
     name: ubuntu asan compatibility
     runs-on: ubuntu-latest
