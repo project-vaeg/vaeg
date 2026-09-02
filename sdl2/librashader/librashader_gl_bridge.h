@@ -57,7 +57,9 @@ public:
     libra_image_gl_t output_image() const;
 
 private:
-    void destroy_textures();
+	void destroy_textures();
+	void destroy_gl_objects();
+	bool initialize_context();
 
     bool initialized_;
     GLuint source_texture_;

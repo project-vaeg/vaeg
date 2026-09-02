@@ -118,6 +118,21 @@ static const char *scrnmng_librashader_preset_path(void) {
 	}
 	return "assets/shaders/crt/vaeg_crt_lottes_fast.slangp";
 }
+
+static void scrnmng_create_librashader_bridge(void) {
+	scrnmng.librashader_bridge = librashader_gl_bridge_create(scrnmng.renderer);
+	if (scrnmng.librashader_bridge == NULL) {
+		fprintf(stderr, "librashader: OpenGL bridge unavailable; using SDL renderer\n");
+	} else if (scrnmng.librashader_requested &&
+	           librashader_gl_bridge_load_preset(scrnmng.librashader_bridge,
+                                             scrnmng_librashader_preset_path())) {
+		scrnmng.librashader_active = TRUE;
+		fprintf(stderr, "librashader: CRT filter enabled preset=%s\n",
+		        scrnmng_librashader_preset_path());
+	} else if (scrnmng.librashader_requested) {
+		fprintf(stderr, "librashader: preset unavailable; using SDL renderer\n");
+	}
+}
 #endif
 
 static void scrnmng_capture_dummy_frame(void) {
@@ -1149,18 +1164,7 @@ BOOL scrnmng_create(int width, int height) {
 	scrnmng.shadow_pitch = (SCRNMNG_CANVAS_WIDTH + SCRNMNG_SURFACE_GUARD_LEFT) * 2;
 	scrnmng.shadow = (BYTE *)calloc(SCRNMNG_CANVAS_HEIGHT, scrnmng.shadow_pitch);
 	#if defined(VAEG_ENABLE_LIBRASHADER)
-	scrnmng.librashader_bridge = librashader_gl_bridge_create(scrnmng.renderer);
-	if (scrnmng.librashader_bridge == NULL) {
-		fprintf(stderr, "librashader: OpenGL bridge unavailable; using SDL renderer\n");
-	} else if (scrnmng.librashader_requested &&
-	           librashader_gl_bridge_load_preset(scrnmng.librashader_bridge,
-                                             scrnmng_librashader_preset_path())) {
-		scrnmng.librashader_active = TRUE;
-		fprintf(stderr, "librashader: CRT filter enabled preset=%s\n",
-		        scrnmng_librashader_preset_path());
-	} else if (scrnmng.librashader_requested) {
-		fprintf(stderr, "librashader: preset unavailable; using SDL renderer\n");
-	}
+	scrnmng_create_librashader_bridge();
 	#endif
 	{
 		const char *rendered_path;
@@ -1343,6 +1347,20 @@ BOOL scrnmng_get_librashader_enabled(void) {
 	return scrnmng.librashader_active;
 #else
 	return FALSE;
+#endif
+}
+
+void scrnmng_rebuild_librashader(void) {
+#if defined(VAEG_ENABLE_LIBRASHADER)
+	if (scrnmng.librashader_bridge != NULL) {
+		librashader_gl_bridge_destroy(scrnmng.librashader_bridge);
+		scrnmng.librashader_bridge = NULL;
+	}
+	scrnmng.librashader_active = FALSE;
+	scrnmng.librashader_frame_count = 0;
+	if (scrnmng.renderer != NULL) {
+		scrnmng_create_librashader_bridge();
+	}
 #endif
 }
 

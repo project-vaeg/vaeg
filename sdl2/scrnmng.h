@@ -94,6 +94,7 @@ int scrnmng_get_effect(void);
 void scrnmng_set_librashader_enabled(BOOL enabled);
 BOOL scrnmng_get_librashader_enabled(void);
 BOOL scrnmng_set_librashader_preset(const char *path);
+void scrnmng_rebuild_librashader(void);
 UINT32 scrnmng_librashader_parameter_count(void);
 BOOL scrnmng_librashader_parameter_info(UINT32 index, SCRNLIBRASHADER_PARAMETER *info);
 BOOL scrnmng_set_librashader_parameter(const char *name, float value);

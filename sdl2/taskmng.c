@@ -270,6 +270,9 @@ void taskmng_rol(void) {
 				np2oscfg.gui_window_height = (UINT16)min(height, 65535);
 				sysmng_update(SYS_UPDATEOSCFG);
 			}
+		} else if ((e.type == SDL_RENDER_TARGETS_RESET) ||
+		           (e.type == SDL_RENDER_DEVICE_RESET)) {
+			scrnmng_rebuild_librashader();
 		} else if (e.type == SDL_QUIT) {
 			vaeg_pacing_reset(&task_pacing);
 			paste_shortcut_down = FALSE;

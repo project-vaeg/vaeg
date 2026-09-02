@@ -277,23 +277,25 @@ LibrashaderGlBridge::LibrashaderGlBridge(SDL_Renderer *renderer)
     : initialized_(false), source_texture_(0), output_texture_(0), source_width_(0),
       source_height_(0), output_width_(0), output_height_(0), renderer_(renderer),
       loader_(), chain_(nullptr), chain_ready_(false), api_(nullptr) {
+    (void)initialize_context();
+}
+
+bool LibrashaderGlBridge::initialize_context() {
     SDL_RendererInfo info{};
-    if ((renderer == nullptr) || (SDL_GetRendererInfo(renderer, &info) != 0) ||
+    if ((renderer_ == nullptr) || (SDL_GetRendererInfo(renderer_, &info) != 0) ||
         (info.name == nullptr) || (std::strcmp(info.name, "opengl") != 0) ||
         (SDL_GL_GetCurrentContext() == nullptr)) {
-        return;
+        return false;
     }
 
     api_ = new (std::nothrow) GlApi{};
     if ((api_ == nullptr) || !load_gl_api(api_)) {
-        delete api_;
-        api_ = nullptr;
-        return;
+        destroy_gl_objects();
+        return false;
     }
     if (!create_output_program(api_)) {
-        delete api_;
-        api_ = nullptr;
-        return;
+        destroy_gl_objects();
+        return false;
     }
 
     glGetError();
@@ -301,7 +303,8 @@ LibrashaderGlBridge::LibrashaderGlBridge(SDL_Renderer *renderer)
     glGenTextures(1, &output_texture_);
     if ((source_texture_ == 0) || (output_texture_ == 0) || !gl_ok()) {
         destroy_textures();
-        return;
+        destroy_gl_objects();
+        return false;
     }
 
     glBindTexture(GL_TEXTURE_2D, source_texture_);
@@ -312,26 +315,34 @@ LibrashaderGlBridge::LibrashaderGlBridge(SDL_Renderer *renderer)
     initialized_ = gl_ok();
     if (!initialized_) {
         destroy_textures();
+        destroy_gl_objects();
     }
+    return initialized_;
 }
 
 LibrashaderGlBridge::~LibrashaderGlBridge() {
     disable_filter();
     destroy_textures();
+    destroy_gl_objects();
+    loader_.unload();
+}
+
+void LibrashaderGlBridge::destroy_gl_objects() {
+    const bool context_available = SDL_GL_GetCurrentContext() != nullptr;
+
     if (api_ != nullptr) {
-        if (api_->output_vbo != 0) {
+        if (context_available && (api_->output_vbo != 0)) {
             api_->delete_buffers(1, &api_->output_vbo);
         }
-        if (api_->output_vao != 0) {
+        if (context_available && (api_->output_vao != 0)) {
             api_->delete_vertex_arrays(1, &api_->output_vao);
         }
-        if (api_->output_program != 0) {
+        if (context_available && (api_->output_program != 0)) {
             api_->delete_program(api_->output_program);
         }
         delete api_;
         api_ = nullptr;
     }
-    loader_.unload();
 }
 
 void LibrashaderGlBridge::destroy_textures() {
@@ -534,10 +545,12 @@ bool LibrashaderGlBridge::draw_output(int drawable_width, int drawable_height,
 
 void LibrashaderGlBridge::disable_filter() {
     if (chain_ != nullptr) {
-        const libra_instance_t *instance = loader_.instance();
-        libra_error_t error = instance->gl_filter_chain_free(&chain_);
-        if (error != nullptr) {
-            report_error(instance, "filter-chain destruction", error);
+        if (SDL_GL_GetCurrentContext() != nullptr) {
+            const libra_instance_t *instance = loader_.instance();
+            libra_error_t error = instance->gl_filter_chain_free(&chain_);
+            if (error != nullptr) {
+                report_error(instance, "filter-chain destruction", error);
+            }
         }
         chain_ = nullptr;
     }
