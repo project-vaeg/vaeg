@@ -30,7 +30,11 @@ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <SDL.h>
 #include <SDL_opengl.h>
 
-#include "librashader/librashader_gl_bridge_c.h"
+#include "librashader/librashader_gl_bridge.h"
+
+#ifndef APIENTRY
+#define APIENTRY
+#endif
 
 namespace {
 
@@ -58,7 +62,84 @@ uint16_t source_pixel(unsigned int x, unsigned int y, unsigned int width,
     return static_cast<uint16_t>((red << 11U) | (green << 5U) | blue);
 }
 
-int test_preset(void *bridge, const char *path, unsigned int frame) {
+struct Readback {
+    uint64_t checksum;
+    size_t nonzero_color_bytes;
+};
+
+bool read_output_texture(const LibrashaderGlBridge &bridge, Readback *readback) {
+    using GenFramebuffers = void(APIENTRY *)(GLsizei, GLuint *);
+    using BindFramebuffer = void(APIENTRY *)(GLenum, GLuint);
+    using FramebufferTexture2D = void(APIENTRY *)(GLenum, GLenum, GLenum, GLuint,
+                                                  GLint);
+    using CheckFramebufferStatus = GLenum(APIENTRY *)(GLenum);
+    using DeleteFramebuffers = void(APIENTRY *)(GLsizei, const GLuint *);
+    const auto gen_framebuffers = reinterpret_cast<GenFramebuffers>(
+        SDL_GL_GetProcAddress("glGenFramebuffers"));
+    const auto bind_framebuffer = reinterpret_cast<BindFramebuffer>(
+        SDL_GL_GetProcAddress("glBindFramebuffer"));
+    const auto framebuffer_texture_2d = reinterpret_cast<FramebufferTexture2D>(
+        SDL_GL_GetProcAddress("glFramebufferTexture2D"));
+    const auto check_framebuffer_status = reinterpret_cast<CheckFramebufferStatus>(
+        SDL_GL_GetProcAddress("glCheckFramebufferStatus"));
+    const auto delete_framebuffers = reinterpret_cast<DeleteFramebuffers>(
+        SDL_GL_GetProcAddress("glDeleteFramebuffers"));
+    if ((gen_framebuffers == nullptr) || (bind_framebuffer == nullptr) ||
+        (framebuffer_texture_2d == nullptr) ||
+        (check_framebuffer_status == nullptr) ||
+        (delete_framebuffers == nullptr) || (readback == nullptr)) {
+        std::fprintf(stderr, "librashader GL smoke: framebuffer API unavailable\n");
+        return false;
+    }
+
+    const libra_image_gl_t output = bridge.output_image();
+    GLuint framebuffer = 0;
+    glFinish();
+    gen_framebuffers(1, &framebuffer);
+    bind_framebuffer(GL_FRAMEBUFFER, framebuffer);
+    framebuffer_texture_2d(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D,
+                           output.handle, 0);
+    const GLenum status = check_framebuffer_status(GL_FRAMEBUFFER);
+    if ((framebuffer == 0) || (status != GL_FRAMEBUFFER_COMPLETE)) {
+        std::fprintf(stderr,
+                     "librashader GL smoke: output framebuffer incomplete: 0x%x\n",
+                     static_cast<unsigned int>(status));
+        bind_framebuffer(GL_FRAMEBUFFER, 0);
+        if (framebuffer != 0) {
+            delete_framebuffers(1, &framebuffer);
+        }
+        return false;
+    }
+
+    const int pitch = static_cast<int>(output.width * 4U);
+    std::vector<uint8_t> pixels(static_cast<size_t>(pitch) * output.height);
+    glReadPixels(0, 0, static_cast<GLsizei>(output.width),
+                 static_cast<GLsizei>(output.height), GL_RGBA,
+                 GL_UNSIGNED_BYTE, pixels.data());
+    const GLenum readback_error = glGetError();
+    bind_framebuffer(GL_FRAMEBUFFER, 0);
+    delete_framebuffers(1, &framebuffer);
+    if (readback_error != GL_NO_ERROR) {
+        std::fprintf(stderr,
+                     "librashader GL smoke: output texture readback failed: 0x%x\n",
+                     static_cast<unsigned int>(readback_error));
+        return false;
+    }
+
+    readback->checksum = 0;
+    readback->nonzero_color_bytes = 0;
+    for (size_t index = 0; index < pixels.size(); ++index) {
+        const uint8_t value = pixels[index];
+        readback->checksum = (readback->checksum * 131U) + value;
+        if ((index & 3U) != 3U) {
+            readback->nonzero_color_bytes += (value != 0U) ? 1U : 0U;
+        }
+    }
+    return true;
+}
+
+int test_preset(LibrashaderGlBridge *bridge, const char *path,
+                unsigned int frame, Readback *readback) {
     constexpr unsigned int source_width = 96;
     constexpr unsigned int source_height = 64;
     constexpr int drawable_width = 320;
@@ -72,48 +153,26 @@ int test_preset(void *bridge, const char *path, unsigned int frame) {
         }
     }
     std::fprintf(stderr, "librashader GL smoke: testing preset: %s\n", path);
-    if (!librashader_gl_bridge_upload_source(
-            bridge, source.data(), source_pitch, source_width, source_height) ||
-        !librashader_gl_bridge_load_preset(bridge, path) ||
-        !librashader_gl_bridge_render_frame(bridge, frame, 16, drawable_width,
-                                            drawable_height) ||
-        !librashader_gl_bridge_draw_output(
-            bridge, drawable_width, drawable_height, 0, 0, drawable_width,
-            drawable_height)) {
+    if (!bridge->upload_source(source.data(), source_pitch, source_width,
+                               source_height) ||
+        !bridge->load_preset(path) ||
+        !bridge->render_frame(frame, 16, drawable_width, drawable_height) ||
+        !read_output_texture(*bridge, readback) ||
+        !bridge->draw_output(drawable_width, drawable_height, 0, 0,
+                             drawable_width, drawable_height)) {
         std::fprintf(stderr, "librashader GL smoke: preset failed: %s\n", path);
         return 1;
     }
-
-    glFinish();
-    const int pitch = drawable_width * 4;
-    std::vector<uint8_t> pixels(static_cast<size_t>(pitch) * drawable_height);
-    glReadPixels(0, 0, drawable_width, drawable_height, GL_RGBA,
-                 GL_UNSIGNED_BYTE, pixels.data());
-    const GLenum readback_error = glGetError();
-    if (readback_error != GL_NO_ERROR) {
-        std::fprintf(stderr,
-                     "librashader GL smoke: OpenGL readback failed: 0x%x\n",
-                     static_cast<unsigned int>(readback_error));
-        return 1;
-    }
-    uint64_t checksum = 0;
-    size_t nonzero = 0;
-    for (uint8_t value : pixels) {
-        checksum = (checksum * 131U) + value;
-        nonzero += (value != 0U) ? 1U : 0U;
-    }
-    if (nonzero == 0U) {
+    if (readback->nonzero_color_bytes == 0U) {
         std::fprintf(stderr, "librashader GL smoke: black output: %s\n", path);
         return 1;
     }
     std::fprintf(stderr,
                  "librashader GL smoke: passed preset=%s width=%d height=%d "
-                 "nonzero=%zu checksum=%llu\n",
-                 path, drawable_width, drawable_height, nonzero,
-                 static_cast<unsigned long long>(checksum));
-    std::printf("preset=%s width=%d height=%d nonzero=%zu checksum=%llu\n", path,
-                drawable_width, drawable_height, nonzero,
-                static_cast<unsigned long long>(checksum));
+                 "nonzero_color_bytes=%zu checksum=%llu\n",
+                 path, drawable_width, drawable_height,
+                 readback->nonzero_color_bytes,
+                 static_cast<unsigned long long>(readback->checksum));
     return 0;
 }
 
@@ -163,19 +222,26 @@ int main(int argc, char **argv) {
         return skip("SDL did not create an OpenGL renderer");
     }
 
-    void *bridge = librashader_gl_bridge_create(renderer);
-    if (bridge == nullptr) {
+    LibrashaderGlBridge bridge(renderer);
+    if (!bridge.initialized()) {
         std::fprintf(stderr, "librashader GL smoke: OpenGL bridge unavailable\n");
         SDL_DestroyRenderer(renderer);
         SDL_DestroyWindow(window);
         SDL_Quit();
         return 1;
     }
-    int result = test_preset(bridge, argv[1], 0);
+    Readback pass_through{};
+    Readback lottes{};
+    int result = test_preset(&bridge, argv[1], 0, &pass_through);
     if (result == 0) {
-        result = test_preset(bridge, argv[2], 1);
+        result = test_preset(&bridge, argv[2], 1, &lottes);
     }
-    librashader_gl_bridge_destroy(bridge);
+    if ((result == 0) && (pass_through.checksum == lottes.checksum)) {
+        std::fprintf(stderr,
+                     "librashader GL smoke: CRT preset matched pass-through "
+                     "output\n");
+        result = 1;
+    }
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
