@@ -2,10 +2,11 @@
 
 [![build](https://github.com/nakatamaho/vaeg/actions/workflows/build.yml/badge.svg)](https://github.com/nakatamaho/vaeg/actions/workflows/build.yml)
 
-88VA Eternal Grafx, or `vaeg`, is a maintained fork of the abandoned
-`project-vaeg` PC-88VA emulator lineage, itself derived from Neko Project
-II. This fork is the living tree: the old upstream should be treated as
-historical source material, not as the active project.
+88VA Eternal Grafx, or `vaeg`, is a maintained fork developed by Shinra from
+the abandoned `project-vaeg` PC-88VA emulator lineage, itself derived from
+Neko Project II. This fork is the living tree: the
+[original project-vaeg repository](https://github.com/project-vaeg/vaeg)
+should be treated as historical source material, not as the active project.
 
 The active product is a portable PC-88VA emulator that builds and runs on
 modern Windows, Linux, and macOS systems. Compared with the old VAEG, this
