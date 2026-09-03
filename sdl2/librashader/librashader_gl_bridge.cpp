@@ -387,6 +387,11 @@ bool LibrashaderGlBridge::upload_source(const void *pixels, int pitch,
                         static_cast<GLsizei>(height), GL_RGB,
                         GL_UNSIGNED_SHORT_5_6_5, pixels);
     }
+    // librashader 0.12.0 binds its source sampler with a mipmapped minification
+    // mode even when the preset does not request mipmap generation. Keep the
+    // externally-owned source texture complete so those samplers cannot return
+    // an incomplete-texture black value.
+    glGenerateMipmap(GL_TEXTURE_2D);
     glPixelStorei(GL_UNPACK_ROW_LENGTH, 0);
     glBindTexture(GL_TEXTURE_2D, 0);
     return gl_ok();
