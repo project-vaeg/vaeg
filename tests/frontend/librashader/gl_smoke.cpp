@@ -67,7 +67,8 @@ struct Readback {
     size_t nonzero_color_bytes;
 };
 
-bool read_output_texture(const LibrashaderGlBridge &bridge, Readback *readback) {
+bool read_texture(libra_image_gl_t image, const char *label,
+                  Readback *readback) {
     using GenFramebuffers = void(APIENTRY *)(GLsizei, GLuint *);
     using BindFramebuffer = void(APIENTRY *)(GLenum, GLuint);
     using FramebufferTexture2D = void(APIENTRY *)(GLenum, GLenum, GLenum, GLuint,
@@ -92,17 +93,17 @@ bool read_output_texture(const LibrashaderGlBridge &bridge, Readback *readback) 
         return false;
     }
 
-    const libra_image_gl_t output = bridge.output_image();
     GLuint framebuffer = 0;
     glFinish();
     gen_framebuffers(1, &framebuffer);
     bind_framebuffer(GL_FRAMEBUFFER, framebuffer);
     framebuffer_texture_2d(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D,
-                           output.handle, 0);
+                           image.handle, 0);
     const GLenum status = check_framebuffer_status(GL_FRAMEBUFFER);
     if ((framebuffer == 0) || (status != GL_FRAMEBUFFER_COMPLETE)) {
         std::fprintf(stderr,
-                     "librashader GL smoke: output framebuffer incomplete: 0x%x\n",
+                     "librashader GL smoke: %s framebuffer incomplete: 0x%x\n",
+                     label,
                      static_cast<unsigned int>(status));
         bind_framebuffer(GL_FRAMEBUFFER, 0);
         if (framebuffer != 0) {
@@ -111,17 +112,18 @@ bool read_output_texture(const LibrashaderGlBridge &bridge, Readback *readback) 
         return false;
     }
 
-    const int pitch = static_cast<int>(output.width * 4U);
-    std::vector<uint8_t> pixels(static_cast<size_t>(pitch) * output.height);
-    glReadPixels(0, 0, static_cast<GLsizei>(output.width),
-                 static_cast<GLsizei>(output.height), GL_RGBA,
+    const int pitch = static_cast<int>(image.width * 4U);
+    std::vector<uint8_t> pixels(static_cast<size_t>(pitch) * image.height);
+    glReadPixels(0, 0, static_cast<GLsizei>(image.width),
+                 static_cast<GLsizei>(image.height), GL_RGBA,
                  GL_UNSIGNED_BYTE, pixels.data());
     const GLenum readback_error = glGetError();
     bind_framebuffer(GL_FRAMEBUFFER, 0);
     delete_framebuffers(1, &framebuffer);
     if (readback_error != GL_NO_ERROR) {
         std::fprintf(stderr,
-                     "librashader GL smoke: output texture readback failed: 0x%x\n",
+                     "librashader GL smoke: %s texture readback failed: 0x%x\n",
+                     label,
                      static_cast<unsigned int>(readback_error));
         return false;
     }
@@ -136,6 +138,10 @@ bool read_output_texture(const LibrashaderGlBridge &bridge, Readback *readback) 
         }
     }
     return true;
+}
+
+bool read_output_texture(const LibrashaderGlBridge &bridge, Readback *readback) {
+    return read_texture(bridge.output_image(), "output", readback);
 }
 
 int test_preset(LibrashaderGlBridge *bridge, const char *path,
@@ -153,14 +159,20 @@ int test_preset(LibrashaderGlBridge *bridge, const char *path,
         }
     }
     std::fprintf(stderr, "librashader GL smoke: testing preset: %s\n", path);
+    Readback source_readback{};
     if (!bridge->upload_source(source.data(), source_pitch, source_width,
                                source_height) ||
+        !read_texture(bridge->source_image(), "source", &source_readback) ||
         !bridge->load_preset(path) ||
         !bridge->render_frame(frame, 16, drawable_width, drawable_height) ||
         !read_output_texture(*bridge, readback) ||
         !bridge->draw_output(drawable_width, drawable_height, 0, 0,
                              drawable_width, drawable_height)) {
         std::fprintf(stderr, "librashader GL smoke: preset failed: %s\n", path);
+        return 1;
+    }
+    if (source_readback.nonzero_color_bytes == 0U) {
+        std::fprintf(stderr, "librashader GL smoke: black source: %s\n", path);
         return 1;
     }
     if (readback->nonzero_color_bytes == 0U) {
