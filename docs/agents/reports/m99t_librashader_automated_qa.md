@@ -33,6 +33,12 @@ The source-texture regression guard also checks that the OpenGL entry point for
 the runtime samples it. This protects the librashader 0.12.0 source-sampler
 behavior used by the pinned runtime.
 
+The OpenGL smoke executable also exercises a resizable window, fullscreen
+entry and exit, repeated filter disable/re-enable, renderer/context
+recreation, and a bounded 1920x1080 benchmark. These checks run only when a
+usable OpenGL context and runtime are available; they are not substituted for
+the ordinary GPU-less fallback test.
+
 It is registered as `vaeg_librashader_pipeline_static` in CTest and runs in
 both feature-on and feature-off test configurations. It does not claim a GPU
 rendering result.
@@ -40,7 +46,8 @@ rendering result.
 Validation:
 
 ```text
-python3 tests/frontend/librashader/test_librashader_pipeline.py --root .  PASS (8 tests)
+python3 tests/frontend/librashader/test_librashader_pipeline.py --root .  PASS (9 tests)
+cmake --build /private/tmp/m99-gl-test -j2 --target vaeg_gl_preset_smoke PASS
 ctest --test-dir /private/tmp/m99t-lib-on-tests --output-on-failure \
   -R '^vaeg_librashader_pipeline_static$'                         PASS
 ctest --test-dir /private/tmp/m99t-lib-off-tests --output-on-failure \
@@ -54,3 +61,22 @@ ctest --test-dir /private/tmp/m99t-lib-on-tests --output-on-failure \
 The feature-on test build also passed `vaeg_sdl2` compilation. The existing
 SCSI, screenshot-scheduler, and invalid-debug-script negative-case messages
 remain expected self-test output.
+
+Hosted run [`33717000722`](https://github.com/nakatamaho/vaeg/actions/runs/33717000722)
+passed the Ubuntu feature-on build, runtime-absent and runtime-present
+fallback smokes, pinned runtime build, OpenGL smoke, and staged package
+inspection. The Ubuntu OpenGL smoke used Xvfb with Mesa software rendering and
+reported:
+
+```text
+pass-through: 60 frames at 1920x1080, elapsed 234.061 ms, average 3.901 ms/frame
+lottes-fast:  60 frames at 1920x1080, elapsed 4386.994 ms, average 73.117 ms/frame
+context recreation: passed
+```
+
+The same run's Windows and macOS feature-on jobs passed their build, runtime,
+and fallback steps. Their complete CTest steps, and Ubuntu's complete CTest
+step, failed only on the repository's pre-existing external/optional test
+inputs; no M99-specific test failure was reported. The hosted software-Mesa
+benchmark is evidence of bounded behavior and relative cost, not proof of
+normal hardware performance.

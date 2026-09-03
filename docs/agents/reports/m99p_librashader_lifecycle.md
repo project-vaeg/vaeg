@@ -41,5 +41,8 @@ cmake --build /private/tmp/m99d-lib-on -j2 --target vaeg_sdl2  PASS
 cmake --build /private/tmp/m99d-lib-off -j2 --target vaeg_sdl2 PASS
 ```
 
-Physical context-loss, fullscreen, and device-reset execution remains deferred
-because this environment has no usable SDL display or OpenGL context.
+The hosted Ubuntu OpenGL smoke now also destroys and recreates the SDL renderer
+and OpenGL context, reloads the preset, and verifies non-black output after
+recreation. It exercises the same ownership order used by the bridge. A real
+OS/device context-loss event, SDL renderer-reset event, physical fullscreen
+transition, and recovery on normal hardware remain deferred.

@@ -31,14 +31,19 @@ frame copies and zero per-frame allocations in the VAeg bridge. No preset
 parsing, shader compilation, or filter-chain construction occurs in the frame
 path.
 
-The required 640x400-to-1080p, windowed/fullscreen, runtime-present, and
-GPU-presentation measurements are deferred: this managed macOS environment has
-no usable SDL display/OpenGL context and no pinned librashader shared runtime
-has been staged. The source-side counters and reproducible debug command are
-ready for the supported-hardware run:
+The source-side counters and reproducible debug command remain ready for a
+supported-hardware run:
 
 ```text
 VAEG_CRT_FILTER=1 ./build/linux-debug/sdl2/vaeg --debug
 ```
 
-This is recorded as deferred evidence, not as a performance pass.
+Hosted Ubuntu CI also ran the lower-layer OpenGL smoke under Xvfb and Mesa
+software rendering. At 1920x1080 with a 640x400 source, 60 filter-chain frames
+took 234.061 ms (3.901 ms/frame) for pass-through and 4386.994 ms (73.117
+ms/frame) for Lottes-fast. This records a reproducible software-rendering
+baseline and confirms bounded execution, but it is not a claim that
+Lottes-fast maintains normal emulation speed on physical hardware. Physical
+GPU presentation timing, windowed/fullscreen hardware cost, upload/copy
+counters from a normal emulator session, and the final supported-hardware
+decision remain deferred.
