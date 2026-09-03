@@ -8,6 +8,8 @@ Neko Project II. This fork is the living tree: the
 [original project-vaeg repository](https://github.com/project-vaeg/vaeg)
 should be treated as historical source material, not as the active project.
 
+![VAEG](docs/images/vaeg-20260903-122323-0000052767-000.png)
+
 ## Sections
 
 | Section | Description |
