@@ -94,6 +94,14 @@ class LibrashaderPipelineTest(unittest.TestCase):
         self.assertNotRegex(render_body, r"\b(new|malloc|calloc|realloc)\b")
         self.assertIn("gl_filter_chain_frame", render_body)
 
+    def test_source_texture_is_complete_for_librashader_samplers(self):
+        bridge = self.read("sdl2/librashader/librashader_gl_bridge.cpp")
+        self.assertIn(
+            'LOAD_GL(generate_mipmap, GenerateMipmap, "glGenerateMipmap")',
+            bridge,
+        )
+        self.assertIn("api_->generate_mipmap(GL_TEXTURE_2D)", bridge)
+
     def test_raw_capture_stays_upstream(self):
         screen = self.read("sdl2/scrnmng.c")
         raw_start = screen.index("BOOL scrnmng_save_guest_frame(")
