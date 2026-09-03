@@ -104,6 +104,17 @@ def parse_commit_prefix(value: str) -> str:
     return match.group(1)
 
 
+def gate_belongs_to_milestone(milestone_core: str, gate_core: str) -> bool:
+    """Accept a milestone gate or one of its lettered child gates."""
+    if gate_core == milestone_core:
+        return True
+    return (
+        gate_core.startswith(milestone_core)
+        and len(gate_core) > len(milestone_core)
+        and gate_core[len(milestone_core)].islower()
+    )
+
+
 def artifact_stem(gate: str, profile: str, scope: str) -> str:
     """Build a deterministic artifact stem from strict identifiers."""
     core = parse_gate(gate)
@@ -152,7 +163,9 @@ def validate_roadmap(root: pathlib.Path) -> int:
         if core == "0":
             if gates:
                 raise MilestoneIdError(f"ROADMAP:{line_number}: unexpected M0 gate")
-        elif gates != [core]:
+        elif not gates or not all(
+            gate_belongs_to_milestone(core, gate) for gate in gates
+        ):
             raise MilestoneIdError(f"ROADMAP:{line_number}: gate ID mismatch")
         rows += 1
     if rows == 0:

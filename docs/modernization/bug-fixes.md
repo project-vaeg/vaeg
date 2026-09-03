@@ -93,7 +93,7 @@ separate parity correction or move it to Open Defects.
   reaches a complete-frame flip checkpoint for private counts 1, 4, 16, and
   64, with the private HUD and instances rendered. Focused M98aa, M98z, and
   M98y tests pass.
-- **Evidence:** [M98aa IDA64 report](../agents/reports/m98aa_ida_64_animation.md).
+- **Evidence:** [M98aa IDA64 report](../agents/reports/m98a1_ida_64_animation.md).
 - **Milestone/task:** M98aa IDA 64-instance animation launch correction.
 - **Commit:** [ee65ac70](https://github.com/nakatamaho/vaeg/commit/ee65ac701dec5d9d759b3efed245b76cf4686052).
 
@@ -120,7 +120,7 @@ separate parity correction or move it to Open Defects.
   private deterministic rebuilds remain 60,848 bytes. Private VAEG startup
   reaches complete-frame checkpoints for counts 1, 4, 16, and 64, and the
   bounded divisor-change scenario completes without a runtime failure.
-- **Evidence:** [M98aa IDA64 report](../agents/reports/m98aa_ida_64_animation.md).
+- **Evidence:** [M98aa IDA64 report](../agents/reports/m98a1_ida_64_animation.md).
 - **Milestone/task:** M98aa private cadence-key failure correction.
 - **Commit:** [36593140](https://github.com/nakatamaho/vaeg/commit/36593140e2fca01fdc62ae1aa18c195f08d593e1).
 
