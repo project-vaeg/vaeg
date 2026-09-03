@@ -28,6 +28,11 @@ shader denylist and dependency closure, optional dynamic-loader boundary,
 non-per-frame filter-chain creation, raw-capture separation, settings
 metadata/migration markers, and release-archive staging records.
 
+The source-texture regression guard also checks that the OpenGL entry point for
+`glGenerateMipmap` is loaded and that the source texture is completed before
+the runtime samples it. This protects the librashader 0.12.0 source-sampler
+behavior used by the pinned runtime.
+
 It is registered as `vaeg_librashader_pipeline_static` in CTest and runs in
 both feature-on and feature-off test configurations. It does not claim a GPU
 rendering result.
@@ -35,7 +40,7 @@ rendering result.
 Validation:
 
 ```text
-python3 tests/frontend/librashader/test_librashader_pipeline.py --root .  PASS (7 tests)
+python3 tests/frontend/librashader/test_librashader_pipeline.py --root .  PASS (8 tests)
 ctest --test-dir /private/tmp/m99t-lib-on-tests --output-on-failure \
   -R '^vaeg_librashader_pipeline_static$'                         PASS
 ctest --test-dir /private/tmp/m99t-lib-off-tests --output-on-failure \
