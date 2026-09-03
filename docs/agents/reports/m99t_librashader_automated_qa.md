@@ -62,15 +62,15 @@ The feature-on test build also passed `vaeg_sdl2` compilation. The existing
 SCSI, screenshot-scheduler, and invalid-debug-script negative-case messages
 remain expected self-test output.
 
-Hosted run [`33717000722`](https://github.com/nakatamaho/vaeg/actions/runs/33717000722)
+Hosted run [`33718345618`](https://github.com/nakatamaho/vaeg/actions/runs/33718345618)
 passed the Ubuntu feature-on build, runtime-absent and runtime-present
 fallback smokes, pinned runtime build, OpenGL smoke, and staged package
 inspection. The Ubuntu OpenGL smoke used Xvfb with Mesa software rendering and
 reported:
 
 ```text
-pass-through: 60 frames at 1920x1080, elapsed 234.061 ms, average 3.901 ms/frame
-lottes-fast:  60 frames at 1920x1080, elapsed 4386.994 ms, average 73.117 ms/frame
+pass-through: 60 frames at 1920x1080, elapsed 244.464 ms, average 4.074 ms/frame
+lottes-fast:  60 frames at 1920x1080, elapsed 4411.375 ms, average 73.523 ms/frame
 context recreation: passed
 ```
 

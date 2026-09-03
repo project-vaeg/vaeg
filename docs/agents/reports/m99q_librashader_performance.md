@@ -40,7 +40,7 @@ VAEG_CRT_FILTER=1 ./build/linux-debug/sdl2/vaeg --debug
 
 Hosted Ubuntu CI also ran the lower-layer OpenGL smoke under Xvfb and Mesa
 software rendering. At 1920x1080 with a 640x400 source, 60 filter-chain frames
-took 234.061 ms (3.901 ms/frame) for pass-through and 4386.994 ms (73.117
+took 244.464 ms (4.074 ms/frame) for pass-through and 4411.375 ms (73.523
 ms/frame) for Lottes-fast. This records a reproducible software-rendering
 baseline and confirms bounded execution, but it is not a claim that
 Lottes-fast maintains normal emulation speed on physical hardware. Physical
