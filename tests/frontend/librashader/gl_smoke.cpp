@@ -58,8 +58,7 @@ uint16_t source_pixel(unsigned int x, unsigned int y, unsigned int width,
     return static_cast<uint16_t>((red << 11U) | (green << 5U) | blue);
 }
 
-int test_preset(void *bridge, SDL_Renderer *renderer, const char *path,
-                unsigned int frame) {
+int test_preset(void *bridge, const char *path, unsigned int frame) {
     constexpr unsigned int source_width = 96;
     constexpr unsigned int source_height = 64;
     constexpr int drawable_width = 320;
@@ -72,6 +71,7 @@ int test_preset(void *bridge, SDL_Renderer *renderer, const char *path,
                 source_pixel(x, y, source_width, source_height);
         }
     }
+    std::fprintf(stderr, "librashader GL smoke: testing preset: %s\n", path);
     if (!librashader_gl_bridge_upload_source(
             bridge, source.data(), source_pitch, source_width, source_height) ||
         !librashader_gl_bridge_load_preset(bridge, path) ||
@@ -87,10 +87,13 @@ int test_preset(void *bridge, SDL_Renderer *renderer, const char *path,
     glFinish();
     const int pitch = drawable_width * 4;
     std::vector<uint8_t> pixels(static_cast<size_t>(pitch) * drawable_height);
-    if (SDL_RenderReadPixels(renderer, nullptr, SDL_PIXELFORMAT_RGBA32,
-                             pixels.data(), pitch) != 0) {
-        std::fprintf(stderr, "librashader GL smoke: readback failed: %s\n",
-                     SDL_GetError());
+    glReadPixels(0, 0, drawable_width, drawable_height, GL_RGBA,
+                 GL_UNSIGNED_BYTE, pixels.data());
+    const GLenum readback_error = glGetError();
+    if (readback_error != GL_NO_ERROR) {
+        std::fprintf(stderr,
+                     "librashader GL smoke: OpenGL readback failed: 0x%x\n",
+                     static_cast<unsigned int>(readback_error));
         return 1;
     }
     uint64_t checksum = 0;
@@ -103,6 +106,11 @@ int test_preset(void *bridge, SDL_Renderer *renderer, const char *path,
         std::fprintf(stderr, "librashader GL smoke: black output: %s\n", path);
         return 1;
     }
+    std::fprintf(stderr,
+                 "librashader GL smoke: passed preset=%s width=%d height=%d "
+                 "nonzero=%zu checksum=%llu\n",
+                 path, drawable_width, drawable_height, nonzero,
+                 static_cast<unsigned long long>(checksum));
     std::printf("preset=%s width=%d height=%d nonzero=%zu checksum=%llu\n", path,
                 drawable_width, drawable_height, nonzero,
                 static_cast<unsigned long long>(checksum));
@@ -163,9 +171,9 @@ int main(int argc, char **argv) {
         SDL_Quit();
         return 1;
     }
-    int result = test_preset(bridge, renderer, argv[1], 0);
+    int result = test_preset(bridge, argv[1], 0);
     if (result == 0) {
-        result = test_preset(bridge, renderer, argv[2], 1);
+        result = test_preset(bridge, argv[2], 1);
     }
     librashader_gl_bridge_destroy(bridge);
     SDL_DestroyRenderer(renderer);
