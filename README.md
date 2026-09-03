@@ -8,32 +8,11 @@ Neko Project II. This fork is the living tree: the
 [original project-vaeg repository](https://github.com/project-vaeg/vaeg)
 should be treated as historical source material, not as the active project.
 
-The active product is a portable PC-88VA emulator that builds and runs on
-modern Windows, Linux, and macOS systems. Compared with the old VAEG, this
-fork adds or improves:
-
-- partial PC-9801-55-compatible SCSI support;
-- EMS support;
-- main-memory and BMS compatibility;
-- host text copy and paste;
-- more hardware-like sound through ymfm;
-- Kana/Romaji input support;
-- US keyboard layout support;
-- more faithful uPD9002 instruction support;
-- a uPD70008-compatible Z80 emulation path;
-- optional on-screen graphics and text-sprite diagnostics;
-- simple CRT screen effects;
-- substantially reorganized and simplified code;
-- a greatly reduced PC-98-only codebase.
-
-The former Visual Studio reference tier is archived at tag
-`archive/frozen-win9x-i286x-g56`; normal development targets the CMake/SDL2
-tree.
-
 ## Sections
 
 | Section | Description |
 | --- | --- |
+| [Features](#features) | Portable platform support and major features |
 | [News](#news) | Release notes and project updates |
 | [Current Frontend](#current-frontend) | Portable SDL2 frontend overview |
 | [ROM Dump](#rom-dump) | ROM names, checksums, and dump notes |
@@ -48,6 +27,25 @@ tree.
 | [Documentation Map](#documentation-map) | Guides and modernization notes |
 | [Status](#status) | Current project status |
 | [License Status](#license-status) | License and redistribution notes |
+
+## Features
+
+`vaeg` is portable and builds and runs natively on modern Windows, Linux, and
+macOS systems. It provides:
+
+- partial PC-9801-55-compatible SCSI support;
+- EMS support;
+- main-memory and BMS compatibility;
+- host text copy and paste;
+- more hardware-like sound through ymfm;
+- Kana/Romaji input support;
+- US keyboard layout support;
+- more faithful uPD9002 instruction support (BRKEM only);
+- a uPD70008-compatible Z80 emulation path;
+- optional on-screen graphics and text-sprite diagnostics;
+- simple CRT screen effects;
+- substantially reorganized and simplified code;
+- a greatly reduced PC-98-only codebase.
 
 ## News
 
