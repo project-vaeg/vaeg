@@ -54,9 +54,15 @@ size. With a 512-KiB installation, the BIOS must be changed to 640 KiB before
 the operating system recognizes the upper 128 KiB. The BIOS also permits
 smaller configurations such as 384 KiB and 256 KiB.
 
-![PC-88VA main-memory configuration screen](../images/vaeg-20260903-130742-0000074511-000.png)
+![VA main-memory configuration screen](../images/vaeg-20260903-130702-0000034918-000.png)
 
-*On the original PC-88VA, hold the PC key while powering on, or press the
+*VA main-memory configuration screen.*
+
+![VA2 main-memory configuration screen](../images/vaeg-20260903-130742-0000074511-000.png)
+
+*VA2 main-memory configuration screen.*
+
+*On the original VA and VA2, hold the PC key while powering on, or press the
 reset button, to open this configuration screen. When 640 KiB is installed,
 the setting can be reduced from 640 KiB, but the operating system will not
 recognize the memory above the selected capacity. The original default is
