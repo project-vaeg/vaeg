@@ -102,6 +102,13 @@ class LibrashaderPipelineTest(unittest.TestCase):
         )
         self.assertIn("api_->generate_mipmap(GL_TEXTURE_2D)", bridge)
 
+    def test_gl_smoke_covers_window_lifecycle_and_benchmark(self):
+        smoke = self.read("tests/frontend/librashader/gl_smoke.cpp")
+        self.assertIn("SDL_WINDOW_RESIZABLE", smoke)
+        self.assertIn("SDL_SetWindowFullscreen", smoke)
+        self.assertIn("context recreation passed", smoke)
+        self.assertIn("librashader GL benchmark", smoke)
+
     def test_raw_capture_stays_upstream(self):
         screen = self.read("sdl2/scrnmng.c")
         raw_start = screen.index("BOOL scrnmng_save_guest_frame(")

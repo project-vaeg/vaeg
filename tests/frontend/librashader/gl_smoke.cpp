@@ -24,6 +24,7 @@ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <cstdio>
 #include <cstdlib>
 #include <filesystem>
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -60,6 +61,16 @@ uint16_t source_pixel(unsigned int x, unsigned int y, unsigned int width,
     const unsigned int green = ((x ^ y) * 63U) / (width + height - 2U);
     const unsigned int blue = (y * 31U) / (height - 1U);
     return static_cast<uint16_t>((red << 11U) | (green << 5U) | blue);
+}
+
+std::vector<uint16_t> make_source(unsigned int width, unsigned int height) {
+    std::vector<uint16_t> source(width * height);
+    for (unsigned int y = 0; y < height; ++y) {
+        for (unsigned int x = 0; x < width; ++x) {
+            source[y * width + x] = source_pixel(x, y, width, height);
+        }
+    }
+    return source;
 }
 
 struct Readback {
@@ -144,6 +155,23 @@ bool read_output_texture(const LibrashaderGlBridge &bridge, Readback *readback) 
     return read_texture(bridge.output_image(), "output", readback);
 }
 
+bool render_output(LibrashaderGlBridge *bridge, unsigned int frame,
+                   int output_width, int output_height, int drawable_width,
+                   int drawable_height, Readback *readback,
+                   SDL_Renderer *renderer) {
+    if ((bridge == nullptr) || (readback == nullptr) ||
+        !bridge->render_frame(frame, 16, output_width, output_height) ||
+        !read_output_texture(*bridge, readback) ||
+        !bridge->draw_output(drawable_width, drawable_height, 0, 0,
+                             output_width, output_height)) {
+        return false;
+    }
+    if (renderer != nullptr) {
+        SDL_RenderPresent(renderer);
+    }
+    return true;
+}
+
 int test_preset(LibrashaderGlBridge *bridge, const char *path,
                 unsigned int frame, Readback *readback) {
     constexpr unsigned int source_width = 96;
@@ -151,13 +179,7 @@ int test_preset(LibrashaderGlBridge *bridge, const char *path,
     constexpr int drawable_width = 320;
     constexpr int drawable_height = 240;
     const int source_pitch = static_cast<int>(source_width * sizeof(uint16_t));
-    std::vector<uint16_t> source(source_width * source_height);
-    for (unsigned int y = 0; y < source_height; ++y) {
-        for (unsigned int x = 0; x < source_width; ++x) {
-            source[y * source_width + x] =
-                source_pixel(x, y, source_width, source_height);
-        }
-    }
+    const std::vector<uint16_t> source = make_source(source_width, source_height);
     std::fprintf(stderr, "librashader GL smoke: testing preset: %s\n", path);
     Readback source_readback{};
     if (!bridge->upload_source(source.data(), source_pitch, source_width,
@@ -188,6 +210,117 @@ int test_preset(LibrashaderGlBridge *bridge, const char *path,
     return 0;
 }
 
+int test_window_lifecycle(LibrashaderGlBridge *bridge, SDL_Window *window,
+                          SDL_Renderer *renderer, const char *pass_through,
+                          const char *lottes) {
+    if ((bridge == nullptr) || (window == nullptr) || (renderer == nullptr)) {
+        return 1;
+    }
+
+    SDL_SetWindowSize(window, 800, 600);
+    SDL_PumpEvents();
+    int window_width = 0;
+    int window_height = 0;
+    SDL_GetWindowSize(window, &window_width, &window_height);
+    if ((window_width != 800) || (window_height != 600)) {
+        std::fprintf(stderr,
+                     "librashader GL smoke: resize was not applied: %dx%d\n",
+                     window_width, window_height);
+        return 1;
+    }
+
+    Readback resized{};
+    if (!bridge->load_preset(pass_through) ||
+        !render_output(bridge, 2, 800, 600, 800, 600, &resized, renderer) ||
+        (resized.nonzero_color_bytes == 0U)) {
+        std::fprintf(stderr, "librashader GL smoke: resized output failed\n");
+        return 1;
+    }
+
+    bridge->disable_filter();
+    if (bridge->parameter_count() != 0U || !bridge->load_preset(lottes)) {
+        std::fprintf(stderr,
+                     "librashader GL smoke: repeated filter enable failed\n");
+        return 1;
+    }
+    Readback toggled{};
+    if (!render_output(bridge, 3, 640, 480, 800, 600, &toggled, renderer) ||
+        (toggled.nonzero_color_bytes == 0U)) {
+        std::fprintf(stderr,
+                     "librashader GL smoke: repeated filter render failed\n");
+        return 1;
+    }
+
+    if (SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN_DESKTOP) != 0) {
+        std::fprintf(stderr, "librashader GL smoke: fullscreen failed: %s\n",
+                     SDL_GetError());
+        return 1;
+    }
+    SDL_PumpEvents();
+    int drawable_width = 0;
+    int drawable_height = 0;
+    if (SDL_GetRendererOutputSize(renderer, &drawable_width, &drawable_height) !=
+            0 ||
+        (drawable_width <= 0) || (drawable_height <= 0)) {
+        std::fprintf(stderr,
+                     "librashader GL smoke: fullscreen drawable size failed\n");
+        (void)SDL_SetWindowFullscreen(window, 0);
+        return 1;
+    }
+    Readback fullscreen{};
+    if (!render_output(bridge, 4, drawable_width, drawable_height,
+                       drawable_width, drawable_height, &fullscreen, renderer) ||
+        (fullscreen.nonzero_color_bytes == 0U)) {
+        std::fprintf(stderr, "librashader GL smoke: fullscreen output failed\n");
+        (void)SDL_SetWindowFullscreen(window, 0);
+        return 1;
+    }
+    if (SDL_SetWindowFullscreen(window, 0) != 0) {
+        std::fprintf(stderr, "librashader GL smoke: fullscreen restore failed: %s\n",
+                     SDL_GetError());
+        return 1;
+    }
+    SDL_PumpEvents();
+    return 0;
+}
+
+int benchmark_preset(LibrashaderGlBridge *bridge, const char *path,
+                     unsigned int frame_base, const char *label) {
+    constexpr unsigned int source_width = 640;
+    constexpr unsigned int source_height = 400;
+    constexpr int output_width = 1920;
+    constexpr int output_height = 1080;
+    constexpr unsigned int frame_count = 60;
+    const std::vector<uint16_t> source = make_source(source_width, source_height);
+    if (!bridge->upload_source(source.data(),
+                               static_cast<int>(source_width * sizeof(uint16_t)),
+                               source_width, source_height) ||
+        !bridge->load_preset(path)) {
+        std::fprintf(stderr, "librashader GL benchmark: setup failed: %s\n", label);
+        return 1;
+    }
+    const uint64_t started = SDL_GetPerformanceCounter();
+    for (unsigned int frame = 0; frame < frame_count; ++frame) {
+        if (!bridge->render_frame(frame_base + frame, 16, output_width,
+                                  output_height)) {
+            std::fprintf(stderr, "librashader GL benchmark: render failed: %s\n",
+                         label);
+            return 1;
+        }
+    }
+    glFinish();
+    const uint64_t elapsed = SDL_GetPerformanceCounter() - started;
+    const double elapsed_ms =
+        static_cast<double>(elapsed) * 1000.0 /
+        static_cast<double>(SDL_GetPerformanceFrequency());
+    std::fprintf(stderr,
+                 "librashader GL benchmark: preset=%s frames=%u output=%dx%d "
+                 "elapsed_ms=%.3f avg_frame_ms=%.3f\n",
+                 label, frame_count, output_width, output_height, elapsed_ms,
+                 elapsed_ms / static_cast<double>(frame_count));
+    return 0;
+}
+
 } // namespace
 
 int main(int argc, char **argv) {
@@ -210,7 +343,8 @@ int main(int argc, char **argv) {
     SDL_SetHint(SDL_HINT_RENDER_DRIVER, "opengl");
     SDL_Window *window = SDL_CreateWindow(
         "vaeg librashader GL smoke", SDL_WINDOWPOS_UNDEFINED,
-        SDL_WINDOWPOS_UNDEFINED, 640, 480, SDL_WINDOW_HIDDEN);
+        SDL_WINDOWPOS_UNDEFINED, 640, 480,
+        SDL_WINDOW_HIDDEN | SDL_WINDOW_RESIZABLE);
     if (window == nullptr) {
         const std::string error = SDL_GetError();
         SDL_Quit();
@@ -234,8 +368,8 @@ int main(int argc, char **argv) {
         return skip("SDL did not create an OpenGL renderer");
     }
 
-    LibrashaderGlBridge bridge(renderer);
-    if (!bridge.initialized()) {
+    auto bridge = std::make_unique<LibrashaderGlBridge>(renderer);
+    if (!bridge->initialized()) {
         std::fprintf(stderr, "librashader GL smoke: OpenGL bridge unavailable\n");
         SDL_DestroyRenderer(renderer);
         SDL_DestroyWindow(window);
@@ -244,9 +378,9 @@ int main(int argc, char **argv) {
     }
     Readback pass_through{};
     Readback lottes{};
-    int result = test_preset(&bridge, argv[1], 0, &pass_through);
+    int result = test_preset(bridge.get(), argv[1], 0, &pass_through);
     if (result == 0) {
-        result = test_preset(&bridge, argv[2], 1, &lottes);
+        result = test_preset(bridge.get(), argv[2], 1, &lottes);
     }
     if ((result == 0) && (pass_through.checksum == lottes.checksum)) {
         std::fprintf(stderr,
@@ -254,6 +388,46 @@ int main(int argc, char **argv) {
                      "output\n");
         result = 1;
     }
+    if (result == 0) {
+        result = test_window_lifecycle(bridge.get(), window, renderer, argv[1],
+                                       argv[2]);
+    }
+    if (result == 0) {
+        result = benchmark_preset(bridge.get(), argv[1], 10, "pass-through");
+    }
+    if (result == 0) {
+        result = benchmark_preset(bridge.get(), argv[2], 70, "lottes-fast");
+    }
+    if (result == 0) {
+        bridge.reset();
+        SDL_DestroyRenderer(renderer);
+        renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+        if (renderer == nullptr) {
+            std::fprintf(stderr,
+                         "librashader GL smoke: renderer recreation failed: %s\n",
+                         SDL_GetError());
+            result = 1;
+        } else {
+            bridge = std::make_unique<LibrashaderGlBridge>(renderer);
+            const std::vector<uint16_t> source = make_source(96, 64);
+            Readback recreated{};
+            if (!bridge->initialized() ||
+                !bridge->upload_source(source.data(), 96 * sizeof(uint16_t), 96,
+                                        64) ||
+                !bridge->load_preset(argv[2]) ||
+                !render_output(bridge.get(), 100, 640, 480, 800, 600,
+                               &recreated, renderer) ||
+                (recreated.nonzero_color_bytes == 0U)) {
+                std::fprintf(stderr,
+                             "librashader GL smoke: context recreation failed\n");
+                result = 1;
+            } else {
+                std::fprintf(stderr,
+                             "librashader GL smoke: context recreation passed\n");
+            }
+        }
+    }
+    bridge.reset();
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
