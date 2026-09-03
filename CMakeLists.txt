@@ -762,6 +762,32 @@ if(VAEG_ENABLE_TESTS)
     set_tests_properties(vaeg_librashader_pipeline_static PROPERTIES
         LABELS "frontend;librashader;romless")
 
+    if(VAEG_ENABLE_LIBRASHADER)
+        add_executable(vaeg_gl_preset_smoke
+            tests/frontend/librashader/gl_smoke.cpp
+            sdl2/librashader/librashader_loader.cpp
+            sdl2/librashader/librashader_gl_bridge.cpp)
+        target_include_directories(vaeg_gl_preset_smoke PRIVATE
+            "${CMAKE_CURRENT_SOURCE_DIR}/sdl2"
+            "${CMAKE_CURRENT_SOURCE_DIR}/third_party/librashader/include")
+        target_compile_definitions(vaeg_gl_preset_smoke PRIVATE
+            LIBRA_RUNTIME_OPENGL=1)
+        target_link_libraries(vaeg_gl_preset_smoke PRIVATE
+            ${VAEG_SDL2_LIBS} OpenGL::GL ${CMAKE_DL_LIBS})
+        if(UNIX)
+            target_link_libraries(vaeg_gl_preset_smoke PRIVATE m)
+        endif()
+        add_test(NAME vaeg_librashader_gl_smoke
+            COMMAND vaeg_gl_preset_smoke
+                "${CMAKE_CURRENT_SOURCE_DIR}/assets/shaders/crt/vaeg_crt_passthrough.slangp"
+                "${CMAKE_CURRENT_SOURCE_DIR}/assets/shaders/crt/vaeg_crt_lottes_fast.slangp")
+        set_tests_properties(vaeg_librashader_gl_smoke PROPERTIES
+            ENVIRONMENT
+                "VAEG_LIBRASHADER_RUNTIME_DIR=${CMAKE_CURRENT_BINARY_DIR}/librashader-runtime;SDL_AUDIODRIVER=dummy"
+            SKIP_RETURN_CODE 77
+            LABELS "frontend;librashader;opengl")
+    endif()
+
     if(TARGET hostfat_sys)
         add_test(NAME vaeg_hostfat_driver
             COMMAND "${Python3_EXECUTABLE}"

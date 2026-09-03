@@ -211,17 +211,59 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y cmake ninja-build pkg-config libsdl2-dev \
-            libgl1-mesa-dev gcc g++ git
+            libgl1-mesa-dev libgl1-mesa-dri xvfb gcc g++ git
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
       - name: Configure feature-on build
         run: cmake --preset linux-ci-gcc -DVAEG_ENABLE_LIBRASHADER=ON
       - name: Build feature-on target
-        run: cmake --build --preset linux-ci-gcc --target vaeg_sdl2
+        run: >-
+          cmake --build --preset linux-ci-gcc --target
+          vaeg_sdl2 vaeg_gl_preset_smoke
       - name: Smoke without runtime
         run: SDL_VIDEODRIVER=dummy SDL_AUDIODRIVER=dummy ./build/linux-ci-gcc/sdl2/vaeg --smoke
       - name: Build pinned OpenGL runtime
         run: tools/release/build-librashader-runtime.sh linux build/librashader-runtime
+      - name: OpenGL preset rendering smoke
+        run: |
+          export LD_LIBRARY_PATH="$PWD/build/librashader-runtime${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+          xvfb-run -a -s "-screen 0 640x480x24" env \
+            SDL_AUDIODRIVER=dummy \
+            LIBGL_ALWAYS_SOFTWARE=1 \
+            VAEG_LIBRASHADER_RUNTIME_DIR="$PWD/build/librashader-runtime" \
+            ./build/linux-ci-gcc/vaeg_gl_preset_smoke \
+            "$PWD/assets/shaders/crt/vaeg_crt_passthrough.slangp" \
+            "$PWD/assets/shaders/crt/vaeg_crt_lottes_fast.slangp"
+      - name: Inspect a staged release-shaped package
+        run: |
+          set -eu
+          package="vaeg-m99-ci-linux"
+          rm -rf dist-package "${package}.tar.gz"
+          mkdir -p "dist-package/${package}/licenses" \
+            "dist-package/${package}/shaders/crt/licenses"
+          install -m 755 build/linux-ci-gcc/sdl2/vaeg \
+            "dist-package/${package}/vaeg"
+          install -m 755 build/librashader-runtime/librashader.so \
+            "dist-package/${package}/librashader.so"
+          install -m 644 third_party/librashader/license-mpl-2.0.txt \
+            "dist-package/${package}/licenses/LIBRASHADER_MPL-2.0.txt"
+          install -m 644 third_party/librashader/readme.vaeg.md \
+            "dist-package/${package}/licenses/LIBRASHADER_SOURCE.txt"
+          install -m 644 assets/NOTICE.md \
+            "dist-package/${package}/licenses/THIRD_PARTY_NOTICES.md"
+          install -m 644 assets/shaders/crt/vaeg_crt_lottes_fast.slangp \
+            "dist-package/${package}/shaders/crt/"
+          install -m 644 assets/shaders/crt/shaders/crt-lottes-fast.slang \
+            "dist-package/${package}/shaders/crt/"
+          install -m 644 \
+            assets/shaders/crt/licenses/crt_lottes_fast_unlicense.txt \
+            "dist-package/${package}/shaders/crt/licenses/CRT_LOTTES_FAST_LICENSE.txt"
+          install -m 644 \
+            assets/shaders/crt/licenses/crt_lottes_fast_provenance.md \
+            "dist-package/${package}/shaders/crt/licenses/CRT_LOTTES_FAST_PROVENANCE.md"
+          tar -C dist-package -czf "${package}.tar.gz" "${package}"
+          python3 tools/release/inspect-librashader-package.py \
+            "${package}.tar.gz" --platform linux
       - name: Smoke with runtime present
         run: |
           export LD_LIBRARY_PATH="$PWD/build/librashader-runtime${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"

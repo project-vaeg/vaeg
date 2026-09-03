@@ -124,6 +124,7 @@ class LibrashaderPipelineTest(unittest.TestCase):
         self.assertEqual(3, workflow.count("LIBRASHADER_MPL-2.0.txt"))
         self.assertEqual(3, workflow.count("LIBRASHADER_SOURCE.txt"))
         self.assertEqual(3, workflow.count("CRT_LOTTES_FAST_PROVENANCE.md"))
+        self.assertEqual(3, workflow.count("inspect-librashader-package.py"))
         self.assertNotRegex(workflow.lower(), r"crt[-_]geom|crt[-_]royale|mega[-_]bezel")
         source_record = self.read("third_party/librashader/readme.vaeg.md")
         self.assertIn("87e8a97b50516d997defeaa168173dcd185d4022", source_record)

@@ -113,6 +113,8 @@ jobs:
           tar -C dist-package -czf "${asset}" "${package}"
           tar -tzf "${asset}"
           python3 tests/z80_compat/check_zex_archive.py "${asset}"
+          python3 tools/release/inspect-librashader-package.py \
+            "${asset}" --platform linux
       - name: Create GitHub Release
         env:
           GH_TOKEN: ${{ github.token }}
@@ -282,6 +284,7 @@ jobs:
           }
           Compress-Archive -Path "dist-package/$package" -DestinationPath $asset -Force
           python tests/z80_compat/check_zex_archive.py $asset
+          python tools/release/inspect-librashader-package.py $asset --platform windows
       - name: Upload release asset
         shell: pwsh
         env:
@@ -369,6 +372,8 @@ jobs:
           tar -C dist-package -czf "${asset}" "${package}"
           tar -tzf "${asset}"
           python3 tests/z80_compat/check_zex_archive.py "${asset}"
+          python3 tools/release/inspect-librashader-package.py \
+            "${asset}" --platform macos
       - name: Upload release asset
         env:
           GH_TOKEN: ${{ github.token }}
