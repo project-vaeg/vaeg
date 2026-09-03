@@ -32,9 +32,9 @@ should be treated as historical source material, not as the active project.
 
 ## Features
 
-`vaeg` is portable and builds and runs natively on modern Windows, Linux, and
-macOS systems. It provides:
+`vaeg` has the following features:
 
+- builds and runs natively on modern Windows, Linux, and macOS systems;
 - partial PC-9801-55-compatible SCSI support;
 - EMS support;
 - main-memory and BMS compatibility;
