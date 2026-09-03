@@ -50,6 +50,7 @@ struct GlApi {
     using DrawArrays = void(APIENTRY *)(GLenum, GLint, GLsizei);
     using EnableVertexAttribArray = void(APIENTRY *)(GLuint);
     using GenBuffers = void(APIENTRY *)(GLsizei, GLuint *);
+    using GenerateMipmap = void(APIENTRY *)(GLenum);
     using GenVertexArrays = void(APIENTRY *)(GLsizei, GLuint *);
     using GetProgramInfoLog = void(APIENTRY *)(GLuint, GLsizei, GLsizei *, GLchar *);
     using GetProgramiv = void(APIENTRY *)(GLuint, GLenum, GLint *);
@@ -81,6 +82,7 @@ struct GlApi {
     DrawArrays draw_arrays;
     EnableVertexAttribArray enable_vertex_attrib_array;
     GenBuffers gen_buffers;
+    GenerateMipmap generate_mipmap;
     GenVertexArrays gen_vertex_arrays;
     GetProgramInfoLog get_program_info_log;
     GetProgramiv get_program_iv;
@@ -128,6 +130,7 @@ bool load_gl_api(GlApi *api) {
     LOAD_GL(enable_vertex_attrib_array, EnableVertexAttribArray,
             "glEnableVertexAttribArray");
     LOAD_GL(gen_buffers, GenBuffers, "glGenBuffers");
+    LOAD_GL(generate_mipmap, GenerateMipmap, "glGenerateMipmap");
     LOAD_GL(gen_vertex_arrays, GenVertexArrays, "glGenVertexArrays");
     LOAD_GL(get_program_info_log, GetProgramInfoLog, "glGetProgramInfoLog");
     LOAD_GL(get_program_iv, GetProgramiv, "glGetProgramiv");
@@ -146,7 +149,8 @@ bool load_gl_api(GlApi *api) {
            api->delete_buffers && api->delete_program && api->delete_shader &&
            api->delete_vertex_arrays && api->disable_vertex_attrib_array &&
            api->draw_arrays && api->enable_vertex_attrib_array && api->gen_buffers &&
-           api->gen_vertex_arrays && api->get_program_info_log && api->get_program_iv &&
+           api->generate_mipmap && api->gen_vertex_arrays &&
+           api->get_program_info_log && api->get_program_iv &&
            api->get_shader_info_log && api->get_shader_iv && api->link_program &&
            api->get_uniform_location &&
            api->shader_source && api->uniform_1i && api->use_program &&
@@ -391,7 +395,7 @@ bool LibrashaderGlBridge::upload_source(const void *pixels, int pitch,
     // mode even when the preset does not request mipmap generation. Keep the
     // externally-owned source texture complete so those samplers cannot return
     // an incomplete-texture black value.
-    glGenerateMipmap(GL_TEXTURE_2D);
+    api_->generate_mipmap(GL_TEXTURE_2D);
     glPixelStorei(GL_UNPACK_ROW_LENGTH, 0);
     glBindTexture(GL_TEXTURE_2D, 0);
     return gl_ok();
