@@ -117,6 +117,29 @@ For reference, the combined SHA-1 of banks 0 through 5 (`0x00000` through
 `0x5FFFF`) is
 `24a7a5091846ec1f177c97711e4837573bc40b42`.
 
+### Reserved-bank observation (VA1 only)
+
+The selected `varom00.rom` dump has the following contents in ROM0 banks 6
+and 7:
+
+- bank 6: `0x60000–0x6ffff`
+- bank 7: `0x70000–0x7ffff`
+- both banks are byte-for-byte identical
+- the entire contents are the repeating pattern `AA 0E AA 0E ...`
+- each bank is 65536 bytes
+- each bank has SHA-1 `c13a76090102c5ac408ed0cbbcbe3707f8234786`
+
+The beginning and end of both banks are the same:
+
+```text
+aa 0e aa 0e aa 0e aa 0e ...
+...
+aa 0e aa 0e aa 0e aa 0e
+```
+
+In this dump, banks 6 and 7 appear to be fixed-pattern regions rather than
+meaningful code or data.
+
 ### Observed read-to-read differences (VA1 only)
 
 `sample1` and `sample2` differ at eight byte positions. The eight positions
