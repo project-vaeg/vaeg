@@ -22,7 +22,7 @@ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 # M99 progress log
 
-Branch: `topic/m99-librashader-crt-pipeline`
+Branch: `topic/m99999-misc-fixes` (M99 work retained on the existing user branch)
 Starting commit: `1e73f2b2c20b09b2ac97c58590014cc413401d5c`
 Working policy: one focused commit per sub-milestone; unrelated dirty paths
 are intentionally not staged.
@@ -48,8 +48,8 @@ are intentionally not staged.
 | M99q | `6b1e0394` | PASS: bounded presentation instrumentation | `m99q_librashader_performance.md` |
 | M99r | `fb1d0bbe` | PASS: platform package license/source/shader records | `m99r` changes and release workflow |
 | M99s | `0aa7278e`, `70c6a443`, `36a68848` | PASS in workflow definition; hosted feature-on build/runtime fallback checks passed, full suite had unrelated baseline failures | `m99s_librashader_platform_matrix.md` |
-| M99t | `d241a497` | PASS: 7 static QA checks and CTest registration | `m99t_librashader_automated_qa.md` |
-| M99u | `6bdfea78` | Documentation complete; final gate BLOCKED by unavailable GPU visual evidence and uninspected official release archive | this log and M99u docs |
+| M99t | `d241a497`, `10aedf7b`, `02c43122`, `7e673260`, `34295654`, `0fa37564`, `2680fa54` | PASS: source-texture completeness correction, 8 static QA checks, real Linux Mesa pass-through/Lottes smoke, and staged package inspection | `m99t_librashader_automated_qa.md` |
+| M99u | pending report commit | Documentation and final evidence log updated; physical display lifecycle/performance and official release archive inspection remain deferred | this log and M99u docs |
 
 ## Tests and CI
 
@@ -60,23 +60,26 @@ cmake --build /private/tmp/m99d-lib-on -j2 --target vaeg_sdl2       PASS
 cmake --build /private/tmp/m99d-lib-off -j2 --target vaeg_sdl2      PASS
 SDL_VIDEODRIVER=dummy SDL_AUDIODRIVER=dummy .../vaeg --selftest    PASS (on/off)
 python3 tests/frontend/librashader/test_librashader_pipeline.py \
-  --root .                                                          PASS (7 tests)
+  --root .                                                          PASS (8 tests)
 CTest static, ROM-less, and M75 compiled tests in m99t-lib-on-tests PASS
 CTest static test in m99t-lib-off-tests                             PASS
 ```
 
 Repository checks pass: UTF-8, LF EOL, path case, and scoped `git diff
---check`. Hosted CI run [`33695887109`](https://github.com/nakatamaho/vaeg/actions/runs/33695887109)
-completed with overall failure from unrelated baseline tests. The M99-specific
-jobs all reached the relevant checks: Ubuntu, Windows, and macOS feature-on
-builds passed; runtime-absent and runtime-present SDL dummy-device smokes
-passed; the pinned runtime was built successfully on all three platforms; and
-`vaeg_librashader_pipeline_static` passed on all three platforms. The Windows
-runtime build took 5m23s, and the macOS runtime build took 2m56s. The Windows
-release-artifact job also passed. The full CTest failures were the existing
-`M98aa_ida_64_animation.md` milestone-name rejection and missing external
-differential traces; macOS additionally stopped at the existing compiled-M75
-test. These failures did not report an M99 test failure.
+--check`. Hosted CI run [`33714413776`](https://github.com/nakatamaho/vaeg/actions/runs/33714413776)
+completed with overall failure from existing baseline tests. The M99-specific
+checks passed on Ubuntu, Windows, and macOS: feature-on builds, runtime-absent
+and runtime-present SDL dummy-device smokes, pinned runtime builds, and static
+pipeline QA. Ubuntu additionally ran a Mesa software-OpenGL smoke and both
+bundled presets produced non-black RGB output; pass-through and Lottes-fast
+reported `nonzero_color_bytes=221364` and `220337`, respectively. Ubuntu's
+staged release-shaped package inspection also passed. The full CTest failures
+were unrelated missing/ unavailable external regression inputs: Ubuntu had 17
+failures out of 84, while Windows had 31 out of 97 and macOS had 31 out of
+102; these included the existing Z80 compatibility/ABI and optional external
+test inputs. The Windows and macOS jobs did not provide a physical GPU visual
+run. Other jobs in the same run passed, including repository invariants, ASAN,
+MinGW release, macOS SDL2 compatibility, and GCC/Clang compatibility.
 
 ## Decisions and deferred evidence
 
@@ -90,18 +93,25 @@ test. These failures did not report an M99 test failure.
   captures are separately named and are not goldens.
 - Local macOS has no usable SDL display/OpenGL context (`glxinfo -B` reports
   `unable to open display`); Xvfb and Weston are unavailable. Local Rust/Cargo
-  is also absent. Hosted smokes use SDL's dummy/software renderer and therefore
-  do not prove shader rendering, non-black filtered output, resize/fullscreen/
-  HiDPI behavior, context recovery, presented-frame capture, or performance.
-  The official release workflow was not invoked because it would publish a
-  release; consequently, final release-archive inspection remains deferred.
+  is also absent. The hosted Ubuntu Mesa smoke proves the corrected shader
+  source-sampling path for the two bundled presets, but not physical-display
+  resize/fullscreen/HiDPI behavior, context recovery, presented-frame capture,
+  or normal-hardware performance. Windows and macOS supplied build and
+  fallback evidence but no GPU rendering smoke. The official release workflow
+  was not invoked because it would publish a release; the staged Linux
+  release-shaped package was inspected successfully, while final archive
+  inspection remains deferred.
 
-Current gate status: G99-1 PASS by reports M99a-M99c. G99-2 is BLOCKED on
-actual pass-through and CRT-Lottes-fast GPU rendering. G99-3 is DEFERRED on
-physical UI, resize/fullscreen, and persistence inspection. G99-4 is BLOCKED
-on GPU lifecycle/performance evidence and final archive inspection. The exact
-remaining action is to run the feature-on binary with a usable OpenGL 3.3+
-display, exercise both bundled presets and the settings/lifecycle paths, then
-inspect a staged release archive without publishing it. Known risks are
-platform-specific OpenGL context and runtime packaging behavior; the existing
-renderer remains the required fallback.
+Current gate status: G99-1 PASS by reports M99a-M99c. G99-2 PASS for the
+optional fallback contract and software-OpenGL preset rendering: runtime
+absence remains non-fatal, runtime-present operation is covered on all three
+platforms, and both bundled presets render non-black RGB under Ubuntu Mesa.
+G99-3 remains DEFERRED on physical UI, resize/fullscreen/HiDPI, persistence,
+and context-loss inspection. G99-4 remains DEFERRED on normal-hardware
+performance, physical lifecycle/recovery, Windows/macOS GPU visual evidence,
+and final release-archive inspection. The exact remaining action is to run the
+feature-on binary with a usable OpenGL display, exercise the settings and
+lifecycle paths, measure presentation cost, and inspect a final staged archive
+without publishing it. Known risks are platform-specific OpenGL context and
+runtime packaging behavior; the existing renderer remains the required
+fallback.
