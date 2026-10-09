@@ -1,0 +1,27 @@
+ZEXED undefined ED opcode exerciser
+ed 00-3f nop (d7).............  OK
+ed 00-3f nop (ff).............  OK
+ed 77,7f nop (d7).............  OK
+ed 77,7f nop (ff).............  OK
+ed 80-9f nop (d7).............  OK
+ed 80-9f nop (ff).............  OK
+ed a4-bf holes nop (d7).......  OK
+ed a4-bf holes nop (ff).......  OK
+ed c0-df nop (d7).............  OK
+ed c0-df nop (ff).............  OK
+ed e0-e3,e8-eb nop (d7).......  OK
+ed e0-e3,e8-eb nop (ff).......  OK
+ed e4-e7 nop (d7).............  OK
+ed e4-e7 nop (ff).............  OK
+ed ec,ee nop (d7).............  OK
+ed ec,ee nop (ff).............  OK
+ed f0-f7 nop (d7).............  OK
+ed f0-f7 nop (ff).............  OK
+ed f8-fb nop (d7).............  OK
+ed f8-fb nop (ff).............  OK
+ed fc,fe nop (d7).............  OK
+ed fc,fe nop (ff).............  OK
+ed ff nop (d7)................  OK
+ed ff nop (ff)................  OK
+Tests complete
+

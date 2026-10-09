@@ -1,0 +1,11 @@
+ZEXIY INC/DEC IXH/IXL/IYH/IYL exerciser
+inc,dec ixh (d7)..............  OK
+inc,dec ixh (ff)..............  ERROR **** crc expected:07e23803 found:cfc8b622
+inc,dec ixl (d7)..............  OK
+inc,dec ixl (ff)..............  ERROR **** crc expected:12a7becd found:bb96e4c1
+inc,dec iyh (d7)..............  OK
+inc,dec iyh (ff)..............  ERROR **** crc expected:7768ea1c found:580724ce
+inc,dec iyl (d7)..............  OK
+inc,dec iyl (ff)..............  ERROR **** crc expected:c592446b found:29b50d35
+Tests complete
+

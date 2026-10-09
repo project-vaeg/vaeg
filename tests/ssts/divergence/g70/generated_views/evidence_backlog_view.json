@@ -1,0 +1,670 @@
+{
+  "generated_from_registry": "tests/ssts/divergence/g70/registry.json",
+  "records": [
+    {
+      "applicable": false,
+      "applicable_hash_count": 0,
+      "applicable_hash_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "authority_level": "no_exact_g65_applicable_failure_owner",
+      "authority_sources": [
+        "tests/ssts/campaigns/g65m/evidence_backlog/prefix_restart.json",
+        "docs/agents/reports/m65l_upd9002_prefix_restart.md"
+      ],
+      "blocking_architectural": false,
+      "blocks_next_milestone": false,
+      "comparison_domain": "architectural",
+      "contract_ids": {
+        "architectural": {
+          "id": "upd9002-v20-architectural-v1",
+          "sha256": "aa7ecb1fa7c30fc5d7e7fc742bb4e616595c3d10c7a35e561c09da419907d5d5"
+        },
+        "fingerprint": {
+          "id": "upd9002-v20-fingerprint-v1",
+          "sha256": "47e6b4dcf8c2bba2a36f15953b9701fb306b8db7e0254c54e1fe878e2d33fb2e"
+        }
+      },
+      "corpus_question": null,
+      "current_classification": "no_current_action",
+      "current_gap_kind": null,
+      "dataset_id": "ssts-v20-9efbd02b8ec1a3aad347c2b59672ad25f3bcdb21-1d2e9c0e14101f05379d938245af68f3219c16f638fce019ad2a1946084930a4",
+      "evidence_sources": [],
+      "generated_views": [
+        "hardware_pending_view",
+        "evidence_backlog_view"
+      ],
+      "hardware_question": "prefix/restart behavior after interrupt or exception",
+      "historical_predecessors": [],
+      "implementation_prohibition": "Do not change prefix/restart behavior without exact owned evidence.",
+      "notes": [
+        "No exact G65 applicable-failure owner or implementation-missing selector is assigned to M65l. No current target-policy, selected-set, applicable-set, or SST-result transition is authorized by this checkpoint."
+      ],
+      "officially_executed": false,
+      "opcode_family": "prefix/restart",
+      "owned_hash_count": 0,
+      "owned_hash_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "owner": "M67",
+      "passing_claim": false,
+      "record_id": "upd9002.hardware_pending.prefix_restart",
+      "record_kind": "hardware_evidence_pending",
+      "related_policy_entries": [],
+      "related_policy_id": "upd9002-g64-37ae2b706a9cbbe2d36cf7c98372c0cae7ca4b8d90e4f738973bc0ed3248eed6",
+      "resolution_condition": "Selector-specific target evidence and exact ownership.",
+      "selected_hash_count": 0,
+      "selected_hash_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "selector": [
+        "REPC",
+        "REPNC",
+        "REPE",
+        "REPNE",
+        "segment overrides",
+        "LOCK"
+      ],
+      "source_architecture": "uPD9002",
+      "status": "current",
+      "structural_scope": {
+        "prefix_scope": [
+          "REPC",
+          "REPNC",
+          "REPE",
+          "REPNE",
+          "multiple prefixes",
+          "segment overrides",
+          "LOCK",
+          "restart after interrupt or exception",
+          "trace and saved IP"
+        ]
+      },
+      "target": "uPD9002",
+      "title": "Prefix/restart semantics evidence question"
+    },
+    {
+      "applicable": false,
+      "applicable_hash_count": 0,
+      "applicable_hash_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "authority_level": "target_absence_recorded_but_cleanup_requires_future_evidence",
+      "authority_sources": [
+        "tests/ssts/campaigns/g65m/evidence_backlog/reserved_6c6f.json",
+        "docs/agents/reports/m65f_upd9002_reserved_6c6f.md"
+      ],
+      "blocking_architectural": false,
+      "blocks_next_milestone": false,
+      "comparison_domain": "architectural",
+      "contract_ids": {
+        "architectural": {
+          "id": "upd9002-v20-architectural-v1",
+          "sha256": "aa7ecb1fa7c30fc5d7e7fc742bb4e616595c3d10c7a35e561c09da419907d5d5"
+        },
+        "fingerprint": {
+          "id": "upd9002-v20-fingerprint-v1",
+          "sha256": "47e6b4dcf8c2bba2a36f15953b9701fb306b8db7e0254c54e1fe878e2d33fb2e"
+        }
+      },
+      "corpus_question": null,
+      "current_classification": "known_target_gap",
+      "current_gap_kind": "documented_silicon_absent",
+      "dataset_id": "ssts-v20-9efbd02b8ec1a3aad347c2b59672ad25f3bcdb21-1d2e9c0e14101f05379d938245af68f3219c16f638fce019ad2a1946084930a4",
+      "evidence_sources": [],
+      "generated_views": [
+        "hardware_pending_view",
+        "evidence_backlog_view"
+      ],
+      "hardware_question": "target-wide reserved opcode behavior and debugger/trace presentation",
+      "historical_predecessors": [],
+      "implementation_prohibition": "Do not remove or rewrite active handlers without a cleanup milestone and protected evidence.",
+      "notes": [],
+      "officially_executed": false,
+      "opcode_family": "6C-6F",
+      "owned_hash_count": 0,
+      "owned_hash_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "owner": "M67",
+      "passing_claim": false,
+      "record_id": "upd9002.reserved_behavior.primary_6c_6f_cleanup",
+      "record_kind": "reserved_behavior_question",
+      "related_policy_entries": [],
+      "related_policy_id": "upd9002-g64-37ae2b706a9cbbe2d36cf7c98372c0cae7ca4b8d90e4f738973bc0ed3248eed6",
+      "resolution_condition": "Target-wide reserved behavior evidence plus cleanup authorization.",
+      "selected_hash_count": 0,
+      "selected_hash_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "selector": [
+        "6C",
+        "6D",
+        "6E",
+        "6F"
+      ],
+      "source_architecture": "uPD9002 monitor authority",
+      "status": "current",
+      "structural_scope": {
+        "cleanup_authorized_now": false
+      },
+      "target": "uPD9002",
+      "title": "6C-6F production-handler cleanup question"
+    },
+    {
+      "applicable": false,
+      "applicable_hash_count": 0,
+      "applicable_hash_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "authority_level": "approved_monitor_authority_within_scope",
+      "authority_sources": [
+        "docs/agents/reports/m60b_upd9002_rom_authority.md",
+        "tests/ssts/target_policy/g64.json"
+      ],
+      "blocking_architectural": false,
+      "blocks_next_milestone": false,
+      "comparison_domain": "architectural",
+      "contract_ids": {
+        "architectural": {
+          "id": "upd9002-v20-architectural-v1",
+          "sha256": "aa7ecb1fa7c30fc5d7e7fc742bb4e616595c3d10c7a35e561c09da419907d5d5"
+        },
+        "fingerprint": {
+          "id": "upd9002-v20-fingerprint-v1",
+          "sha256": "47e6b4dcf8c2bba2a36f15953b9701fb306b8db7e0254c54e1fe878e2d33fb2e"
+        }
+      },
+      "corpus_question": null,
+      "current_classification": "known_target_gap",
+      "current_gap_kind": "documented_silicon_absent",
+      "dataset_id": "ssts-v20-9efbd02b8ec1a3aad347c2b59672ad25f3bcdb21-1d2e9c0e14101f05379d938245af68f3219c16f638fce019ad2a1946084930a4",
+      "evidence_sources": [
+        "tests/ssts/gap_taxonomy.json",
+        "tests/ssts/baseline/upd9002_v20_known_gaps.json"
+      ],
+      "generated_views": [
+        "approved_target_divergences_view",
+        "evidence_backlog_view"
+      ],
+      "hardware_question": null,
+      "historical_predecessors": [],
+      "implementation_prohibition": "Do not implement inherited V20 behavior as uPD9002-required behavior without a new evidence gate.",
+      "notes": [
+        "G60b complete 0F monitor table contains no entries for these forms.",
+        "Records are outside the blocking denominator and are never reported as passes."
+      ],
+      "officially_executed": false,
+      "opcode_family": "0F31,0F33,0F39,0F3B",
+      "owned_hash_count": 20000,
+      "owned_hash_digest": null,
+      "owner": "M67",
+      "passing_claim": false,
+      "record_id": "upd9002.target_absence.nec_0f_31_33_39_3b",
+      "record_kind": "documented_target_absence",
+      "related_policy_entries": [],
+      "related_policy_id": "upd9002-g64-37ae2b706a9cbbe2d36cf7c98372c0cae7ca4b8d90e4f738973bc0ed3248eed6",
+      "resolution_condition": "Separate target-wide reserved behavior evidence and policy authority.",
+      "selected_hash_count": 20000,
+      "selected_hash_digest": null,
+      "selector": [
+        "0F31",
+        "0F33",
+        "0F39",
+        "0F3B"
+      ],
+      "source_architecture": "uPD9002 monitor authority",
+      "status": "current",
+      "structural_scope": {
+        "selectors": [
+          "0F31",
+          "0F33",
+          "0F39",
+          "0F3B"
+        ]
+      },
+      "target": "uPD9002",
+      "title": "0F31/0F33/0F39/0F3B documented target absence"
+    },
+    {
+      "applicable": false,
+      "applicable_hash_count": 0,
+      "applicable_hash_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "authority_level": "approved_monitor_authority_within_scope",
+      "authority_sources": [
+        "docs/agents/reports/m60b_upd9002_rom_authority.md",
+        "tests/ssts/target_policy/g64.json"
+      ],
+      "blocking_architectural": false,
+      "blocks_next_milestone": false,
+      "comparison_domain": "architectural",
+      "contract_ids": {
+        "architectural": {
+          "id": "upd9002-v20-architectural-v1",
+          "sha256": "aa7ecb1fa7c30fc5d7e7fc742bb4e616595c3d10c7a35e561c09da419907d5d5"
+        },
+        "fingerprint": {
+          "id": "upd9002-v20-fingerprint-v1",
+          "sha256": "47e6b4dcf8c2bba2a36f15953b9701fb306b8db7e0254c54e1fe878e2d33fb2e"
+        }
+      },
+      "corpus_question": null,
+      "current_classification": "known_target_gap",
+      "current_gap_kind": "documented_silicon_absent",
+      "dataset_id": "ssts-v20-9efbd02b8ec1a3aad347c2b59672ad25f3bcdb21-1d2e9c0e14101f05379d938245af68f3219c16f638fce019ad2a1946084930a4",
+      "evidence_sources": [
+        "tests/ssts/gap_taxonomy.json",
+        "tests/ssts/baseline/upd9002_v20_known_gaps.json"
+      ],
+      "generated_views": [
+        "approved_target_divergences_view",
+        "evidence_backlog_view"
+      ],
+      "hardware_question": null,
+      "historical_predecessors": [],
+      "implementation_prohibition": "Do not implement inherited V20 behavior as uPD9002-required behavior without a new evidence gate.",
+      "notes": [
+        "historical M43/M60b known-gap evidence",
+        "Records are outside the blocking denominator and are never reported as passes."
+      ],
+      "officially_executed": false,
+      "opcode_family": "63",
+      "owned_hash_count": 5000,
+      "owned_hash_digest": "a0f961f60656f03ca16eca42080fd7cb6122d1ece161694000c837a115568bd7",
+      "owner": "M67",
+      "passing_claim": false,
+      "record_id": "upd9002.target_absence.primary_63",
+      "record_kind": "documented_target_absence",
+      "related_policy_entries": [],
+      "related_policy_id": "upd9002-g64-37ae2b706a9cbbe2d36cf7c98372c0cae7ca4b8d90e4f738973bc0ed3248eed6",
+      "resolution_condition": "Separate target-wide reserved behavior evidence and policy authority.",
+      "selected_hash_count": 5000,
+      "selected_hash_digest": "a0f961f60656f03ca16eca42080fd7cb6122d1ece161694000c837a115568bd7",
+      "selector": [
+        "63"
+      ],
+      "source_architecture": "uPD9002 monitor authority",
+      "status": "current",
+      "structural_scope": {
+        "selectors": [
+          "63"
+        ]
+      },
+      "target": "uPD9002",
+      "title": "Primary opcode 63 documented target absence"
+    },
+    {
+      "applicable": false,
+      "applicable_hash_count": 0,
+      "applicable_hash_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "authority_level": "approved_monitor_authority_within_scope",
+      "authority_sources": [
+        "docs/agents/reports/m60b_upd9002_rom_authority.md",
+        "tests/ssts/target_policy/g64.json"
+      ],
+      "blocking_architectural": false,
+      "blocks_next_milestone": false,
+      "comparison_domain": "architectural",
+      "contract_ids": {
+        "architectural": {
+          "id": "upd9002-v20-architectural-v1",
+          "sha256": "aa7ecb1fa7c30fc5d7e7fc742bb4e616595c3d10c7a35e561c09da419907d5d5"
+        },
+        "fingerprint": {
+          "id": "upd9002-v20-fingerprint-v1",
+          "sha256": "47e6b4dcf8c2bba2a36f15953b9701fb306b8db7e0254c54e1fe878e2d33fb2e"
+        }
+      },
+      "corpus_question": null,
+      "current_classification": "known_target_gap",
+      "current_gap_kind": "documented_silicon_absent",
+      "dataset_id": "ssts-v20-9efbd02b8ec1a3aad347c2b59672ad25f3bcdb21-1d2e9c0e14101f05379d938245af68f3219c16f638fce019ad2a1946084930a4",
+      "evidence_sources": [
+        "tests/ssts/gap_taxonomy.json",
+        "tests/ssts/baseline/upd9002_v20_known_gaps.json"
+      ],
+      "generated_views": [
+        "approved_target_divergences_view",
+        "evidence_backlog_view"
+      ],
+      "hardware_question": null,
+      "historical_predecessors": [],
+      "implementation_prohibition": "Do not implement inherited V20 behavior as uPD9002-required behavior without a new evidence gate.",
+      "notes": [
+        "G60b monitor authority proves absence from the primary dispatch table; exact child selector digests are preserved in the M60b report.",
+        "Records are outside the blocking denominator and are never reported as passes."
+      ],
+      "officially_executed": false,
+      "opcode_family": "6C,6D,6E,6F",
+      "owned_hash_count": 7000,
+      "owned_hash_digest": null,
+      "owner": "M67",
+      "passing_claim": false,
+      "record_id": "upd9002.target_absence.primary_6c_6f",
+      "record_kind": "documented_target_absence",
+      "related_policy_entries": [],
+      "related_policy_id": "upd9002-g64-37ae2b706a9cbbe2d36cf7c98372c0cae7ca4b8d90e4f738973bc0ed3248eed6",
+      "resolution_condition": "Separate target-wide reserved behavior evidence and policy authority.",
+      "selected_hash_count": 7000,
+      "selected_hash_digest": null,
+      "selector": [
+        "6C",
+        "6D",
+        "6E",
+        "6F"
+      ],
+      "source_architecture": "uPD9002 monitor authority",
+      "status": "current",
+      "structural_scope": {
+        "selectors": [
+          "6C",
+          "6D",
+          "6E",
+          "6F"
+        ]
+      },
+      "target": "uPD9002",
+      "title": "Primary opcodes 6C-6F documented target absence"
+    },
+    {
+      "applicable": false,
+      "applicable_hash_count": 0,
+      "applicable_hash_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "authority_level": "underdetermined_silicon_support",
+      "authority_sources": [
+        "docs/agents/reports/m60c_upd9002_fpo2_main_dispatch_audit.md",
+        "tests/ssts/campaigns/g65m/evidence_backlog/opcode_66_67_fpo2.json"
+      ],
+      "blocking_architectural": false,
+      "blocks_next_milestone": false,
+      "comparison_domain": "architectural",
+      "contract_ids": {
+        "architectural": {
+          "id": "upd9002-v20-architectural-v1",
+          "sha256": "aa7ecb1fa7c30fc5d7e7fc742bb4e616595c3d10c7a35e561c09da419907d5d5"
+        },
+        "fingerprint": {
+          "id": "upd9002-v20-fingerprint-v1",
+          "sha256": "47e6b4dcf8c2bba2a36f15953b9701fb306b8db7e0254c54e1fe878e2d33fb2e"
+        }
+      },
+      "corpus_question": null,
+      "current_classification": "upstream_nonblocking",
+      "current_gap_kind": null,
+      "dataset_id": "ssts-v20-9efbd02b8ec1a3aad347c2b59672ad25f3bcdb21-1d2e9c0e14101f05379d938245af68f3219c16f638fce019ad2a1946084930a4",
+      "evidence_sources": [],
+      "generated_views": [
+        "hardware_pending_view",
+        "evidence_backlog_view"
+      ],
+      "hardware_question": "whether uPD9002 silicon implements an FPO2 mode not exposed by monitor disassembly",
+      "historical_predecessors": [],
+      "implementation_prohibition": "Do not implement FPO2 from V20 metadata alone.",
+      "notes": [
+        "Monitor-disassembler target absence is proven only within the monitor authority scope."
+      ],
+      "officially_executed": false,
+      "opcode_family": "FPO2",
+      "owned_hash_count": 0,
+      "owned_hash_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "owner": "M67",
+      "passing_claim": false,
+      "record_id": "upd9002.upstream_nonblocking.fpo2",
+      "record_kind": "upstream_nonblocking",
+      "related_policy_entries": [],
+      "related_policy_id": "upd9002-g64-37ae2b706a9cbbe2d36cf7c98372c0cae7ca4b8d90e4f738973bc0ed3248eed6",
+      "resolution_condition": "Target-specific silicon or authoritative executable evidence.",
+      "selected_hash_count": 0,
+      "selected_hash_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "selector": "FPO2",
+      "source_architecture": "V20 metadata",
+      "status": "current",
+      "structural_scope": {
+        "related_selectors": [
+          "66",
+          "67"
+        ]
+      },
+      "target": "uPD9002",
+      "title": "FPO2 target authority question"
+    },
+    {
+      "applicable": false,
+      "applicable_hash_count": 0,
+      "applicable_hash_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "authority_level": "monitor_disassembler_authority_with_limited_scope",
+      "authority_sources": [
+        "docs/agents/reports/m60c_upd9002_fpo2_main_dispatch_audit.md",
+        "docs/agents/reports/m65i_upd9002_opcode_66_67_fpo2.md"
+      ],
+      "blocking_architectural": false,
+      "blocks_next_milestone": false,
+      "comparison_domain": "architectural",
+      "contract_ids": {
+        "architectural": {
+          "id": "upd9002-v20-architectural-v1",
+          "sha256": "aa7ecb1fa7c30fc5d7e7fc742bb4e616595c3d10c7a35e561c09da419907d5d5"
+        },
+        "fingerprint": {
+          "id": "upd9002-v20-fingerprint-v1",
+          "sha256": "47e6b4dcf8c2bba2a36f15953b9701fb306b8db7e0254c54e1fe878e2d33fb2e"
+        }
+      },
+      "corpus_question": null,
+      "current_classification": "upstream_nonblocking",
+      "current_gap_kind": null,
+      "dataset_id": "ssts-v20-9efbd02b8ec1a3aad347c2b59672ad25f3bcdb21-1d2e9c0e14101f05379d938245af68f3219c16f638fce019ad2a1946084930a4",
+      "evidence_sources": [
+        "tests/ssts/campaigns/g65m/evidence_backlog/opcode_66_67_fpo2.json"
+      ],
+      "generated_views": [
+        "hardware_pending_view",
+        "evidence_backlog_view"
+      ],
+      "hardware_question": "complete uPD9002 silicon support remains underdetermined",
+      "historical_predecessors": [],
+      "implementation_prohibition": "Do not infer FPO2 implementation requirements from V20 metadata.",
+      "notes": [
+        "Generic FPO string absence is non-evidence outside its documented monitor scope."
+      ],
+      "officially_executed": false,
+      "opcode_family": "66",
+      "owned_hash_count": 0,
+      "owned_hash_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "owner": "M67",
+      "passing_claim": false,
+      "record_id": "upd9002.upstream_nonblocking.prefix_66",
+      "record_kind": "upstream_nonblocking",
+      "related_policy_entries": [],
+      "related_policy_id": "upd9002-g64-37ae2b706a9cbbe2d36cf7c98372c0cae7ca4b8d90e4f738973bc0ed3248eed6",
+      "resolution_condition": "Positive silicon or target authority and executable semantic contract.",
+      "selected_hash_count": 5000,
+      "selected_hash_digest": null,
+      "selector": "66",
+      "source_architecture": "V20 metadata and uPD9002 monitor audit",
+      "status": "current",
+      "structural_scope": {
+        "officially_executed": 0,
+        "primary_opcode": "66",
+        "selected": 5000
+      },
+      "target": "uPD9002",
+      "title": "Opcode 66 FPO2 monitor-surface absence"
+    },
+    {
+      "applicable": false,
+      "applicable_hash_count": 0,
+      "applicable_hash_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "authority_level": "monitor_disassembler_authority_with_limited_scope",
+      "authority_sources": [
+        "docs/agents/reports/m60c_upd9002_fpo2_main_dispatch_audit.md",
+        "docs/agents/reports/m65i_upd9002_opcode_66_67_fpo2.md"
+      ],
+      "blocking_architectural": false,
+      "blocks_next_milestone": false,
+      "comparison_domain": "architectural",
+      "contract_ids": {
+        "architectural": {
+          "id": "upd9002-v20-architectural-v1",
+          "sha256": "aa7ecb1fa7c30fc5d7e7fc742bb4e616595c3d10c7a35e561c09da419907d5d5"
+        },
+        "fingerprint": {
+          "id": "upd9002-v20-fingerprint-v1",
+          "sha256": "47e6b4dcf8c2bba2a36f15953b9701fb306b8db7e0254c54e1fe878e2d33fb2e"
+        }
+      },
+      "corpus_question": null,
+      "current_classification": "upstream_nonblocking",
+      "current_gap_kind": null,
+      "dataset_id": "ssts-v20-9efbd02b8ec1a3aad347c2b59672ad25f3bcdb21-1d2e9c0e14101f05379d938245af68f3219c16f638fce019ad2a1946084930a4",
+      "evidence_sources": [
+        "tests/ssts/campaigns/g65m/evidence_backlog/opcode_66_67_fpo2.json"
+      ],
+      "generated_views": [
+        "hardware_pending_view",
+        "evidence_backlog_view"
+      ],
+      "hardware_question": "complete uPD9002 silicon support remains underdetermined",
+      "historical_predecessors": [],
+      "implementation_prohibition": "Do not infer FPO2 implementation requirements from V20 metadata.",
+      "notes": [
+        "Generic FPO string absence is non-evidence outside its documented monitor scope."
+      ],
+      "officially_executed": false,
+      "opcode_family": "67",
+      "owned_hash_count": 0,
+      "owned_hash_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "owner": "M67",
+      "passing_claim": false,
+      "record_id": "upd9002.upstream_nonblocking.prefix_67",
+      "record_kind": "upstream_nonblocking",
+      "related_policy_entries": [],
+      "related_policy_id": "upd9002-g64-37ae2b706a9cbbe2d36cf7c98372c0cae7ca4b8d90e4f738973bc0ed3248eed6",
+      "resolution_condition": "Positive silicon or target authority and executable semantic contract.",
+      "selected_hash_count": 5000,
+      "selected_hash_digest": null,
+      "selector": "67",
+      "source_architecture": "V20 metadata and uPD9002 monitor audit",
+      "status": "current",
+      "structural_scope": {
+        "officially_executed": 0,
+        "primary_opcode": "67",
+        "selected": 5000
+      },
+      "target": "uPD9002",
+      "title": "Opcode 67 FPO2 monitor-surface absence"
+    },
+    {
+      "applicable": false,
+      "applicable_hash_count": 0,
+      "applicable_hash_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "authority_level": "authority_present_but_executable_contract_missing",
+      "authority_sources": [
+        "tests/ssts/campaigns/g65m/evidence_backlog/brkem.json",
+        "tests/ssts/evidence/g65/zero_coverage_inventory.json"
+      ],
+      "blocking_architectural": false,
+      "blocks_next_milestone": false,
+      "comparison_domain": "architectural",
+      "contract_ids": {
+        "architectural": {
+          "id": "upd9002-v20-architectural-v1",
+          "sha256": "aa7ecb1fa7c30fc5d7e7fc742bb4e616595c3d10c7a35e561c09da419907d5d5"
+        },
+        "fingerprint": {
+          "id": "upd9002-v20-fingerprint-v1",
+          "sha256": "47e6b4dcf8c2bba2a36f15953b9701fb306b8db7e0254c54e1fe878e2d33fb2e"
+        }
+      },
+      "corpus_question": "approved executable architectural corpus is absent",
+      "current_classification": "known_target_gap",
+      "current_gap_kind": null,
+      "dataset_id": "ssts-v20-9efbd02b8ec1a3aad347c2b59672ad25f3bcdb21-1d2e9c0e14101f05379d938245af68f3219c16f638fce019ad2a1946084930a4",
+      "evidence_sources": [
+        "docs/agents/reports/m65g_upd9002_brkem_corpus.md"
+      ],
+      "generated_views": [
+        "zero_coverage_view",
+        "hardware_pending_view",
+        "evidence_backlog_view"
+      ],
+      "hardware_question": "content-addressed corpus; expected architectural state; mode-state representation",
+      "historical_predecessors": [],
+      "implementation_prohibition": "Do not implement or claim passing before a separate approved evidence/corpus gate.",
+      "notes": [
+        "Zero selected or executed records are not passing evidence."
+      ],
+      "officially_executed": false,
+      "opcode_family": "0F FF imm8",
+      "owned_hash_count": 0,
+      "owned_hash_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "owner": "M67",
+      "passing_claim": false,
+      "record_id": "upd9002.zero_coverage.brkem_0fff",
+      "record_kind": "zero_coverage_evidence_backlog",
+      "related_policy_entries": [],
+      "related_policy_id": "upd9002-g64-37ae2b706a9cbbe2d36cf7c98372c0cae7ca4b8d90e4f738973bc0ed3248eed6",
+      "resolution_condition": "Positive target authority and executable semantic contract.",
+      "selected_hash_count": 0,
+      "selected_hash_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "selector": "0F FF imm8",
+      "source_architecture": "uPD9002 monitor/debugger authority",
+      "status": "current",
+      "structural_scope": {
+        "encoding": "0F FF imm8"
+      },
+      "target": "uPD9002",
+      "title": "BRKEM zero-coverage corpus backlog"
+    },
+    {
+      "applicable": false,
+      "applicable_hash_count": 0,
+      "applicable_hash_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "authority_level": "authority_present_but_executable_contract_missing",
+      "authority_sources": [
+        "tests/ssts/campaigns/g65m/evidence_backlog/brkfem.json",
+        "tests/ssts/evidence/g65/zero_coverage_inventory.json"
+      ],
+      "blocking_architectural": false,
+      "blocks_next_milestone": false,
+      "comparison_domain": "architectural",
+      "contract_ids": {
+        "architectural": {
+          "id": "upd9002-v20-architectural-v1",
+          "sha256": "aa7ecb1fa7c30fc5d7e7fc742bb4e616595c3d10c7a35e561c09da419907d5d5"
+        },
+        "fingerprint": {
+          "id": "upd9002-v20-fingerprint-v1",
+          "sha256": "47e6b4dcf8c2bba2a36f15953b9701fb306b8db7e0254c54e1fe878e2d33fb2e"
+        }
+      },
+      "corpus_question": "approved executable architectural corpus is absent",
+      "current_classification": "known_target_gap",
+      "current_gap_kind": null,
+      "dataset_id": "ssts-v20-9efbd02b8ec1a3aad347c2b59672ad25f3bcdb21-1d2e9c0e14101f05379d938245af68f3219c16f638fce019ad2a1946084930a4",
+      "evidence_sources": [
+        "docs/agents/reports/m65h_upd9002_brkfem_evidence.md"
+      ],
+      "generated_views": [
+        "zero_coverage_view",
+        "hardware_pending_view",
+        "evidence_backlog_view"
+      ],
+      "hardware_question": "immediate/vector interpretation; entry mode identity; frame or stack state; relationship to BRKEM; RETEM/CALLN behavior",
+      "historical_predecessors": [],
+      "implementation_prohibition": "Do not implement or claim passing before a separate approved evidence/corpus gate.",
+      "notes": [
+        "Zero selected or executed records are not passing evidence."
+      ],
+      "officially_executed": false,
+      "opcode_family": "0F FE imm8",
+      "owned_hash_count": 0,
+      "owned_hash_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "owner": "M67",
+      "passing_claim": false,
+      "record_id": "upd9002.zero_coverage.brkfem_0ffe",
+      "record_kind": "zero_coverage_evidence_backlog",
+      "related_policy_entries": [],
+      "related_policy_id": "upd9002-g64-37ae2b706a9cbbe2d36cf7c98372c0cae7ca4b8d90e4f738973bc0ed3248eed6",
+      "resolution_condition": "Positive target authority and executable semantic contract.",
+      "selected_hash_count": 0,
+      "selected_hash_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "selector": "0F FE imm8",
+      "source_architecture": "uPD9002 monitor/debugger authority",
+      "status": "current",
+      "structural_scope": {
+        "encoding": "0F FE imm8"
+      },
+      "target": "uPD9002",
+      "title": "BRKFEM executable-contract backlog"
+    }
+  ],
+  "schema": "vaeg-upd9002-g70-evidence-backlog-view-v1",
+  "schema_version": 1
+}

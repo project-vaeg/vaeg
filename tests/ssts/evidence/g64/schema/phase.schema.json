@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "vaeg-upd9002-m64-phase-audit-v1",
+  "title": "M64 phase audit summary",
+  "type": "object",
+  "required": [
+    "epoch",
+    "forms",
+    "phase",
+    "schema",
+    "schema_version",
+    "source_sha",
+    "summaries",
+    "worker_sha256"
+  ],
+  "properties": {
+    "epoch": {
+      "enum": [
+        "g62",
+        "g64"
+      ]
+    },
+    "forms": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "phase": {
+      "enum": [
+        "div_idiv",
+        "add4s_sub4s_cmp4s",
+        "bit_operations",
+        "brkem"
+      ]
+    },
+    "schema": {
+      "const": "vaeg-upd9002-m64-phase-audit-v1"
+    },
+    "schema_version": {
+      "const": 1
+    },
+    "source_sha": {
+      "pattern": "^[0-9a-f]{40}$",
+      "type": "string"
+    },
+    "summaries": {
+      "type": "object"
+    },
+    "worker_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}

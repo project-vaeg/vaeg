@@ -1,0 +1,24 @@
+{
+  "architectural_failure_count": 7511,
+  "architectural_failure_digest": "d504fa09678568a226a6e2214caa0783462700010a7e8d953c199d830025592b",
+  "architectural_owner_counts": {
+    "61": 3,
+    "62": 1244,
+    "81.6": 1,
+    "9C": 1,
+    "A5": 1,
+    "C4": 1,
+    "C8": 1,
+    "D1.6": 1,
+    "F7.2": 1113,
+    "FF.5": 1,
+    "FF.6": 144,
+    "FF.7": 5000
+  },
+  "implementation_missing_count": 5908,
+  "implementation_missing_digest": "240e0bf76de968b310ad13ef53de8d044637b185e267e1cfb2540f32ab6571e5",
+  "schema": "vaeg-upd9002-m65-ownership-v1",
+  "unexplained_zero_coverage_authority_items": [],
+  "unowned_applicable_failures": [],
+  "unowned_implementation_missing_hashes": []
+}

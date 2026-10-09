@@ -1,2 +1,14 @@
 /bin/
+/build/
+/vaeg-cache/
 /obj/
+/tools/qa/__pycache__/
+
+/docs/openwatcom-image.tar
+/docs/openwatcom-image.tar.sha256
+/docs/archives/
+/tools/cpmva/zex/__pycache__/
+/tools/cpmva/tests/__pycache__/
+/tests/z80_compat/__pycache__/
+/tools/cpmva/__pycache__/
+/tools/__pycache__/

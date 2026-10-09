@@ -1,0 +1,100 @@
+# Copyright (c) 2026 Nakata Maho
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+# 1. Redistributions of source code must retain the above copyright notice,
+#    this list of conditions and the following disclaimer.
+# 2. Redistributions in binary form must reproduce the above copyright notice,
+#    this list of conditions and the following disclaimer in the documentation
+#    and/or other materials provided with the distribution.
+#
+# THIS SOFTWARE IS PROVIDED BY THE AUTHOR "AS IS" AND ANY EXPRESS OR IMPLIED
+# WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+# MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
+# EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+# EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+# PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+# OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+# OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
+# OF THE POSSIBILITY OF SUCH DAMAGE.
+
+name=suzukiplan/z80
+upstream_repository=https://github.com/suzukiplan/z80
+license=MIT
+license_file=LICENSE.txt
+
+# Current vendored state (M102, 2026-09-30)
+current_base_sha=ab97d3fa9eedc4914f82f3d9bc2abf33984d984d
+current_base_note=upstream master after pull requests #60, #61 and #62 (CHANGELOG version 1.11.0, no tag)
+current_patches=docs/agents/reports/m102_upstream_upd9002_daa_cpl_scf_ccf.patch docs/agents/reports/m102_upstream_upd9002_ddcb_register_forms.patch docs/agents/reports/m102_upstream_undefined_opcodes.patch docs/agents/reports/m102_m35_irq_extension_on_1_11.patch docs/agents/reports/m102_upd9002_undefined_ed_semantics.patch
+current_patch_sha256_upd9002_daa_cpl_scf_ccf=0731306a6a0b6df14777f070f0194ecba345d929f2e37e06db00422db62beb07
+current_patch_sha256_upd9002_ddcb_register_forms=8eb861d3f79508af85e8b21d5993cb065ec295b561ae6da993dd5a36188ed9dd
+current_patch_sha256_undefined_opcodes=4d622e1cd327e58e45b7614e8cfd2ecd95ab01a876c2562b9ea1392cadc54ab9
+current_patch_sha256_m35_irq_extension=76e50ec777c1f6117f95faa2455d5625046329e778f183f4786c0d362a7b9ce8
+current_patch_sha256_upd9002_undefined_ed_semantics=678746bb8a7ae69f0d92cb959776839f6016bbcc70fff53d2a9dc91bc88c01cb
+current_resulting_commit=3cc3e221bb00dfb91532b18d6584ee57e1a0f13a
+current_resulting_tree=129c42b92db4a2e1b0cf422f226288ccea2fbbf3
+current_z80_hpp_sha256=8d88753778a0cf0d14d306ea4a5f54d11526051b2b93b569fe596dae540513dc
+current_upstream_pull_requests=https://github.com/suzukiplan/z80/pull/64 https://github.com/suzukiplan/z80/pull/63
+current_vendored_files=z80.hpp LICENSE.txt test/test-interrupt-extension.cpp
+
+Upstream merged #60 (ADC/SBC HL carry fix) and #61 (flag profile R1-R7),
+and added its own commits (#62), including a WZ update for IX/IY-prefixed CB
+instructions. #61 was merged at its first commit, so the R8-R11 and R12/R13
+commits are offered again as #64; the undefined-opcode fix is #63. vaeg
+applies, on the upstream base above and in this order with
+`git am --committer-date-is-author-date` and committer
+"Nakata Maho <maho.nakata@gmail.com>": the two #64 commits, the #63 commit,
+and the M35 IRQ extension rebased onto this base (its test/Makefile conflict
+resolved). The result reproduces current_resulting_commit and
+current_resulting_tree; z80.hpp, LICENSE.txt and
+test/test-interrupt-extension.cpp were copied from that tree.
+
+# History (superseded states)
+upstream_release=1.10.0
+approved_base_sha=e3926769a790fab0af1c34a5540e317f8d4f0ddc
+approved_patch=docs/agents/reports/m35_suzukiplan_irq_extension.patch
+approved_patch_sha256=d8624085139ef4e7b400b918b2b498e79bea1af4a1942e4ac935545846e746a4
+tested_resulting_commit=b4a0a5a238fecc280781e6fe5719faf0eafcd667
+tested_resulting_tree=8a606eb39332a6e79b69bb62d9dedca042b923dc
+vendored_milestone=M36
+vendored_date=2026-07-15
+m101_patches=docs/agents/reports/m101_suzukiplan_adc_sbc_carry.patch docs/agents/reports/m101_suzukiplan_adc_sbc_test.patch docs/agents/reports/m101_suzukiplan_flag_profile.patch docs/agents/reports/m101_suzukiplan_daa_cpl_scf_ccf.patch
+m101_patch_sha256_adc_sbc_carry=233360c8763db8473604d699dbc30f5887659c84aeaf4ca3107e72e7059bd4d7
+m101_patch_sha256_adc_sbc_test=f3829e5acce1d6e0faa22f102a8b6aa783ae793cbd39ee64da448cf3721bc67a
+m101_patch_sha256_flag_profile=4d5bedbb5f556b758debe95b2319323153db3c113b31bc74bca1fb103bbf3844
+m101_patch_sha256_daa_cpl_scf_ccf=73510c321e4dce29975298619fb34bcdd8d3e93a342888b5ec7b64a430589e83
+m101_resulting_commit=6f34be621ae67a66d74485beca9f424f6ac314fd
+m101_resulting_tree=5ec540547bf9736baabe09e51d18542650d19714
+m101_z80_hpp_sha256=74ac94d34c0afbcb21e6cf3335f30a3c0198238cfa8df000deebc7535aeeef56
+m101_upstream_pull_requests=https://github.com/suzukiplan/z80/pull/60 https://github.com/suzukiplan/z80/pull/61
+m101_updated_date=2026-09-29
+m102_patches=docs/agents/reports/m102_suzukiplan_undefined_opcodes.patch docs/agents/reports/m102_suzukiplan_ddcb_register_forms.patch
+m102_patch_sha256_undefined_opcodes=d25676fee49329f8159b20ee6840b368f041971fd68b599a7222edd6a34489aa
+m102_patch_sha256_ddcb_register_forms=2f68c16a32405d0eb71a8697ced7ebff7ff6d5c5b5fc1289be9c4376cfb99a70
+m102_resulting_commit=60b725f129979c4179fa6e08b6385d20fd69f85e
+m102_resulting_tree=37e3d5e6130ca12d5dbf41904bd65d567817bff0
+m102_z80_hpp_sha256=cef7096e0801623108da35d995ac36cdba84f383ea36b7b18b50fd7fc6e983f8
+m102_upstream_pull_requests=https://github.com/suzukiplan/z80/pull/63 https://github.com/suzukiplan/z80/pull/61
+m102_updated_date=2026-09-30
+
+The vaeg-required downstream extension adds an inspectable and restorable
+level-sensitive IRQ line, an acknowledge callback invoked at actual maskable
+interrupt acceptance, and raw first-opcode execution for IM0. The vendored
+third-party files were reproduced from the approved base and patch; they were
+not manually edited.
+
+M101 applies four further downstream patches on top of the M35 commit, in
+order, with `git am --committer-date-is-author-date` and committer
+"Nakata Maho <maho.nakata@gmail.com>": the ADC/SBC HL,rr carry fix, its
+test, the per-instance FlagProfile (Zilog default, Upd9002 for the NEC
+uPD9002 Z80 emulation mode), and the Upd9002 DAA/CPL/SCF/CCF rules. M102
+applies one more patch on that result, from upstream pull request #63 (with
+the test/Makefile conflict resolved): with Z80_NO_EXCEPTION, opcodes without
+a handler execute as on a Zilog Z80 instead of calling a null handler; then
+the Upd9002 DD/FD CB register-form rules R12/R13 from upstream pull request
+#61. The result reproduces m102_resulting_commit and m102_resulting_tree. They are the commits of upstream pull requests
+#60 and #61, with the test/Makefile conflict against M35 resolved. The result reproduces m101_resulting_commit and
+m101_resulting_tree exactly. z80.hpp was copied from that tree; LICENSE.txt
+and test/test-interrupt-extension.cpp are unchanged.

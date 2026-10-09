@@ -1,0 +1,12 @@
+{
+  "approved_g65_sha": "efd96b7e46717e7ee56e086f7d27ba42b04b49d3",
+  "campaign_branch": "topic/m65-residue-campaign",
+  "group_count": 19,
+  "hash_set_sha256": "240e0bf76de968b310ad13ef53de8d044637b185e267e1cfb2540f32ab6571e5",
+  "implementation_missing_count_before": 5908,
+  "original_m65j_sha": "1c1b9740cc7c286d841d296341c3cefd66e35116",
+  "production_semantic_change": false,
+  "schema": "vaeg-upd9002-m65j-manifest-v2",
+  "selected_applicable_unchanged": true,
+  "target_support_unverified_count_after": 5908
+}

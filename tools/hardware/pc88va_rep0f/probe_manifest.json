@@ -1,0 +1,85 @@
+{
+  "cases": [
+    {
+      "binary": "r0f001.com",
+      "case_id": "r001",
+      "define": 1,
+      "instruction": "0f 10 c0",
+      "purpose": "harmless implemented V30 TEST1 register form",
+      "reference_sha256": "00c088a9e3f997bf5c14b05bc7c4d32a577464661782e5f65ac58a7bf46bf8cd",
+      "risk_control": "register-only bit test; TF redirects before any following byte"
+    },
+    {
+      "binary": "r0f002.com",
+      "case_id": "r002",
+      "define": 2,
+      "instruction": "f2 0f 10 c0",
+      "purpose": "REPNE-prefixed harmless V30 TEST1 form",
+      "reference_sha256": "0e96f9169eeeb307e2fc876909b42f66814427b813a7db67a146654cae505a99",
+      "risk_control": "register-only operand; INT 1 and INT 6 are recoverable"
+    },
+    {
+      "binary": "r0f003.com",
+      "case_id": "r003",
+      "define": 3,
+      "instruction": "f3 0f 10 c0",
+      "purpose": "REPE-prefixed harmless V30 TEST1 form",
+      "reference_sha256": "6ac009ee97094153bd82022b66324bfcd2a60dd477ea0f08bebcee4e45e27228",
+      "risk_control": "register-only operand; INT 1 and INT 6 are recoverable"
+    },
+    {
+      "binary": "r0f004.com",
+      "case_id": "r004",
+      "define": 4,
+      "instruction": "0f 01 f0",
+      "purpose": "unprefixed control for the legacy LMSW-shaped byte sequence",
+      "reference_sha256": "346567984dfb5ef6151586b059353851eddb307ffea613db3aea26265a58e074",
+      "risk_control": "AX=0000; trace/invalid-op handlers redirect to recovery"
+    },
+    {
+      "binary": "r0f005.com",
+      "case_id": "r005",
+      "define": 5,
+      "instruction": "f2 0f 01 f0",
+      "purpose": "current VAEG REPNE path to legacy LMSW AX",
+      "reference_sha256": "e0e63a12bba753e940ec62aa89f7a344b94bcf2c1b2d971a144b7a7436a2cbdc",
+      "risk_control": "AX=0000 prevents the probe from setting MSW_PE"
+    },
+    {
+      "binary": "r0f006.com",
+      "case_id": "r006",
+      "define": 6,
+      "instruction": "f3 0f 01 f0",
+      "purpose": "current VAEG REPE path to legacy LMSW AX",
+      "reference_sha256": "7cfffc6dfa633c423aff832cb2e0c5eb397720e039dc9e34b4f48cae4f7713c9",
+      "risk_control": "AX=0000 prevents the probe from setting MSW_PE"
+    },
+    {
+      "binary": "r0f007.com",
+      "case_id": "r007",
+      "define": 7,
+      "instruction": "f2 0f 00 c0",
+      "purpose": "representative current CTS0 route in real mode",
+      "reference_sha256": "9a2c4de33147f7ec40feca8955c58c504624e5f431505d6f88b73d7038e03b99",
+      "risk_control": "real-mode MSW_PE=0 is expected; INT 6 is hooked and recoverable"
+    },
+    {
+      "binary": "r0f008.com",
+      "case_id": "r008",
+      "define": 8,
+      "instruction": "f2 0f 01 06 guard16",
+      "purpose": "representative current CTS1 SGDT route to a guard buffer",
+      "reference_sha256": "94778f8b1a1471eaf235ba43cf6225cdc39253f81ea79ce721cf3d224cf6f734",
+      "risk_control": "the only possible memory destination is a private 12-byte guard"
+    }
+  ],
+  "copyright": "Copyright (c) 2026 Nakata Maho",
+  "license": "BSD-2-Clause",
+  "loadall286": {
+    "included": false,
+    "reason": "LOADALL286 can replace CS:IP, FLAGS, descriptors, and stack state from a fixed physical image; a generally recoverable PC-88VA probe was not justified."
+  },
+  "reference_builder": "NASM version 3.01",
+  "schema": "vaeg-pc88va-rep0f-probe-m47-v1",
+  "source_sha256": "b832cddfc363da7c2b4ef2a15c830d7bf1e9205aa386c8cd00e640647f7bda4a"
+}

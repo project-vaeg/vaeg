@@ -1,0 +1,14 @@
+{
+  "approved_predecessor_gate": "G69",
+  "approved_predecessor_sha": "680308a603b24341c5b9649657f01791b79002f7",
+  "changed_record_count": 19,
+  "conflict_count": 0,
+  "milestone": "M70",
+  "new_target_policy_id": "upd9002-g70-18a5606ad77ecc2e461b3fd56fa0105061831e685d7af430fc5026d0137bbb80",
+  "old_target_policy_id": "upd9002-g64-37ae2b706a9cbbe2d36cf7c98372c0cae7ca4b8d90e4f738973bc0ed3248eed6",
+  "owned_hash_count": 5908,
+  "population_digest": "240e0bf76de968b310ad13ef53de8d044637b185e267e1cfb2540f32ab6571e5",
+  "predecessor_registry": "tests/ssts/divergence/g67/registry.json",
+  "schema": "vaeg-upd9002-g70-divergence-manifest-v1",
+  "schema_version": 1
+}

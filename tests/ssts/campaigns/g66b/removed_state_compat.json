@@ -1,0 +1,88 @@
+{
+  "compatibility_matrix": [
+    {
+      "error": null,
+      "format": "Current M66a UPD9CPU v1 + UPD9002 state",
+      "mutation_on_rejection": "not_applicable",
+      "result": "write_and_read"
+    },
+    {
+      "error": null,
+      "format": "Approved-predecessor transitional CPU286 v0 + UPD9002 state",
+      "mutation_on_rejection": "not_applicable",
+      "result": "migrate_read_then_resave_as_UPD9CPU_v1"
+    },
+    {
+      "error": "obsolete processor state section lacks uPD9002 format marker",
+      "format": "Legacy CPU286 v0 without UPD9002 marker",
+      "mutation_on_rejection": "none",
+      "result": "reject"
+    },
+    {
+      "error": "uPD9002 cpu_type is not CPUTYPE_V30",
+      "format": "Wrong CPU identity in current UPD9CPU payload",
+      "mutation_on_rejection": "none",
+      "result": "reject"
+    },
+    {
+      "error": "uPD9002 state requires unsupported protected-mode execution",
+      "format": "Unsupported protected-mode bit in current UPD9CPU payload",
+      "mutation_on_rejection": "none",
+      "result": "reject"
+    },
+    {
+      "error": "uPD9002 payload size is not 112 bytes",
+      "format": "Malformed current UPD9CPU payload size",
+      "mutation_on_rejection": "none",
+      "result": "reject"
+    },
+    {
+      "error": "uPD9002 payload is truncated",
+      "format": "Truncated current UPD9CPU payload",
+      "mutation_on_rejection": "none",
+      "result": "reject"
+    }
+  ],
+  "legacy_fixture_disposition": {
+    "CPU286_without_UPD9002_marker": "reject before load mutation",
+    "predecessor_transitional_CPU286_plus_UPD9002": "migrate/read and re-save as UPD9CPU v1",
+    "tests/upd9002/state_fixtures_m42.txt": "preserved byte-identical as historical M42 fixture"
+  },
+  "preserved_current_paths": [
+    {
+      "path": "cpu/upd9002/upd9002_state.c",
+      "role": "current uPD9002 state import/export"
+    },
+    {
+      "path": "statsave.c",
+      "role": "current UPD9CPU v1 save/load and transactional pre-load check"
+    },
+    {
+      "path": "statsave.tbl",
+      "role": "current UPD9CPU v1 section registration"
+    }
+  ],
+  "removed_compatibility_paths": [
+    {
+      "after": "UPD9CPU section version 1 written",
+      "before": "CPU286 section version 0 written",
+      "path": "statsave.tbl"
+    },
+    {
+      "after": "CPU286 section is legacy migration only when UPD9002 marker is present; CPU286-only input fails before load mutation",
+      "before": "CPU286 section handled as current table entry",
+      "path": "statsave.c"
+    },
+    {
+      "after": "Upd9002StateImage current state image type and uPD9002 error text",
+      "before": "Cpu286StateCompat public state image type and CPU286 error text",
+      "path": "cpu/upd9002/upd9002_state.h"
+    },
+    {
+      "after": "Upd9002StateImage overlay/import/export naming",
+      "before": "Cpu286StateCompat overlay/import/export naming",
+      "path": "cpu/upd9002/upd9002_state.c"
+    }
+  ],
+  "schema": "vaeg-upd9002-m66a-removed-state-compat-v1"
+}

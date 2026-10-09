@@ -1,0 +1,136 @@
+{
+  "applicable_set_after": {
+    "ci": "6f10f47cd0f939145f99dbe6b1d820c79082c90083963b61cd39b5f56503537f",
+    "full": "4f0f19a6496f4c4463da092c7d5df7a9a0365a951821d9428eac8662d0c76e7c"
+  },
+  "applicable_set_before": {
+    "ci": "6f10f47cd0f939145f99dbe6b1d820c79082c90083963b61cd39b5f56503537f",
+    "full": "4f0f19a6496f4c4463da092c7d5df7a9a0365a951821d9428eac8662d0c76e7c"
+  },
+  "campaign_base_gate": "G65",
+  "campaign_base_sha": "efd96b7e46717e7ee56e086f7d27ba42b04b49d3",
+  "campaign_branch": "topic/m65-residue-campaign",
+  "campaign_predecessor_sha": "e5ff4fda663156836d327314df28dd48c2006668",
+  "canonical_task_path": "docs/agents/tasks/M65c_upd9002_f72.md",
+  "classification_after": "applicable",
+  "classification_before": "applicable",
+  "evidence_artifacts": {
+    "case_table": {
+      "path": "tests/ssts/campaigns/g65m/reconstruction/m65c_f7_not_cases.json.gz",
+      "sha256": "ca751f74d2e45a256da9a4f6f54ea11ce7de90a611c3fbabaf552d517bba2de6"
+    },
+    "contract": {
+      "path": "tests/ssts/campaigns/g65m/reconstruction/m65c_contract.json",
+      "sha256": "a680593812de118bbd8ab28b64c0a1602430722dadefbed7da1656172b5ba4c5"
+    },
+    "execution_spec": {
+      "path": "tests/ssts/campaigns/g65m/execution_specs/m65c.json",
+      "sha256": "fe5a4a2d760e3e2c12eab8a56ad2eef4ed05ca979ef88771757cd0d81fdf3292"
+    },
+    "replay_summary": {
+      "path": "tests/ssts/campaigns/g65m/checkpoints/m65c_replay_summary.json",
+      "sha256": "b2c3b43b07c5a955619085ba65553b9ee94ca87239ab9450893cdd7e371ae148"
+    }
+  },
+  "focused_tests": [
+    {
+      "command": "ctest --test-dir build/linux-ci-gcc -R vaeg_upd9002_m65c_f72 --output-on-failure",
+      "result": "pass"
+    },
+    {
+      "command": "ctest --test-dir build/linux-ci-gcc -R 'vaeg_upd9002_m65(a_ff7|b_bound|c_f72)' --output-on-failure",
+      "result": "3/3 pass"
+    },
+    {
+      "command": "python3 tools/qa/upd9002_m65c_f72.py selftest",
+      "result": "pass"
+    },
+    {
+      "command": "python3 tools/qa/upd9002_m65c_f72.py verify --root . --shard-root /tmp/ssts-v20-v1_native --worker build/linux-ci-gcc/sdl2/vaeg --write-summary",
+      "result": "pass"
+    },
+    {
+      "command": "python3 tools/qa/upd9002_m65a_ff7.py verify --root . --shard-root /tmp/ssts-v20-v1_native --worker build/linux-ci-gcc/sdl2/vaeg",
+      "result": "pass"
+    },
+    {
+      "command": "python3 tools/qa/upd9002_m65b_bound.py verify --root . --shard-root /tmp/ssts-v20-v1_native --worker build/linux-ci-gcc/sdl2/vaeg",
+      "result": "pass"
+    },
+    {
+      "command": "ctest --test-dir build/linux-ci-gcc -LE external --output-on-failure",
+      "result": "67/67 pass"
+    }
+  ],
+  "full_f7_2_population": {
+    "fail": 0,
+    "hash_set_sha256": "ff7c9f1988e9e9b1f73309501059c84fdbaf545604f942bfd533aed8ab987df6",
+    "pass": 5000,
+    "predecessor_passes_preserved": 3887,
+    "selected_count": 5000
+  },
+  "gap_kind_after": null,
+  "gap_kind_before": null,
+  "milestone": "M65c",
+  "newly_applicable": 0,
+  "newly_failing": 0,
+  "newly_passing": 1113,
+  "owned_hash_count": 1113,
+  "owned_hash_set_sha256": "69bf316c8a0751f7aed67504d0ea606fd2530e8d254b2b4e73ead66ccbc30ccc",
+  "owned_selectors": [
+    "F7 /2 word NOT r/m16"
+  ],
+  "production_semantic_change": true,
+  "protected_bound_frame_result": {
+    "count": 3565,
+    "fail": 0,
+    "hash_set_sha256": "15862f179608f8745f76bb3565197106ae6f63cba6c3363dd307fb29e6bbd746",
+    "pass": 3565,
+    "selector": "62 BOUND former frame-only"
+  },
+  "protected_m65a_result": {
+    "count": 5000,
+    "fail": 0,
+    "hash_set_sha256": "6028d5dcd4b6a3dcded2aaf69fb186e502f7f5a4d094180572f802c86240039a",
+    "pass": 5000,
+    "selector": "FF /7"
+  },
+  "protected_m65b_result": {
+    "count": 1244,
+    "fail": 0,
+    "hash_set_sha256": "2fd0e1053b264042031c657ebf55796858e8ff2405509b3cc1d17ace71ae4f0d",
+    "pass": 1244,
+    "selector": "62 BOUND"
+  },
+  "protected_m65d_guard": {
+    "count": 144,
+    "hash_set_sha256": "ce1bc644ee5a5bc73ae872440ad4446cb0dbccbad626ba93372082fe7add9076",
+    "official_failures_preserved": 144,
+    "selector": "FF /6 SP alias"
+  },
+  "protected_m65e_guard": {
+    "count": 10,
+    "hash_set_sha256": "7b228418bf0391884381514282e60ea9ccaf3af8c0f1f7f5a1b038a24de230a1",
+    "official_failures_preserved": 10,
+    "selector": "exact ten-case tail"
+  },
+  "report_path": "docs/agents/reports/m65c_upd9002_f72.md",
+  "selected_applicable_no_change": true,
+  "selected_set_after": {
+    "ci": "d30dd9c864fbbaa74c661e1b829c66264f2184a8fbbb72b654b2baa825664ae6",
+    "full": "0aa3dbb24323223b3a9595a0bd7cfd5666596741157c14b60f6969318475f8f7"
+  },
+  "selected_set_before": {
+    "ci": "d30dd9c864fbbaa74c661e1b829c66264f2184a8fbbb72b654b2baa825664ae6",
+    "full": "0aa3dbb24323223b3a9595a0bd7cfd5666596741157c14b60f6969318475f8f7"
+  },
+  "status": "complete_pending_campaign_gate",
+  "target_policy_after": "upd9002-g64-37ae2b706a9cbbe2d36cf7c98372c0cae7ca4b8d90e4f738973bc0ed3248eed6",
+  "target_policy_before": "upd9002-g64-37ae2b706a9cbbe2d36cf7c98372c0cae7ca4b8d90e4f738973bc0ed3248eed6",
+  "task_checkpoint_sha": "supplied_by_handoff",
+  "task_evaluated_sha": "8d338a528a7c3b4a18636f2f3a4678ece6dbcd4f",
+  "task_evidence_sha": "supplied_by_handoff",
+  "task_start_sha": "e5ff4fda663156836d327314df28dd48c2006668",
+  "validator_only_sha": "f6cb876ea45d63facf16b1e7d4d425aab3b1346f",
+  "worker_sha256": "5c01c71e367af72fdb9ac54d61f78aad48c6e6ae921f72d0ee8c3d895ab81add"
+}

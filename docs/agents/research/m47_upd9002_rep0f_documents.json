@@ -1,0 +1,120 @@
+{
+  "copyright": "Copyright (c) 2026 Nakata Maho",
+  "decision_status": "unresolved_pending_pc88va_hardware_probe",
+  "documents": [
+    {
+      "availability": "acquired",
+      "describes": [
+        "V20",
+        "V30"
+      ],
+      "edition": "October 1986",
+      "file_size": 11351331,
+      "finding": "Defines V20/V30 instruction prefixes and the interrupt-time prefix-retention rules, but does not define uPD9002-specific REP+0F behavior.",
+      "local_filename": "nec-v20-v30-users-manual-oct86.pdf",
+      "relevant_sections": [
+        {
+          "printed_pages": "6-3--6-4",
+          "section": "6, interrupt processing and prefix retention"
+        },
+        {
+          "printed_pages": "12-14--12-15",
+          "section": "12, repeat prefixes"
+        }
+      ],
+      "sha256": "8252fe5ddc0623380b7f28819009e6bb7d2b8e345ef347d9e6f2d299ce97865f",
+      "source": "Bitsavers NEC V-Series archive",
+      "source_url": "https://bitsavers.org/components/nec/V-Series/V20_V30_Users_Manual_Oct86.pdf",
+      "title": "uPD70108/V20 & uPD70116/V30 User's Manual",
+      "unambiguously_resolves_rep0f": false
+    },
+    {
+      "availability": "acquired",
+      "describes": [
+        "V20",
+        "V30",
+        "V25",
+        "V35",
+        "V40",
+        "V50"
+      ],
+      "edition": "U11301EJ5V0UMJ1, 5th edition, September 2000; information current February 1997",
+      "file_size": 700276,
+      "finding": "Defines REP/REPC/REPNC/REPE/REPNE only for their documented repeat targets and maps 0F to V-series Group 3 instructions. It does not specify the combined REP+0F behavior or the uPD9002.",
+      "local_filename": "nec-16bit-v-series-instruction-jun97.pdf",
+      "relevant_sections": [
+        {
+          "printed_pages": "3",
+          "section": "1.3.2, prefix instructions"
+        },
+        {
+          "printed_pages": "124--128",
+          "section": "REP, REPC, REPNC, REPE, and REPNE"
+        },
+        {
+          "printed_pages": "200, 202",
+          "section": "Appendix C, instruction maps including 0F Group 3"
+        }
+      ],
+      "sha256": "19a69547651aa65e32df33f1bf84dea095a00237f680a67b166213fcc6d96f6a",
+      "source": "Ardent Tool NEC V20/V30 documentation archive",
+      "source_url": "https://www.ardent-tool.com/CPU/docs/NEC/V20-V30/v_series.pdf",
+      "title": "16-BIT V SERIES 16-/8- AND 16-BIT MICROPROCESSORS INSTRUCTION",
+      "unambiguously_resolves_rep0f": false
+    },
+    {
+      "availability": "acquired",
+      "describes": [
+        "V30MX"
+      ],
+      "edition": "A11897EJ1V0UM00, 1st edition, April 1997",
+      "file_size": 307725,
+      "finding": "Documents V30MX prefix processing and instruction execution, but is not a uPD9002/V52 or PC-88VA specification and does not resolve REP+0F.",
+      "local_filename": "nec-v30mx-users-manual-apr97.pdf",
+      "relevant_sections": [
+        {
+          "printed_pages": "37",
+          "section": "3.6, instruction prefixes"
+        },
+        {
+          "printed_pages": "68",
+          "section": "5.3, prefix processing"
+        }
+      ],
+      "sha256": "71d7c5c749d1c3839a32fa04b6405c420f3358c5e1e62dd130a7014dd54d474e",
+      "source": "Bitsavers NEC V-Series archive",
+      "source_url": "https://www.bitsavers.org/components/nec/V-Series/uPD70116mx-um_199704.pdf",
+      "title": "V30MX CPU Core User's Manual",
+      "unambiguously_resolves_rep0f": false
+    },
+    {
+      "availability": "bibliographic_record_only",
+      "describes": [
+        "PC-88VA",
+        "uPD9002"
+      ],
+      "edition": "Revised edition, January 1988, 454 pages",
+      "file_size": null,
+      "finding": "The bibliographic record establishes the manual identity, but no contents were available for inspection. It cannot be used as instruction-semantic evidence until the exact edition is acquired and hashed.",
+      "local_filename": null,
+      "relevant_sections": [],
+      "sha256": null,
+      "source": "CiNii Books, NCID BA48885862",
+      "source_url": "https://ci.nii.ac.jp/ncid/BA48885862",
+      "title": "PC-88VA Technical Manual",
+      "unambiguously_resolves_rep0f": false
+    }
+  ],
+  "license": "BSD-2-Clause",
+  "repository_evidence": {
+    "accepted_m47_audit": {
+      "file_size": 7405,
+      "local_filename": "m47-audit.txt",
+      "sha256": "3b93bc4b9fefe3026b3dd1533a968f7f6ea2a6b6b00a9c4756d3315dbcdfa5ea"
+    },
+    "m42_final_dispatch_graph": "tools/qa/golden/upd9002_final_dispatch_graph.csv",
+    "m43_dataset_manifest": "tests/ssts/v20_dataset_manifest.json",
+    "repository_document_search": "No tracked PC-88VA/uPD9002 instruction or technical manual was found; binary/manual payloads were not added to Git."
+  },
+  "schema": "vaeg-upd9002-rep0f-documents-m47-v1"
+}

@@ -1,0 +1,57 @@
+Copyright (c) 2026 Nakata Maho
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+1. Redistributions of source code must retain the above copyright notice,
+   this list of conditions and the following disclaimer.
+2. Redistributions in binary form must reproduce the above copyright notice,
+   this list of conditions and the following disclaimer in the documentation
+   and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE AUTHOR "AS IS" AND ANY EXPRESS OR IMPLIED
+WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
+EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
+BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER
+IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+POSSIBILITY OF SUCH DAMAGE.
+
+PC-88VA guest drivers bundled with vaeg
+========================================
+
+HOSTFAT.SYS
+-----------
+
+HOSTFAT.SYS is vaeg's read-only PC-Engine host-folder block driver. Put the
+driver on a PC-Engine boot disk and add this line to CONFIG.SYS:
+
+    DEVICE=HOSTFAT.SYS
+
+Start vaeg with `--hostfat-dir` or enable the HOSTFAT read-only host folder in
+the GUI. Keep the driver from the same vaeg distribution as the executable.
+
+SQEMM98.SYS
+-----------
+
+SQEMM98.SYS is the PC-88VA port of SQEMM98 MAX for vaeg's EMS board. It is the
+EMS manager, not the complete EMMVA/RDEMS stack. When using EMMVA 1.5a and
+RDEMS 1.52, CONFIG.SYS must load the drivers in this order:
+
+    DEVICE=EMMVA01.SYS
+    DEVICE=SQEMM98.SYS
+    DEVICE=EMMVA02.SYS
+    DEVICE=RDEMS.SYS -P40 -A
+
+Enable a 1 through 13MB EMS Board capacity in vaeg before booting that disk.
+SQEMM98 messages use the PC-Engine Text BIOS.
+
+Licenses and integrity
+----------------------
+
+`licenses/HOSTFAT.txt` contains the HOSTFAT license.
+`licenses/SQEMM98.txt` contains the SQEMM upstream license and the PC-88VA
+port license. `SHA256SUMS` covers both drivers, this README, and both license
+files.

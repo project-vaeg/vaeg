@@ -1,0 +1,40 @@
+* text=auto eol=lf
+
+# VS/VC project machinery and cmd scripts stay CRLF
+*.dsp  text eol=crlf
+*.dsw  text eol=crlf
+*.sln  text eol=crlf
+*.vcproj  text eol=crlf
+*.vcxproj text eol=crlf
+*.vcxproj.filters text eol=crlf
+*.bat  text eol=crlf
+
+# Binary payloads - never renormalize, never diff as text
+*.rom binary
+*.bin binary
+*.d88 binary
+*.ico binary
+*.cur binary
+*.bmp binary
+*.gif binary
+*.png binary
+*.ttf binary
+*.wav binary
+*.jpg binary
+*.com binary
+
+# Generated mail patch; embedded upstream context whitespace is patch data
+docs/agents/reports/m35_suzukiplan_irq_extension.patch -diff
+
+# Unified source patch retains upstream tab-indented context as patch data
+tools/cpmva/patches/cpm22-64k.patch -diff
+
+# Byte-identical legal evidence retains its historical line whitespace
+LICENSES/legacy-vaeg.txt whitespace=-blank-at-eol
+
+# M101 byte-exact CP/M output evidence (CRLF, 1Ah padding); never convert
+docs/agents/reports/m101_zexall_qa/*/raw/** binary
+
+# M102 byte-exact CP/M output evidence
+docs/agents/reports/m102_zexund_qa/*/raw/** binary
+docs/agents/reports/m103a_altregs_qa/*/raw/** binary

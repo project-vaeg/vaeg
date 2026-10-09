@@ -1,0 +1,357 @@
+From f9d25f270f04b9a8a93bf18dea4409e945d22fca Mon Sep 17 00:00:00 2001
+From: Nakata Maho <maho.nakata@gmail.com>
+Date: Mon, 28 Sep 2026 10:55:23 +0000
+Subject: [PATCH] Add FlagProfile::Upd9002 for the NEC uPD9002 Z80 emulation
+ mode
+
+Per-instance flag profile with two values:
+
+  Zilog    default; documented and undocumented Zilog Z80 behaviour
+           (the existing behaviour)
+  Upd9002  NEC uPD9002 Z80 emulation mode (PC-88VA V1/V2 mode)
+
+Upd9002 applies the rules reproduced from ZEXDOC/ZEXALL on a real
+PC-88VA2 in V2 mode:
+
+  R1  F bits 5/3 are never set; POP AF, setAF/setAF2 and reset mask them
+  R2  AND: H = 0
+  R3  BIT n,r / (HL) / (IX+d) / (IY+d): H = 0
+  R4  RLCA/RRCA/RLA/RRA: H and N preserved
+  R5  LDI/LDD/LDIR/LDDR: H and N preserved
+  R6  ADD HL/IX/IY,rr: H preserved
+  R7  ADC/SBC HL,rr: H = carry/borrow out of bit 3
+
+DAA/CPL/SCF/CCF are unresolved and keep Zilog behaviour.
+---
+ README.md                  | 23 ++++++++++++
+ test/Makefile              |  5 +++
+ test/test-flag-profile.cpp | 76 ++++++++++++++++++++++++++++++++++++++
+ z80.hpp                    | 76 +++++++++++++++++++++++++++++++-------
+ 4 files changed, 166 insertions(+), 14 deletions(-)
+ create mode 100644 test/test-flag-profile.cpp
+
+diff --git a/README.md b/README.md
+index c5945ad..1d90583 100644
+--- a/README.md
++++ b/README.md
+@@ -395,6 +395,29 @@ ReturnHandler will be called back immediately **before** a branch by a RET instr
+ - call `addReturnHandlerFP` if you want to use the function pointer.
+ - In the case of a condition-specified branch instruction, only the case where the branch is executed is callbacked.
+ 
++### Flag profile (NEC uPD9002 Z80 emulation mode)
++
++By default the flags follow the Zilog Z80, including the undocumented bits 5 and 3 (`Z80::FlagProfile::Zilog`).
++
++The NEC uPD9002 used in the PC-88VA has a Z80 emulation mode whose flags differ.
++`Z80::FlagProfile::Upd9002` reproduces the ZEXDOC/ZEXALL results measured on a real PC-88VA2 in V2 mode:
++
++| Rule | Instructions | uPD9002 behaviour |
++|:-|:-|:-|
++| R1 | all | F bits 5 and 3 are always 0 (also after `POP AF` and `EX AF,AF'`) |
++| R2 | `AND` | H = 0 |
++| R3 | `BIT n,r` / `(HL)` / `(IX+d)` / `(IY+d)` | H = 0 |
++| R4 | `RLCA` / `RRCA` / `RLA` / `RRA` | H and N are not changed |
++| R5 | `LDI` / `LDD` / `LDIR` / `LDDR` | H and N are not changed |
++| R6 | `ADD HL/IX/IY,rr` | H is not changed |
++| R7 | `ADC HL,rr` / `SBC HL,rr` | H is the carry/borrow out of bit 3 |
++
++`DAA`, `CPL`, `SCF` and `CCF` are not yet resolved and keep the Zilog behaviour.
++
++```c++
++    z80.setFlagProfile(Z80::FlagProfile::Upd9002);
++```
++
+ ## Advanced Compile Flags
+ 
+ There is a compile flag that disables certain features in order to adapt to environments with poor performance environments, i.e: Arduino or ESP32:
+diff --git a/test/Makefile b/test/Makefile
+index 077ffa5..2e005db 100644
+--- a/test/Makefile
++++ b/test/Makefile
+@@ -26,6 +26,7 @@ all:
+ 	make test-interrupt-extension
+ 	make test-interrupt-extension-no-functional
+ 	make test-adc-sbc-16
++	make test-flag-profile
+ 
+ test-execute:
+ 	clang $(CFLAGS) test-execute.cpp -lstdc++
+@@ -90,3 +91,7 @@ test-interrupt-extension-no-functional:
+ test-adc-sbc-16:
+ 	clang $(CFLAGS) test-adc-sbc-16.cpp -lstdc++
+ 	./a.out
++
++test-flag-profile:
++	clang $(CFLAGS) test-flag-profile.cpp -lstdc++
++	./a.out
+diff --git a/test/test-flag-profile.cpp b/test/test-flag-profile.cpp
+new file mode 100644
+index 0000000..1c32063
+--- /dev/null
++++ b/test/test-flag-profile.cpp
+@@ -0,0 +1,76 @@
++// FlagProfile test: Zilog (default) and Upd9002 (NEC
++// uPD9002 Z80 emulation mode, rules R1-R7). F is loaded with PUSH BC / POP AF
++// and captured with PUSH AF / POP DE right after the instruction under test.
++#include "z80.hpp"
++
++struct Probe {
++    const char* name;
++    unsigned short af;
++    unsigned short bc;
++    unsigned short hl;
++    unsigned char body[8];
++    int bodySize;
++    unsigned char a;        // expected A (both profiles)
++    unsigned char fZilog;   // expected F, Zilog
++    unsigned char fUpd9002; // expected F, Upd9002
++};
++
++static const Probe probes[] = {
++    {"XOR A", 0x5A00, 0x0000, 0x0000, {0xAF}, 1, 0x00, 0x44, 0x44},
++    {"AND $0F", 0xFF00, 0x0000, 0x0000, {0xE6, 0x0F}, 2, 0x0F, 0x1C, 0x04},       // R1, R2
++    {"BIT 0,A", 0x0100, 0x0000, 0x0000, {0xCB, 0x47}, 2, 0x01, 0x10, 0x00},       // R3
++    {"RLCA", 0x80D7, 0x0000, 0x0000, {0x07}, 1, 0x01, 0xC5, 0xD7},                // R4
++    {"LDI (BC=1)", 0x00D7, 0x0001, 0x4000, {0xED, 0xA0}, 2, 0x00, 0xC1, 0xD3},    // R5
++    {"LDI (BC=2)", 0x00D7, 0x0002, 0x4000, {0xED, 0xA0}, 2, 0x00, 0xC5, 0xD7},    // R5
++    {"ADD HL,BC (H set)", 0x0000, 0x0001, 0x0FFF, {0x09}, 1, 0x00, 0x10, 0x00},   // R6
++    {"ADD HL,BC (H kept)", 0x0010, 0x0001, 0x0001, {0x09}, 1, 0x00, 0x00, 0x10},  // R6
++    {"ADC HL,BC", 0x0000, 0x0001, 0x000F, {0xED, 0x4A}, 2, 0x00, 0x00, 0x10},     // R7
++    {"SBC HL,BC", 0x0000, 0x0001, 0x0010, {0xED, 0x42}, 2, 0x00, 0x02, 0x12},     // R7
++    {"POP AF ($FFFF)", 0x0000, 0xFFFF, 0x0000, {0xC5, 0xF1}, 2, 0xFF, 0xFF, 0xD7}, // R1
++    {"EX AF,AF' x2", 0x0000, 0xFFFF, 0x0000, {0xC5, 0xF1, 0x08, 0x08}, 4, 0xFF, 0xFF, 0xD7}, // R1
++};
++
++int main()
++{
++    unsigned char memory[65536];
++    int failures = 0;
++    for (int profile = 0; profile < 2; profile++) {
++        for (const Probe& probe : probes) {
++            memset(memory, 0, sizeof(memory));
++            unsigned char* p = memory;
++            *p++ = 0x01; // LD BC,af
++            *p++ = (unsigned char)probe.af;
++            *p++ = (unsigned char)(probe.af >> 8);
++            *p++ = 0xC5; // PUSH BC
++            *p++ = 0xF1; // POP AF
++            *p++ = 0x01; // LD BC,bc
++            *p++ = (unsigned char)probe.bc;
++            *p++ = (unsigned char)(probe.bc >> 8);
++            *p++ = 0x21; // LD HL,hl
++            *p++ = (unsigned char)probe.hl;
++            *p++ = (unsigned char)(probe.hl >> 8);
++            *p++ = 0x11; // LD DE,$5000
++            *p++ = 0x00;
++            *p++ = 0x50;
++            memcpy(p, probe.body, (size_t)probe.bodySize);
++            p += probe.bodySize;
++            *p++ = 0xF5; // PUSH AF
++            *p++ = 0xD1; // POP DE
++            unsigned short end = (unsigned short)(p - memory);
++            Z80 z80([&memory](void* arg, unsigned short addr) { return memory[addr]; },
++                    [&memory](void* arg, unsigned short addr, unsigned char value) { memory[addr] = value; },
++                    [](void* arg, unsigned short port) { return (unsigned char)0xFF; },
++                    [](void* arg, unsigned short port, unsigned char value) {},
++                    &z80);
++            z80.setFlagProfile(profile ? Z80::FlagProfile::Upd9002 : Z80::FlagProfile::Zilog);
++            z80.reg.SP = 0xF000;
++            while (z80.reg.PC != end) z80.execute(1);
++            unsigned char expectedF = profile ? probe.fUpd9002 : probe.fZilog;
++            bool ok = z80.reg.pair.A == probe.a && z80.reg.pair.E == expectedF;
++            printf("%s: %-8s %-20s A=$%02X F=$%02X (expected A=$%02X F=$%02X)\n", ok ? "OK" : "NG",
++                   profile ? "Upd9002" : "Zilog", probe.name, z80.reg.pair.A, z80.reg.pair.E, probe.a, expectedF);
++            if (!ok) failures++;
++        }
++    }
++    return failures ? -1 : 0;
++}
+diff --git a/z80.hpp b/z80.hpp
+index ac69bb9..86dbd86 100644
+--- a/z80.hpp
++++ b/z80.hpp
+@@ -116,15 +116,49 @@ class Z80
+         consumeClock(clock);
+     }
+ 
++  public: // Flag profile
++    // Zilog: documented and undocumented Zilog Z80 flag behaviour. This is the
++    // default and the existing behaviour.
++    // Upd9002: NEC uPD9002 Z80 emulation mode (PC-88VA V1/V2 mode). Rules
++    // R1-R7 are reproduced from ZEXDOC/ZEXALL runs on a real PC-88VA2;
++    // DAA/CPL/SCF/CCF are unresolved and keep Zilog behaviour.
++    enum class FlagProfile {
++        Zilog,
++        Upd9002
++    };
++    void setFlagProfile(FlagProfile profile)
++    {
++        flagProfile = profile;
++        maskUndocumentedFlags();
++    }
++    FlagProfile getFlagProfile() const { return flagProfile; }
++
+   private: // Internal functions & variables
++    FlagProfile flagProfile = FlagProfile::Zilog;
++    inline bool isUpd9002() const { return flagProfile == FlagProfile::Upd9002; }
++    // R1 (storage variant): F bits 5/3 are never held. Whether POP AF can
++    // store them on real hardware is untested (probe P7).
++    inline void maskUndocumentedFlags()
++    {
++        if (isUpd9002()) {
++            reg.pair.F &= 0xD7;
++            reg.back.F &= 0xD7;
++        }
++    }
+     // bit table
+     const unsigned char bits[8] = {0b00000001, 0b00000010, 0b00000100, 0b00001000, 0b00010000, 0b00100000, 0b01000000, 0b10000000};
+     // flag setter
+     inline void setFlagS() { reg.pair.F |= flagS(); }
+     inline void setFlagZ() { reg.pair.F |= flagZ(); }
+-    inline void setFlagY() { reg.pair.F |= flagY(); }
++    inline void setFlagY()
++    {
++        if (!isUpd9002()) reg.pair.F |= flagY(); // R1
++    }
+     inline void setFlagH() { reg.pair.F |= flagH(); }
+-    inline void setFlagX() { reg.pair.F |= flagX(); }
++    inline void setFlagX()
++    {
++        if (!isUpd9002()) reg.pair.F |= flagX(); // R1
++    }
+     inline void setFlagPV() { reg.pair.F |= flagPV(); }
+     inline void setFlagN() { reg.pair.F |= flagN(); }
+     inline void setFlagC() { reg.pair.F |= flagC(); }
+@@ -418,8 +452,16 @@ class Z80
+     inline unsigned short getHL() { return make16BitsFromLE(reg.pair.L, reg.pair.H); }
+     inline unsigned short getHL2() { return make16BitsFromLE(reg.back.L, reg.back.H); }
+ 
+-    inline void setAF(unsigned short value) { splitTo8BitsPair(value, &reg.pair.A, &reg.pair.F); }
+-    inline void setAF2(unsigned short value) { splitTo8BitsPair(value, &reg.back.A, &reg.back.F); }
++    inline void setAF(unsigned short value)
++    {
++        splitTo8BitsPair(value, &reg.pair.A, &reg.pair.F);
++        maskUndocumentedFlags(); // R1
++    }
++    inline void setAF2(unsigned short value)
++    {
++        splitTo8BitsPair(value, &reg.back.A, &reg.back.F);
++        maskUndocumentedFlags(); // R1
++    }
+     inline void setBC(unsigned short value) { splitTo8BitsPair(value, &reg.pair.B, &reg.pair.C); }
+     inline void setBC2(unsigned short value) { splitTo8BitsPair(value, &reg.back.B, &reg.back.C); }
+     inline void setDE(unsigned short value) { splitTo8BitsPair(value, &reg.pair.D, &reg.pair.E); }
+@@ -923,6 +965,7 @@ class Z80
+     {
+         ctx->reg.pair.F = ctx->pop(3);
+         ctx->reg.pair.A = ctx->pop(3);
++        ctx->maskUndocumentedFlags(); // R1
+ #ifndef Z80_DISABLE_DEBUG
+         if (ctx->isDebug()) ctx->log("[%04X] POP AF <SP:$%04X> = $%04X", ctx->reg.PC - 1, ctx->reg.SP - 2, ctx->getAF());
+ #endif
+@@ -1836,9 +1879,9 @@ class Z80
+         setBC(bc);
+         setDE(de);
+         setHL(hl);
+-        resetFlagH();
++        if (!isUpd9002()) resetFlagH(); // R5
+         setFlagPV(bc != 0);
+-        resetFlagN();
++        if (!isUpd9002()) resetFlagN(); // R5
+         unsigned char an = reg.pair.A + n;
+         setFlagY(an & 0b00000010);
+         setFlagX(an & 0b00001000);
+@@ -2022,8 +2065,10 @@ class Z80
+     inline void setFlagByRotate(unsigned char n, bool carry, bool isA = false)
+     {
+         setFlagC(carry);
+-        resetFlagH();
+-        resetFlagN();
++        if (!(isA && isUpd9002())) { // R4
++            resetFlagH();
++            resetFlagN();
++        }
+         setFlagXY(n);
+         if (!isA) {
+             setFlagS(n & 0x80);
+@@ -3711,7 +3756,7 @@ class Z80
+         resetFlagN();
+         setFlagXY((result & 0xFF00) >> 8);
+         setFlagC((carrybits & 0x10000) != 0);
+-        setFlagH((carrybits & 0x1000) != 0);
++        if (!isUpd9002()) setFlagH((carrybits & 0x1000) != 0); // R6
+     }
+ 
+     inline void setFlagByAdc16(unsigned short before, unsigned short addition, unsigned char carry)
+@@ -3763,6 +3808,7 @@ class Z80
+         unsigned char c = isFlagC() ? 1 : 0;
+         reg.WZ = hl + 1;
+         setFlagByAdc16(hl, nn, c);
++        if (isUpd9002()) setFlagH(((hl & 0xF) + (nn & 0xF) + c) > 0xF); // R7
+         setHL(hl + c + nn);
+         consumeClock(7);
+     }
+@@ -3900,6 +3946,7 @@ class Z80
+         unsigned char c = isFlagC() ? 1 : 0;
+         reg.WZ = hl + 1;
+         setFlagBySbc16(hl, nn, c);
++        if (isUpd9002()) setFlagH((hl & 0xF) < ((nn & 0xF) + c)); // R7
+         setHL(hl - c - nn);
+         consumeClock(7);
+     }
+@@ -3918,7 +3965,7 @@ class Z80
+     {
+         reg.pair.A &= n;
+         setFlagByLogical();
+-        setFlagH();
++        setFlagH(!isUpd9002()); // R2
+     }
+ 
+     inline void or8(unsigned char n)
+@@ -4373,7 +4420,7 @@ class Z80
+         setFlagZ(n ? false : true);
+         setFlagPV(isFlagZ());
+         setFlagS(!isFlagZ() && 7 == bit);
+-        setFlagH();
++        setFlagH(!isUpd9002()); // R3
+         resetFlagN();
+         setFlagXY(*rp);
+     }
+@@ -4397,7 +4444,7 @@ class Z80
+         setFlagZ(!n);
+         setFlagPV(isFlagZ());
+         setFlagS(!isFlagZ() && 7 == bit);
+-        setFlagH();
++        setFlagH(!isUpd9002()); // R3
+         resetFlagN();
+         setFlagXY((reg.WZ & 0xFF00) >> 8);
+     }
+@@ -4421,7 +4468,7 @@ class Z80
+         setFlagZ(!n);
+         setFlagPV(isFlagZ());
+         setFlagS(!isFlagZ() && 7 == bit);
+-        setFlagH();
++        setFlagH(!isUpd9002()); // R3
+         resetFlagN();
+         setFlagXY((reg.WZ & 0xFF00) >> 8);
+     }
+@@ -4445,7 +4492,7 @@ class Z80
+         setFlagZ(!n);
+         setFlagPV(isFlagZ());
+         setFlagS(!isFlagZ() && 7 == bit);
+-        setFlagH();
++        setFlagH(!isUpd9002()); // R3
+         resetFlagN();
+         setFlagXY((reg.WZ & 0xFF00) >> 8);
+     }
+@@ -6170,6 +6217,7 @@ class Z80
+         reg.pair.A = 0xff;
+         reg.pair.F = 0xff;
+         reg.SP = 0xffff;
++        maskUndocumentedFlags(); // R1
+         memset(&wtc, 0, sizeof(wtc));
+     }
+ 
+-- 
+2.43.0
+

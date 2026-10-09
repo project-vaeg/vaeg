@@ -1,0 +1,13 @@
+ZEX13S <daa,cpl,scf,ccf> split exerciser
+aluop a,nn....................  ERROR **** crc expected:48799360 found:12967d59
+<daa,cpl,scf,ccf>.............  OK
+daa (d7)......................  OK
+daa (ff)......................  ERROR **** crc expected:3551c326 found:a4611558
+cpl (d7)......................  OK
+cpl (ff)......................  ERROR **** crc expected:7e08aada found:a2215a02
+scf (d7)......................  OK
+scf (ff)......................  ERROR **** crc expected:835e229b found:01dfb77c
+ccf (d7)......................  OK
+ccf (ff)......................  ERROR **** crc expected:8a539a07 found:08d20fe0
+Tests complete
+

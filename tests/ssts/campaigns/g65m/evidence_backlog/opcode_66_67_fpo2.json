@@ -1,0 +1,30 @@
+{
+  "applicable_change": "none",
+  "authority_status": {
+    "complete_silicon_support": "underdetermined",
+    "monitor_disassembler_authority": "target_absence_proven",
+    "v20_metadata": "not sufficient to infer uPD9002 implementation"
+  },
+  "blocks_G65m": false,
+  "blocks_M66_after_G65m": false,
+  "disposition": "approved_nonblocking_defer",
+  "evidence_domain": "target_authority_evidence_required",
+  "implemented": false,
+  "owned_hash_count": 0,
+  "owned_hash_set_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "passing_claim": false,
+  "policy_change": "none",
+  "required_before_implementation": [
+    "positive uPD9002 silicon or target authority",
+    "executable target semantic contract",
+    "explicit separation from V20 metadata-only evidence"
+  ],
+  "schema": "vaeg-upd9002-m65i-66-67-fpo2-backlog-v1",
+  "selected_applicable_change": "none",
+  "selectors": [
+    "66",
+    "67",
+    "FPO2"
+  ],
+  "task_id": "M65i"
+}

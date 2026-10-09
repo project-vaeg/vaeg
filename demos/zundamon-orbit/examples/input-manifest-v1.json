@@ -1,0 +1,36 @@
+{
+  "anchor": {
+    "space": "crop-top-left",
+    "x": 11,
+    "y": 9
+  },
+  "copyright": "Copyright (c) 2026 Nakata Maho",
+  "crop": {
+    "height": 19,
+    "width": 23,
+    "x": 0,
+    "y": 0
+  },
+  "image": {
+    "encoding": "bmp32",
+    "path": "source.bmp"
+  },
+  "license": "BSD-2-Clause",
+  "palette": {
+    "encoding": "rgb888",
+    "entries": 16,
+    "path": "palette.rgb",
+    "reserved_index": 15,
+    "transparent_index": 0
+  },
+  "schema": "vaeg-zundamon-orbit-input-v1",
+  "schema_version": 1,
+  "transparency": {
+    "background_rgb": [
+      0,
+      0,
+      0
+    ],
+    "method": "exact-rgb"
+  }
+}

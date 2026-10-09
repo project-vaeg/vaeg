@@ -1,0 +1,10 @@
+{
+  "disposition_after": "approved_nonblocking_defer",
+  "gap_kind_after": "target_support_unverified",
+  "gap_kind_before": "implementation_missing",
+  "group_count": 19,
+  "hash_count": 5908,
+  "hash_set_sha256": "240e0bf76de968b310ad13ef53de8d044637b185e267e1cfb2540f32ab6571e5",
+  "schema": "vaeg-upd9002-m65j-disposition-v2",
+  "unresolved": []
+}

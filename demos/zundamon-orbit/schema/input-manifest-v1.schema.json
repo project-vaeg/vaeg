@@ -1,0 +1,156 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "copyright": "Copyright (c) 2026 Nakata Maho",
+  "license": "BSD-2-Clause",
+  "properties": {
+    "anchor": {
+      "additionalProperties": false,
+      "properties": {
+        "space": {
+          "const": "crop-top-left"
+        },
+        "x": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "y": {
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "space",
+        "x",
+        "y"
+      ],
+      "type": "object"
+    },
+    "copyright": {
+      "const": "Copyright (c) 2026 Nakata Maho"
+    },
+    "crop": {
+      "additionalProperties": false,
+      "properties": {
+        "height": {
+          "maximum": 4096,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "width": {
+          "maximum": 4096,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "x": {
+          "maximum": 65535,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "y": {
+          "maximum": 65535,
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "x",
+        "y",
+        "width",
+        "height"
+      ],
+      "type": "object"
+    },
+    "image": {
+      "additionalProperties": false,
+      "properties": {
+        "encoding": {
+          "const": "bmp32"
+        },
+        "path": {
+          "pattern": "^[a-z0-9][a-z0-9._-]{0,63}\\.bmp$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "path",
+        "encoding"
+      ],
+      "type": "object"
+    },
+    "license": {
+      "const": "BSD-2-Clause"
+    },
+    "palette": {
+      "additionalProperties": false,
+      "properties": {
+        "encoding": {
+          "const": "rgb888"
+        },
+        "entries": {
+          "const": 16
+        },
+        "path": {
+          "pattern": "^[a-z0-9][a-z0-9._-]{0,63}\\.rgb$",
+          "type": "string"
+        },
+        "reserved_index": {
+          "const": 15
+        },
+        "transparent_index": {
+          "const": 0
+        }
+      },
+      "required": [
+        "path",
+        "encoding",
+        "entries",
+        "transparent_index",
+        "reserved_index"
+      ],
+      "type": "object"
+    },
+    "schema": {
+      "const": "vaeg-zundamon-orbit-input-v1"
+    },
+    "schema_version": {
+      "const": 1
+    },
+    "transparency": {
+      "additionalProperties": false,
+      "properties": {
+        "background_rgb": {
+          "items": {
+            "maximum": 255,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "maxItems": 3,
+          "minItems": 3,
+          "type": "array"
+        },
+        "method": {
+          "const": "exact-rgb"
+        }
+      },
+      "required": [
+        "method",
+        "background_rgb"
+      ],
+      "type": "object"
+    }
+  },
+  "required": [
+    "copyright",
+    "license",
+    "schema",
+    "schema_version",
+    "image",
+    "palette",
+    "crop",
+    "transparency",
+    "anchor"
+  ],
+  "title": "VAEG Zundamon orbit local input manifest version 1",
+  "type": "object"
+}

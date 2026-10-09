@@ -1,0 +1,124 @@
+{
+  "architectural_contract": {
+    "id": "upd9002-v20-architectural-v1",
+    "sha256": "aa7ecb1fa7c30fc5d7e7fc742bb4e616595c3d10c7a35e561c09da419907d5d5"
+  },
+  "dataset_id": "ssts-v20-9efbd02b8ec1a3aad347c2b59672ad25f3bcdb21-1d2e9c0e14101f05379d938245af68f3219c16f638fce019ad2a1946084930a4",
+  "fingerprint_contract": {
+    "id": "upd9002-v20-fingerprint-v1",
+    "sha256": "47e6b4dcf8c2bba2a36f15953b9701fb306b8db7e0254c54e1fe878e2d33fb2e"
+  },
+  "implemented_owned_selectors": [
+    {
+      "opcode": "0xa4",
+      "repeat_prefix": "repc",
+      "target": "upd9002_repc_movsb"
+    },
+    {
+      "opcode": "0xa5",
+      "repeat_prefix": "repc",
+      "target": "upd9002_repc_movsw"
+    },
+    {
+      "opcode": "0xa6",
+      "repeat_prefix": "repc",
+      "target": "upd9002_repc_cmpsb"
+    },
+    {
+      "opcode": "0xa7",
+      "repeat_prefix": "repc",
+      "target": "upd9002_repc_cmpsw"
+    },
+    {
+      "opcode": "0xaa",
+      "repeat_prefix": "repc",
+      "target": "upd9002_repc_stosb"
+    },
+    {
+      "opcode": "0xab",
+      "repeat_prefix": "repc",
+      "target": "upd9002_repc_stosw"
+    },
+    {
+      "opcode": "0xac",
+      "repeat_prefix": "repc",
+      "target": "upd9002_repc_lodsb"
+    },
+    {
+      "opcode": "0xad",
+      "repeat_prefix": "repc",
+      "target": "upd9002_repc_lodsw"
+    },
+    {
+      "opcode": "0xaf",
+      "repeat_prefix": "repc",
+      "target": "upd9002_repc_scasw"
+    },
+    {
+      "opcode": "0xa4",
+      "repeat_prefix": "repnc",
+      "target": "upd9002_repnc_movsb"
+    },
+    {
+      "opcode": "0xa5",
+      "repeat_prefix": "repnc",
+      "target": "upd9002_repnc_movsw"
+    },
+    {
+      "opcode": "0xa6",
+      "repeat_prefix": "repnc",
+      "target": "upd9002_repnc_cmpsb"
+    },
+    {
+      "opcode": "0xa7",
+      "repeat_prefix": "repnc",
+      "target": "upd9002_repnc_cmpsw"
+    },
+    {
+      "opcode": "0xaa",
+      "repeat_prefix": "repnc",
+      "target": "upd9002_repnc_stosb"
+    },
+    {
+      "opcode": "0xab",
+      "repeat_prefix": "repnc",
+      "target": "upd9002_repnc_stosw"
+    },
+    {
+      "opcode": "0xac",
+      "repeat_prefix": "repnc",
+      "target": "upd9002_repnc_lodsb"
+    },
+    {
+      "opcode": "0xad",
+      "repeat_prefix": "repnc",
+      "target": "upd9002_repnc_lodsw"
+    },
+    {
+      "opcode": "0xae",
+      "repeat_prefix": "repnc",
+      "target": "upd9002_repnc_scasb"
+    },
+    {
+      "opcode": "0xaf",
+      "repeat_prefix": "repnc",
+      "target": "upd9002_repnc_scasw"
+    }
+  ],
+  "milestone": "M70",
+  "negative_protection": {
+    "prefixed_6c_6f": {
+      "executed_as_inm_outm": 0,
+      "owned_hash_count": 0,
+      "reserved_behavior": "evidence_pending"
+    }
+  },
+  "old_target_policy_id": "upd9002-g64-37ae2b706a9cbbe2d36cf7c98372c0cae7ca4b8d90e4f738973bc0ed3248eed6",
+  "schema": "vaeg-upd9002-m70-target-policy-v1",
+  "schema_version": 1,
+  "support_map_path": "tests/ssts/policies/upd9002-g70-18a5606ad77ecc2e461b3fd56fa0105061831e685d7af430fc5026d0137bbb80.csv",
+  "support_map_row_count": 1552,
+  "support_map_sha256": "18a5606ad77ecc2e461b3fd56fa0105061831e685d7af430fc5026d0137bbb80",
+  "target_policy_id": "upd9002-g70-18a5606ad77ecc2e461b3fd56fa0105061831e685d7af430fc5026d0137bbb80",
+  "target_policy_sha256": "18a5606ad77ecc2e461b3fd56fa0105061831e685d7af430fc5026d0137bbb80"
+}

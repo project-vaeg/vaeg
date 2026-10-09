@@ -1,0 +1,255 @@
+M102 ZEXED: the file-output ZEXALL with a replaced test table (ZEXED.COM writes
+ZEXED.TXT): undefined ED opcodes, expected to be two-byte NOPs, without ED ED (CALLN) and ED FD (RETEM); machine state from negop.
+
+This patch modifies ZEX and is distributed under the GPL-2.0-or-later terms
+stated in external/zex/zexall.src. tools/cpmva/zex/zexbuild.py applies it
+after zexall-fileout.patch. msbt and the original descriptors are unchanged.
+The expected CRCs of the new groups are those of the Zilog profile.
+
+--- a/external/zex/zexall.src
++++ b/external/zex/zexall.src
+@@ -94,7 +94,7 @@
+ 	ld	c,9
+ 	call	bdos
+ 
+-	ld	hl,tests	; first test case
++	ld	hl,testsed	; vaeg ZEXED: first test case
+ loop:	ld	a,(hl)		; end of list ?
+ 	inc	hl
+ 	or	(hl)
+@@ -109,6 +109,37 @@
+ 	call	fclose		; vaeg: flush and close the log file
+ 	jp	0		; warm boot
+ 
++; vaeg M102 ZEXED test table: undefined ED opcodes, expected to be two-byte NOPs;
++; ED ED (CALLN) and ED FD (RETEM) are excluded. Every group runs with flag mask
++; D7h and FFh. This addition is distributed under the same GPL-2.0-or-later
++; terms as the rest of this file.
++testsed:
++	dw	ed00d7
++	dw	ed00ff
++	dw	ed77d7
++	dw	ed77ff
++	dw	ed80d7
++	dw	ed80ff
++	dw	eda4d7
++	dw	eda4ff
++	dw	edc0d7
++	dw	edc0ff
++	dw	ede0d7
++	dw	ede0ff
++	dw	ede4d7
++	dw	ede4ff
++	dw	edecd7
++	dw	edecff
++	dw	edf0d7
++	dw	edf0ff
++	dw	edf8d7
++	dw	edf8ff
++	dw	edfcd7
++	dw	edfcff
++	dw	edffd7
++	dw	edffff
++	dw	0
++
+ tests:
+ 	dw	adc16
+ 	dw	add16
+@@ -711,6 +742,177 @@
+ 	db	0cch,063h,0f9h,08ah			; expected crc
+ 	tmsg	'<set,res> n,(<ix,iy>+1).......'
+ 
++; vaeg M102 ZEXED descriptors, derived from the stock descriptors noted in
++; tools/cpmva/zex/zexed.patch.
++
++ed00d7:	db	0d7h		; flag mask
++	tstr	0edh,000h,0,0,038a2h,05f6bh,0d934h,057e4h,0d2d6h,04642h,043h,05ah,009cch
++	tstr	0,03fh,0,0,0,0,0,0,0,0,0,0,0
++	tstr	0,0,0,0,0ffh,0ffh,0ffh,0ffh,0ffh,0ffh,0d7h,0ffh,0
++	db	069h,0efh,0f8h,083h			; expected crc
++	tmsg	'ed 00-3f nop (d7).............'
++
++ed00ff:	db	0ffh		; flag mask
++	tstr	0edh,000h,0,0,038a2h,05f6bh,0d934h,057e4h,0d2d6h,04642h,043h,05ah,009cch
++	tstr	0,03fh,0,0,0,0,0,0,0,0,0,0,0
++	tstr	0,0,0,0,0ffh,0ffh,0ffh,0ffh,0ffh,0ffh,0d7h,0ffh,0
++	db	069h,0efh,0f8h,083h			; expected crc
++	tmsg	'ed 00-3f nop (ff).............'
++
++ed77d7:	db	0d7h		; flag mask
++	tstr	0edh,077h,0,0,038a2h,05f6bh,0d934h,057e4h,0d2d6h,04642h,043h,05ah,009cch
++	tstr	0,008h,0,0,0,0,0,0,0,0,0,0,0
++	tstr	0,0,0,0,0ffh,0ffh,0ffh,0ffh,0ffh,0ffh,0d7h,0ffh,0
++	db	004h,0bch,03bh,0b4h			; expected crc
++	tmsg	'ed 77,7f nop (d7).............'
++
++ed77ff:	db	0ffh		; flag mask
++	tstr	0edh,077h,0,0,038a2h,05f6bh,0d934h,057e4h,0d2d6h,04642h,043h,05ah,009cch
++	tstr	0,008h,0,0,0,0,0,0,0,0,0,0,0
++	tstr	0,0,0,0,0ffh,0ffh,0ffh,0ffh,0ffh,0ffh,0d7h,0ffh,0
++	db	004h,0bch,03bh,0b4h			; expected crc
++	tmsg	'ed 77,7f nop (ff).............'
++
++ed80d7:	db	0d7h		; flag mask
++	tstr	0edh,080h,0,0,038a2h,05f6bh,0d934h,057e4h,0d2d6h,04642h,043h,05ah,009cch
++	tstr	0,01fh,0,0,0,0,0,0,0,0,0,0,0
++	tstr	0,0,0,0,0ffh,0ffh,0ffh,0ffh,0ffh,0ffh,0d7h,0ffh,0
++	db	0b4h,04ch,0cah,01bh			; expected crc
++	tmsg	'ed 80-9f nop (d7).............'
++
++ed80ff:	db	0ffh		; flag mask
++	tstr	0edh,080h,0,0,038a2h,05f6bh,0d934h,057e4h,0d2d6h,04642h,043h,05ah,009cch
++	tstr	0,01fh,0,0,0,0,0,0,0,0,0,0,0
++	tstr	0,0,0,0,0ffh,0ffh,0ffh,0ffh,0ffh,0ffh,0d7h,0ffh,0
++	db	0b4h,04ch,0cah,01bh			; expected crc
++	tmsg	'ed 80-9f nop (ff).............'
++
++eda4d7:	db	0d7h		; flag mask
++	tstr	0edh,0a4h,0,0,038a2h,05f6bh,0d934h,057e4h,0d2d6h,04642h,043h,05ah,009cch
++	tstr	0,01bh,0,0,0,0,0,0,0,0,0,0,0
++	tstr	0,0,0,0,0ffh,0ffh,0ffh,0ffh,0ffh,0ffh,0d7h,0ffh,0
++	db	041h,06bh,03bh,006h			; expected crc
++	tmsg	'ed a4-bf holes nop (d7).......'
++
++eda4ff:	db	0ffh		; flag mask
++	tstr	0edh,0a4h,0,0,038a2h,05f6bh,0d934h,057e4h,0d2d6h,04642h,043h,05ah,009cch
++	tstr	0,01bh,0,0,0,0,0,0,0,0,0,0,0
++	tstr	0,0,0,0,0ffh,0ffh,0ffh,0ffh,0ffh,0ffh,0d7h,0ffh,0
++	db	041h,06bh,03bh,006h			; expected crc
++	tmsg	'ed a4-bf holes nop (ff).......'
++
++edc0d7:	db	0d7h		; flag mask
++	tstr	0edh,0c0h,0,0,038a2h,05f6bh,0d934h,057e4h,0d2d6h,04642h,043h,05ah,009cch
++	tstr	0,01fh,0,0,0,0,0,0,0,0,0,0,0
++	tstr	0,0,0,0,0ffh,0ffh,0ffh,0ffh,0ffh,0ffh,0d7h,0ffh,0
++	db	0b4h,04ch,0cah,01bh			; expected crc
++	tmsg	'ed c0-df nop (d7).............'
++
++edc0ff:	db	0ffh		; flag mask
++	tstr	0edh,0c0h,0,0,038a2h,05f6bh,0d934h,057e4h,0d2d6h,04642h,043h,05ah,009cch
++	tstr	0,01fh,0,0,0,0,0,0,0,0,0,0,0
++	tstr	0,0,0,0,0ffh,0ffh,0ffh,0ffh,0ffh,0ffh,0d7h,0ffh,0
++	db	0b4h,04ch,0cah,01bh			; expected crc
++	tmsg	'ed c0-df nop (ff).............'
++
++ede0d7:	db	0d7h		; flag mask
++	tstr	0edh,0e0h,0,0,038a2h,05f6bh,0d934h,057e4h,0d2d6h,04642h,043h,05ah,009cch
++	tstr	0,00bh,0,0,0,0,0,0,0,0,0,0,0
++	tstr	0,0,0,0,0ffh,0ffh,0ffh,0ffh,0ffh,0ffh,0d7h,0ffh,0
++	db	0d4h,04eh,0b2h,0ffh			; expected crc
++	tmsg	'ed e0-e3,e8-eb nop (d7).......'
++
++ede0ff:	db	0ffh		; flag mask
++	tstr	0edh,0e0h,0,0,038a2h,05f6bh,0d934h,057e4h,0d2d6h,04642h,043h,05ah,009cch
++	tstr	0,00bh,0,0,0,0,0,0,0,0,0,0,0
++	tstr	0,0,0,0,0ffh,0ffh,0ffh,0ffh,0ffh,0ffh,0d7h,0ffh,0
++	db	0d4h,04eh,0b2h,0ffh			; expected crc
++	tmsg	'ed e0-e3,e8-eb nop (ff).......'
++
++ede4d7:	db	0d7h		; flag mask
++	tstr	0edh,0e4h,0,0,038a2h,05f6bh,0d934h,057e4h,0d2d6h,04642h,043h,05ah,009cch
++	tstr	0,003h,0,0,0,0,0,0,0,0,0,0,0
++	tstr	0,0,0,0,0ffh,0ffh,0ffh,0ffh,0ffh,0ffh,0d7h,0ffh,0
++	db	07eh,038h,006h,008h			; expected crc
++	tmsg	'ed e4-e7 nop (d7).............'
++
++ede4ff:	db	0ffh		; flag mask
++	tstr	0edh,0e4h,0,0,038a2h,05f6bh,0d934h,057e4h,0d2d6h,04642h,043h,05ah,009cch
++	tstr	0,003h,0,0,0,0,0,0,0,0,0,0,0
++	tstr	0,0,0,0,0ffh,0ffh,0ffh,0ffh,0ffh,0ffh,0d7h,0ffh,0
++	db	07eh,038h,006h,008h			; expected crc
++	tmsg	'ed e4-e7 nop (ff).............'
++
++edecd7:	db	0d7h		; flag mask
++	tstr	0edh,0ech,0,0,038a2h,05f6bh,0d934h,057e4h,0d2d6h,04642h,043h,05ah,009cch
++	tstr	0,002h,0,0,0,0,0,0,0,0,0,0,0
++	tstr	0,0,0,0,0ffh,0ffh,0ffh,0ffh,0ffh,0ffh,0d7h,0ffh,0
++	db	004h,0bch,03bh,0b4h			; expected crc
++	tmsg	'ed ec,ee nop (d7).............'
++
++edecff:	db	0ffh		; flag mask
++	tstr	0edh,0ech,0,0,038a2h,05f6bh,0d934h,057e4h,0d2d6h,04642h,043h,05ah,009cch
++	tstr	0,002h,0,0,0,0,0,0,0,0,0,0,0
++	tstr	0,0,0,0,0ffh,0ffh,0ffh,0ffh,0ffh,0ffh,0d7h,0ffh,0
++	db	004h,0bch,03bh,0b4h			; expected crc
++	tmsg	'ed ec,ee nop (ff).............'
++
++edf0d7:	db	0d7h		; flag mask
++	tstr	0edh,0f0h,0,0,038a2h,05f6bh,0d934h,057e4h,0d2d6h,04642h,043h,05ah,009cch
++	tstr	0,007h,0,0,0,0,0,0,0,0,0,0,0
++	tstr	0,0,0,0,0ffh,0ffh,0ffh,0ffh,0ffh,0ffh,0d7h,0ffh,0
++	db	0d4h,04eh,0b2h,0ffh			; expected crc
++	tmsg	'ed f0-f7 nop (d7).............'
++
++edf0ff:	db	0ffh		; flag mask
++	tstr	0edh,0f0h,0,0,038a2h,05f6bh,0d934h,057e4h,0d2d6h,04642h,043h,05ah,009cch
++	tstr	0,007h,0,0,0,0,0,0,0,0,0,0,0
++	tstr	0,0,0,0,0ffh,0ffh,0ffh,0ffh,0ffh,0ffh,0d7h,0ffh,0
++	db	0d4h,04eh,0b2h,0ffh			; expected crc
++	tmsg	'ed f0-f7 nop (ff).............'
++
++edf8d7:	db	0d7h		; flag mask
++	tstr	0edh,0f8h,0,0,038a2h,05f6bh,0d934h,057e4h,0d2d6h,04642h,043h,05ah,009cch
++	tstr	0,003h,0,0,0,0,0,0,0,0,0,0,0
++	tstr	0,0,0,0,0ffh,0ffh,0ffh,0ffh,0ffh,0ffh,0d7h,0ffh,0
++	db	07eh,038h,006h,008h			; expected crc
++	tmsg	'ed f8-fb nop (d7).............'
++
++edf8ff:	db	0ffh		; flag mask
++	tstr	0edh,0f8h,0,0,038a2h,05f6bh,0d934h,057e4h,0d2d6h,04642h,043h,05ah,009cch
++	tstr	0,003h,0,0,0,0,0,0,0,0,0,0,0
++	tstr	0,0,0,0,0ffh,0ffh,0ffh,0ffh,0ffh,0ffh,0d7h,0ffh,0
++	db	07eh,038h,006h,008h			; expected crc
++	tmsg	'ed f8-fb nop (ff).............'
++
++edfcd7:	db	0d7h		; flag mask
++	tstr	0edh,0fch,0,0,038a2h,05f6bh,0d934h,057e4h,0d2d6h,04642h,043h,05ah,009cch
++	tstr	0,002h,0,0,0,0,0,0,0,0,0,0,0
++	tstr	0,0,0,0,0ffh,0ffh,0ffh,0ffh,0ffh,0ffh,0d7h,0ffh,0
++	db	004h,0bch,03bh,0b4h			; expected crc
++	tmsg	'ed fc,fe nop (d7).............'
++
++edfcff:	db	0ffh		; flag mask
++	tstr	0edh,0fch,0,0,038a2h,05f6bh,0d934h,057e4h,0d2d6h,04642h,043h,05ah,009cch
++	tstr	0,002h,0,0,0,0,0,0,0,0,0,0,0
++	tstr	0,0,0,0,0ffh,0ffh,0ffh,0ffh,0ffh,0ffh,0d7h,0ffh,0
++	db	004h,0bch,03bh,0b4h			; expected crc
++	tmsg	'ed fc,fe nop (ff).............'
++
++edffd7:	db	0d7h		; flag mask
++	tstr	0edh,0ffh,0,0,038a2h,05f6bh,0d934h,057e4h,0d2d6h,04642h,043h,05ah,009cch
++	tstr	0,000h,0,0,0,0,0,0,0,0,0,0,0
++	tstr	0,0,0,0,0ffh,0ffh,0ffh,0ffh,0ffh,0ffh,0d7h,0ffh,0
++	db	078h,013h,03dh,058h			; expected crc
++	tmsg	'ed ff nop (d7)................'
++
++edffff:	db	0ffh		; flag mask
++	tstr	0edh,0ffh,0,0,038a2h,05f6bh,0d934h,057e4h,0d2d6h,04642h,043h,05ah,009cch
++	tstr	0,000h,0,0,0,0,0,0,0,0,0,0,0
++	tstr	0,0,0,0,0ffh,0ffh,0ffh,0ffh,0ffh,0ffh,0d7h,0ffh,0
++	db	078h,013h,03dh,058h			; expected crc
++	tmsg	'ed ff nop (ff)................'
++
+ ; ld (<ix,iy>+1),<b,c,d,e> (1024 cycles)
+ st8ix1:	db	0ffh		; flag mask
+ 	tstr	0ddh,070h,1,0,0270dh,msbt-1,msbt-1,0b73ah,0887bh,099eeh,086h,070h,0ca07h
+@@ -1322,15 +1524,15 @@
+ 	call	5
+ 	ret
+ 
+-fcb:	db	0,'ZEXALL  TXT'
++fcb:	db	0,'ZEXED   TXT'
+ 	db	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ fptr:	dw	fbuf
+ fcnt:	db	128
+-fmkerr:	db	'Cannot create ZEXALL.TXT',13,10,'$'
+-fwrerr:	db	13,10,'Write error on ZEXALL.TXT',13,10,'$'
++fmkerr:	db	'Cannot create ZEXED.TXT',13,10,'$'
++fwrerr:	db	13,10,'Write error on ZEXED.TXT',13,10,'$'
+ fbuf:	ds	128
+ 
+-msg1:	db	'Z80all instruction exerciser',13,10,'$'
++msg1:	db	'ZEXED undefined ED opcode exerciser',13,10,'$'
+ msg2:	db	'Tests complete',13,10,'$'
+ okmsg:	db	'  OK',13,10,'$'
+ ermsg1:	db	'  ERROR **** crc expected:$'

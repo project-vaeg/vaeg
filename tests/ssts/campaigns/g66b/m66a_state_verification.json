@@ -1,0 +1,7 @@
+{
+  "active_cpu286_state_compat_occurrences": 0,
+  "current_state_section": "UPD9CPU",
+  "current_state_version": 1,
+  "legacy_section_detection": "fail_closed_or_predecessor_marker_migration",
+  "schema": "vaeg-upd9002-m66a-state-verification-v1"
+}

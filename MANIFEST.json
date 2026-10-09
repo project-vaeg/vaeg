@@ -1,0 +1,251 @@
+{
+  "format_version": 1,
+  "pack_version": "v6",
+  "files": [
+    {
+      "path": "INSTALL.md",
+      "size": 4890,
+      "sha256": "2df54f45f06f6a49c9ec5e414dd16b5f5f0edf61ceb74fd8dd092da4080603ad"
+    },
+    {
+      "path": "docs/8087/v6/README.md",
+      "size": 5184,
+      "sha256": "ccad107d14112e840746cb18987bc5b63775bd79f0f8301572e25d7b9b258c14"
+    },
+    {
+      "path": "docs/8087/v6/acquisition.md",
+      "size": 7018,
+      "sha256": "d0927447a1fcdc757d88a91491d8becba9c4efdd41efd104b006599b34840ea2"
+    },
+    {
+      "path": "docs/8087/v6/activation-acquire.txt",
+      "size": 1086,
+      "sha256": "51d872b5fb880186d7ba0fab0f8d440474ea460620698c3839d446c7949825e3"
+    },
+    {
+      "path": "docs/8087/v6/activation-implement.txt",
+      "size": 1186,
+      "sha256": "b7f6be4c2a5007eb662271c2e8d21cd9a2bc44db6e6d5ea2d01a783f0942ccfd"
+    },
+    {
+      "path": "docs/8087/v6/activation.md",
+      "size": 4236,
+      "sha256": "0e8c29d62a2c6bfd7e7c4ee6255da4aacc4d046f5914618fdf8175a48b0d8e3b"
+    },
+    {
+      "path": "docs/8087/v6/activation.txt",
+      "size": 1086,
+      "sha256": "51d872b5fb880186d7ba0fab0f8d440474ea460620698c3839d446c7949825e3"
+    },
+    {
+      "path": "docs/8087/v6/architecture.md",
+      "size": 12195,
+      "sha256": "144d4441d4e0fc0bb9edbb4fcaa4d136f8590f81c7305a97e4da80d8db83ba28"
+    },
+    {
+      "path": "docs/8087/v6/clock-and-timing.md",
+      "size": 9977,
+      "sha256": "a8c30023ef2a2cabd360d79dc2d9f3e453f3202cb257c4c49f9b1462ab64d511"
+    },
+    {
+      "path": "docs/8087/v6/goal-contract.md",
+      "size": 15542,
+      "sha256": "8f6356b86cd518227c8fe6e15e6afb013100d1007b27ce84499509ad03cdbce9"
+    },
+    {
+      "path": "docs/8087/v6/instruction-coverage.md",
+      "size": 7740,
+      "sha256": "793b4aacd3dce6ba90e1697da0eb9fc8c179e30e7c7d3d02eb20d9d8a693c60f"
+    },
+    {
+      "path": "docs/8087/v6/migration-review.md",
+      "size": 3048,
+      "sha256": "5a3c24f00e457615206a79bec9193c8a86ea2f1415d8a3029d9812ec2d7f7ba1"
+    },
+    {
+      "path": "docs/8087/v6/numerics-and-oracles.md",
+      "size": 10674,
+      "sha256": "2e57ddc7af20931adcc7d2573816fc5aa3734deb0a2bc63114bc5d4157945f64"
+    },
+    {
+      "path": "docs/8087/v6/ocr-handoff.md",
+      "size": 4759,
+      "sha256": "b241f197e0ea1815a67cdbcaa8fada8ef2f0d516a3b58df0fde4f18b762a3f3d"
+    },
+    {
+      "path": "docs/8087/v6/packages/a00-workspace.md",
+      "size": 690,
+      "sha256": "c78b7e78dcb5e4aacbbf7c5a00f0de7363ae46e856566269de3df440bb7cc39b"
+    },
+    {
+      "path": "docs/8087/v6/packages/a01-download.md",
+      "size": 753,
+      "sha256": "382551c722a7a1322c04ae3ca9c799f716b81042ae56ef6fd2e323e4ce949141"
+    },
+    {
+      "path": "docs/8087/v6/packages/a02-inventory.md",
+      "size": 699,
+      "sha256": "2c5928bcb021b0446c3fdf77781b1a32ea00b456793ffbb0a0aa9fd863da5452"
+    },
+    {
+      "path": "docs/8087/v6/packages/a03-handoff.md",
+      "size": 736,
+      "sha256": "8eed919dd45f2dff4f5902c315a61217b317b31156d07388f17cb48f6a29882e"
+    },
+    {
+      "path": "docs/8087/v6/packages/p00-baseline.md",
+      "size": 3687,
+      "sha256": "40de024f1873f55866f89bb0b24c64558837065406f432785d75c6592df8e994"
+    },
+    {
+      "path": "docs/8087/v6/packages/p01-source-inventory.md",
+      "size": 3632,
+      "sha256": "f5c5ddafaf65b5736c0af575a506f48071a132d802fb446b9d9319dc41950b90"
+    },
+    {
+      "path": "docs/8087/v6/packages/p02-softfloat.md",
+      "size": 3321,
+      "sha256": "83c3c15486fc633b6f594d462697b0c67bd33bbb32e07971242c40ffcb31d960"
+    },
+    {
+      "path": "docs/8087/v6/packages/p03-state.md",
+      "size": 3036,
+      "sha256": "c8953b6f3246132d67505ad1fac99a487e7d9d9d76db3430cd1b31103b1bab90"
+    },
+    {
+      "path": "docs/8087/v6/packages/p04-clock.md",
+      "size": 3050,
+      "sha256": "12891d08a102a819948a600510162134a76775e93c21a8dcc4867176a03ef0ce"
+    },
+    {
+      "path": "docs/8087/v6/packages/p05-cpu-bus.md",
+      "size": 2993,
+      "sha256": "1e67fb29ae8e8cbb185c307102744e7773abc13254a3b8291f509cb1b78ddc1b"
+    },
+    {
+      "path": "docs/8087/v6/packages/p06-exceptions.md",
+      "size": 3054,
+      "sha256": "0c469913463aebce659409b5de1af07a4f92c297a8dec52c9e97792611413032"
+    },
+    {
+      "path": "docs/8087/v6/packages/p07-vertical-slice.md",
+      "size": 3029,
+      "sha256": "34b764ec07d0049f545570e1bb9e262852c5a8ef39cebe720d5654f317f1dcc6"
+    },
+    {
+      "path": "docs/8087/v6/packages/p08-transfers.md",
+      "size": 2903,
+      "sha256": "7c033c248b6a83567d23dae02612b4a22bf603c4e61d46fa8452d48c6f4d606d"
+    },
+    {
+      "path": "docs/8087/v6/packages/p09-arithmetic.md",
+      "size": 2881,
+      "sha256": "8c2d875b17195c5e7f814cd620bbf5218f2c0d9ff4b0e2e7dcf4a24874cc66f4"
+    },
+    {
+      "path": "docs/8087/v6/packages/p10-control-compare.md",
+      "size": 2887,
+      "sha256": "2deb72ec711216a048fbf29a5de707b3fd326cef6b1aa48966092f79e5341afc"
+    },
+    {
+      "path": "docs/8087/v6/packages/p11-environment.md",
+      "size": 2824,
+      "sha256": "939114965abe47dc78fe2e12b7524a2b37b4f54c6f3bae7fda48f13b6ef882b4"
+    },
+    {
+      "path": "docs/8087/v6/packages/p12-remainder-scale-extract.md",
+      "size": 2831,
+      "sha256": "c9e2ccd61806f48bf3a0f9f50b151f797f704f117086aa58629260d62ae9cd9b"
+    },
+    {
+      "path": "docs/8087/v6/packages/p13-oracle-prototypes.md",
+      "size": 3546,
+      "sha256": "33f8e104d3bf4d6987d555ac4be9bb751cb44202697c7d03fd4f712d976a4887"
+    },
+    {
+      "path": "docs/8087/v6/packages/p14-log-exp.md",
+      "size": 2804,
+      "sha256": "9388643d84808777e05585efa8d04b8d8717581932e34d9bfb567e5d2821bdfb"
+    },
+    {
+      "path": "docs/8087/v6/packages/p15-partial-trig.md",
+      "size": 2829,
+      "sha256": "3b4d9373ea4b1693bfa4fec8093556f41da4799518778338cdbcc39ddd6642d7"
+    },
+    {
+      "path": "docs/8087/v6/packages/p16-exception-closure.md",
+      "size": 3150,
+      "sha256": "3ac7534d78164dcfc1938912ca837f552c730f2b49eb410e67fe343a0d044497"
+    },
+    {
+      "path": "docs/8087/v6/packages/p17-machine-integration.md",
+      "size": 3046,
+      "sha256": "15a4e46d73763c6bcfa186deb201d13a3da87726ea64c2a00d1ad7df465acff6"
+    },
+    {
+      "path": "docs/8087/v6/packages/p18-config-savestate-ui.md",
+      "size": 3049,
+      "sha256": "960463648d7f30fa05d0ad0648ed5ba7e628146c64da296b0f197a6f3146792a"
+    },
+    {
+      "path": "docs/8087/v6/packages/p19-final.md",
+      "size": 3500,
+      "sha256": "97fcb01ccad0a499fa034533adafcb4b9bd6fb2d333c23aa8923d04165d610de"
+    },
+    {
+      "path": "docs/8087/v6/records/progress.md",
+      "size": 1663,
+      "sha256": "b5e2683ae9c06766cffc799b7293e178a77b4a5cfa699b574b170ee85c80d5ff"
+    },
+    {
+      "path": "docs/8087/v6/reference-validation.md",
+      "size": 3865,
+      "sha256": "87d294cd1ded9c06d1cb931239650e87520ca22f12db5b7b36abb3aa7c5b9581"
+    },
+    {
+      "path": "docs/8087/v6/scripts/README.md",
+      "size": 4442,
+      "sha256": "cf51201216fbbb09f41b76c4de8e1360bdaec293fda1d7dbf3eb1c734b84b9fd"
+    },
+    {
+      "path": "docs/8087/v6/scripts/acquire-sources.py",
+      "size": 27494,
+      "sha256": "0111aa266c2aca30fe7dd8f5c0bdf25f51343ce950720a02806513ffddaca27c"
+    },
+    {
+      "path": "docs/8087/v6/scripts/test-acquire-sources.py",
+      "size": 11583,
+      "sha256": "aaedb5805bff1b53eb254d6128da03f073aecceb12f20b4254e6899f5b9ad385"
+    },
+    {
+      "path": "docs/8087/v6/source-policy.md",
+      "size": 4188,
+      "sha256": "fffa59ff4e796d209783e45d9a66b61e5b33a68e4b90a6068cf2165ed755cf6f"
+    },
+    {
+      "path": "docs/8087/v6/source-register.md",
+      "size": 14120,
+      "sha256": "79469dfed38bc22dbd0ac97ee442ae77c3bb8220be1276e80b9ac5fa3c466035"
+    },
+    {
+      "path": "docs/8087/v6/sources/catalog.json",
+      "size": 17221,
+      "sha256": "215e84ec2d8f8410a5d01c5b469ec6aa2c2c64cd4f254a76c669a261635a414e"
+    },
+    {
+      "path": "docs/8087/v6/verification.md",
+      "size": 9623,
+      "sha256": "0e0a454e10c1acf39e4272a55e14067542f793a462c15d2dbfa5141730f99bc3"
+    },
+    {
+      "path": "docs/8087/v6/work-plan.md",
+      "size": 5828,
+      "sha256": "979600ab9ca5748fa057c52bcc3f8cf523390886ccb4de45de17ed5e9d2d3d90"
+    },
+    {
+      "path": "install-pack.py",
+      "size": 6786,
+      "sha256": "9b2dc8ee65c06234b019222ce933300e970964a9e0500b51392e9be75024a7bf"
+    }
+  ]
+}

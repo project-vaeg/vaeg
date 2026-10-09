@@ -1,0 +1,53 @@
+candidate_id,symbol_or_field,kind,defining_file,approved_group,m50_action,retained_replacement,evidence
+cts.base.i286op,i286op[0x0f] -> i286c_cts,constructor_base_entry,i286c/i286c_mn.c,M50-PM-CTS-SYSTEM,replaced_with_reserved_placeholder,_reserved,final native patch retained; base address removed
+cts.base.i286op_repe,i286op_repe[0x0f] -> i286c_cts,constructor_base_entry,i286c/i286c_mn.c,M50-PM-CTS-SYSTEM,replaced_with_reserved_placeholder,_reserved,final native patch retained; base address removed
+cts.base.i286op_repne,i286op_repne[0x0f] -> i286c_cts,constructor_base_entry,i286c/i286c_mn.c,M50-PM-CTS-SYSTEM,replaced_with_reserved_placeholder,_reserved,final native patch retained; base address removed
+cts.build.cmake,VAEG_CORE_SOURCES:i286c/i286c_0f.c,build_edge,CMakeLists.txt,M50-PM-CTS-SYSTEM,deleted,-,approved dependency-closed member absent from active source
+cts.declaration,i286c_cts declaration,declaration,i286c/i286c.h,M50-PM-CTS-SYSTEM,deleted,-,approved dependency-closed member absent from active source
+cts.dispatcher,i286c_cts,function,i286c/i286c_0f.c,M50-PM-CTS-SYSTEM,deleted,-,approved dependency-closed member absent from active source
+cts.entry.cts0_table.00,cts0_table[0x00] -> _sldt,secondary_dispatch_entry,i286c/i286c_0f.c,M50-PM-CTS-SYSTEM,deleted,-,approved dependency-closed member absent from active source
+cts.entry.cts0_table.01,cts0_table[0x01] -> _str,secondary_dispatch_entry,i286c/i286c_0f.c,M50-PM-CTS-SYSTEM,deleted,-,approved dependency-closed member absent from active source
+cts.entry.cts0_table.02,cts0_table[0x02] -> _lldt,secondary_dispatch_entry,i286c/i286c_0f.c,M50-PM-CTS-SYSTEM,deleted,-,approved dependency-closed member absent from active source
+cts.entry.cts0_table.03,cts0_table[0x03] -> _ltr,secondary_dispatch_entry,i286c/i286c_0f.c,M50-PM-CTS-SYSTEM,deleted,-,approved dependency-closed member absent from active source
+cts.entry.cts0_table.04,cts0_table[0x04] -> _verr,secondary_dispatch_entry,i286c/i286c_0f.c,M50-PM-CTS-SYSTEM,deleted,-,approved dependency-closed member absent from active source
+cts.entry.cts0_table.05,cts0_table[0x05] -> _verw,secondary_dispatch_entry,i286c/i286c_0f.c,M50-PM-CTS-SYSTEM,deleted,-,approved dependency-closed member absent from active source
+cts.entry.cts0_table.06,cts0_table[0x06] -> _verr,secondary_dispatch_entry,i286c/i286c_0f.c,M50-PM-CTS-SYSTEM,deleted,-,approved dependency-closed member absent from active source
+cts.entry.cts0_table.07,cts0_table[0x07] -> _verw,secondary_dispatch_entry,i286c/i286c_0f.c,M50-PM-CTS-SYSTEM,deleted,-,approved dependency-closed member absent from active source
+cts.entry.cts1_table.00,cts1_table[0x00] -> _sgdt,secondary_dispatch_entry,i286c/i286c_0f.c,M50-PM-CTS-SYSTEM,deleted,-,approved dependency-closed member absent from active source
+cts.entry.cts1_table.01,cts1_table[0x01] -> _sidt,secondary_dispatch_entry,i286c/i286c_0f.c,M50-PM-CTS-SYSTEM,deleted,-,approved dependency-closed member absent from active source
+cts.entry.cts1_table.02,cts1_table[0x02] -> _lgdt,secondary_dispatch_entry,i286c/i286c_0f.c,M50-PM-CTS-SYSTEM,deleted,-,approved dependency-closed member absent from active source
+cts.entry.cts1_table.03,cts1_table[0x03] -> _lidt,secondary_dispatch_entry,i286c/i286c_0f.c,M50-PM-CTS-SYSTEM,deleted,-,approved dependency-closed member absent from active source
+cts.entry.cts1_table.04,cts1_table[0x04] -> _smsw,secondary_dispatch_entry,i286c/i286c_0f.c,M50-PM-CTS-SYSTEM,deleted,-,approved dependency-closed member absent from active source
+cts.entry.cts1_table.05,cts1_table[0x05] -> _smsw,secondary_dispatch_entry,i286c/i286c_0f.c,M50-PM-CTS-SYSTEM,deleted,-,approved dependency-closed member absent from active source
+cts.entry.cts1_table.06,cts1_table[0x06] -> _lmsw,secondary_dispatch_entry,i286c/i286c_0f.c,M50-PM-CTS-SYSTEM,deleted,-,approved dependency-closed member absent from active source
+cts.entry.cts1_table.07,cts1_table[0x07] -> _lmsw,secondary_dispatch_entry,i286c/i286c_0f.c,M50-PM-CTS-SYSTEM,deleted,-,approved dependency-closed member absent from active source
+cts.handler.lgdt,_lgdt,function,i286c/i286c_0f.c,M50-PM-CTS-SYSTEM,deleted,-,approved dependency-closed member absent from active source
+cts.handler.lidt,_lidt,function,i286c/i286c_0f.c,M50-PM-CTS-SYSTEM,deleted,-,approved dependency-closed member absent from active source
+cts.handler.lldt,_lldt,function,i286c/i286c_0f.c,M50-PM-CTS-SYSTEM,deleted,-,approved dependency-closed member absent from active source
+cts.handler.lmsw,_lmsw,function,i286c/i286c_0f.c,M50-PM-CTS-SYSTEM,deleted,-,approved dependency-closed member absent from active source
+cts.handler.loadall286,_loadall286,function,i286c/i286c_0f.c,M50-PM-CTS-SYSTEM,deleted,-,approved dependency-closed member absent from active source
+cts.handler.ltr,_ltr,function,i286c/i286c_0f.c,M50-PM-CTS-SYSTEM,deleted,-,approved dependency-closed member absent from active source
+cts.handler.sgdt,_sgdt,function,i286c/i286c_0f.c,M50-PM-CTS-SYSTEM,deleted,-,approved dependency-closed member absent from active source
+cts.handler.sidt,_sidt,function,i286c/i286c_0f.c,M50-PM-CTS-SYSTEM,deleted,-,approved dependency-closed member absent from active source
+cts.handler.sldt,_sldt,function,i286c/i286c_0f.c,M50-PM-CTS-SYSTEM,deleted,-,approved dependency-closed member absent from active source
+cts.handler.smsw,_smsw,function,i286c/i286c_0f.c,M50-PM-CTS-SYSTEM,deleted,-,approved dependency-closed member absent from active source
+cts.handler.str,_str,function,i286c/i286c_0f.c,M50-PM-CTS-SYSTEM,deleted,-,approved dependency-closed member absent from active source
+cts.handler.verr,_verr,function,i286c/i286c_0f.c,M50-PM-CTS-SYSTEM,deleted,-,approved dependency-closed member absent from active source
+cts.handler.verw,_verw,function,i286c/i286c_0f.c,M50-PM-CTS-SYSTEM,deleted,-,approved dependency-closed member absent from active source
+cts.header.i286_0f,I286_0F,macro,i286c/i286c.h,M50-PM-CTS-SYSTEM,deleted,-,approved dependency-closed member absent from active source
+cts.header.i286_idtr,I286_IDTR,macro,i286c/i286c.h,M50-PM-CTS-SYSTEM,deleted,-,approved dependency-closed member absent from active source
+cts.header.i286_ldtr,I286_LDTR,macro,i286c/i286c.h,M50-PM-CTS-SYSTEM,deleted,-,approved dependency-closed member absent from active source
+cts.header.i286_tr,I286_TR,macro,i286c/i286c.h,M50-PM-CTS-SYSTEM,deleted,-,approved dependency-closed member absent from active source
+cts.header.i286_trc,I286_TRC,macro,i286c/i286c.h,M50-PM-CTS-SYSTEM,deleted,-,approved dependency-closed member absent from active source
+cts.header.i286op_0f,I286OP_0F,typedef,i286c/i286c.h,M50-PM-CTS-SYSTEM,deleted,-,approved dependency-closed member absent from active source
+cts.table.cts0_table,cts0_table,secondary_dispatch_table,i286c/i286c_0f.c,M50-PM-CTS-SYSTEM,deleted,-,approved dependency-closed member absent from active source
+cts.table.cts1_table,cts1_table,secondary_dispatch_table,i286c/i286c_0f.c,M50-PM-CTS-SYSTEM,deleted,-,approved dependency-closed member absent from active source
+file.i286c_0f,i286c/i286c_0f.c,source_or_evidence_file,i286c/i286c_0f.c,M50-PM-CTS-SYSTEM,deleted,-,approved dependency-closed member absent from active source
+overwritten.base.arpl.i286op,i286op[0x63] -> _arpl,constructor_base_entry,i286c/i286c_mn.c,M50-PM-ARPL,replaced_with_reserved_placeholder,_reserved,final native patch retained; base address removed
+overwritten.base.arpl.i286op_repe,i286op_repe[0x63] -> _arpl,constructor_base_entry,i286c/i286c_mn.c,M50-PM-ARPL,replaced_with_reserved_placeholder,_reserved,final native patch retained; base address removed
+overwritten.base.arpl.i286op_repne,i286op_repne[0x63] -> _arpl,constructor_base_entry,i286c/i286c_mn.c,M50-PM-ARPL,replaced_with_reserved_placeholder,_reserved,final native patch retained; base address removed
+overwritten.base.mov_seg_ea.i286op,i286op[0x8e] -> _mov_seg_ea,constructor_base_entry,i286c/i286c_mn.c,M50-PM-MOV-SEG-EA,replaced_with_reserved_placeholder,_reserved,final native patch retained; base address removed
+overwritten.base.mov_seg_ea.i286op_repe,i286op_repe[0x8e] -> _mov_seg_ea,constructor_base_entry,i286c/i286c_mn.c,M50-PM-MOV-SEG-EA,replaced_with_reserved_placeholder,_reserved,final native patch retained; base address removed
+overwritten.base.mov_seg_ea.i286op_repne,i286op_repne[0x8e] -> _mov_seg_ea,constructor_base_entry,i286c/i286c_mn.c,M50-PM-MOV-SEG-EA,replaced_with_reserved_placeholder,_reserved,final native patch retained; base address removed
+overwritten.function.arpl,_arpl,function,i286c/i286c_mn.c,M50-PM-ARPL,deleted,-,approved dependency-closed member absent from active source
+overwritten.function.mov_seg_ea,_mov_seg_ea,function,i286c/i286c_mn.c,M50-PM-MOV-SEG-EA,deleted,-,approved dependency-closed member absent from active source

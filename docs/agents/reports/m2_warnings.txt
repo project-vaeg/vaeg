@@ -1,0 +1,326 @@
+1>------ ビルド開始: プロジェクト: np2, 構成: Release Win32 ------
+1>Assembling C:\Users\maho\vaeg\Win9x\x86\parts.x86
+1>C:\Users\maho\vaeg\Win9x\x86\parts.x86:140: warning: label `ends' alone on a line without a colon might be in error [-w+label-orphan]
+1>Assembling C:\Users\maho\vaeg\i286x\dmap.x86
+1>C:\Users\maho\vaeg\i286x\dmap.x86:23: warning: label `.size' alone on a line without a colon might be in error [-w+label-orphan]
+1>C:\Users\maho\vaeg\i286x\dmap.x86:137: warning: label `ends' alone on a line without a colon might be in error [-w+label-orphan]
+1>Assembling C:\Users\maho\vaeg\i286x\egcmem.x86
+1>C:\Users\maho\vaeg\i286x\egcmem.x86:1100: warning: label `ends' alone on a line without a colon might be in error [-w+label-orphan]
+1>Assembling C:\Users\maho\vaeg\i286x\memory.x86
+1>C:\Users\maho\vaeg\i286x\memory.x86:1551: warning: label `ends' alone on a line without a colon might be in error [-w+label-orphan]
+1>Assembling C:\Users\maho\vaeg\Win9x\x86\opngeng.x86
+1>C:\Users\maho\vaeg\Win9x\x86\opngeng.x86:53: warning: label `.size' alone on a line without a colon might be in error [-w+label-orphan]
+1>C:\Users\maho\vaeg\Win9x\x86\opngeng.x86:75: warning: label `.size' alone on a line without a colon might be in error [-w+label-orphan]
+1>C:\Users\maho\vaeg\Win9x\x86\opngeng.x86:454: warning: label `ends' alone on a line without a colon might be in error [-w+label-orphan]
+1>Assembling C:\Users\maho\vaeg\Win9x\x86\cputype.x86
+1>C:\Users\maho\vaeg\Win9x\x86\cputype.x86:26: warning: label `ends' alone on a line without a colon might be in error [-w+label-orphan]
+1>Assembling C:\Users\maho\vaeg\Win9x\dclockd.x86
+1>C:\Users\maho\vaeg\Win9x\dclockd.x86:15: warning: label `.dat' alone on a line without a colon might be in error [-w+label-orphan]
+1>C:\Users\maho\vaeg\Win9x\dclockd.x86:239: warning: label `ends' alone on a line without a colon might be in error [-w+label-orphan]
+1>Assembling C:\Users\maho\vaeg\Win9x\x86\makegrph.x86
+1>C:\Users\maho\vaeg\Win9x\x86\makegrph.x86:254: warning: label `ends' alone on a line without a colon might be in error [-w+label-orphan]
+1>Assembling C:\Users\maho\vaeg\cpuxva\memoryva.x86
+1>C:\Users\maho\vaeg\cpuxva\memoryva.x86:776: warning: label `_memoryva' alone on a line without a colon might be in error [-w+label-orphan]
+1>C:\Users\maho\vaeg\cpuxva\memoryva.x86:789: warning: label `_va91' alone on a line without a colon might be in error [-w+label-orphan]
+1>C:\Users\maho\vaeg\cpuxva\memoryva.x86:793: warning: label `_va91cfg' alone on a line without a colon might be in error [-w+label-orphan]
+1>C:\Users\maho\vaeg\cpuxva\memoryva.x86:1153: warning: label `MEMTRACE' alone on a line without a colon might be in error [-w+label-orphan]
+1>C:\Users\maho\vaeg\cpuxva\memoryva.x86:1165: warning: label `MEMTRACE_W' alone on a line without a colon might be in error [-w+label-orphan]
+1>_memory.c
+1>bmpdata.c
+1>lstarray.c
+1>milstr.c
+1>mimpidef.c
+1>profile.c
+1>strres.c
+1>textfile.c
+1>wavefile.c
+1>bios.c
+1>bios09.c
+1>bios0c.c
+1>bios12.c
+1>bios13.c
+1>bios18.c
+1>bios19.c
+1>bios1a.c
+1>bios1b.c
+1>bios1c.c
+1>bios1f.c
+1>コードを生成中...
+1>コンパイル中...
+1>sxsibios.c
+1>midimod.c
+1>midinst.c
+1>midiout.c
+1>midtable.c
+1>midvoice.c
+1>getsmix.c
+1>getsnd.c
+1>getwave.c
+1>adpcmc.c
+1>adpcmg.c
+1>beepc.c
+1>beepg.c
+1>cs4231c.c
+1>cs4231g.c
+1>fmboard.c
+1>fmtimer.c
+1>opngenc.c
+1>pcm86c.c
+1>pcm86g.c
+1>コードを生成中...
+1>コンパイル中...
+1>psggenc.c
+1>psggeng.c
+1>rhythmc.c
+1>s98.c
+1>sound.c
+1>soundrom.c
+1>tms3631c.c
+1>tms3631g.c
+1>diskdrv.c
+1>fdd_d88.c
+1>fdd_mtr.c
+1>fdd_xdf.c
+1>fddfile.c
+1>newdisk.c
+1>sxsi.c
+1>gcircle.c
+1>gline.c
+1>gpset.c
+1>gput1.c
+1>gscreen.c
+1>コードを生成中...
+1>コンパイル中...
+1>lio.c
+1>font.c
+1>fontdata.c
+1>fontfm7.c
+1>fontmake.c
+1>fontpc88.c
+1>fontpc98.c
+1>fontv98.c
+1>fontx1.c
+1>fontx68k.c
+1>artic.c
+1>bmsio.c
+1>cgrom.c
+1>cpuio.c
+1>crtc.c
+1>dipsw.c
+1>dmac.c
+1>egc.c
+1>emsio.c
+1>epsonio.c
+1>コードを生成中...
+1>コンパイル中...
+1>fdc.c
+1>fdd320.c
+1>gdc.c
+1>gdc_pset.c
+1>gdc_sub.c
+1>iocore.c
+1>mouseif.c
+1>necio.c
+1>nmiio.c
+1>np2sysp.c
+1>np2vasup.c
+1>pic.c
+1>pit.c
+1>printif.c
+1>serial.c
+1>sysport.c
+1>upd4990.c
+1>amd98.c
+1>board118.c
+1>board14.c
+1>コードを生成中...
+1>コンパイル中...
+1>board26k.c
+1>board86.c
+1>boardspb.c
+1>boardx2.c
+1>cbuscore.c
+1>cs4231io.c
+1>ideio.c
+1>mpu98ii.c
+1>pc9861k.c
+1>pcm86io.c
+1>sasiio.c
+1>scsicmd.c
+1>scsiio.c
+1>dispsync.c
+1>maketext.c
+1>maketgrp.c
+1>palettes.c
+1>scrndraw.c
+1>scrnsave.c
+1>sdraw.c
+1>コードを生成中...
+1>コンパイル中...
+1>vram.c
+1>cmjasts.c
+1>cmndraw.c
+1>dipswbmp.c
+1>hostdrv.c
+1>c:\users\maho\vaeg\generic\hostdrv.c(478): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+1>c:\users\maho\vaeg\generic\hostdrv.c(479): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+1>c:\users\maho\vaeg\generic\hostdrv.c(491): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+1>hostdrvs.c
+1>keydisp.c
+1>np2info.c
+1>softkbd.c
+1>unasm.c
+1>makegrphva.c
+1>makesprva.c
+1>maketextva.c
+1>palettesva.c
+1>scrndrawva.c
+1>sdrawva.c
+1>biosva.c
+1>bkupmemva.c
+1>boardsb2.c
+1>cgromva.c
+1>コードを生成中...
+1>コンパイル中...
+1>fdsubsys.c
+1>gactrlva.c
+1>i8255.c
+1>iocoreva.c
+1>memctrlva.c
+1>mouseifva.c
+1>sgp.c
+1>subsystemif.c
+1>subsystemmx.c
+1>sysportva.c
+1>tsp.c
+1>upd9002.c
+1>va91.c
+1>videova.c
+1>gvramva.c
+1>breakpoint.c
+1>calendar.c
+1>debugsub.c
+1>keystat.c
+1>nevent.c
+1>コードを生成中...
+1>コンパイル中...
+1>oprecord.c
+1>pccore.c
+1>statsave.c
+1>timing.c
+1>コードを生成中...
+1>i286x.cpp
+1>i286xadr.cpp
+1>i286xcts.cpp
+1>i286xrep.cpp
+1>i286xs.cpp
+1>v30patch.cpp
+1>d_about.cpp
+1>d_bmp.cpp
+1>d_bms.cpp
+1>d_clnd.cpp
+1>d_config.cpp
+1>d_disk.cpp
+1>d_mpu98.cpp
+1>d_oprecord.cpp
+1>d_screen.cpp
+1>d_serial.cpp
+1>d_sound.cpp
+1>dialogs.cpp
+1>np2class.cpp
+1>debugctrl.cpp
+1>c:\users\maho\vaeg\win9x\debuguty\debugctrl.cpp(234): warning C4101: 'idc': ローカル変数は 1 度も使われていません。
+1>c:\users\maho\vaeg\win9x\debuguty\debugctrl.cpp(232): warning C4101: 'hMenu': ローカル変数は 1 度も使われていません。
+1>c:\users\maho\vaeg\win9x\debuguty\debugctrl.cpp(233): warning C4101: 'r': ローカル変数は 1 度も使われていません。
+1>コードを生成中...
+1>コンパイル中...
+1>view1mb.cpp
+1>viewasm.cpp
+1>c:\users\maho\vaeg\win9x\debuguty\viewasm.cpp(32): warning C4101: 'opsize': ローカル変数は 1 度も使われていません。
+1>viewcmn.cpp
+1>viewer.cpp
+1>c:\users\maho\vaeg\win9x\debuguty\viewer.cpp(139): warning C4244: '=': 'LONG' から 'WORD' への変換です。データが失われる可能性があります。
+1>viewgactrlva.cpp
+1>viewmem.cpp
+1>viewmenu.cpp
+1>viewreg.cpp
+1>viewseg.cpp
+1>viewsnd.cpp
+1>viewsubasm.cpp
+1>viewsubmem.cpp
+1>viewsubreg.cpp
+1>viewvabank.cpp
+1>viewvideova.cpp
+1>cmmidi.cpp
+1>cmpara.cpp
+1>cmserial.cpp
+1>commng.cpp
+1>dclock.cpp
+1>コードを生成中...
+1>コンパイル中...
+1>dd2.cpp
+1>dosio.cpp
+1>extromio.cpp
+1>fontmng.cpp
+1>ini.cpp
+1>joymng.cpp
+1>juliet.cpp
+1>menu.cpp
+1>mousemng.cpp
+1>np2.cpp
+1>np2arg.cpp
+1>scrnmng.cpp
+1>soundmng.cpp
+1>sstp.cpp
+1>sstpmsg.cpp
+1>c:\users\maho\vaeg\win9x\sstpmsg.cpp(395): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+1>c:\program files (x86)\windows kits\10\include\10.0.19041.0\ucrt\string.h(91): note: 'strcat' の宣言を確認してください
+1>c:\users\maho\vaeg\win9x\sstpmsg.cpp(399): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+1>c:\program files (x86)\windows kits\10\include\10.0.19041.0\ucrt\string.h(91): note: 'strcat' の宣言を確認してください
+1>c:\users\maho\vaeg\win9x\sstpmsg.cpp(401): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+1>c:\program files (x86)\windows kits\10\include\10.0.19041.0\ucrt\string.h(91): note: 'strcat' の宣言を確認してください
+1>c:\users\maho\vaeg\win9x\sstpmsg.cpp(405): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+1>c:\program files (x86)\windows kits\10\include\10.0.19041.0\ucrt\string.h(91): note: 'strcat' の宣言を確認してください
+1>c:\users\maho\vaeg\win9x\sstpmsg.cpp(407): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+1>c:\program files (x86)\windows kits\10\include\10.0.19041.0\ucrt\string.h(91): note: 'strcat' の宣言を確認してください
+1>c:\users\maho\vaeg\win9x\sstpmsg.cpp(413): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+1>c:\program files (x86)\windows kits\10\include\10.0.19041.0\ucrt\string.h(91): note: 'strcat' の宣言を確認してください
+1>c:\users\maho\vaeg\win9x\sstpmsg.cpp(417): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+1>c:\program files (x86)\windows kits\10\include\10.0.19041.0\ucrt\string.h(91): note: 'strcat' の宣言を確認してください
+1>c:\users\maho\vaeg\win9x\sstpmsg.cpp(421): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+1>c:\program files (x86)\windows kits\10\include\10.0.19041.0\ucrt\string.h(91): note: 'strcat' の宣言を確認してください
+1>c:\users\maho\vaeg\win9x\sstpmsg.cpp(424): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+1>c:\program files (x86)\windows kits\10\include\10.0.19041.0\ucrt\string.h(91): note: 'strcat' の宣言を確認してください
+1>c:\users\maho\vaeg\win9x\sstpmsg.cpp(428): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+1>c:\program files (x86)\windows kits\10\include\10.0.19041.0\ucrt\string.h(91): note: 'strcat' の宣言を確認してください
+1>c:\users\maho\vaeg\win9x\sstpmsg.cpp(431): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+1>c:\program files (x86)\windows kits\10\include\10.0.19041.0\ucrt\string.h(91): note: 'strcat' の宣言を確認してください
+1>c:\users\maho\vaeg\win9x\sstpmsg.cpp(435): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+1>c:\program files (x86)\windows kits\10\include\10.0.19041.0\ucrt\string.h(91): note: 'strcat' の宣言を確認してください
+1>c:\users\maho\vaeg\win9x\sstpmsg.cpp(438): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+1>c:\program files (x86)\windows kits\10\include\10.0.19041.0\ucrt\string.h(91): note: 'strcat' の宣言を確認してください
+1>c:\users\maho\vaeg\win9x\sstpmsg.cpp(440): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+1>c:\program files (x86)\windows kits\10\include\10.0.19041.0\ucrt\string.h(91): note: 'strcat' の宣言を確認してください
+1>c:\users\maho\vaeg\win9x\sstpmsg.cpp(444): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+1>c:\program files (x86)\windows kits\10\include\10.0.19041.0\ucrt\string.h(91): note: 'strcat' の宣言を確認してください
+1>subwind.cpp
+1>sysmng.cpp
+1>taskmng.cpp
+1>timemng.cpp
+1>toolwin.cpp
+1>コードを生成中...
+1>コンパイル中...
+1>trace.cpp
+1>winkbd.cpp
+1>winloc.cpp
+1>subsystem.cpp
+1>z80c.cpp
+1>c:\users\maho\vaeg\cpucva\z80c.cpp(1954): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+1>c:\program files (x86)\windows kits\10\include\10.0.19041.0\ucrt\string.h(130): note: 'strcpy' の宣言を確認してください
+1>c:\users\maho\vaeg\cpucva\z80c.cpp(1955): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+1>c:\program files (x86)\windows kits\10\include\10.0.19041.0\ucrt\stdio.h(213): note: 'fopen' の宣言を確認してください
+1>z80diag.cpp
+1>コードを生成中...
+1>np2.vcxproj -> C:\Users\maho\vaeg\Win9x\..\bin\vaeg.exe
+1>プロジェクト "np2.vcxproj" のビルドが終了しました。
+========== ビルド: 1 正常終了、0 失敗、0 更新不要、0 スキップ ==========

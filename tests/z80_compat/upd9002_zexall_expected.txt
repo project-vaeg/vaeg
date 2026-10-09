@@ -1,0 +1,93 @@
+# Copyright (c) 2026 Nakata Maho
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+# 1. Redistributions of source code must retain the above copyright notice,
+#    this list of conditions and the following disclaimer.
+# 2. Redistributions in binary form must reproduce the above copyright notice,
+#    this list of conditions and the following disclaimer in the documentation
+#    and/or other materials provided with the distribution.
+#
+# THIS SOFTWARE IS PROVIDED BY THE AUTHOR "AS IS" AND ANY EXPRESS OR IMPLIED
+# WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+# MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
+# EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+# EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+# PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+# OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+# OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
+# OF THE POSSIBILITY OF SUCH DAMAGE.
+#
+# Expected stock ZEXALL group results under the uPD9002 flag profile.
+# Format: <group> OK | <group> ERROR <expected-crc> <found-crc>
+# Every line equals the real PC-88VA2 result: the first run recorded in
+# docs/modernization/uPD9002-zex-results.md and the M101 re-run in
+# docs/agents/reports/m101_zexall_qa/pc88va2/, which agree group for group.
+1 ERROR d48ad519 38bd187c
+2 ERROR d9a4ca05 e5cb0e49
+3 ERROR b1df8ec0 433479fc
+4 ERROR 39c8589b 6a867b69
+5 ERROR 51c19c2e 12967d59
+6 ERROR 06c7aa8e 4f797917
+7 ERROR a886cc44 6d7397f5
+8 ERROR d3f2d74a 4142bbf8
+9 ERROR 83534ee1 71fdaadc
+10 ERROR 5e020e98 30717c8b
+11 ERROR 134b622d a87e6cfa
+12 ERROR 2da42d19 06deb356
+13 ERROR 6d2dd213 6096b6aa
+14 ERROR 81fa8100 d18815a4
+15 ERROR 77f35a73 5f682264
+16 OK
+17 ERROR 1af612a7 c284554c
+18 ERROR d146bf51 4523de10
+19 OK
+20 ERROR ca8c6ac2 e175afcc
+21 ERROR 560f955e 1ced847d
+22 OK
+23 OK
+24 OK
+25 ERROR a0a1b49f 56cd06f3
+26 ERROR 28295ece b83adcef
+27 OK
+28 ERROR 0b95a8ea 20581470
+29 OK
+30 OK
+31 OK
+32 ERROR 36c11e75 fbcbba95
+33 OK
+34 OK
+35 OK
+36 OK
+37 OK
+38 OK
+39 OK
+40 OK
+41 OK
+42 OK
+43 OK
+44 OK
+45 OK
+46 OK
+47 OK
+48 OK
+49 OK
+50 OK
+51 OK
+52 OK
+53 ERROR 94f42769 ec734af4
+54 ERROR 39dd3de1 3958c2d0
+55 ERROR f782b0d1 e23a9b28
+56 ERROR e9ead0ae 49a0684e
+57 ERROR d638dd6a 6a3c3bbd
+58 ERROR ff823e77 955ba326
+59 ERROR 9ba3807c 9ac609b5
+60 ERROR 710034cb 713acd81
+61 ERROR a4255833 eb604d58
+62 OK
+63 OK
+64 OK
+65 OK
+66 OK
+67 OK

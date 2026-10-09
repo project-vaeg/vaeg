@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "vaeg-upd9002-m64-cases-v1",
+  "title": "M64 complete expected/actual case table",
+  "type": "object",
+  "required": [
+    "form",
+    "row_count",
+    "rows",
+    "schema",
+    "schema_version"
+  ],
+  "properties": {
+    "form": {
+      "type": "string"
+    },
+    "row_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "rows": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "actual_final_state",
+          "case_hash",
+          "complete_instruction_bytes",
+          "conclusion_status",
+          "expected_final_state",
+          "form",
+          "initial_state",
+          "top_level_classification"
+        ]
+      }
+    },
+    "schema": {
+      "const": "vaeg-upd9002-m64-cases-v1"
+    },
+    "schema_version": {
+      "const": 1
+    }
+  },
+  "additionalProperties": false
+}

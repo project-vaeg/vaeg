@@ -1,0 +1,69 @@
+From 13462eb7440cc1841d044a04ad347b3fca4092e7 Mon Sep 17 00:00:00 2001
+From: Nakata Maho <maho.nakata@gmail.com>
+Date: Mon, 28 Sep 2026 10:50:13 +0000
+Subject: [PATCH] Fix ADC/SBC HL,rr flags when the carry is folded into the
+ operand
+
+setFlagByAdc16/setFlagBySbc16 received c + nn as one unsigned short.
+Folding the carry into the operand before computing carrybits flips
+the carry chain at every bit where nn has a run of ones:
+
+- H is wrong whenever (nn & 0FFFh) == 0FFFh and C = 1;
+- P/V is wrong whenever (nn & 7FFFh) == 7FFFh and C = 1;
+- when nn == FFFFh and C = 1 the operand truncates to 0000h, so C
+  is lost as well (C = 0, H = 0 instead of C = 1, H = 1).
+
+Pass the carry separately so the flags come from before + nn + c.
+---
+ z80.hpp | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/z80.hpp b/z80.hpp
+index b4e1f9d..ac69bb9 100644
+--- a/z80.hpp
++++ b/z80.hpp
+@@ -3714,9 +3714,9 @@ class Z80
+         setFlagH((carrybits & 0x1000) != 0);
+     }
+ 
+-    inline void setFlagByAdc16(unsigned short before, unsigned short addition)
++    inline void setFlagByAdc16(unsigned short before, unsigned short addition, unsigned char carry)
+     {
+-        int result = before + addition;
++        int result = before + addition + carry;
+         int carrybits = before ^ addition ^ result;
+         unsigned short finalResult = (unsigned short)(result);
+         // same as ADD
+@@ -3762,7 +3762,7 @@ class Z80
+         unsigned short nn = getRP(rp);
+         unsigned char c = isFlagC() ? 1 : 0;
+         reg.WZ = hl + 1;
+-        setFlagByAdc16(hl, c + nn);
++        setFlagByAdc16(hl, nn, c);
+         setHL(hl + c + nn);
+         consumeClock(7);
+     }
+@@ -3871,9 +3871,9 @@ class Z80
+         consumeClock(2);
+     }
+ 
+-    inline void setFlagBySbc16(unsigned short before, unsigned short subtract)
++    inline void setFlagBySbc16(unsigned short before, unsigned short subtract, unsigned char carry)
+     {
+-        int result = before - subtract;
++        int result = before - subtract - carry;
+         int carrybits = before ^ subtract ^ result;
+         unsigned short finalResult = (unsigned short)result;
+         setFlagN();
+@@ -3899,7 +3899,7 @@ class Z80
+         unsigned short nn = getRP(rp);
+         unsigned char c = isFlagC() ? 1 : 0;
+         reg.WZ = hl + 1;
+-        setFlagBySbc16(hl, c + nn);
++        setFlagBySbc16(hl, nn, c);
+         setHL(hl - c - nn);
+         consumeClock(7);
+     }
+-- 
+2.43.0
+

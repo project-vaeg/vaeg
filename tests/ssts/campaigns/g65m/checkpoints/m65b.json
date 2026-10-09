@@ -1,0 +1,99 @@
+{
+  "campaign_base_gate": "G65",
+  "campaign_base_sha": "efd96b7e46717e7ee56e086f7d27ba42b04b49d3",
+  "campaign_branch": "topic/m65-residue-campaign",
+  "campaign_predecessor_sha": "057489a98aac5f976b82530916d15c73541036a5",
+  "canonical_task_path": "docs/agents/tasks/M65b_upd9002_bound.md",
+  "classification_after": "applicable",
+  "classification_before": "applicable",
+  "evidence_artifacts": {
+    "case_table": {
+      "path": "tests/ssts/campaigns/g65m/reconstruction/m65b_bound_cases.json.gz",
+      "sha256": "4425d22a0dde0e7e6f1a8f41d7c4e1b8e56e581b0aa8e29ce6f741d50213328a"
+    },
+    "contract": {
+      "path": "tests/ssts/campaigns/g65m/reconstruction/m65b_contract.json",
+      "sha256": "1ee1cc1689c191270012f74ec285ac0d2b1d0023bf66881c99d37f200d4faf61"
+    },
+    "replay_summary": {
+      "path": "tests/ssts/campaigns/g65m/checkpoints/m65b_replay_summary.json",
+      "sha256": "bc26d5ecfdc79155d0f37d45e886708c8a7356a126f2a8d65dd4b03b55f043eb"
+    }
+  },
+  "focused_tests": [
+    {
+      "command": "ctest --test-dir build/linux-ci-gcc -R vaeg_upd9002_m65b_bound --output-on-failure",
+      "result": "pass"
+    },
+    {
+      "command": "python3 tools/qa/upd9002_m65b_bound.py selftest",
+      "result": "pass"
+    },
+    {
+      "command": "python3 tools/qa/upd9002_m65b_bound.py verify --shard-root /tmp/ssts-v20-v1_native --worker build/linux-ci-gcc/sdl2/vaeg --write-summary",
+      "result": "pass"
+    },
+    {
+      "command": "ctest --test-dir build/linux-ci-gcc -LE external --output-on-failure",
+      "result": "66/66 pass"
+    }
+  ],
+  "gap_kind_after": null,
+  "gap_kind_before": null,
+  "milestone": "M65b",
+  "newly_applicable": 0,
+  "newly_failing": 0,
+  "newly_passing": 1244,
+  "owned_hash_count": 1244,
+  "owned_hash_set_sha256": "2fd0e1053b264042031c657ebf55796858e8ff2405509b3cc1d17ace71ae4f0d",
+  "owned_selectors": [
+    "62 BOUND"
+  ],
+  "production_semantic_change": true,
+  "protected_bound_frame_only": {
+    "count": 3565,
+    "hash_set_sha256": "15862f179608f8745f76bb3565197106ae6f63cba6c3363dd307fb29e6bbd746",
+    "pass": 3565,
+    "selector": "62 BOUND former frame-only"
+  },
+  "protected_m65a_result": {
+    "count": 5000,
+    "fail": 0,
+    "hash_set_sha256": "6028d5dcd4b6a3dcded2aaf69fb186e502f7f5a4d094180572f802c86240039a",
+    "pass": 5000,
+    "selector": "FF /7"
+  },
+  "protected_m65d_guard": {
+    "count": 144,
+    "hash_set_sha256": "ce1bc644ee5a5bc73ae872440ad4446cb0dbccbad626ba93372082fe7add9076",
+    "official_failures_preserved": 144,
+    "selector": "FF /6 SP alias"
+  },
+  "report_path": "docs/agents/reports/m65b_upd9002_bound.md",
+  "selected_applicable_no_change": true,
+  "selected_set_after": {
+    "ci": "d30dd9c864fbbaa74c661e1b829c66264f2184a8fbbb72b654b2baa825664ae6",
+    "full": "0aa3dbb24323223b3a9595a0bd7cfd5666596741157c14b60f6969318475f8f7"
+  },
+  "selected_set_before": {
+    "ci": "d30dd9c864fbbaa74c661e1b829c66264f2184a8fbbb72b654b2baa825664ae6",
+    "full": "0aa3dbb24323223b3a9595a0bd7cfd5666596741157c14b60f6969318475f8f7"
+  },
+  "applicable_set_after": {
+    "ci": "6f10f47cd0f939145f99dbe6b1d820c79082c90083963b61cd39b5f56503537f",
+    "full": "4f0f19a6496f4c4463da092c7d5df7a9a0365a951821d9428eac8662d0c76e7c"
+  },
+  "applicable_set_before": {
+    "ci": "6f10f47cd0f939145f99dbe6b1d820c79082c90083963b61cd39b5f56503537f",
+    "full": "4f0f19a6496f4c4463da092c7d5df7a9a0365a951821d9428eac8662d0c76e7c"
+  },
+  "status": "complete_pending_campaign_gate",
+  "target_policy_after": "upd9002-g64-37ae2b706a9cbbe2d36cf7c98372c0cae7ca4b8d90e4f738973bc0ed3248eed6",
+  "target_policy_before": "upd9002-g64-37ae2b706a9cbbe2d36cf7c98372c0cae7ca4b8d90e4f738973bc0ed3248eed6",
+  "task_checkpoint_sha": "supplied_by_handoff",
+  "task_evaluated_sha": "d0e01694a9b82b4cd16500743d77e45459c74be1",
+  "task_evidence_sha": "supplied_by_handoff",
+  "task_start_sha": "057489a98aac5f976b82530916d15c73541036a5",
+  "validator_only_sha": "49867cfdc82fc4f389ccfed775aee6ab66646def",
+  "worker_sha256": "1cf04ba49f76be3269a7545f15c4a7d07d92dbc12adf2d2f1acb7d85d0546012"
+}

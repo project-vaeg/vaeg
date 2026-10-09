@@ -1,0 +1,19 @@
+# Activation
+
+Run Codex from the VAEG repository root.
+
+## Start
+
+```text
+/goal Implement and locally verify documented-instruction-complete Intel 8087 emulation in the checked-out VAEG repository under docs/8087/v7/goal-contract.md and its normative companion documents. The user has already completed document acquisition and OCR. Use /Users/maho/work/vaeg-8087-evidence-v6 as the external read-only evidence workspace. Verify the supplied PDF/OCR pairs and SoftFloat Release 3e evidence before coding, but do not perform OCR again and do not copy full manuals or OCR documents into the VAEG repository. Implement at most one optional 8087 per emulated machine, default clock exactly 10000000 Hz, independently configurable and persisted with reset-time application; the configured frequency must affect emulated NDP service time. Never attach an 8087 to FPO2 or create a second 8087. Implement every documented Intel 8087 instruction and documented operand/encoding form, including packed BCD, environment/save/restore, FDISI/FENI, FPREM, FSCALE, FXTRACT, F2XM1, FYL2X, FYL2XP1, FPTAN, and FPATAN. Preserve native/8080 decoding separation. Use the exact upstream Berkeley SoftFloat Release 3e archive already present under upstream/S03 as the shipping arithmetic substrate; do not substitute host floating point or later-x87 semantics. Follow SERIAL_TIMED_V1 and integer clock accounting. Do not inspect, copy, translate, paraphrase, or port FPU implementation source from 86Box, DOSBox-X, PCem, Bochs, QEMU, Open Watcom fpuemu, PCjs FPU, Linux wm-FPU-emu, bitblaze-fuzzball, i486SX_soft_FPU, Granite microcode-derived implementation code, or similar emulators. Reference implementations may be used only as separately isolated black-box executables when explicitly approved by the contract. Continue through P00-P19 with implementation, executable tests, repairs, coverage audits, and durable evidence until all mandatory local gates and the zero-omission gate pass. Do not stop after writing plans or after a partial opcode subset. Preserve unrelated work and prior v2-v6 records; do not push, merge, rewrite history, reset hard, clean, or fabricate unavailable evidence. If a contract-defined blocker remains, finish all independent work first and report the exact blocker without calling the implementation complete.
+```
+
+## Resume in a new thread
+
+```text
+Resume the existing VAEG Intel 8087 v7 implementation. Read
+docs/8087/v7/records/progress.md, docs/8087/v7/work-plan.md, and the binding v7
+contracts. Inspect the current HEAD and dirty tree and revalidate the most recent
+accepted package against its recorded source digest. Continue from the earliest
+incomplete or invalidated package; do not recreate already verified work.
+```

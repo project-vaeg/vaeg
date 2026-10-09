@@ -1,0 +1,32 @@
+{
+  "applicable_change": "none",
+  "authority_status": {
+    "monitor_authority": "absent per approved G60b authority evidence",
+    "silicon_reserved_behavior": "requires separate evidence before cleanup",
+    "target_policy_status": "known_target_gap / documented_silicon_absent"
+  },
+  "blocks_G65m": false,
+  "blocks_M66_after_G65m": false,
+  "cleanup_authorized_now": false,
+  "disposition": "approved_nonblocking_defer",
+  "evidence_domain": "reserved_opcode_policy",
+  "implemented": false,
+  "owned_hash_count": 0,
+  "owned_hash_set_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "passing_claim": false,
+  "policy_change": "none",
+  "required_before_cleanup": [
+    "target-wide reserved opcode behavior evidence",
+    "debugger and trace presentation decision",
+    "proof that cleanup cannot affect applicable hash sets"
+  ],
+  "schema": "vaeg-upd9002-m65f-reserved-6c6f-backlog-v1",
+  "selected_applicable_change": "none",
+  "selectors": [
+    "6C",
+    "6D",
+    "6E",
+    "6F"
+  ],
+  "task_id": "M65f"
+}

@@ -1,0 +1,51 @@
+upd9002-trace-v1
+begin step=00000000 cs=0000 ip=2000 bytes=f6f0000000000000
+event step=00000000 seq=00000000 origin=cpu kind=fetch address=00002000 value=000000f6 width=01
+event step=00000000 seq=00000001 origin=dma kind=scheduler-checkpoint address=00000000 value=00000000 width=00
+event step=00000000 seq=00000002 origin=device kind=device-checkpoint address=00000000 value=00000000 width=00
+end step=00000000 ax=0001 bx=0000 cx=0001 dx=007f si=0000 di=0000 bp=0000 sp=8000 es=0000 cs=0000 ss=0000 ds=0000 ip=2002 flags=f002 esbase=00000000 csbase=00000000 ssbase=00000000 dsbase=00000000 consumed=0000000e remain=000003da
+begin step=00000001 cs=0000 ip=2000 bytes=f6f0000000000000
+event step=00000001 seq=00000000 origin=cpu kind=fetch address=00002000 value=000000f6 width=01
+event step=00000001 seq=00000001 origin=dma kind=scheduler-checkpoint address=00000000 value=00000000 width=00
+event step=00000001 seq=00000002 origin=device kind=device-checkpoint address=00000000 value=00000000 width=00
+end step=00000001 ax=0001 bx=0000 cx=0001 dx=007f si=0000 di=0000 bp=0000 sp=8000 es=0000 cs=0000 ss=0000 ds=0000 ip=2002 flags=f002 esbase=00000000 csbase=00000000 ssbase=00000000 dsbase=00000000 consumed=0000000e remain=000003da
+begin step=00000002 cs=0000 ip=2000 bytes=f6f3000000000000
+event step=00000002 seq=00000000 origin=cpu kind=fetch address=00002000 value=000000f6 width=01
+event step=00000002 seq=00000001 origin=dma kind=scheduler-checkpoint address=00000000 value=00000000 width=00
+event step=00000002 seq=00000002 origin=device kind=device-checkpoint address=00000000 value=00000000 width=00
+end step=00000002 ax=0205 bx=0003 cx=0001 dx=007f si=0000 di=0000 bp=0000 sp=8000 es=0000 cs=0000 ss=0000 ds=0000 ip=2002 flags=f002 esbase=00000000 csbase=00000000 ssbase=00000000 dsbase=00000000 consumed=0000000e remain=000003da
+begin step=00000003 cs=0000 ip=2000 bytes=f6f3000000000000
+event step=00000003 seq=00000000 origin=cpu kind=fetch address=00002000 value=000000f6 width=01
+event step=00000003 seq=00000001 origin=dma kind=scheduler-checkpoint address=00000000 value=00000000 width=00
+event step=00000003 seq=00000002 origin=device kind=device-checkpoint address=00000000 value=00000000 width=00
+end step=00000003 ax=0205 bx=0003 cx=0001 dx=007f si=0000 di=0000 bp=0000 sp=8000 es=0000 cs=0000 ss=0000 ds=0000 ip=2002 flags=f002 esbase=00000000 csbase=00000000 ssbase=00000000 dsbase=00000000 consumed=0000000e remain=000003da
+begin step=00000004 cs=0000 ip=2000 bytes=f7fb000000000000
+event step=00000004 seq=00000000 origin=cpu kind=fetch address=00002000 value=000000f7 width=01
+event step=00000004 seq=00000001 origin=dma kind=scheduler-checkpoint address=00000000 value=00000000 width=00
+event step=00000004 seq=00000002 origin=device kind=device-checkpoint address=00000000 value=00000000 width=00
+event step=00000004 seq=00000003 origin=cpu kind=exception address=00000000 value=00002002 width=02
+event step=00000004 seq=00000004 origin=cpu kind=memory-write address=00007ffe value=00000002 width=02
+event step=00000004 seq=00000005 origin=cpu kind=memory-write address=00007ffc value=00000000 width=02
+event step=00000004 seq=00000006 origin=cpu kind=memory-write address=00007ffa value=00002002 width=02
+end step=00000004 ax=0011 bx=0003 cx=0001 dx=007f si=0000 di=0000 bp=0000 sp=7ffa es=0000 cs=0000 ss=0000 ds=0000 ip=0000 flags=f002 esbase=00000000 csbase=00000000 ssbase=00000000 dsbase=00000000 consumed=0000002d remain=000003bb
+begin step=00000005 cs=0000 ip=2000 bytes=f7fb000000000000
+event step=00000005 seq=00000000 origin=cpu kind=fetch address=00002000 value=000000f7 width=01
+event step=00000005 seq=00000001 origin=dma kind=scheduler-checkpoint address=00000000 value=00000000 width=00
+event step=00000005 seq=00000002 origin=device kind=device-checkpoint address=00000000 value=00000000 width=00
+event step=00000005 seq=00000003 origin=cpu kind=exception address=00000000 value=00002002 width=02
+event step=00000005 seq=00000004 origin=cpu kind=memory-write address=00007ffe value=00000002 width=02
+event step=00000005 seq=00000005 origin=cpu kind=memory-write address=00007ffc value=00000000 width=02
+event step=00000005 seq=00000006 origin=cpu kind=memory-write address=00007ffa value=00002002 width=02
+end step=00000005 ax=0011 bx=0003 cx=0001 dx=007f si=0000 di=0000 bp=0000 sp=7ffa es=0000 cs=0000 ss=0000 ds=0000 ip=0000 flags=f002 esbase=00000000 csbase=00000000 ssbase=00000000 dsbase=00000000 consumed=0000002d remain=000003bb
+begin step=00000006 cs=0000 ip=2000 bytes=e67f000000000000
+event step=00000006 seq=00000000 origin=cpu kind=fetch address=00002000 value=000000e6 width=01
+event step=00000006 seq=00000001 origin=dma kind=scheduler-checkpoint address=00000000 value=00000000 width=00
+event step=00000006 seq=00000002 origin=device kind=device-checkpoint address=00000000 value=00000000 width=00
+event step=00000006 seq=00000003 origin=cpu kind=io-write address=0000007f value=00000011 width=01
+end step=00000006 ax=0011 bx=0003 cx=0001 dx=007f si=0000 di=0000 bp=0000 sp=8000 es=0000 cs=0000 ss=0000 ds=0000 ip=2002 flags=f002 esbase=00000000 csbase=00000000 ssbase=00000000 dsbase=00000000 consumed=00000005 remain=000003e3
+begin step=00000007 cs=0000 ip=2000 bytes=e67f000000000000
+event step=00000007 seq=00000000 origin=cpu kind=fetch address=00002000 value=000000e6 width=01
+event step=00000007 seq=00000001 origin=dma kind=scheduler-checkpoint address=00000000 value=00000000 width=00
+event step=00000007 seq=00000002 origin=device kind=device-checkpoint address=00000000 value=00000000 width=00
+event step=00000007 seq=00000003 origin=cpu kind=io-write address=0000007f value=00000011 width=01
+end step=00000007 ax=0011 bx=0003 cx=0001 dx=007f si=0000 di=0000 bp=0000 sp=8000 es=0000 cs=0000 ss=0000 ds=0000 ip=2002 flags=f002 esbase=00000000 csbase=00000000 ssbase=00000000 dsbase=00000000 consumed=00000005 remain=000003e3

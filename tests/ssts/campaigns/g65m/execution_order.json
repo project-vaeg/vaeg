@@ -1,0 +1,9 @@
+{
+  "schema": "vaeg-upd9002-g65m-execution-order-v1",
+  "campaign_base_gate": "G65",
+  "campaign_base_sha": "efd96b7e46717e7ee56e086f7d27ba42b04b49d3",
+  "order": ["M65j", "M65a", "M65b", "M65c", "M65d", "M65e", "M65f", "M65g", "M65h", "M65i", "M65k", "M65l", "M65m"],
+  "deferred_evidence_backlog": ["M65j.01", "M65j.02", "M65j.03", "M65j.04", "M65j.05", "M65j.06", "M65j.07", "M65j.08", "M65j.09", "M65j.10", "M65j.11", "M65j.12", "M65j.13", "M65j.14", "M65j.15", "M65j.16", "M65j.17", "M65j.18", "M65j.19"],
+  "formal_gate": "G65m",
+  "intermediate_approval": false
+}

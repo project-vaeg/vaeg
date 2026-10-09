@@ -1,0 +1,104 @@
+<!--
+Copyright (c) 2026 Nakata Maho
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+1. Redistributions of source code must retain the above copyright notice,
+   this list of conditions and the following disclaimer.
+2. Redistributions in binary form must reproduce the above copyright notice,
+   this list of conditions and the following disclaimer in the documentation
+   and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE AUTHOR "AS IS" AND ANY EXPRESS OR IMPLIED
+WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
+EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
+OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+# M101 ZEX and flag-probe QA outputs
+
+Byte-exact outputs of the M101 CP/M programs (`ZEXDOCF`, `ZEXALLF`,
+`FLAGPRB`, `ZEX13S`, `DAADUMP`), run from the generated test disk
+`cpmva-zexall-test.d88` under CP/MVA:
+
+| Directory | Machine |
+| --- | --- |
+| [`vaeg/`](vaeg/) | vaeg, uPD9002 profile before the U1 rules |
+| [`pc88va2/`](pc88va2/) | real NEC PC-88VA2, V3 mode, Z80 emulation mode entered with BRKEM |
+
+Each directory holds:
+
+- `raw/`: the nine output files exactly as CP/M wrote them, including CRLF
+  line ends and 1Ah padding; names are lower-cased for the repository.
+  `.gitattributes` marks them binary so that Git never converts them.
+- `manifest.sha256`: SHA-256 of every `raw/` file.
+- `compare.txt`: `tools/cpmva/zex/compare.py raw --ref <ref>` against the
+  host reference below.
+
+## Inputs
+
+- Programs, built by the installer with z80asm 1.8 built from the locked
+  source (SHA-256):
+
+  | Program | SHA-256 |
+  | --- | --- |
+  | `DAADUMP.COM` | `2dae2fa70b4d1a1e7166e446fb5280d306d9d22511e1751df9cd048682c73b02` |
+  | `FLAGPRB.COM` | `ab4ae8027f83ef4fee3fce777cc04c06064d8f80578bbe5d74edd011922f1c43` |
+  | `ZEX13S.COM` | `e10d9703525385d892912e6270417594ab413295a928b6672f4e06fb07dae4e2` |
+  | `ZEXALLF.COM` | `028e25fdc25e84885b4d70a62ea10ffd0148546692fecfd471743fc62b34e9e4` |
+  | `ZEXDOCF.COM` | `a98e281bacb59557cfe12e610931ff460fc529af1c6344ae7fe0893c9c079b90` |
+
+- Test disk before any run (`cpmva-zexall-test.d88`, installer at
+  `77e0dab55d8efb8f68fd2fe00558f4ffb31269dc`; byte-identical to the disk
+  generated at `c470a80e8431982b35d94af67d33de14fa96ec76` under its earlier
+  name `cpmva-test.d88`):
+  `cf299fb053fa4d3e5ac68005a1b3042aeacd71eb91db4ca05511a7c8ff53b5fd`.
+  The PC-Engine boot disk is private and is not identified here.
+
+## Runs
+
+### `vaeg/`
+
+- Emulator: fully static MinGW `vaeg.exe` built from
+  `c470a80e8431982b35d94af67d33de14fa96ec76`, SHA-256
+  `9f306e2c5396b4e7d4328b9326c25971595331a5249ae00b40a393f4e43f77ba`.
+- Disk after the run (kept outside Git by the maintainer):
+  `a288197c6b0f69de2cb540117e12bca9d7be871b9433e70d21f7b86c4decc385`.
+- Result: all nine files are byte-identical to the host uPD9002 reference.
+
+### `pc88va2/`
+
+- Machine: NEC PC-88VA2 in V3 mode, run by the maintainer under CP/MVA,
+  which enters the µPD9002 Z80 emulation mode with BRKEM. The disk was
+  written and read back with a KryoFlux and converted to D88 with the HxC
+  Floppy Emulator software; the returned image has the header name `HxCFE`,
+  media type 00h and another track order, with all
+  1,280 sectors present and error-free.
+- Disk after the run (kept outside Git by the maintainer):
+  `c7a7f2ee8dfe8e4b048f6cebda6c29028cc7cdcf7c368b8edf2b9f564fa5554b`.
+- The seven programs on the returned disk are identical to the generated
+  disk.
+- Result: see [`pc88va2/compare.txt`](pc88va2/compare.txt). `FLAGPRB`
+  matches uPD9002 in every probe, including P7. `ZEXDOC.TXT` and
+  `ZEXALL.TXT` match the uPD9002 expectation in every group except #13
+  `<daa,cpl,scf,ccf>` (found `6096b6aa`, as in the first real-machine run).
+  The DAA, CPL, SCF and CCF dumps differ from both profiles; they determine
+  U1.
+
+## Extraction and host reference
+
+- Extraction:
+  `tools/cpmva/zex/extract_d88.py <disk> <dir>/raw --lowercase --skip-com`
+  (`eb57b6bb`), which places sectors by C/H/R and reads both the installer
+  layout and the layout of D88 files converted by the HxC Floppy Emulator
+  software.
+- Host reference: `tools/cpmva/zex/host_reference.py` at
+  `2254651be3080245201181e35f8d8677c9adb7df` with `vaeg_cpm_runner`
+  SHA-256 `2dd458a7550294e2aad3285137a6188ca4fbf3cf9f6b469de8da8fc09bb0e5da`
+  (Linux GCC build of `linux-ci-gcc`), exit status 0, 10 runs. The host
+  outputs are not committed; they are regenerated by the same command.

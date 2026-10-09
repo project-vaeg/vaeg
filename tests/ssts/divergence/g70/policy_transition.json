@@ -1,0 +1,32 @@
+{
+  "changed_record_ids": [
+    "upd9002.target_unverified.v30_reserved_0f.group_001",
+    "upd9002.target_unverified.v30_reserved_0f.group_002",
+    "upd9002.target_unverified.v30_reserved_0f.group_005",
+    "upd9002.target_unverified.v30_reserved_0f.group_009",
+    "upd9002.target_unverified.v30_reserved_0f.group_010",
+    "upd9002.target_unverified.v30_reserved_0f.group_013",
+    "upd9002.target_unverified.v30_reserved_0f.group_014",
+    "upd9002.target_unverified.v30_reserved_0f.group_015",
+    "upd9002.target_unverified.v30_reserved_0f.group_016",
+    "upd9002.target_unverified.v30_reserved_0f.group_019",
+    "upd9002.target_unverified.v30_reserved_repc.group_003",
+    "upd9002.target_unverified.v30_reserved_repc.group_004",
+    "upd9002.target_unverified.v30_reserved_repc.group_006",
+    "upd9002.target_unverified.v30_reserved_repc.group_007",
+    "upd9002.target_unverified.v30_reserved_repc.group_008",
+    "upd9002.target_unverified.v30_reserved_repc.group_011",
+    "upd9002.target_unverified.v30_reserved_repc.group_012",
+    "upd9002.target_unverified.v30_reserved_repc.group_017",
+    "upd9002.target_unverified.v30_reserved_repc.group_018"
+  ],
+  "m70_owned_hash_count": 5908,
+  "m70_record_count": 19,
+  "new_target_policy_id": "upd9002-g70-18a5606ad77ecc2e461b3fd56fa0105061831e685d7af430fc5026d0137bbb80",
+  "old_target_policy_id": "upd9002-g64-37ae2b706a9cbbe2d36cf7c98372c0cae7ca4b8d90e4f738973bc0ed3248eed6",
+  "schema": "vaeg-upd9002-g70-policy-transition-v1",
+  "schema_version": 1,
+  "unrelated_classification_changes": 0,
+  "unrelated_gap_kind_changes": 0,
+  "unrelated_policy_entry_changes": 0
+}

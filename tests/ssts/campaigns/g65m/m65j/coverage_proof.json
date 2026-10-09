@@ -1,0 +1,9 @@
+{
+  "actual_count": 5908,
+  "actual_digest": "240e0bf76de968b310ad13ef53de8d044637b185e267e1cfb2540f32ab6571e5",
+  "expected_count": 5908,
+  "expected_digest": "240e0bf76de968b310ad13ef53de8d044637b185e267e1cfb2540f32ab6571e5",
+  "pairwise_disjoint": true,
+  "schema": "vaeg-upd9002-m65j-coverage-v1",
+  "unowned": []
+}

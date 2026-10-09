@@ -1,0 +1,374 @@
+# Copyright (c) 2026 Nakata Maho
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions
+# are met:
+# 1. Redistributions of source code must retain the above copyright
+#    notice, this list of conditions and the following disclaimer.
+# 2. Redistributions in binary form must reproduce the above copyright
+#    notice, this list of conditions and the following disclaimer in the
+#    documentation and/or other materials provided with the distribution.
+#
+# THIS SOFTWARE IS PROVIDED BY THE AUTHOR "AS IS" AND ANY EXPRESS OR
+# IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+# WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+# DISCLAIMED. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT,
+# INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+# (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+# SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+# HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
+# STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
+# IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+# POSSIBILITY OF SUCH DAMAGE.
+
+name: release
+
+on:
+  push:
+    tags:
+      - 'rel-*'
+  workflow_dispatch:
+    inputs:
+      tag_name:
+        description: 'Existing rel-* tag to package'
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+env:
+  RELEASE_TAG: ${{ github.event_name == 'workflow_dispatch' && inputs.tag_name || github.ref_name }}
+
+jobs:
+  linux:
+    name: linux gcc release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'workflow_dispatch' && inputs.tag_name || github.ref }}
+          fetch-depth: 0
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake ninja-build pkg-config libsdl2-dev libarchive-dev gcc g++ nasm
+      - uses: dtolnay/rust-toolchain@1.88.0
+        with:
+          targets: x86_64-unknown-linux-gnu
+      - name: Acquire pinned librashader source
+        run: |
+          mkdir -p build/m99-static
+          git clone https://github.com/SnowflakePowered/librashader.git \
+            build/m99-static/librashader-git
+          git -C build/m99-static/librashader-git checkout --detach \
+            87e8a97b50516d997defeaa168173dcd185d4022
+      - name: Build static librashader
+        run: |
+          python3 tools/release/build-static-librashader.py \
+            --source build/m99-static/librashader-git \
+            --target x86_64-unknown-linux-gnu \
+            --output build/m99-static/linux-audit
+      - name: Configure
+        run: >-
+          cmake --preset linux-ci-gcc
+          -DVAEG_STATIC_LIBRASHADER=ON
+          -DVAEG_LIBRASHADER_STATIC_LIBRARY=${{ github.workspace }}/build/m99-static/librashader-git/target/x86_64-unknown-linux-gnu/release/liblibrashader_capi.a
+          -DVAEG_LIBRASHADER_STATIC_NOTICES=${{ github.workspace }}/build/m99-static/linux-audit/third-party-notices.txt
+          '-DVAEG_LIBRASHADER_NATIVE_LIBS=stdc++;gcc_s;util;rt;pthread;m;dl;c'
+      - name: Build
+        run: cmake --build --preset linux-ci-gcc
+      - name: Smoke
+        run: SDL_VIDEODRIVER=dummy SDL_AUDIODRIVER=dummy ./build/linux-ci-gcc/sdl2/vaeg --smoke
+      - name: Unit tests
+        run: ctest --test-dir build/linux-ci-gcc --output-on-failure
+      - name: Build PC-88VA guest-driver bundle
+        run: >-
+          tools/pc88va/build-guest-driver-bundle.sh
+          --output build/pc88va-guest-drivers
+          --hostfat build/linux-ci-gcc/guest/hostfat.sys
+      - name: Upload PC-88VA guest-driver bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: vaeg-release-pc88va-guest-drivers
+          path: build/pc88va-guest-drivers/
+      - name: Package
+        run: |
+          set -euo pipefail
+          release_id="${RELEASE_TAG//-/}"
+          release_notes="CHANGES.${RELEASE_TAG#rel-}.md"
+          package="vaeg-${release_id}-linux-x86_64"
+          asset="${package}.tar.gz"
+          test -f "${release_notes}"
+          rm -rf dist-package "${asset}"
+          mkdir -p "dist-package/${package}/assets" \
+            "dist-package/${package}/licenses"
+          install -m 755 build/linux-ci-gcc/sdl2/vaeg "dist-package/${package}/vaeg"
+          cp -R build/pc88va-guest-drivers/. "dist-package/${package}/"
+          install -m 644 assets/OFL.txt "dist-package/${package}/assets/"
+          install -m 644 assets/NOTICE.md "dist-package/${package}/assets/"
+          install -m 644 external/suzukiplan-z80/LICENSE.txt \
+            "dist-package/${package}/licenses/suzukiplan-z80.txt"
+          install -m 644 "${release_notes}" "dist-package/${package}/"
+          install -m 644 dist/readme-dist.txt "dist-package/${package}/README-dist.txt"
+          stage_args=(--output "dist-package/${package}" --platform linux)
+          if [[ -n "${VAEG_LIBRASHADER_RUNTIME:-}" ]]; then
+            stage_args+=(--runtime "${VAEG_LIBRASHADER_RUNTIME}")
+          fi
+          tools/release/stage-librashader-assets.sh "${stage_args[@]}"
+          python3 tools/release/check-librashader-package.py \
+            --input "dist-package/${package}" --platform linux
+          tar -C dist-package -czf "${asset}" "${package}"
+          tar -tzf "${asset}"
+          python3 tools/release/check-librashader-package.py \
+            --input "${asset}" --platform linux
+          python3 tests/z80_compat/check_zex_archive.py "${asset}"
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          release_notes="CHANGES.${RELEASE_TAG#rel-}.md"
+          test -f "${release_notes}"
+          if gh release view "${RELEASE_TAG}" >/dev/null 2>&1; then
+            release_title="88VA Eternal Grafx Rel.${RELEASE_TAG#rel-}"
+            gh release edit "${RELEASE_TAG}" \
+              --title "${release_title}" \
+              --notes-file "${release_notes}"
+          else
+            release_title="88VA Eternal Grafx Rel.${RELEASE_TAG#rel-}"
+            gh release create "${RELEASE_TAG}" \
+              --verify-tag \
+              --title "${release_title}" \
+              --notes-file "${release_notes}"
+          fi
+      - name: Upload release asset
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          release_id="${RELEASE_TAG//-/}"
+          gh release upload "${RELEASE_TAG}" \
+            "vaeg-${release_id}-linux-x86_64.tar.gz" \
+            --clobber
+
+  windows:
+    name: windows mingw native static-runtime
+    runs-on: windows-latest
+    needs: linux
+    defaults:
+      run:
+        shell: msys2 {0}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'workflow_dispatch' && inputs.tag_name || github.ref }}
+          fetch-depth: 0
+      - uses: msys2/setup-msys2@v2
+        with:
+          msystem: MINGW64
+          update: true
+          install: >-
+            git
+            mingw-w64-x86_64-cmake
+            mingw-w64-x86_64-ninja
+            mingw-w64-x86_64-gcc
+            mingw-w64-x86_64-pkgconf
+            python
+            nasm
+      - uses: dtolnay/rust-toolchain@1.88.0
+        with:
+          targets: x86_64-pc-windows-gnu
+      - name: Build pinned static librashader
+        run: |
+          export PATH="$(cygpath -u "${USERPROFILE}")/.cargo/bin:${PATH}"
+          tools/release/build-mingw-static-librashader.sh
+      - name: Configure
+        run: cmake --preset mingw-ci
+      - name: Build
+        run: cmake --build --preset mingw-ci
+      - name: Smoke
+        run: SDL_VIDEODRIVER=dummy SDL_AUDIODRIVER=dummy ./build/mingw-ci/sdl2/vaeg.exe --smoke
+      - name: Unit tests
+        run: |
+          set +e
+          ctest --test-dir build/mingw-ci --output-on-failure 2>&1 | tee ctest.log
+          status=${PIPESTATUS[0]}
+          if [ "${status}" -ne 0 ]; then
+            failed_tests="$(cat build/mingw-ci/Testing/Temporary/LastTestsFailed.log 2>/dev/null | tr '\n' ' ')"
+            if [ -z "${failed_tests}" ]; then
+              failed_tests="$(grep -E '\*\*\*Failed' ctest.log | tr '\n' ' ')"
+            fi
+            echo "CTest failed tests: ${failed_tests}" >&2
+            failure_markers="$(grep -E 'FAIL|failed|CMake Error|Error:' ctest.log | tr '\r\n' ' ')"
+            echo "CTest failure markers: ${failure_markers}" >&2
+            echo "::error title=CTest failure markers::${failure_markers}"
+            failed_names="$(sed -n 's/^[0-9][0-9]*:\([^ ]*\).*/\1/p' build/mingw-ci/Testing/Temporary/LastTestsFailed.log 2>/dev/null)"
+            for failed_name in ${failed_names}; do
+              start_line="$(grep -n "Start .*: ${failed_name}" ctest.log | head -n 1 | cut -d: -f1)"
+              if [ -n "${start_line}" ]; then
+                end_line=$((start_line + 80))
+                failed_section="$(sed -n "${start_line},${end_line}p" ctest.log | tail -n 80 | tr '\r\n' ' ')"
+                failed_section="${failed_section//%/%25}"
+                failed_section="${failed_section//$'\r'/}"
+                echo "CTest failed test output: ${failed_section}" >&2
+                echo "::error title=CTest failed test output::${failed_section}"
+              fi
+            done
+          fi
+          exit "${status}"
+      - name: Download PC-88VA guest-driver bundle
+        uses: actions/download-artifact@v4
+        with:
+          name: vaeg-release-pc88va-guest-drivers
+          path: build/pc88va-guest-drivers
+      - name: Verify PC-88VA guest-driver bundle
+        run: |
+          cd build/pc88va-guest-drivers
+          sha256sum --check SHA256SUMS
+      - name: Verify Windows runtime imports
+        run: python3 tools/release/check-static-windows-imports.py --binary build/mingw-ci/sdl2/vaeg.exe
+      - name: Stage package
+        run: |
+          set -euo pipefail
+          release_id="${RELEASE_TAG//-/}"
+          release_notes="CHANGES.${RELEASE_TAG#rel-}.md"
+          package="vaeg-${release_id}-win-x86_64"
+          test -f "${release_notes}"
+          rm -rf dist-package
+          mkdir -p "dist-package/${package}/assets" "dist-package/${package}/licenses"
+          cp build/mingw-ci/sdl2/vaeg.exe "dist-package/${package}/"
+          cp -R build/pc88va-guest-drivers/. "dist-package/${package}/"
+          cp assets/OFL.txt "dist-package/${package}/assets/"
+          cp assets/NOTICE.md "dist-package/${package}/assets/"
+          cp external/suzukiplan-z80/LICENSE.txt \
+            "dist-package/${package}/licenses/suzukiplan-z80.txt"
+          cp "${release_notes}" "dist-package/${package}/"
+          cp dist/readme-dist.txt "dist-package/${package}/README-dist.txt"
+          stage_args=(--output "dist-package/${package}" --platform windows)
+          if [[ -n "${VAEG_LIBRASHADER_RUNTIME:-}" ]]; then
+            stage_args+=(--runtime "${VAEG_LIBRASHADER_RUNTIME}")
+          fi
+          tools/release/stage-librashader-assets.sh "${stage_args[@]}"
+          python3 tools/release/check-librashader-package.py \
+            --input "dist-package/${package}" --platform windows
+          find "dist-package/${package}" -type f | sort
+      - name: Zip package
+        shell: pwsh
+        run: |
+          $releaseId = $env:RELEASE_TAG -replace '-', ''
+          $package = "vaeg-$releaseId-win-x86_64"
+          $asset = "$package.zip"
+          if (Test-Path $asset) {
+            Remove-Item $asset
+          }
+          Compress-Archive -Path "dist-package/$package" -DestinationPath $asset -Force
+          python tools/release/check-librashader-package.py --input $asset --platform windows
+          python tests/z80_compat/check_zex_archive.py $asset
+      - name: Upload release asset
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $releaseId = $env:RELEASE_TAG -replace '-', ''
+          gh release upload $env:RELEASE_TAG "vaeg-$releaseId-win-x86_64.zip" --clobber
+
+  macos:
+    name: macos fetch-sdl2 release
+    runs-on: macos-14
+    needs: linux
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'workflow_dispatch' && inputs.tag_name || github.ref }}
+          fetch-depth: 0
+      - name: Install build tools
+        run: brew install cmake ninja nasm
+      - uses: dtolnay/rust-toolchain@1.88.0
+        with:
+          targets: aarch64-apple-darwin
+      - name: Acquire pinned librashader source
+        run: |
+          mkdir -p build/m99-static
+          git clone https://github.com/SnowflakePowered/librashader.git \
+            build/m99-static/librashader-git
+          git -C build/m99-static/librashader-git checkout --detach \
+            87e8a97b50516d997defeaa168173dcd185d4022
+      - name: Build static librashader
+        run: |
+          python3 tools/release/build-static-librashader.py \
+            --source build/m99-static/librashader-git \
+            --target aarch64-apple-darwin \
+            --output build/m99-static/macos-audit
+      - name: Configure
+        run: >-
+          cmake --preset macos-ci
+          -DVAEG_STATIC_LIBRASHADER=ON
+          -DVAEG_LIBRASHADER_STATIC_LIBRARY=${{ github.workspace }}/build/m99-static/librashader-git/target/aarch64-apple-darwin/release/liblibrashader_capi.a
+          -DVAEG_LIBRASHADER_STATIC_NOTICES=${{ github.workspace }}/build/m99-static/macos-audit/third-party-notices.txt
+          '-DVAEG_LIBRASHADER_NATIVE_LIBS=c++;-framework Metal;-framework Foundation;-framework CoreFoundation;iconv;objc'
+      - name: Build
+        run: cmake --build --preset macos-ci
+      - name: Smoke
+        run: SDL_VIDEODRIVER=dummy SDL_AUDIODRIVER=dummy ./build/macos-ci/sdl2/vaeg --smoke
+      - name: Unit tests
+        run: ctest --test-dir build/macos-ci --output-on-failure
+      - name: Download PC-88VA guest-driver bundle
+        uses: actions/download-artifact@v4
+        with:
+          name: vaeg-release-pc88va-guest-drivers
+          path: build/pc88va-guest-drivers
+      - name: Verify PC-88VA guest-driver bundle
+        run: |
+          cd build/pc88va-guest-drivers
+          shasum -a 256 --check SHA256SUMS
+      - name: Package
+        run: |
+          set -euo pipefail
+          file build/macos-ci/sdl2/vaeg | tee vaeg-file.txt
+          grep -q 'arm64' vaeg-file.txt
+          release_id="${RELEASE_TAG//-/}"
+          release_notes="CHANGES.${RELEASE_TAG#rel-}.md"
+          package="vaeg-${release_id}-macos-arm64"
+          asset="${package}.tar.gz"
+          test -f "${release_notes}"
+          rm -rf dist-package "${asset}"
+          mkdir -p "dist-package/${package}/assets" \
+            "dist-package/${package}/licenses"
+          install -m 755 build/macos-ci/sdl2/vaeg "dist-package/${package}/vaeg"
+          cp -R build/pc88va-guest-drivers/. "dist-package/${package}/"
+          install -m 644 assets/OFL.txt "dist-package/${package}/assets/"
+          install -m 644 assets/NOTICE.md "dist-package/${package}/assets/"
+          install -m 644 external/suzukiplan-z80/LICENSE.txt \
+            "dist-package/${package}/licenses/suzukiplan-z80.txt"
+          install -m 644 "${release_notes}" "dist-package/${package}/"
+          install -m 644 dist/readme-dist.txt "dist-package/${package}/README-dist.txt"
+          stage_args=(--output "dist-package/${package}" --platform macos)
+          if [[ -n "${VAEG_LIBRASHADER_RUNTIME:-}" ]]; then
+            stage_args+=(--runtime "${VAEG_LIBRASHADER_RUNTIME}")
+          fi
+          tools/release/stage-librashader-assets.sh "${stage_args[@]}"
+          python3 tools/release/check-librashader-package.py \
+            --input "dist-package/${package}" --platform macos
+
+          if otool -L "dist-package/${package}/vaeg" | grep -E 'libSDL2.*dylib'; then
+            echo "unexpected dynamic SDL2 dependency" >&2
+            exit 1
+          fi
+
+          otool -L "dist-package/${package}/vaeg"
+          find "dist-package/${package}" -type f | sort
+          tar -C dist-package -czf "${asset}" "${package}"
+          tar -tzf "${asset}"
+          python3 tools/release/check-librashader-package.py \
+            --input "${asset}" --platform macos
+          python3 tests/z80_compat/check_zex_archive.py "${asset}"
+      - name: Upload release asset
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          release_id="${RELEASE_TAG//-/}"
+          gh release upload "${RELEASE_TAG}" \
+            "vaeg-${release_id}-macos-arm64.tar.gz" \
+            --clobber

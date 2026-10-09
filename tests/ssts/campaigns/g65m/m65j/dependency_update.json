@@ -1,0 +1,102 @@
+{
+  "canonical_next": "M65a",
+  "edges": [
+    {
+      "from": "M65j",
+      "to": "M65j.01",
+      "type": "campaign_serialization_dependency"
+    },
+    {
+      "from": "M65j",
+      "to": "M65j.02",
+      "type": "campaign_serialization_dependency"
+    },
+    {
+      "from": "M65j",
+      "to": "M65j.03",
+      "type": "campaign_serialization_dependency"
+    },
+    {
+      "from": "M65j",
+      "to": "M65j.04",
+      "type": "campaign_serialization_dependency"
+    },
+    {
+      "from": "M65j",
+      "to": "M65j.05",
+      "type": "campaign_serialization_dependency"
+    },
+    {
+      "from": "M65j",
+      "to": "M65j.06",
+      "type": "campaign_serialization_dependency"
+    },
+    {
+      "from": "M65j",
+      "to": "M65j.07",
+      "type": "campaign_serialization_dependency"
+    },
+    {
+      "from": "M65j",
+      "to": "M65j.08",
+      "type": "campaign_serialization_dependency"
+    },
+    {
+      "from": "M65j",
+      "to": "M65j.09",
+      "type": "campaign_serialization_dependency"
+    },
+    {
+      "from": "M65j",
+      "to": "M65j.10",
+      "type": "campaign_serialization_dependency"
+    },
+    {
+      "from": "M65j",
+      "to": "M65j.11",
+      "type": "campaign_serialization_dependency"
+    },
+    {
+      "from": "M65j",
+      "to": "M65j.12",
+      "type": "campaign_serialization_dependency"
+    },
+    {
+      "from": "M65j",
+      "to": "M65j.13",
+      "type": "campaign_serialization_dependency"
+    },
+    {
+      "from": "M65j",
+      "to": "M65j.14",
+      "type": "campaign_serialization_dependency"
+    },
+    {
+      "from": "M65j",
+      "to": "M65j.15",
+      "type": "campaign_serialization_dependency"
+    },
+    {
+      "from": "M65j",
+      "to": "M65j.16",
+      "type": "campaign_serialization_dependency"
+    },
+    {
+      "from": "M65j",
+      "to": "M65j.17",
+      "type": "campaign_serialization_dependency"
+    },
+    {
+      "from": "M65j",
+      "to": "M65j.18",
+      "type": "campaign_serialization_dependency"
+    },
+    {
+      "from": "M65j",
+      "to": "M65j.19",
+      "type": "campaign_serialization_dependency"
+    }
+  ],
+  "m65m_terminal": true,
+  "schema": "vaeg-upd9002-m65j-dependency-update-v1"
+}

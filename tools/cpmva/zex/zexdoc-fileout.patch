@@ -1,0 +1,149 @@
+M101 file-output variant of zexdoc.src (ZEXDOCF.COM writes ZEXDOC.TXT).
+
+This patch modifies ZEX and is distributed under the GPL-2.0-or-later terms
+stated in external/zex/zexdoc.src. It is applied by tools/cpmva/zex/zexbuild.py
+before the z80asm dialect translation. msbt and the test table are unchanged.
+
+--- a/external/zex/zexdoc.src
++++ b/external/zex/zexdoc.src
+@@ -89,6 +89,7 @@
+ 
+ start:	ld	hl,(6)
+ 	ld	sp,hl
++	call	fopen		; vaeg: create the log file
+ 	ld	de,msg1
+ 	ld	c,9
+ 	call	bdos
+@@ -105,6 +106,7 @@
+ done:	ld	de,msg2
+ 	ld	c,9
+ 	call	bdos
++	call	fclose		; vaeg: flush and close the log file
+ 	jp	0		; warm boot
+ 
+ tests:
+@@ -1210,6 +1212,7 @@
+ 	push	bc
+ 	push	de
+ 	push	hl
++	call	flog		; vaeg: copy console output to the log
+ 	call	5
+ 	pop	hl
+ 	pop	de
+@@ -1217,6 +1220,116 @@
+ 	pop	af
+ 	ret
+ 
++; vaeg M101 file output. This addition is distributed under the same
++; GPL-2.0-or-later terms as the rest of this file.
++; Every byte written with BDOS 2 or 9 is also written to ZEXDOC.TXT.
++; The log uses 128-byte records; the last record is padded with 1Ah.
++; Only BDOS 16, 19, 21, 22 and 26 are used, always through CALL 5.
++
++; create the log file; stop with a message if it cannot be created
++fopen:	ld	de,fcb
++	ld	c,19		; delete any old log file
++	call	5
++	xor	a
++	ld	(fcb+12),a	; ex
++	ld	(fcb+14),a	; s2
++	ld	(fcb+32),a	; cr
++	ld	de,fcb
++	ld	c,22		; make the log file
++	call	5
++	inc	a		; 0ffh means no directory space
++	ret	nz
++	ld	de,fmkerr
++	ld	c,9
++	call	5
++	jp	0
++
++; copy a BDOS 2 character (e) or BDOS 9 string (de) to the log
++flog:	push	af
++	push	bc
++	push	de
++	push	hl
++	ld	a,c
++	cp	2
++	jp	z,flogc
++	cp	9
++	jp	nz,flogx
++flogs:	ld	a,(de)
++	cp	'$'
++	jp	z,flogx
++	call	fputc
++	inc	de
++	jp	flogs
++flogc:	ld	a,e
++	call	fputc
++flogx:	pop	hl
++	pop	de
++	pop	bc
++	pop	af
++	ret
++
++; append the byte in a to the record buffer; write the record when full
++fputc:	push	af
++	push	hl
++	ld	hl,(fptr)
++	ld	(hl),a
++	inc	hl
++	ld	(fptr),hl
++	ld	hl,fcnt
++	dec	(hl)
++	call	z,fflush
++	pop	hl
++	pop	af
++	ret
++
++; write the record buffer and reset it
++fflush:	push	af
++	push	bc
++	push	de
++	push	hl
++	ld	de,fbuf
++	ld	c,26		; set dma address
++	call	5
++	ld	de,fcb
++	ld	c,21		; write sequential
++	call	5
++	or	a
++	jp	z,ffok
++	ld	de,fwrerr
++	ld	c,9
++	call	5
++ffok:	ld	hl,fbuf
++	ld	(fptr),hl
++	ld	a,128
++	ld	(fcnt),a
++	pop	hl
++	pop	de
++	pop	bc
++	pop	af
++	ret
++
++; pad the last record with 1ah, write it, and close the log file
++fclose:	ld	a,(fcnt)
++	cp	128
++	jp	z,fcls
++fpad:	ld	a,01ah
++	call	fputc
++	ld	a,(fcnt)
++	cp	128
++	jp	nz,fpad
++fcls:	ld	de,fcb
++	ld	c,16		; close file
++	call	5
++	ret
++
++fcb:	db	0,'ZEXDOC  TXT'
++	db	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
++fptr:	dw	fbuf
++fcnt:	db	128
++fmkerr:	db	'Cannot create ZEXDOC.TXT',13,10,'$'
++fwrerr:	db	13,10,'Write error on ZEXDOC.TXT',13,10,'$'
++fbuf:	ds	128
++
+ msg1:	db	'Z80doc instruction exerciser',13,10,'$'
+ msg2:	db	'Tests complete',13,10,'$'
+ okmsg:	db	'  OK',13,10,'$'

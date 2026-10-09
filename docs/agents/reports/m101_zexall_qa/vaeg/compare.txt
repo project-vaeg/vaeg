@@ -1,0 +1,146 @@
+== FLAGPRB
+P0   BOTH     
+P1   UPD9002  zilog: F^1C=H,X
+P2   UPD9002  zilog: F^10=H
+P3   UPD9002  zilog: F^C5=H,N
+P4a  UPD9002  zilog: F^C1=H,N
+P4b  UPD9002  zilog: F^C5=H,N
+P5a  UPD9002  zilog: F^10=H
+P5b  UPD9002  zilog: F^00=H
+P6a  UPD9002  zilog: F^00=H
+P6b  UPD9002  zilog: F^02=H
+P7a  UPD9002  zilog: F^FF=Y,X C^FF=Y,X
+P7b  UPD9002  zilog: F^FF=Y,X C^FF=Y,X
+P7c  UPD9002  zilog: F^28=Y,X C^28=Y,X
+P7d  UPD9002  zilog: F^FF=Y,X C^FF=Y,X
+
+== ZEX13S
+aluop a,nn               found 12967d59 UPD9002
+<daa,cpl,scf,ccf>        found 9b4ba675 BOTH
+daa (d7)                 found a4611558 BOTH
+daa (ff)                 found a4611558 UPD9002
+cpl (d7)                 found a2215a02 BOTH
+cpl (ff)                 found a2215a02 UPD9002
+scf (d7)                 found 01dfb77c BOTH
+scf (ff)                 found 01dfb77c UPD9002
+ccf (d7)                 found 08d20fe0 BOTH
+ccf (ff)                 found 08d20fe0 UPD9002
+control aluop a,nn: 12967d59 (12967d59 reproduced)
+control <daa,cpl,scf,ccf>: 9b4ba675 (6096b6aa NOT reproduced)
+
+== ZEXDOC.TXT
+groups 67; OK 56; ERROR 11
+differs from UPD9002 host: 0
+differs from the expectation file (upd9002_zexdoc_expected.txt): 0
+
+== ZEXALL.TXT
+groups 67; OK 35; ERROR 32
+differs from UPD9002 host: 0
+differs from the expectation file (upd9002_zexall_expected.txt): 0
+
+== DAADUMP
+-- DAA.BIN size 32768 crc 18EA0D71 DAADUMP.TXT ok
+   vs zilog: 10496 mismatching records of 16384
+   by field: X=5632, Y=7456
+   by input: H0 N0 C0=976, H0 N0 C1=1152, H0 N1 C0=1120, H0 N1 C1=1280, H1 N0 C0=1456, H1 N0 C1=1536, H1 N1 C0=1440, H1 N1 C1=1536
+   by A:     hi 0-9 lo 0-9=4640, hi 0-9 lo A-F=2208, hi A-F lo 0-9=2432, hi A-F lo A-F=1216
+   fi= 0 F_in=00 A_in=08: real A=08 F=00 zilog A=08 F=08 dF=X
+   fi= 0 F_in=00 A_in=09: real A=09 F=04 zilog A=09 F=0C dF=X
+   fi= 0 F_in=00 A_in=18: real A=18 F=04 zilog A=18 F=0C dF=X
+   fi= 0 F_in=00 A_in=19: real A=19 F=00 zilog A=19 F=08 dF=X
+   fi= 0 F_in=00 A_in=1A: real A=20 F=10 zilog A=20 F=30 dF=Y
+   fi= 0 F_in=00 A_in=1B: real A=21 F=14 zilog A=21 F=34 dF=Y
+   fi= 0 F_in=00 A_in=1C: real A=22 F=14 zilog A=22 F=34 dF=Y
+   fi= 0 F_in=00 A_in=1D: real A=23 F=10 zilog A=23 F=30 dF=Y
+   fi= 0 F_in=00 A_in=1E: real A=24 F=14 zilog A=24 F=34 dF=Y
+   fi= 0 F_in=00 A_in=1F: real A=25 F=10 zilog A=25 F=30 dF=Y
+   fi= 0 F_in=00 A_in=20: real A=20 F=00 zilog A=20 F=20 dF=Y
+   fi= 0 F_in=00 A_in=21: real A=21 F=04 zilog A=21 F=24 dF=Y
+   fi= 0 F_in=00 A_in=22: real A=22 F=04 zilog A=22 F=24 dF=Y
+   fi= 0 F_in=00 A_in=23: real A=23 F=00 zilog A=23 F=20 dF=Y
+   fi= 0 F_in=00 A_in=24: real A=24 F=04 zilog A=24 F=24 dF=Y
+   fi= 0 F_in=00 A_in=25: real A=25 F=00 zilog A=25 F=20 dF=Y
+   fi= 0 F_in=00 A_in=26: real A=26 F=00 zilog A=26 F=20 dF=Y
+   fi= 0 F_in=00 A_in=27: real A=27 F=04 zilog A=27 F=24 dF=Y
+   fi= 0 F_in=00 A_in=28: real A=28 F=04 zilog A=28 F=2C dF=Y,X
+   fi= 0 F_in=00 A_in=29: real A=29 F=00 zilog A=29 F=28 dF=Y,X
+   vs upd9002: 0 mismatching records of 16384
+-- CPL.BIN size 32768 crc 7C1BF580 DAADUMP.TXT ok
+   vs zilog: 12288 mismatching records of 16384
+   by field: X=8192, Y=8192
+   by input: H0 N0 C0=1536, H0 N0 C1=1536, H0 N1 C0=1536, H0 N1 C1=1536, H1 N0 C0=1536, H1 N0 C1=1536, H1 N1 C0=1536, H1 N1 C1=1536
+   by A:     hi 0-9 lo 0-9=5888, hi 0-9 lo A-F=2304, hi A-F lo 0-9=3328, hi A-F lo A-F=768
+   fi= 0 F_in=00 A_in=00: real A=FF F=12 zilog A=FF F=3A dF=Y,X
+   fi= 0 F_in=00 A_in=01: real A=FE F=12 zilog A=FE F=3A dF=Y,X
+   fi= 0 F_in=00 A_in=02: real A=FD F=12 zilog A=FD F=3A dF=Y,X
+   fi= 0 F_in=00 A_in=03: real A=FC F=12 zilog A=FC F=3A dF=Y,X
+   fi= 0 F_in=00 A_in=04: real A=FB F=12 zilog A=FB F=3A dF=Y,X
+   fi= 0 F_in=00 A_in=05: real A=FA F=12 zilog A=FA F=3A dF=Y,X
+   fi= 0 F_in=00 A_in=06: real A=F9 F=12 zilog A=F9 F=3A dF=Y,X
+   fi= 0 F_in=00 A_in=07: real A=F8 F=12 zilog A=F8 F=3A dF=Y,X
+   fi= 0 F_in=00 A_in=08: real A=F7 F=12 zilog A=F7 F=32 dF=Y
+   fi= 0 F_in=00 A_in=09: real A=F6 F=12 zilog A=F6 F=32 dF=Y
+   fi= 0 F_in=00 A_in=0A: real A=F5 F=12 zilog A=F5 F=32 dF=Y
+   fi= 0 F_in=00 A_in=0B: real A=F4 F=12 zilog A=F4 F=32 dF=Y
+   fi= 0 F_in=00 A_in=0C: real A=F3 F=12 zilog A=F3 F=32 dF=Y
+   fi= 0 F_in=00 A_in=0D: real A=F2 F=12 zilog A=F2 F=32 dF=Y
+   fi= 0 F_in=00 A_in=0E: real A=F1 F=12 zilog A=F1 F=32 dF=Y
+   fi= 0 F_in=00 A_in=0F: real A=F0 F=12 zilog A=F0 F=32 dF=Y
+   fi= 0 F_in=00 A_in=10: real A=EF F=12 zilog A=EF F=3A dF=Y,X
+   fi= 0 F_in=00 A_in=11: real A=EE F=12 zilog A=EE F=3A dF=Y,X
+   fi= 0 F_in=00 A_in=12: real A=ED F=12 zilog A=ED F=3A dF=Y,X
+   fi= 0 F_in=00 A_in=13: real A=EC F=12 zilog A=EC F=3A dF=Y,X
+   vs upd9002: 0 mismatching records of 16384
+-- SCF.BIN size 32768 crc FAD09EF5 DAADUMP.TXT ok
+   vs zilog: 12288 mismatching records of 16384
+   by field: X=8192, Y=8192
+   by input: H0 N0 C0=1536, H0 N0 C1=1536, H0 N1 C0=1536, H0 N1 C1=1536, H1 N0 C0=1536, H1 N0 C1=1536, H1 N1 C0=1536, H1 N1 C1=1536
+   by A:     hi 0-9 lo 0-9=3328, hi 0-9 lo A-F=3840, hi A-F lo 0-9=2816, hi A-F lo A-F=2304
+   fi= 0 F_in=00 A_in=08: real A=08 F=01 zilog A=08 F=09 dF=X
+   fi= 0 F_in=00 A_in=09: real A=09 F=01 zilog A=09 F=09 dF=X
+   fi= 0 F_in=00 A_in=0A: real A=0A F=01 zilog A=0A F=09 dF=X
+   fi= 0 F_in=00 A_in=0B: real A=0B F=01 zilog A=0B F=09 dF=X
+   fi= 0 F_in=00 A_in=0C: real A=0C F=01 zilog A=0C F=09 dF=X
+   fi= 0 F_in=00 A_in=0D: real A=0D F=01 zilog A=0D F=09 dF=X
+   fi= 0 F_in=00 A_in=0E: real A=0E F=01 zilog A=0E F=09 dF=X
+   fi= 0 F_in=00 A_in=0F: real A=0F F=01 zilog A=0F F=09 dF=X
+   fi= 0 F_in=00 A_in=18: real A=18 F=01 zilog A=18 F=09 dF=X
+   fi= 0 F_in=00 A_in=19: real A=19 F=01 zilog A=19 F=09 dF=X
+   fi= 0 F_in=00 A_in=1A: real A=1A F=01 zilog A=1A F=09 dF=X
+   fi= 0 F_in=00 A_in=1B: real A=1B F=01 zilog A=1B F=09 dF=X
+   fi= 0 F_in=00 A_in=1C: real A=1C F=01 zilog A=1C F=09 dF=X
+   fi= 0 F_in=00 A_in=1D: real A=1D F=01 zilog A=1D F=09 dF=X
+   fi= 0 F_in=00 A_in=1E: real A=1E F=01 zilog A=1E F=09 dF=X
+   fi= 0 F_in=00 A_in=1F: real A=1F F=01 zilog A=1F F=09 dF=X
+   fi= 0 F_in=00 A_in=20: real A=20 F=01 zilog A=20 F=21 dF=Y
+   fi= 0 F_in=00 A_in=21: real A=21 F=01 zilog A=21 F=21 dF=Y
+   fi= 0 F_in=00 A_in=22: real A=22 F=01 zilog A=22 F=21 dF=Y
+   fi= 0 F_in=00 A_in=23: real A=23 F=01 zilog A=23 F=21 dF=Y
+   vs upd9002: 0 mismatching records of 16384
+-- CCF.BIN size 32768 crc 32B0FA6E DAADUMP.TXT ok
+   vs zilog: 12288 mismatching records of 16384
+   by field: X=8192, Y=8192
+   by input: H0 N0 C0=1536, H0 N0 C1=1536, H0 N1 C0=1536, H0 N1 C1=1536, H1 N0 C0=1536, H1 N0 C1=1536, H1 N1 C0=1536, H1 N1 C1=1536
+   by A:     hi 0-9 lo 0-9=3328, hi 0-9 lo A-F=3840, hi A-F lo 0-9=2816, hi A-F lo A-F=2304
+   fi= 0 F_in=00 A_in=08: real A=08 F=01 zilog A=08 F=09 dF=X
+   fi= 0 F_in=00 A_in=09: real A=09 F=01 zilog A=09 F=09 dF=X
+   fi= 0 F_in=00 A_in=0A: real A=0A F=01 zilog A=0A F=09 dF=X
+   fi= 0 F_in=00 A_in=0B: real A=0B F=01 zilog A=0B F=09 dF=X
+   fi= 0 F_in=00 A_in=0C: real A=0C F=01 zilog A=0C F=09 dF=X
+   fi= 0 F_in=00 A_in=0D: real A=0D F=01 zilog A=0D F=09 dF=X
+   fi= 0 F_in=00 A_in=0E: real A=0E F=01 zilog A=0E F=09 dF=X
+   fi= 0 F_in=00 A_in=0F: real A=0F F=01 zilog A=0F F=09 dF=X
+   fi= 0 F_in=00 A_in=18: real A=18 F=01 zilog A=18 F=09 dF=X
+   fi= 0 F_in=00 A_in=19: real A=19 F=01 zilog A=19 F=09 dF=X
+   fi= 0 F_in=00 A_in=1A: real A=1A F=01 zilog A=1A F=09 dF=X
+   fi= 0 F_in=00 A_in=1B: real A=1B F=01 zilog A=1B F=09 dF=X
+   fi= 0 F_in=00 A_in=1C: real A=1C F=01 zilog A=1C F=09 dF=X
+   fi= 0 F_in=00 A_in=1D: real A=1D F=01 zilog A=1D F=09 dF=X
+   fi= 0 F_in=00 A_in=1E: real A=1E F=01 zilog A=1E F=09 dF=X
+   fi= 0 F_in=00 A_in=1F: real A=1F F=01 zilog A=1F F=09 dF=X
+   fi= 0 F_in=00 A_in=20: real A=20 F=01 zilog A=20 F=21 dF=Y
+   fi= 0 F_in=00 A_in=21: real A=21 F=01 zilog A=21 F=21 dF=Y
+   fi= 0 F_in=00 A_in=22: real A=22 F=01 zilog A=22 F=21 dF=Y
+   fi= 0 F_in=00 A_in=23: real A=23 F=01 zilog A=23 F=21 dF=Y
+   vs upd9002: 0 mismatching records of 16384
+

@@ -1,0 +1,8 @@
+{
+  "m70_changed_record_count": 19,
+  "non_m70_record_count": 12,
+  "predecessor_registry": "tests/ssts/divergence/g67/registry.json",
+  "schema": "vaeg-upd9002-g70-source-migration-v1",
+  "schema_version": 1,
+  "unchanged_record_count": 12
+}

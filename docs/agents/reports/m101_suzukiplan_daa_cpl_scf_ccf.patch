@@ -1,0 +1,205 @@
+From 6f34be621ae67a66d74485beca9f424f6ac314fd Mon Sep 17 00:00:00 2001
+From: Nakata Maho <maho.nakata@gmail.com>
+Date: Wed, 30 Sep 2026 12:58:52 +0900
+Subject: [PATCH] Add DAA/CPL/SCF/CCF rules to FlagProfile::Upd9002
+
+Exhaustive dumps from a real PC-88VA2 (all 64 combinations of S, Z, H,
+P/V, N, C with bits 5/3 clear, times all 256 values of A, for each
+instruction) are reproduced exactly by:
+
+  R8   CPL: no flag changes
+  R9   SCF: only C is set; H and N are not changed
+  R10  CCF: only C is complemented; H and N are not changed
+  R11  DAA: low step (+/-06h) when H=1 or low nibble > 9; high step
+       (+/-60h) when C=1 or A > 99h (H=0) / A > 9Fh (H=1), both on the
+       original A; N selects add or subtract. S/Z from the result,
+       H = low step ran, P/V = signed overflow of A +/- adjustment,
+       C = high step ran, N not changed.
+
+With these rules the Upd9002 profile reproduces the real machine's
+ZEXDOC and ZEXALL results in all 67 groups, including the
+<daa,cpl,scf,ccf> found CRC 6096b6aa. The Zilog profile is unchanged.
+---
+ README.md                  |  9 ++++++--
+ test/test-flag-profile.cpp | 38 ++++++++++++++++++++++++++++++++
+ z80.hpp                    | 45 ++++++++++++++++++++++++++++++++++++--
+ 3 files changed, 88 insertions(+), 4 deletions(-)
+
+diff --git a/README.md b/README.md
+index 1d90583..aa41ea9 100644
+--- a/README.md
++++ b/README.md
+@@ -400,7 +400,7 @@ ReturnHandler will be called back immediately **before** a branch by a RET instr
+ By default the flags follow the Zilog Z80, including the undocumented bits 5 and 3 (`Z80::FlagProfile::Zilog`).
+ 
+ The NEC uPD9002 used in the PC-88VA has a Z80 emulation mode whose flags differ.
+-`Z80::FlagProfile::Upd9002` reproduces the ZEXDOC/ZEXALL results measured on a real PC-88VA2 in V2 mode:
++`Z80::FlagProfile::Upd9002` reproduces the behaviour measured on a real PC-88VA2 (ZEXDOC/ZEXALL, direct flag probes, and exhaustive DAA/CPL/SCF/CCF dumps):
+ 
+ | Rule | Instructions | uPD9002 behaviour |
+ |:-|:-|:-|
+@@ -411,8 +411,13 @@ The NEC uPD9002 used in the PC-88VA has a Z80 emulation mode whose flags differ.
+ | R5 | `LDI` / `LDD` / `LDIR` / `LDDR` | H and N are not changed |
+ | R6 | `ADD HL/IX/IY,rr` | H is not changed |
+ | R7 | `ADC HL,rr` / `SBC HL,rr` | H is the carry/borrow out of bit 3 |
++| R8 | `CPL` | no flag changes |
++| R9 | `SCF` | only C is set (H and N are not changed) |
++| R10 | `CCF` | only C is complemented (H and N are not changed) |
++| R11 | `DAA` | see below |
+ 
+-`DAA`, `CPL`, `SCF` and `CCF` are not yet resolved and keep the Zilog behaviour.
++R11 (`DAA`): the low step (±$06) runs when H=1 or the low nibble of A is above 9; the high step (±$60) runs when C=1 or A is above $99 (H=0) or above $9F (H=1), both tested on the original A; N selects add or subtract.
++S and Z come from the result, H is set when the low step ran, P/V is the signed overflow of A ± the adjustment (not parity), C is set when the high step ran, and N is not changed.
+ 
+ ```c++
+     z80.setFlagProfile(Z80::FlagProfile::Upd9002);
+diff --git a/test/test-flag-profile.cpp b/test/test-flag-profile.cpp
+index 1c32063..864a6f5 100644
+--- a/test/test-flag-profile.cpp
++++ b/test/test-flag-profile.cpp
+@@ -28,7 +28,22 @@ static const Probe probes[] = {
+     {"SBC HL,BC", 0x0000, 0x0001, 0x0010, {0xED, 0x42}, 2, 0x00, 0x02, 0x12},     // R7
+     {"POP AF ($FFFF)", 0x0000, 0xFFFF, 0x0000, {0xC5, 0xF1}, 2, 0xFF, 0xFF, 0xD7}, // R1
+     {"EX AF,AF' x2", 0x0000, 0xFFFF, 0x0000, {0xC5, 0xF1, 0x08, 0x08}, 4, 0xFF, 0xFF, 0xD7}, // R1
++    {"CPL", 0x0000, 0x0000, 0x0000, {0x2F}, 1, 0xFF, 0x3A, 0x00},                  // R8
++    {"CPL (F=$D7)", 0x00D7, 0x0000, 0x0000, {0x2F}, 1, 0xFF, 0xFF, 0xD7},          // R8
++    {"SCF (H,N set)", 0x0012, 0x0000, 0x0000, {0x37}, 1, 0x00, 0x01, 0x13},        // R9
++    {"CCF (C set)", 0x0013, 0x0000, 0x0000, {0x3F}, 1, 0x00, 0x10, 0x12},          // R10
++    {"CCF (C clear)", 0x0012, 0x0000, 0x0000, {0x3F}, 1, 0x00, 0x01, 0x13},        // R10
++    {"DAA A=$00", 0x0000, 0x0000, 0x0000, {0x27}, 1, 0x00, 0x44, 0x40},            // R11
++    {"DAA A=$7A", 0x7A00, 0x0000, 0x0000, {0x27}, 1, 0x80, 0x90, 0x94},            // R11
+ };
++// DAA cases whose A result also differs between the profiles (R11: with H=1
++// the high step needs A > $9F instead of A > $99).
++static const Probe daaHighProbes[] = {
++    {"DAA A=$9A H", 0x9A10, 0x0000, 0x0000, {0x27}, 1, 0x00, 0x55, 0x00},
++    {"DAA A=$9A H N", 0x9A12, 0x0000, 0x0000, {0x27}, 1, 0x00, 0x23, 0x00},
++};
++static const unsigned char daaHighA[][2] = {{0x00, 0xA0}, {0x34, 0x94}};
++static const unsigned char daaHighFUpd9002[] = {0x90, 0x92};
+ 
+ int main()
+ {
+@@ -72,5 +87,28 @@ int main()
+             if (!ok) failures++;
+         }
+     }
++    for (int profile = 0; profile < 2; profile++) {
++        for (int i = 0; i < 2; i++) {
++            const Probe& probe = daaHighProbes[i];
++            memset(memory, 0, sizeof(memory));
++            const unsigned char code[] = {0x01, (unsigned char)probe.af, (unsigned char)(probe.af >> 8), // LD BC,af
++                                          0xC5, 0xF1, 0x27, 0xF5, 0xD1};                               // PUSH BC, POP AF, DAA, PUSH AF, POP DE
++            memcpy(memory, code, sizeof(code));
++            Z80 z80([&memory](void* arg, unsigned short addr) { return memory[addr]; },
++                    [&memory](void* arg, unsigned short addr, unsigned char value) { memory[addr] = value; },
++                    [](void* arg, unsigned short port) { return (unsigned char)0xFF; },
++                    [](void* arg, unsigned short port, unsigned char value) {},
++                    &z80);
++            z80.setFlagProfile(profile ? Z80::FlagProfile::Upd9002 : Z80::FlagProfile::Zilog);
++            z80.reg.SP = 0xF000;
++            while (z80.reg.PC != sizeof(code)) z80.execute(1);
++            unsigned char expectedA = daaHighA[i][profile];
++            unsigned char expectedF = profile ? daaHighFUpd9002[i] : probe.fZilog;
++            bool ok = z80.reg.pair.A == expectedA && z80.reg.pair.E == expectedF;
++            printf("%s: %-8s %-20s A=$%02X F=$%02X (expected A=$%02X F=$%02X)\n", ok ? "OK" : "NG",
++                   profile ? "Upd9002" : "Zilog", probe.name, z80.reg.pair.A, z80.reg.pair.E, expectedA, expectedF);
++            if (!ok) failures++;
++        }
++    }
+     return failures ? -1 : 0;
+ }
+diff --git a/z80.hpp b/z80.hpp
+index 86dbd86..8ddd7c7 100644
+--- a/z80.hpp
++++ b/z80.hpp
+@@ -120,8 +120,8 @@ class Z80
+     // Zilog: documented and undocumented Zilog Z80 flag behaviour. This is the
+     // default and the existing behaviour.
+     // Upd9002: NEC uPD9002 Z80 emulation mode (PC-88VA V1/V2 mode). Rules
+-    // R1-R7 are reproduced from ZEXDOC/ZEXALL runs on a real PC-88VA2;
+-    // DAA/CPL/SCF/CCF are unresolved and keep Zilog behaviour.
++    // R1-R11 were measured on a real PC-88VA2 (ZEXDOC/ZEXALL, direct flag
++    // probes and exhaustive DAA/CPL/SCF/CCF dumps).
+     enum class FlagProfile {
+         Zilog,
+         Upd9002
+@@ -4311,6 +4311,7 @@ class Z80
+         if (ctx->isDebug()) ctx->log("[%04X] CPL %s", ctx->reg.PC - 1, ctx->registerDump(0b111));
+ #endif
+         ctx->reg.pair.A = ~ctx->reg.pair.A;
++        if (ctx->isUpd9002()) return; // R8: no flag changes
+         ctx->setFlagH();
+         ctx->setFlagN();
+         ctx->setFlagXY(ctx->reg.pair.A);
+@@ -4334,6 +4335,10 @@ class Z80
+ #ifndef Z80_DISABLE_DEBUG
+         if (ctx->isDebug()) ctx->log("[%04X] CCF <C:%s -> %s>", ctx->reg.PC - 1, ctx->isFlagC() ? "ON" : "OFF", !ctx->isFlagC() ? "ON" : "OFF");
+ #endif
++        if (ctx->isUpd9002()) {
++            ctx->setFlagC(!ctx->isFlagC()); // R10: only C changes
++            return;
++        }
+         ctx->setFlagH(ctx->isFlagC());
+         ctx->resetFlagN();
+         ctx->setFlagC(!ctx->isFlagC());
+@@ -4346,6 +4351,10 @@ class Z80
+ #ifndef Z80_DISABLE_DEBUG
+         if (ctx->isDebug()) ctx->log("[%04X] SCF <C:%s -> ON>", ctx->reg.PC - 1, ctx->isFlagC() ? "ON" : "OFF");
+ #endif
++        if (ctx->isUpd9002()) {
++            ctx->setFlagC(); // R9: only C changes
++            return;
++        }
+         ctx->resetFlagH();
+         ctx->resetFlagN();
+         ctx->setFlagC();
+@@ -5664,6 +5673,10 @@ class Z80
+     static inline void DAA(Z80* ctx) { ctx->daa(); }
+     inline void daa()
+     {
++        if (isUpd9002()) {
++            daaUpd9002();
++            return;
++        }
+         int a = reg.pair.A;
+         bool c = isFlagC();
+         bool ac = reg.pair.A > 0x99;
+@@ -5682,6 +5695,34 @@ class Z80
+         reg.pair.A = a;
+     }
+ 
++    // R11: uPD9002 DAA. The low step (+/-06h) runs when H=1 or the low nibble
++    // of A is above 9. The high step (+/-60h) runs when C=1 or A is above 99h
++    // (H=0) or above 9Fh (H=1); both tests use the original A. N selects add
++    // or subtract. S/Z come from the result, H is set when the low step ran,
++    // P/V is the signed overflow of A +/- the adjustment, C is set when the
++    // high step ran, and N is not changed.
++    inline void daaUpd9002()
++    {
++        int a = reg.pair.A;
++        bool h = isFlagH();
++        bool low = h || (a & 0x0F) > 9;
++        bool high = isFlagC() || a > (h ? 0x9F : 0x99);
++        int adjust = (low ? 0x06 : 0x00) + (high ? 0x60 : 0x00);
++        int signedA = a & 0x80 ? a - 0x100 : a;
++        int signedResult = isFlagN() ? signedA - adjust : signedA + adjust;
++        int result = (isFlagN() ? a - adjust : a + adjust) & 0xFF;
++        setFlagS(result & 0x80);
++        setFlagXY(result);
++        setFlagZ(0 == result);
++        setFlagH(low);
++        setFlagPV(signedResult < -128 || 127 < signedResult);
++        setFlagC(high);
++#ifndef Z80_DISABLE_DEBUG
++        if (isDebug()) log("[%04X] DAA ... A: $%02X -> $%02X", reg.PC - 1, reg.pair.A, result);
++#endif
++        reg.pair.A = (unsigned char)result;
++    }
++
+     // Rotate digit Left and right between Acc. and location (HL)
+     static inline void RLD_(Z80* ctx) { ctx->RLD(); }
+     inline void RLD()
+-- 
+2.43.0
+

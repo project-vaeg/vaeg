@@ -1,0 +1,13 @@
+P0C FF FF FF FF
+P0D FF FF FF FF
+P30 DB DB DB DB
+P31 F9 F9 F9 F9
+P50 FF FF FF FF
+P51 FF FF FF FF
+P80 01 01 01 01
+P81 FF FF FF FF
+C0B0C FF FF
+C0130 DB F9
+C0150 FF FF
+C0180 01 FF
+

@@ -1,0 +1,128 @@
+M101 ZEX13S: the file-output ZEXDOC with the <daa,cpl,scf,ccf> group split
+into single-opcode groups (ZEX13S.COM writes ZEX13S.TXT).
+
+This patch modifies ZEX and is distributed under the GPL-2.0-or-later terms
+stated in external/zex/zexdoc.src. tools/cpmva/zex/zexbuild.py applies it
+after zexdoc-fileout.patch. msbt and the original descriptors are unchanged.
+The expected CRCs of the eight new groups are those of the Zilog profile.
+
+--- a/external/zex/zexdoc.src
++++ b/external/zex/zexdoc.src
+@@ -94,7 +94,7 @@
+ 	ld	c,9
+ 	call	bdos
+ 
+-	ld	hl,tests	; first test case
++	ld	hl,tests13	; vaeg ZEX13S: first test case
+ loop:	ld	a,(hl)		; end of list ?
+ 	inc	hl
+ 	or	(hl)
+@@ -109,6 +109,22 @@
+ 	call	fclose		; vaeg: flush and close the log file
+ 	jp	0		; warm boot
+ 
++; vaeg M101 ZEX13S test table: two build controls, then DAA, CPL, SCF and CCF
++; each alone, with flag mask D7h and FFh. This addition is distributed under
++; the same GPL-2.0-or-later terms as the rest of this file.
++tests13:
++	dw	alu8i
++	dw	daaop
++	dw	x27d7
++	dw	x27ff
++	dw	x2fd7
++	dw	x2fff
++	dw	x37d7
++	dw	x37ff
++	dw	x3fd7
++	dw	x3fff
++	dw	0
++
+ tests:
+ 	dw	adc16
+ 	dw	add16
+@@ -311,6 +327,65 @@
+ 	db	09bh,04bh,0a6h,075h			; expected crc
+ 	tmsg	'<daa,cpl,scf,ccf>.............'
+ 
++; vaeg M101 ZEX13S: the <daa,cpl,scf,ccf> descriptor with a single opcode
++; (instruction-byte counter mask 00h); all other fields unchanged.
++
++x27d7:	db	0d7h		; flag mask
++	tstr	027h,0,0,0,02141h,009fah,01d60h,0a559h,08d5bh,09079h,004h,08eh,0299dh
++	tstr	0,0,0,0,0,0,0,0,0,0,0d7h,-1,0	; (16,384 cycles)
++	tstr	0,0,0,0,0,0,0,0,0,0,0,0,0		; (1 cycle)
++	db	0a4h,061h,015h,058h			; expected crc
++	tmsg	'daa (d7)......................'
++
++x27ff:	db	0ffh		; flag mask
++	tstr	027h,0,0,0,02141h,009fah,01d60h,0a559h,08d5bh,09079h,004h,08eh,0299dh
++	tstr	0,0,0,0,0,0,0,0,0,0,0d7h,-1,0	; (16,384 cycles)
++	tstr	0,0,0,0,0,0,0,0,0,0,0,0,0		; (1 cycle)
++	db	035h,051h,0c3h,026h			; expected crc
++	tmsg	'daa (ff)......................'
++
++x2fd7:	db	0d7h		; flag mask
++	tstr	02fh,0,0,0,02141h,009fah,01d60h,0a559h,08d5bh,09079h,004h,08eh,0299dh
++	tstr	0,0,0,0,0,0,0,0,0,0,0d7h,-1,0	; (16,384 cycles)
++	tstr	0,0,0,0,0,0,0,0,0,0,0,0,0		; (1 cycle)
++	db	0a2h,021h,05ah,002h			; expected crc
++	tmsg	'cpl (d7)......................'
++
++x2fff:	db	0ffh		; flag mask
++	tstr	02fh,0,0,0,02141h,009fah,01d60h,0a559h,08d5bh,09079h,004h,08eh,0299dh
++	tstr	0,0,0,0,0,0,0,0,0,0,0d7h,-1,0	; (16,384 cycles)
++	tstr	0,0,0,0,0,0,0,0,0,0,0,0,0		; (1 cycle)
++	db	07eh,008h,0aah,0dah			; expected crc
++	tmsg	'cpl (ff)......................'
++
++x37d7:	db	0d7h		; flag mask
++	tstr	037h,0,0,0,02141h,009fah,01d60h,0a559h,08d5bh,09079h,004h,08eh,0299dh
++	tstr	0,0,0,0,0,0,0,0,0,0,0d7h,-1,0	; (16,384 cycles)
++	tstr	0,0,0,0,0,0,0,0,0,0,0,0,0		; (1 cycle)
++	db	001h,0dfh,0b7h,07ch			; expected crc
++	tmsg	'scf (d7)......................'
++
++x37ff:	db	0ffh		; flag mask
++	tstr	037h,0,0,0,02141h,009fah,01d60h,0a559h,08d5bh,09079h,004h,08eh,0299dh
++	tstr	0,0,0,0,0,0,0,0,0,0,0d7h,-1,0	; (16,384 cycles)
++	tstr	0,0,0,0,0,0,0,0,0,0,0,0,0		; (1 cycle)
++	db	083h,05eh,022h,09bh			; expected crc
++	tmsg	'scf (ff)......................'
++
++x3fd7:	db	0d7h		; flag mask
++	tstr	03fh,0,0,0,02141h,009fah,01d60h,0a559h,08d5bh,09079h,004h,08eh,0299dh
++	tstr	0,0,0,0,0,0,0,0,0,0,0d7h,-1,0	; (16,384 cycles)
++	tstr	0,0,0,0,0,0,0,0,0,0,0,0,0		; (1 cycle)
++	db	008h,0d2h,00fh,0e0h			; expected crc
++	tmsg	'ccf (d7)......................'
++
++x3fff:	db	0ffh		; flag mask
++	tstr	03fh,0,0,0,02141h,009fah,01d60h,0a559h,08d5bh,09079h,004h,08eh,0299dh
++	tstr	0,0,0,0,0,0,0,0,0,0,0d7h,-1,0	; (16,384 cycles)
++	tstr	0,0,0,0,0,0,0,0,0,0,0,0,0		; (1 cycle)
++	db	08ah,053h,09ah,007h			; expected crc
++	tmsg	'ccf (ff)......................'
++
+ ; <inc,dec> a (3072 cycles)
+ inca:	db	0d7h		; flag mask
+ 	tstr	03ch,0,0,0,04adfh,0d5d8h,0e598h,08a2bh,0a7b0h,0431bh,044h,05ah,0d030h
+@@ -1322,15 +1397,15 @@
+ 	call	5
+ 	ret
+ 
+-fcb:	db	0,'ZEXDOC  TXT'
++fcb:	db	0,'ZEX13S  TXT'
+ 	db	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ fptr:	dw	fbuf
+ fcnt:	db	128
+-fmkerr:	db	'Cannot create ZEXDOC.TXT',13,10,'$'
+-fwrerr:	db	13,10,'Write error on ZEXDOC.TXT',13,10,'$'
++fmkerr:	db	'Cannot create ZEX13S.TXT',13,10,'$'
++fwrerr:	db	13,10,'Write error on ZEX13S.TXT',13,10,'$'
+ fbuf:	ds	128
+ 
+-msg1:	db	'Z80doc instruction exerciser',13,10,'$'
++msg1:	db	'ZEX13S <daa,cpl,scf,ccf> split exerciser',13,10,'$'
+ msg2:	db	'Tests complete',13,10,'$'
+ okmsg:	db	'  OK',13,10,'$'
+ ermsg1:	db	'  ERROR **** crc expected:$'

@@ -1,0 +1,1 @@
+{"architectural_outcomes":{"pass":5000},"frame_boundary_partitions":{"no-boundary":2390,"physical-boundary":78},"frame_residual_count":0,"name":"INTO","non_taken_count":2532,"resolved_count":5000,"resolved_hashes_sha256":"7249fc7961aa03e775f898683d32a861c0dd3ac3774226f1f1601584d8e3df95","schema":"vaeg-upd9002-m60d-population-summary-v1","schema_version":1,"taken_count":2468}

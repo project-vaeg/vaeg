@@ -1,0 +1,14 @@
+{
+  "milestone": "M65j",
+  "campaign_base_gate": "G65",
+  "campaign_base_sha": "efd96b7e46717e7ee56e086f7d27ba42b04b49d3",
+  "original_checkpoint_sha": "1c1b9740cc7c286d841d296341c3cefd66e35116",
+  "superseded_reason": "maintainer-approved evidence classification correction and nonblocking defer",
+  "replacement_checkpoint_sha": "cbbbf3d58cb9f484522794b8f13ebde01158bb61",
+  "implementation_missing_before": 5908,
+  "target_support_unverified_after": 5908,
+  "hash_set_sha256": "240e0bf76de968b310ad13ef53de8d044637b185e267e1cfb2540f32ab6571e5",
+  "selected_applicable_unchanged": true,
+  "production_semantic_change": false,
+  "status": "complete_pending_campaign_gate"
+}

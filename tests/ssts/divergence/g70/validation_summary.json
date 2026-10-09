@@ -1,0 +1,12 @@
+{
+  "checks": {
+    "conflicts": "pass",
+    "deterministic_double_generation": "pass",
+    "m70_record_count": "pass",
+    "non_m70_records_unchanged": "pass",
+    "population_digest": "pass",
+    "target_policy_generated": "pass"
+  },
+  "schema": "vaeg-upd9002-g70-validation-summary-v1",
+  "schema_version": 1
+}

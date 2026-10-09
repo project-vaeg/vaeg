@@ -1,0 +1,53 @@
+# Copyright (c) 2026 Nakata Maho
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+# 1. Redistributions of source code must retain the above copyright notice,
+#    this list of conditions and the following disclaimer.
+# 2. Redistributions in binary form must reproduce the above copyright notice,
+#    this list of conditions and the following disclaimer in the documentation
+#    and/or other materials provided with the distribution.
+#
+# THIS SOFTWARE IS PROVIDED BY THE AUTHOR "AS IS" AND ANY EXPRESS OR IMPLIED
+# WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+# MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
+# EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+# SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+# TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+# PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+# LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+# NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+# EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+#
+# start|bytes|next|canonical text
+1000|00|1001|nop
+1000|08|1001|ex af, af'
+1000|10 fe|1002|djnz 0x1000
+1000|20 02|1002|jr nz, 0x1004
+1000|01 34 12|1003|ld bc, 0x1234
+1000|22 34 12|1003|ld (0x1234), hl
+1000|36 7f|1002|ld (hl), 0x7f
+1000|76|1001|halt
+1000|86|1001|add a, (hl)
+1000|c4 34 12|1003|call nz, 0x1234
+1000|cb 30|1002|sll b
+1000|cb 7e|1002|bit 7, (hl)
+1000|ed 43 34 12|1004|ld (0x1234), bc
+1000|ed 4d|1002|reti
+1000|ed 45|1002|retn
+1000|ed 5e|1002|im 2
+1000|ed b3|1002|otir
+1000|ed 00|1002|db 0xed, 0x00
+1000|dd 21 34 12|1004|ld ix, 0x1234
+1000|fd 24|1002|inc iyh
+1000|dd 36 fe 7f|1004|ld (ix-0x02), 0x7f
+1000|dd 66 fe|1003|ld h, (ix-0x02)
+1000|dd 6c|1002|ld ixl, ixh
+1000|dd cb fe 06|1004|rlc (ix-0x02)
+1000|dd cb 01 00|1004|rlc (ix+0x01), b
+1000|fd cb 80 7e|1004|bit 7, (iy-0x80)
+1000|dd ed 4d|1003|reti
+1000|dd fd 21 34 12|1005|ld iy, 0x1234
+1000|dd eb|1002|ex de, hl
+ffff|3e 42|0001|ld a, 0x42
+ffff|18 fe|0001|jr 0xffff

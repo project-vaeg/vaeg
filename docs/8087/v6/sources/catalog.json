@@ -1,0 +1,458 @@
+{
+  "format_version": 1,
+  "pack_version": "v6",
+  "prepared_date": "2026-09-09",
+  "disclaimer": "Locators are not completed local downloads. Expected SHA-256 is null until a trusted pin is established; actual received hashes must be recorded. No OCR or implementation is authorized by acquisition.",
+  "defaults": {
+    "max_attempts_per_url": 2,
+    "inactivity_timeout_seconds": 30,
+    "attempt_deadline_seconds": 180,
+    "max_bytes_per_file": 268435456,
+    "max_total_transfer_bytes": 536870912
+  },
+  "sources": [
+    {
+      "id": "I01",
+      "title": "Intel 8087 Math Coprocessor, order 205835-007, October 1989",
+      "tier": "PRIMARY_DOCUMENT",
+      "action": "FETCH_DOCUMENT",
+      "kind": "pdf",
+      "required": true,
+      "urls": [
+        "https://kib.kiev.ua/x86docs/Intel/486/205835-007.pdf",
+        "https://hercules.syntax.com.tw/upload/pdf/IC-8087-2.pdf"
+      ],
+      "relative_path": "originals/I01/205835-007.pdf",
+      "expected_sha256": null,
+      "max_bytes": 268435456,
+      "implementation_readable": true,
+      "ocr_candidate": true,
+      "prepared_status": "COVER_AND_ORDER_NUMBER_REVIEWED",
+      "notes": "Primary chip reference. Verify fallback edition before use."
+    },
+    {
+      "id": "I02",
+      "title": "Intel The 8086 Family Users Manual: Numerics Supplement, 121586-001",
+      "tier": "PRIMARY_DOCUMENT",
+      "action": "FETCH_DOCUMENT",
+      "kind": "pdf",
+      "required": true,
+      "urls": [
+        "https://mark-ogden.uk/files/intel/publications/121586-001%20The%208086%20Family%20Users%20Manual%20Numerics%20Supplement-Jul80.pdf"
+      ],
+      "relative_path": "originals/I02/121586-001_Numerics_Supplement_Jul80.pdf",
+      "expected_sha256": null,
+      "max_bytes": 134217728,
+      "implementation_readable": true,
+      "ocr_candidate": true,
+      "prepared_status": "INDEX_AND_TARGET_LOCATED_PREVIEW_TOO_LARGE",
+      "notes": "Original-manual locator found in host index. HTTP content length reported as 93425392; web preview exceeded its limit. Full local retrieval and edition verification are still required."
+    },
+    {
+      "id": "I03",
+      "title": "Intel 8087 Support Library Reference Manual, order 121725-001",
+      "tier": "PRIMARY_DOCUMENT",
+      "action": "FETCH_DOCUMENT",
+      "kind": "pdf",
+      "required": true,
+      "urls": [
+        "https://bitsavers.trailing-edge.com/pdf/intel/ISIS_II/121725-001_8087_Support_Library_Reference_Nov83.pdf",
+        "https://bitsavers.org/pdf/intel/ISIS_II/121725-001_8087_Support_Library_Reference_Nov83.pdf"
+      ],
+      "relative_path": "originals/I03/121725-001_8087_Support_Library_Reference_Nov83.pdf",
+      "expected_sha256": null,
+      "max_bytes": 268435456,
+      "implementation_readable": true,
+      "ocr_candidate": true,
+      "prepared_status": "COVER_AND_CHAPTER2_REVIEWED",
+      "notes": "Cover shows copyright 1981 and order 121725-001. Nov83 is a host filename label, not a verified publication date. Chapter 2 covers full E8087 and interfaces; distinguish library functions from chip instructions."
+    },
+    {
+      "id": "I04",
+      "title": "Intel ASM86 Language Reference Manual, order 121703-003",
+      "tier": "PRIMARY_DOCUMENT",
+      "action": "FETCH_DOCUMENT",
+      "kind": "pdf",
+      "required": true,
+      "urls": [
+        "https://bitsavers.trailing-edge.com/pdf/intel/ISIS_II/121703-003_ASM86_Language_Reference_Manual_Nov83.pdf",
+        "https://bitsavers.org/pdf/intel/ISIS_II/121703-003_ASM86_Language_Reference_Manual_Nov83.pdf"
+      ],
+      "relative_path": "originals/I04/121703-003_ASM86_Language_Reference_Manual_Nov83.pdf",
+      "expected_sha256": null,
+      "max_bytes": 268435456,
+      "implementation_readable": true,
+      "ocr_candidate": true,
+      "prepared_status": "INDEX_AND_TARGET_LOCATED_PREVIEW_TOO_LARGE",
+      "notes": "Host lists Nov83 and Mar85 files. Keep edition identity; do not merge them automatically. Browser preview reported a size limit."
+    },
+    {
+      "id": "I05",
+      "title": "Intel early 8086/8087/8088 Macro Assembly Language Reference, 121627-001",
+      "tier": "PRIMARY_DOCUMENT",
+      "action": "DISCOVERY_ONLY",
+      "kind": "none",
+      "required": false,
+      "urls": [],
+      "relative_path": null,
+      "expected_sha256": null,
+      "max_bytes": 268435456,
+      "implementation_readable": false,
+      "ocr_candidate": false,
+      "prepared_status": "DIRECT_FILE_NOT_ESTABLISHED",
+      "notes": "No verified direct file URL in this pack. Make a bounded document search; preserve NOT_LOCATED if no original is found. Do not invent a URL. I04 is already required.",
+      "discovery_queries": [
+        "Intel \"121627-001\" \"Macro Assembly Language\" PDF",
+        "Intel \"121627\" \"Reference Manual\" download"
+      ]
+    },
+    {
+      "id": "I06",
+      "title": "Intel iAPX 86/88 Users Manual (1981), supplement-containing edition",
+      "tier": "PRIMARY_DOCUMENT",
+      "action": "FETCH_DOCUMENT",
+      "kind": "pdf",
+      "required": false,
+      "urls": [
+        "https://www.dosdays.co.uk/media/intel/1981_iAPX_86_88_Users_Manual.pdf"
+      ],
+      "relative_path": "originals/I06/1981_iAPX_86_88_Users_Manual.pdf",
+      "expected_sha256": null,
+      "max_bytes": 268435456,
+      "implementation_readable": true,
+      "ocr_candidate": true,
+      "prepared_status": "PUBLIC_PDF_LOCATOR_FOUND",
+      "notes": "Optional separate edition for corroboration. Never replace I02 under the same source ID. Full original preserved; OCR may prioritize its Numerics Supplement."
+    },
+    {
+      "id": "N01",
+      "title": "NEC 16-Bit V Series Instruction User Manual, U11301EJ5V0UMJ1",
+      "tier": "PRIMARY_DOCUMENT",
+      "action": "FETCH_DOCUMENT",
+      "kind": "pdf",
+      "required": true,
+      "urls": [
+        "https://datasheets.chipdb.org/NEC/V20-V30/U11301EJ5V0UMJ1.PDF"
+      ],
+      "relative_path": "originals/N01/U11301EJ5V0UMJ1.PDF",
+      "expected_sha256": null,
+      "max_bytes": 268435456,
+      "implementation_readable": true,
+      "ocr_candidate": true,
+      "prepared_status": "COVER_AND_EDITION_REVIEWED",
+      "notes": "Cover: fifth edition, September 2000. Check V20/V30 applicability; later CPU-specific behavior is not automatically applicable."
+    },
+    {
+      "id": "N02",
+      "title": "NEC uPD70116 / V30 documentation",
+      "tier": "PRIMARY_DOCUMENT",
+      "action": "FETCH_DOCUMENT",
+      "kind": "pdf",
+      "required": false,
+      "urls": [
+        "https://datasheets.chipdb.org/NEC/V20-V30/NEC_uPD70116.pdf"
+      ],
+      "relative_path": "originals/N02/NEC_uPD70116.pdf",
+      "expected_sha256": null,
+      "max_bytes": 268435456,
+      "implementation_readable": true,
+      "ocr_candidate": true,
+      "prepared_status": "PDF_LOCATED_IDENTITY_PENDING",
+      "notes": "Optional CPU hardware evidence. The scan is located; establish exact title/revision during user-assisted source review."
+    },
+    {
+      "id": "S01",
+      "title": "Berkeley SoftFloat Release 3e Library Interface",
+      "tier": "APPROVED_UPSTREAM",
+      "action": "FETCH_DOCUMENT",
+      "kind": "html",
+      "required": true,
+      "urls": [
+        "https://www.jhauser.us/arithmetic/SoftFloat-3/doc/SoftFloat.html"
+      ],
+      "relative_path": "originals/S01/SoftFloat.html",
+      "expected_sha256": null,
+      "max_bytes": 268435456,
+      "implementation_readable": true,
+      "ocr_candidate": false,
+      "prepared_status": "OFFICIAL_DOCUMENT_REVIEWED",
+      "notes": "Library semantics, not an 8087 device specification.",
+      "html_identity_tokens": [
+        "SoftFloat",
+        "extFloat80"
+      ]
+    },
+    {
+      "id": "S02",
+      "title": "Berkeley SoftFloat Release 3e Source Documentation",
+      "tier": "APPROVED_UPSTREAM",
+      "action": "FETCH_DOCUMENT",
+      "kind": "html",
+      "required": true,
+      "urls": [
+        "https://www.jhauser.us/arithmetic/SoftFloat-3/doc/SoftFloat-source.html"
+      ],
+      "relative_path": "originals/S02/SoftFloat-source.html",
+      "expected_sha256": null,
+      "max_bytes": 268435456,
+      "implementation_readable": true,
+      "ocr_candidate": false,
+      "prepared_status": "OFFICIAL_DOCUMENT_REVIEWED",
+      "notes": "Build/specialization/license documentation. No source archive unpacking during Stage A.",
+      "html_identity_tokens": [
+        "SoftFloat",
+        "Release 3e"
+      ]
+    },
+    {
+      "id": "S03",
+      "title": "Berkeley SoftFloat Release 3e official archive",
+      "tier": "APPROVED_UPSTREAM",
+      "action": "FETCH_ARCHIVE",
+      "kind": "zip",
+      "required": true,
+      "urls": [
+        "https://www.jhauser.us/arithmetic/SoftFloat-3e.zip"
+      ],
+      "relative_path": "upstream/S03/SoftFloat-3e.zip",
+      "expected_sha256": null,
+      "max_bytes": 268435456,
+      "implementation_readable": true,
+      "ocr_candidate": false,
+      "prepared_status": "OFFICIAL_RELEASE_LINK_CONFIRMED",
+      "notes": "Official release link confirmed. Cache only; no extraction/build/vendor until Stage B/P02. First downloaded hash must be computed, not assumed."
+    },
+    {
+      "id": "T01",
+      "title": "Berkeley TestFloat Release 3e General Documentation",
+      "tier": "APPROVED_UPSTREAM",
+      "action": "FETCH_DOCUMENT",
+      "kind": "html",
+      "required": true,
+      "urls": [
+        "https://www.jhauser.us/arithmetic/TestFloat-3/doc/TestFloat-general.html"
+      ],
+      "relative_path": "originals/T01/TestFloat-general.html",
+      "expected_sha256": null,
+      "max_bytes": 268435456,
+      "implementation_readable": true,
+      "ocr_candidate": false,
+      "prepared_status": "OFFICIAL_DOCUMENT_REVIEWED",
+      "notes": "Backend testing scope is separate from 8087 device semantics.",
+      "html_identity_tokens": [
+        "TestFloat",
+        "testsoftfloat"
+      ]
+    },
+    {
+      "id": "T02",
+      "title": "Berkeley TestFloat Release 3e official archive",
+      "tier": "APPROVED_UPSTREAM",
+      "action": "FETCH_ARCHIVE",
+      "kind": "zip",
+      "required": true,
+      "urls": [
+        "https://www.jhauser.us/arithmetic/TestFloat-3e.zip"
+      ],
+      "relative_path": "upstream/T02/TestFloat-3e.zip",
+      "expected_sha256": null,
+      "max_bytes": 268435456,
+      "implementation_readable": true,
+      "ocr_candidate": false,
+      "prepared_status": "OFFICIAL_RELEASE_LINK_CONFIRMED",
+      "notes": "External developer-only archive, cached unextracted before OCR handoff."
+    },
+    {
+      "id": "M01",
+      "title": "GNU MPFR 4.2.2 manual (version-specific)",
+      "tier": "APPROVED_UPSTREAM",
+      "action": "FETCH_DOCUMENT",
+      "kind": "html",
+      "required": false,
+      "urls": [
+        "https://www.mpfr.org/mpfr-4.2.2/mpfr.html"
+      ],
+      "relative_path": "originals/M01/mpfr-4.2.2.html",
+      "expected_sha256": null,
+      "max_bytes": 268435456,
+      "implementation_readable": true,
+      "ocr_candidate": false,
+      "prepared_status": "OFFICIAL_DOCUMENT_REVIEWED",
+      "notes": "Oracle documentation only. No runtime MPFR linkage.",
+      "html_identity_tokens": [
+        "MPFR",
+        "4.2.2"
+      ]
+    },
+    {
+      "id": "C01",
+      "title": "OpenAI Using Goals in Codex",
+      "tier": "WORKFLOW_DOCUMENT",
+      "action": "FETCH_DOCUMENT",
+      "kind": "html",
+      "required": false,
+      "urls": [
+        "https://developers.openai.com/cookbook/examples/codex/using_goals_in_codex"
+      ],
+      "relative_path": "originals/C01/using-goals-in-codex.html",
+      "expected_sha256": null,
+      "max_bytes": 268435456,
+      "implementation_readable": true,
+      "ocr_candidate": false,
+      "prepared_status": "OFFICIAL_DOCUMENT_REVIEWED",
+      "notes": "Workflow documentation, not chip evidence. Controls remain subject to installed version.",
+      "html_identity_tokens": [
+        "goal"
+      ],
+      "allowed_redirect_hosts": [
+        "developers.openai.com",
+        "learn.chatgpt.com"
+      ]
+    },
+    {
+      "id": "D01",
+      "title": "PCjs Intel 8087 documentation transcription",
+      "tier": "DOCUMENT_TRANSCRIPTION",
+      "action": "FETCH_DOCUMENT",
+      "kind": "html",
+      "required": false,
+      "urls": [
+        "https://www.pcjs.org/documents/manuals/intel/8087/"
+      ],
+      "relative_path": "originals/D01/pcjs-intel-8087-documentation.html",
+      "expected_sha256": null,
+      "max_bytes": 268435456,
+      "implementation_readable": true,
+      "ocr_candidate": false,
+      "prepared_status": "DOCUMENT_PAGE_REVIEWED",
+      "notes": "Document-only corroboration. Not the original scan, not independent of Intel source, and not permission to read the PCjs FPU implementation. No linked assets or source files fetched.",
+      "html_identity_tokens": [
+        "8087",
+        "Intel"
+      ]
+    },
+    {
+      "id": "H01",
+      "title": "Ken Shirriff: Microcode inside the Intel 8087 floating-point chip (May 2026)",
+      "tier": "EVIDENCE_ONLY",
+      "action": "FETCH_EVIDENCE_ONLY",
+      "kind": "html",
+      "required": false,
+      "urls": [
+        "https://www.righto.com/2026/05/microcode-inside-intel-8087-floating.html"
+      ],
+      "relative_path": "evidence-only/H01/8087-microcode-article.html",
+      "expected_sha256": null,
+      "max_bytes": 268435456,
+      "implementation_readable": false,
+      "ocr_candidate": false,
+      "prepared_status": "AUTHOR_ARTICLE_LOCATED",
+      "notes": "May contain microcode excerpts. Transfer bytes only; implementation agent must not use its content. No raw microcode, decoder code, linked images or repositories fetched.",
+      "html_identity_tokens": [
+        "8087",
+        "microcode"
+      ]
+    },
+    {
+      "id": "X01",
+      "title": "Intel full E8087 binary candidate",
+      "tier": "EXCLUDED_OR_OPTIONAL_REFERENCE",
+      "action": "METADATA_ONLY",
+      "kind": "none",
+      "required": false,
+      "urls": [],
+      "relative_path": null,
+      "expected_sha256": null,
+      "max_bytes": 268435456,
+      "implementation_readable": false,
+      "ocr_candidate": false,
+      "prepared_status": "METADATA_NOT_EXECUTION_EVIDENCE",
+      "notes": "No verified binary download, version or permission record supplied. Optional separately authorized black-box harness only; never an automatic dependency."
+    },
+    {
+      "id": "X02",
+      "title": "86Box implementation",
+      "tier": "EXCLUDED_OR_OPTIONAL_REFERENCE",
+      "action": "METADATA_ONLY",
+      "kind": "none",
+      "required": false,
+      "urls": [],
+      "relative_path": null,
+      "expected_sha256": null,
+      "max_bytes": 268435456,
+      "implementation_readable": false,
+      "ocr_candidate": false,
+      "prepared_status": "METADATA_NOT_EXECUTION_EVIDENCE",
+      "notes": "Source excluded. Optional separately authorized binary comparison only.",
+      "information_url": "https://github.com/86Box/86Box"
+    },
+    {
+      "id": "X03",
+      "title": "Open Watcom fpuemu",
+      "tier": "EXCLUDED_OR_OPTIONAL_REFERENCE",
+      "action": "METADATA_ONLY",
+      "kind": "none",
+      "required": false,
+      "urls": [],
+      "relative_path": null,
+      "expected_sha256": null,
+      "max_bytes": 268435456,
+      "implementation_readable": false,
+      "ocr_candidate": false,
+      "prepared_status": "METADATA_NOT_EXECUTION_EVIDENCE",
+      "notes": "Source excluded. No clone or source-subtree download.",
+      "information_url": "https://github.com/open-watcom/open-watcom-v2"
+    },
+    {
+      "id": "X04",
+      "title": "PCjs FPU implementation",
+      "tier": "EXCLUDED_OR_OPTIONAL_REFERENCE",
+      "action": "METADATA_ONLY",
+      "kind": "none",
+      "required": false,
+      "urls": [],
+      "relative_path": null,
+      "expected_sha256": null,
+      "max_bytes": 268435456,
+      "implementation_readable": false,
+      "ocr_candidate": false,
+      "prepared_status": "METADATA_NOT_EXECUTION_EVIDENCE",
+      "notes": "FPU source excluded. D01 is a separate documentation page.",
+      "information_url": "https://github.com/jeffpar/pcjs"
+    },
+    {
+      "id": "X05",
+      "title": "Granite / tools/8087mc",
+      "tier": "EXCLUDED_OR_OPTIONAL_REFERENCE",
+      "action": "METADATA_ONLY",
+      "kind": "none",
+      "required": false,
+      "urls": [],
+      "relative_path": null,
+      "expected_sha256": null,
+      "max_bytes": 268435456,
+      "implementation_readable": false,
+      "ocr_candidate": false,
+      "prepared_status": "METADATA_NOT_EXECUTION_EVIDENCE",
+      "notes": "Implementation/decoder/raw microcode excluded; no clone/download.",
+      "information_url": "https://github.com/a-mcego/granite"
+    },
+    {
+      "id": "X06",
+      "title": "DOSBox-X implementation",
+      "tier": "EXCLUDED_OR_OPTIONAL_REFERENCE",
+      "action": "METADATA_ONLY",
+      "kind": "none",
+      "required": false,
+      "urls": [],
+      "relative_path": null,
+      "expected_sha256": null,
+      "max_bytes": 268435456,
+      "implementation_readable": false,
+      "ocr_candidate": false,
+      "prepared_status": "METADATA_NOT_EXECUTION_EVIDENCE",
+      "notes": "Source excluded. Optional separately authorized binary comparison only.",
+      "information_url": "https://github.com/joncampbell123/dosbox-x"
+    }
+  ]
+}

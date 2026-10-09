@@ -1,0 +1,12 @@
+{
+  "approved_g65_sha": "efd96b7e46717e7ee56e086f7d27ba42b04b49d3",
+  "count": 5908,
+  "disposition_after": "approved_nonblocking_defer",
+  "gap_kind_after": "target_support_unverified",
+  "gap_kind_before": "implementation_missing",
+  "hash_set_sha256": "240e0bf76de968b310ad13ef53de8d044637b185e267e1cfb2540f32ab6571e5",
+  "original_m65j_sha": "1c1b9740cc7c286d841d296341c3cefd66e35116",
+  "schema": "vaeg-upd9002-m65j-amendment-v1",
+  "selected_applicable_unchanged": true,
+  "superseded_reason": "maintainer-approved evidence classification correction and nonblocking defer"
+}

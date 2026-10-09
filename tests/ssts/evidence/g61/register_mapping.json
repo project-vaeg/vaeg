@@ -1,0 +1,1 @@
+{"byte_registers_by_rm":["al","cl","dl","bl","ah","ch","dh","bh"],"conclusion":"The pre-fix implementation selected ModR/M reg bits 5:3; the executed SST population requires r/m bits 2:0.","conclusion_status":"proven","schema":"vaeg-upd9002-m61-register-mapping-v1","schema_version":1,"word_registers_by_rm":["ax","cx","dx","bx","sp","bp","si","di"]}

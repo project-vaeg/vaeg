@@ -1,0 +1,8208 @@
+{
+  "accepted_baseline_identity": {
+    "ci_executed": 166821,
+    "ci_failure_signature_index_sha256": "946268103309f8dc7d442fade21596b46c734f48bf0b1e9e32a18736e5e85597",
+    "full_executed": 1443876,
+    "full_failure_signature_index_sha256": "50087f8f6b9483ac70ce5e2dc922ab11fade51a58bea9cb72322ef85ef264ec0",
+    "known_gap_record_hashes": 68626,
+    "known_gap_selectors": 40
+  },
+  "adjacent_byte_sequence_record_count": 105,
+  "adjacent_byte_sequence_records": [
+    {
+      "expected_final": {
+        "queue": [],
+        "ram": [],
+        "regs": {
+          "flags": 61574,
+          "ip": 12683
+        }
+      },
+      "initial": {
+        "queue": [],
+        "ram": [
+          [
+            887463,
+            15
+          ],
+          [
+            887464,
+            25
+          ],
+          [
+            887465,
+            242
+          ],
+          [
+            887466,
+            15
+          ]
+        ],
+        "regs": {
+          "ax": 3777,
+          "bp": 30335,
+          "bx": 56313,
+          "cs": 54674,
+          "cx": 24362,
+          "di": 26199,
+          "ds": 5167,
+          "dx": 59008,
+          "es": 35618,
+          "flags": 61571,
+          "ip": 12679,
+          "si": 9078,
+          "sp": 29394,
+          "ss": 65135
+        }
+      },
+      "instruction_bytes": "0f19f20f",
+      "metadata_form": "0F19",
+      "prefetch": "empty",
+      "record_hash": "019fd117dc2a2f7cafdffc93e09ff699dd9fa7c99f059d7b5db0de598e93bd64",
+      "rep0f_positions": [
+        2
+      ],
+      "upstream_test_hash": "58da4ecf7bd067d644b6205b34e161299c3949ea"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144,
+          144,
+          144
+        ],
+        "ram": [],
+        "regs": {
+          "ax": 51460,
+          "flags": 61575,
+          "ip": 17733,
+          "si": 54506
+        }
+      },
+      "initial": {
+        "queue": [
+          15,
+          59,
+          243,
+          15
+        ],
+        "ram": [
+          [
+            1002881,
+            15
+          ],
+          [
+            1002882,
+            59
+          ],
+          [
+            1002883,
+            243
+          ],
+          [
+            1002884,
+            15
+          ],
+          [
+            131304,
+            34
+          ],
+          [
+            131305,
+            38
+          ],
+          [
+            131306,
+            72
+          ],
+          [
+            131307,
+            198
+          ]
+        ],
+        "regs": {
+          "ax": 23755,
+          "bp": 8105,
+          "bx": 1035,
+          "cs": 61572,
+          "cx": 45026,
+          "di": 52563,
+          "ds": 4800,
+          "dx": 3777,
+          "es": 61496,
+          "flags": 63703,
+          "ip": 17729,
+          "si": 54504,
+          "sp": 50779,
+          "ss": 44416
+        }
+      },
+      "instruction_bytes": "0f3bf30f",
+      "metadata_form": "0F3B",
+      "prefetch": "populated",
+      "record_hash": "03bef36e1c17992fc7c502a84559033cd505e1cbb71d051de6280e461b5368c8",
+      "rep0f_positions": [
+        2
+      ],
+      "upstream_test_hash": "8eb8b4b6684887ea572737286b98fc644c0079a4"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144,
+          144,
+          144
+        ],
+        "ram": [],
+        "regs": {
+          "ax": 7221,
+          "flags": 61575,
+          "ip": 6215,
+          "si": 22603
+        }
+      },
+      "initial": {
+        "queue": [],
+        "ram": [
+          [
+            687091,
+            15
+          ],
+          [
+            687092,
+            59
+          ],
+          [
+            687093,
+            243
+          ],
+          [
+            687094,
+            15
+          ],
+          [
+            307833,
+            142
+          ],
+          [
+            307834,
+            183
+          ],
+          [
+            307835,
+            134
+          ],
+          [
+            307836,
+            3
+          ]
+        ],
+        "regs": {
+          "ax": 12012,
+          "bp": 54736,
+          "bx": 13581,
+          "cs": 42555,
+          "cx": 53645,
+          "di": 53826,
+          "ds": 17827,
+          "dx": 3219,
+          "es": 51645,
+          "flags": 61574,
+          "ip": 6211,
+          "si": 22601,
+          "sp": 39698,
+          "ss": 2174
+        }
+      },
+      "instruction_bytes": "0f3bf30f",
+      "metadata_form": "0F3B",
+      "prefetch": "empty",
+      "record_hash": "09e328cc7c0033986906662a00adeade0b62120e97167475e4eebab556a5d475",
+      "rep0f_positions": [
+        2
+      ],
+      "upstream_test_hash": "742023403e9bd4276f5b23eff990770ac67d9d9a"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144,
+          144,
+          144
+        ],
+        "ram": [
+          [
+            998335,
+            109
+          ],
+          [
+            998336,
+            146
+          ],
+          [
+            998337,
+            141
+          ],
+          [
+            998338,
+            204
+          ]
+        ],
+        "regs": {
+          "di": 46513,
+          "flags": 62599,
+          "ip": 35891
+        }
+      },
+      "initial": {
+        "queue": [],
+        "ram": [
+          [
+            173791,
+            15
+          ],
+          [
+            173792,
+            57
+          ],
+          [
+            173793,
+            242
+          ],
+          [
+            173794,
+            15
+          ],
+          [
+            998335,
+            141
+          ],
+          [
+            998336,
+            230
+          ],
+          [
+            998337,
+            158
+          ],
+          [
+            998338,
+            204
+          ]
+        ],
+        "regs": {
+          "ax": 27795,
+          "bp": 15698,
+          "bx": 8931,
+          "cs": 8619,
+          "cx": 58240,
+          "di": 46511,
+          "ds": 47122,
+          "dx": 3077,
+          "es": 59489,
+          "flags": 64662,
+          "ip": 35887,
+          "si": 46763,
+          "sp": 52993,
+          "ss": 59070
+        }
+      },
+      "instruction_bytes": "0f39f20f",
+      "metadata_form": "0F39",
+      "prefetch": "empty",
+      "record_hash": "0c7c0d1c0395c5e7f248c0782f993230af3b49576eb839b5dc270d79b0319f19",
+      "rep0f_positions": [
+        2
+      ],
+      "upstream_test_hash": "7ef4bc312694b94ad2b5dc6eccc2092e08143624"
+    },
+    {
+      "expected_final": {
+        "queue": [],
+        "ram": [],
+        "regs": {
+          "ax": 18387,
+          "flags": 62466,
+          "ip": 6562
+        }
+      },
+      "initial": {
+        "queue": [],
+        "ram": [
+          [
+            782415,
+            29
+          ],
+          [
+            782416,
+            243
+          ],
+          [
+            782417,
+            15
+          ]
+        ],
+        "regs": {
+          "ax": 22470,
+          "bp": 19034,
+          "bx": 38985,
+          "cs": 48491,
+          "cx": 48242,
+          "di": 45826,
+          "ds": 26595,
+          "dx": 61141,
+          "es": 58886,
+          "flags": 62614,
+          "ip": 6559,
+          "si": 46971,
+          "sp": 44783,
+          "ss": 31249
+        }
+      },
+      "instruction_bytes": "1df30f",
+      "metadata_form": "1D",
+      "prefetch": "empty",
+      "record_hash": "11af508f04fed6eb6fb947ecf78d748f522934c2ae614430b869bc56334abe3f",
+      "rep0f_positions": [
+        1
+      ],
+      "upstream_test_hash": "832b8d577aee9c27cd31f8709f1cd8ef1b0b5813"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144,
+          144,
+          144
+        ],
+        "ram": [
+          [
+            983374,
+            180
+          ],
+          [
+            983375,
+            10
+          ]
+        ],
+        "regs": {
+          "di": 51664,
+          "flags": 62599,
+          "ip": 22091
+        }
+      },
+      "initial": {
+        "queue": [],
+        "ram": [
+          [
+            903719,
+            15
+          ],
+          [
+            903720,
+            57
+          ],
+          [
+            903721,
+            243
+          ],
+          [
+            903722,
+            15
+          ]
+        ],
+        "regs": {
+          "ax": 2740,
+          "bp": 60938,
+          "bx": 23040,
+          "cs": 55102,
+          "cx": 250,
+          "di": 51662,
+          "ds": 38461,
+          "dx": 494,
+          "es": 58232,
+          "flags": 64723,
+          "ip": 22087,
+          "si": 24336,
+          "sp": 4266,
+          "ss": 29243
+        }
+      },
+      "instruction_bytes": "0f39f30f",
+      "metadata_form": "0F39",
+      "prefetch": "empty",
+      "record_hash": "1384d386be831d84e54130c02dcbb8f6ff528977676ed3b66e669478b9d77cdb",
+      "rep0f_positions": [
+        2
+      ],
+      "upstream_test_hash": "a34cfb29c680923d3495ad31b88065a26ec1fbda"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144
+        ],
+        "ram": [
+          [
+            769234,
+            101
+          ],
+          [
+            769235,
+            110
+          ]
+        ],
+        "regs": {
+          "ip": 53050
+        }
+      },
+      "initial": {
+        "queue": [
+          46,
+          163,
+          242,
+          15
+        ],
+        "ram": [
+          [
+            818198,
+            46
+          ],
+          [
+            818199,
+            163
+          ],
+          [
+            818200,
+            242
+          ],
+          [
+            818201,
+            15
+          ]
+        ],
+        "regs": {
+          "ax": 28261,
+          "bp": 46279,
+          "bx": 12630,
+          "cs": 47822,
+          "cx": 43508,
+          "di": 64099,
+          "ds": 33110,
+          "dx": 30978,
+          "es": 23721,
+          "flags": 63639,
+          "ip": 53046,
+          "si": 58906,
+          "sp": 24161,
+          "ss": 31918
+        }
+      },
+      "instruction_bytes": "2ea3f20f",
+      "metadata_form": "A3",
+      "prefetch": "populated",
+      "record_hash": "16aa2d109ab7d720b83a23f594847635627cef3b0827527118fd427a54a0c261",
+      "rep0f_positions": [
+        2
+      ],
+      "upstream_test_hash": "247d2f6ec58e3736bbffe6f00c450d66f87a627d"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144,
+          144,
+          144
+        ],
+        "ram": [
+          [
+            610954,
+            163
+          ],
+          [
+            610955,
+            37
+          ],
+          [
+            610956,
+            219
+          ],
+          [
+            610957,
+            210
+          ]
+        ],
+        "regs": {
+          "di": 1932,
+          "flags": 62595,
+          "ip": 64249
+        }
+      },
+      "initial": {
+        "queue": [],
+        "ram": [
+          [
+            557493,
+            15
+          ],
+          [
+            557494,
+            57
+          ],
+          [
+            557495,
+            243
+          ],
+          [
+            557496,
+            15
+          ],
+          [
+            610954,
+            249
+          ],
+          [
+            610955,
+            203
+          ],
+          [
+            610956,
+            219
+          ],
+          [
+            610957,
+            210
+          ]
+        ],
+        "regs": {
+          "ax": 37585,
+          "bp": 13773,
+          "bx": 16385,
+          "cs": 30828,
+          "cx": 26633,
+          "di": 1930,
+          "ds": 5624,
+          "dx": 435,
+          "es": 38064,
+          "flags": 62658,
+          "ip": 64245,
+          "si": 64400,
+          "sp": 3473,
+          "ss": 53494
+        }
+      },
+      "instruction_bytes": "0f39f30f",
+      "metadata_form": "0F39",
+      "prefetch": "empty",
+      "record_hash": "177ac12ae89a20279efb30af0ad6e3ad289ffbc5896cd057570869841676b172",
+      "rep0f_positions": [
+        2
+      ],
+      "upstream_test_hash": "3b710c062a09a35c29f445690e959500ba15625c"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144,
+          144,
+          144
+        ],
+        "ram": [
+          [
+            775935,
+            86
+          ],
+          [
+            775936,
+            38
+          ],
+          [
+            775937,
+            201
+          ]
+        ],
+        "regs": {
+          "di": 15904,
+          "flags": 61571,
+          "ip": 53829
+        }
+      },
+      "initial": {
+        "queue": [],
+        "ram": [
+          [
+            71649,
+            15
+          ],
+          [
+            71650,
+            57
+          ],
+          [
+            71651,
+            242
+          ],
+          [
+            71652,
+            15
+          ],
+          [
+            775934,
+            110
+          ],
+          [
+            775935,
+            28
+          ],
+          [
+            775936,
+            51
+          ],
+          [
+            775937,
+            201
+          ]
+        ],
+        "regs": {
+          "ax": 19628,
+          "bp": 62582,
+          "bx": 3781,
+          "cs": 1114,
+          "cx": 16822,
+          "di": 15902,
+          "ds": 13687,
+          "dx": 7,
+          "es": 47502,
+          "flags": 63623,
+          "ip": 53825,
+          "si": 20978,
+          "sp": 47626,
+          "ss": 45097
+        }
+      },
+      "instruction_bytes": "0f39f20f",
+      "metadata_form": "0F39",
+      "prefetch": "empty",
+      "record_hash": "18a4fc968413be73fc265860d194b6e6a02fefc48ad57dd47fc6d199421fd592",
+      "rep0f_positions": [
+        2
+      ],
+      "upstream_test_hash": "b7fd8653924b917dc627630d4e35f58bfb313f35"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144,
+          144,
+          144
+        ],
+        "ram": [],
+        "regs": {
+          "dx": 32768,
+          "flags": 61575,
+          "ip": 28687
+        }
+      },
+      "initial": {
+        "queue": [],
+        "ram": [
+          [
+            872940,
+            193
+          ],
+          [
+            872941,
+            242
+          ],
+          [
+            872942,
+            15
+          ]
+        ],
+        "regs": {
+          "ax": 9195,
+          "bp": 15114,
+          "bx": 56565,
+          "cs": 52766,
+          "cx": 58383,
+          "di": 48207,
+          "ds": 11382,
+          "dx": 18291,
+          "es": 56476,
+          "flags": 61591,
+          "ip": 28684,
+          "si": 5738,
+          "sp": 15899,
+          "ss": 24335
+        }
+      },
+      "instruction_bytes": "c1f20f",
+      "metadata_form": "C1.6",
+      "prefetch": "empty",
+      "record_hash": "19b0d3e973ea34f6d69c5699817c01a531383c33633c3ed861de0a9f90d331c7",
+      "rep0f_positions": [
+        1
+      ],
+      "upstream_test_hash": "6e7d91ae1029dbc1ce5a4284e8b8c916e7b19cd3"
+    },
+    {
+      "expected_final": {
+        "queue": [],
+        "ram": [],
+        "regs": {
+          "flags": 61586,
+          "ip": 52157
+        }
+      },
+      "initial": {
+        "queue": [],
+        "ram": [
+          [
+            744986,
+            61
+          ],
+          [
+            744987,
+            242
+          ],
+          [
+            744988,
+            15
+          ]
+        ],
+        "regs": {
+          "ax": 44913,
+          "bp": 51350,
+          "bx": 26714,
+          "cs": 43302,
+          "cx": 23729,
+          "di": 14591,
+          "ds": 53512,
+          "dx": 51052,
+          "es": 58800,
+          "flags": 61587,
+          "ip": 52154,
+          "si": 13267,
+          "sp": 6210,
+          "ss": 46100
+        }
+      },
+      "instruction_bytes": "3df20f",
+      "metadata_form": "3D",
+      "prefetch": "empty",
+      "record_hash": "1c3909b078f93ee65fbf74e2e1158c6a808468c5417355d49e8989e52724634a",
+      "rep0f_positions": [
+        1
+      ],
+      "upstream_test_hash": "3469f4e0a7c679f4ed50165d71afcc1e3268e2de"
+    },
+    {
+      "expected_final": {
+        "queue": [],
+        "ram": [
+          [
+            9634,
+            22
+          ],
+          [
+            9635,
+            82
+          ]
+        ],
+        "regs": {
+          "ip": 60438
+        }
+      },
+      "initial": {
+        "queue": [
+          140,
+          145,
+          243,
+          15
+        ],
+        "ram": [
+          [
+            585346,
+            140
+          ],
+          [
+            585347,
+            145
+          ],
+          [
+            585348,
+            243
+          ],
+          [
+            585349,
+            15
+          ]
+        ],
+        "regs": {
+          "ax": 54208,
+          "bp": 47049,
+          "bx": 6218,
+          "cs": 32807,
+          "cx": 55540,
+          "di": 26037,
+          "ds": 63867,
+          "dx": 47163,
+          "es": 1125,
+          "flags": 63558,
+          "ip": 60434,
+          "si": 33828,
+          "sp": 9665,
+          "ss": 21014
+        }
+      },
+      "instruction_bytes": "8c91f30f",
+      "metadata_form": "8C",
+      "prefetch": "populated",
+      "record_hash": "1d49068cc8496311083671a8f86281767560ec55c5902c691327958da072cbaa",
+      "rep0f_positions": [
+        2
+      ],
+      "upstream_test_hash": "8e48c2e383f1d461797fa2dad102f451f098a71c"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144
+        ],
+        "ram": [
+          [
+            205462,
+            33
+          ]
+        ],
+        "regs": {
+          "flags": 61446,
+          "ip": 52880
+        }
+      },
+      "initial": {
+        "queue": [
+          62,
+          130,
+          157,
+          242
+        ],
+        "ram": [
+          [
+            326106,
+            62
+          ],
+          [
+            326107,
+            130
+          ],
+          [
+            326108,
+            157
+          ],
+          [
+            326109,
+            242
+          ],
+          [
+            326110,
+            15
+          ],
+          [
+            326111,
+            23
+          ],
+          [
+            205462,
+            57
+          ]
+        ],
+        "regs": {
+          "ax": 14951,
+          "bp": 58152,
+          "bx": 55184,
+          "cs": 17077,
+          "cx": 9163,
+          "di": 13012,
+          "ds": 11773,
+          "dx": 41422,
+          "es": 33882,
+          "flags": 63619,
+          "ip": 52874,
+          "si": 12996,
+          "sp": 11690,
+          "ss": 39094
+        }
+      },
+      "instruction_bytes": "3e829df20f17",
+      "metadata_form": "82.3",
+      "prefetch": "populated",
+      "record_hash": "1d766c4a1ccaed42c426d6301044603f0d22aed7705860b9264471edefd4f066",
+      "rep0f_positions": [
+        3
+      ],
+      "upstream_test_hash": "8063a9ce5d44bf65e8e1c3b21ddf26709c0d13d2"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144,
+          144,
+          144
+        ],
+        "ram": [
+          [
+            647324,
+            112
+          ],
+          [
+            647325,
+            210
+          ],
+          [
+            647326,
+            131
+          ]
+        ],
+        "regs": {
+          "di": 44749,
+          "flags": 62599,
+          "ip": 46674
+        }
+      },
+      "initial": {
+        "queue": [
+          15,
+          57,
+          243,
+          15
+        ],
+        "ram": [
+          [
+            474670,
+            15
+          ],
+          [
+            474671,
+            57
+          ],
+          [
+            474672,
+            243
+          ],
+          [
+            474673,
+            15
+          ],
+          [
+            647323,
+            0
+          ],
+          [
+            647324,
+            84
+          ],
+          [
+            647325,
+            217
+          ],
+          [
+            647326,
+            128
+          ]
+        ],
+        "regs": {
+          "ax": 62620,
+          "bp": 60089,
+          "bx": 58378,
+          "cs": 26750,
+          "cx": 39863,
+          "di": 44747,
+          "ds": 31340,
+          "dx": 3076,
+          "es": 37661,
+          "flags": 64530,
+          "ip": 46670,
+          "si": 5713,
+          "sp": 55763,
+          "ss": 64525
+        }
+      },
+      "instruction_bytes": "0f39f30f",
+      "metadata_form": "0F39",
+      "prefetch": "populated",
+      "record_hash": "211198c8d46d5b424c83770c1f826715a430ae27ebae7414ef2d1913fa9796ab",
+      "rep0f_positions": [
+        2
+      ],
+      "upstream_test_hash": "bae5b08042f84464050abef8b07566571ff2b2e6"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144,
+          144,
+          144
+        ],
+        "ram": [
+          [
+            628694,
+            102
+          ],
+          [
+            628695,
+            21
+          ],
+          [
+            628696,
+            1
+          ]
+        ],
+        "regs": {
+          "di": 44743,
+          "flags": 62595,
+          "ip": 24766
+        }
+      },
+      "initial": {
+        "queue": [
+          54,
+          15,
+          57,
+          243
+        ],
+        "ram": [
+          [
+            169145,
+            54
+          ],
+          [
+            169146,
+            15
+          ],
+          [
+            169147,
+            57
+          ],
+          [
+            169148,
+            243
+          ],
+          [
+            169149,
+            15
+          ],
+          [
+            628693,
+            33
+          ],
+          [
+            628694,
+            84
+          ],
+          [
+            628695,
+            75
+          ],
+          [
+            628696,
+            1
+          ]
+        ],
+        "regs": {
+          "ax": 10956,
+          "bp": 62108,
+          "bx": 2311,
+          "cs": 9024,
+          "cx": 32726,
+          "di": 44741,
+          "ds": 33241,
+          "dx": 2694,
+          "es": 36497,
+          "flags": 64707,
+          "ip": 24761,
+          "si": 61754,
+          "sp": 37448,
+          "ss": 35155
+        }
+      },
+      "instruction_bytes": "360f39f30f",
+      "metadata_form": "0F39",
+      "prefetch": "populated",
+      "record_hash": "2242288385d3686fe0a093fb524f346cb56f7a0a7559f6bf40d4bc7cf086181f",
+      "rep0f_positions": [
+        3
+      ],
+      "upstream_test_hash": "924de56f3e2f5dc7444181834103e5e3f08ac012"
+    },
+    {
+      "expected_final": {
+        "queue": [],
+        "ram": [
+          [
+            446231,
+            201
+          ],
+          [
+            446232,
+            57
+          ]
+        ],
+        "regs": {
+          "ip": 18876,
+          "sp": 1415
+        }
+      },
+      "initial": {
+        "queue": [
+          232,
+          243,
+          15,
+          144
+        ],
+        "ram": [
+          [
+            59414,
+            232
+          ],
+          [
+            59415,
+            243
+          ],
+          [
+            59416,
+            15
+          ],
+          [
+            59417,
+            144
+          ]
+        ],
+        "regs": {
+          "ax": 1726,
+          "bp": 44284,
+          "bx": 33265,
+          "cs": 2789,
+          "cx": 54680,
+          "di": 36055,
+          "ds": 8854,
+          "dx": 50983,
+          "es": 26302,
+          "flags": 64583,
+          "ip": 14790,
+          "si": 45175,
+          "sp": 1417,
+          "ss": 27801
+        }
+      },
+      "instruction_bytes": "e8f30f",
+      "metadata_form": "E8",
+      "prefetch": "populated",
+      "record_hash": "25db3f9c644085b540cd506b2ae702507007eca7d3d8abf8188a49a0fcd582ec",
+      "rep0f_positions": [
+        1
+      ],
+      "upstream_test_hash": "012f5a87fc266f954b436b18ffe641fbb1020df0"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144,
+          144,
+          144
+        ],
+        "ram": [
+          [
+            80810,
+            183
+          ]
+        ],
+        "regs": {
+          "flags": 64663,
+          "ip": 20078
+        }
+      },
+      "initial": {
+        "queue": [],
+        "ram": [
+          [
+            287481,
+            192
+          ],
+          [
+            287482,
+            140
+          ],
+          [
+            287483,
+            79
+          ],
+          [
+            287484,
+            243
+          ],
+          [
+            287485,
+            15
+          ],
+          [
+            80810,
+            219
+          ]
+        ],
+        "regs": {
+          "ax": 51855,
+          "bp": 38146,
+          "bx": 18022,
+          "cs": 16713,
+          "cx": 809,
+          "di": 26585,
+          "ds": 1826,
+          "dx": 47379,
+          "es": 1085,
+          "flags": 64662,
+          "ip": 20073,
+          "si": 54843,
+          "sp": 3253,
+          "ss": 59121
+        }
+      },
+      "instruction_bytes": "c08c4ff30f",
+      "metadata_form": "C0.1",
+      "prefetch": "empty",
+      "record_hash": "286e41809d6c3427d33e4bf03c8771b5bff7f67f5bfe7f3340caba39d35bd8a3",
+      "rep0f_positions": [
+        3
+      ],
+      "upstream_test_hash": "dde133508737b9ae17ee8bf8a3f4ca48f694e41d"
+    },
+    {
+      "expected_final": {
+        "queue": [],
+        "ram": [],
+        "regs": {
+          "ax": 20179,
+          "ip": 32128
+        }
+      },
+      "initial": {
+        "queue": [],
+        "ram": [
+          [
+            518509,
+            161
+          ],
+          [
+            518510,
+            243
+          ],
+          [
+            518511,
+            15
+          ],
+          [
+            372947,
+            211
+          ],
+          [
+            372948,
+            78
+          ]
+        ],
+        "regs": {
+          "ax": 36776,
+          "bp": 11519,
+          "bx": 45064,
+          "cs": 30399,
+          "cx": 20137,
+          "di": 56367,
+          "ds": 23054,
+          "dx": 17974,
+          "es": 59905,
+          "flags": 63495,
+          "ip": 32125,
+          "si": 62655,
+          "sp": 42742,
+          "ss": 18380
+        }
+      },
+      "instruction_bytes": "a1f30f",
+      "metadata_form": "A1",
+      "prefetch": "empty",
+      "record_hash": "29ead74006e0357e32ca114d40a597cd24b373a119fe1bed0478b530ab4d4371",
+      "rep0f_positions": [
+        1
+      ],
+      "upstream_test_hash": "6decb000ef91387916cadc660148a8b72620ad45"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144,
+          144,
+          144
+        ],
+        "ram": [],
+        "regs": {
+          "ax": 64689,
+          "flags": 61510,
+          "ip": 19940,
+          "si": 24288
+        }
+      },
+      "initial": {
+        "queue": [
+          15,
+          59,
+          243,
+          15
+        ],
+        "ram": [
+          [
+            599696,
+            15
+          ],
+          [
+            599697,
+            59
+          ],
+          [
+            599698,
+            243
+          ],
+          [
+            599699,
+            15
+          ],
+          [
+            163566,
+            177
+          ],
+          [
+            163567,
+            252
+          ]
+        ],
+        "regs": {
+          "ax": 27701,
+          "bp": 40231,
+          "bx": 49408,
+          "cs": 36235,
+          "cx": 17705,
+          "di": 14811,
+          "ds": 8705,
+          "dx": 1488,
+          "es": 47815,
+          "flags": 63494,
+          "ip": 19936,
+          "si": 24286,
+          "sp": 9221,
+          "ss": 6364
+        }
+      },
+      "instruction_bytes": "0f3bf30f",
+      "metadata_form": "0F3B",
+      "prefetch": "populated",
+      "record_hash": "2fffd607ac843f97865f0c96df0c45a0d26f003ec8cd662c1468b9bf474b7c8b",
+      "rep0f_positions": [
+        2
+      ],
+      "upstream_test_hash": "ffb315171a18cd57679dcb80eb05a26a219f0e68"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144,
+          144,
+          144
+        ],
+        "ram": [
+          [
+            181368,
+            47
+          ],
+          [
+            181369,
+            106
+          ]
+        ],
+        "regs": {
+          "flags": 64534,
+          "ip": 54132
+        }
+      },
+      "initial": {
+        "queue": [
+          193,
+          72,
+          242,
+          15
+        ],
+        "ram": [
+          [
+            30880,
+            193
+          ],
+          [
+            30881,
+            72
+          ],
+          [
+            30882,
+            242
+          ],
+          [
+            30883,
+            15
+          ],
+          [
+            181368,
+            23
+          ],
+          [
+            181369,
+            181
+          ]
+        ],
+        "regs": {
+          "ax": 49857,
+          "bp": 4377,
+          "bx": 4542,
+          "cs": 64083,
+          "cx": 52539,
+          "di": 17118,
+          "ds": 9567,
+          "dx": 43750,
+          "es": 17169,
+          "flags": 64535,
+          "ip": 54128,
+          "si": 23768,
+          "sp": 35387,
+          "ss": 42932
+        }
+      },
+      "instruction_bytes": "c148f20f",
+      "metadata_form": "C1.1",
+      "prefetch": "populated",
+      "record_hash": "30a958f60cab50a48ea169e27416f24b19832cdb661fa2ecf8922ffc51465830",
+      "rep0f_positions": [
+        2
+      ],
+      "upstream_test_hash": "3ec4e20b7b87515df628439876fd458197c8fc76"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144,
+          144,
+          144
+        ],
+        "ram": [],
+        "regs": {
+          "ax": 24552,
+          "flags": 61571,
+          "ip": 18473,
+          "si": 7663
+        }
+      },
+      "initial": {
+        "queue": [
+          54,
+          15,
+          59,
+          242
+        ],
+        "ram": [
+          [
+            1025796,
+            54
+          ],
+          [
+            1025797,
+            15
+          ],
+          [
+            1025798,
+            59
+          ],
+          [
+            1025799,
+            242
+          ],
+          [
+            1025800,
+            15
+          ],
+          [
+            718253,
+            163
+          ],
+          [
+            718254,
+            127
+          ],
+          [
+            718255,
+            201
+          ],
+          [
+            718256,
+            179
+          ]
+        ],
+        "regs": {
+          "ax": 25683,
+          "bp": 17141,
+          "bx": 13670,
+          "cs": 62958,
+          "cx": 55792,
+          "di": 9354,
+          "ds": 57515,
+          "dx": 2306,
+          "es": 59186,
+          "flags": 61570,
+          "ip": 18468,
+          "si": 7661,
+          "sp": 58720,
+          "ss": 44412
+        }
+      },
+      "instruction_bytes": "360f3bf20f",
+      "metadata_form": "0F3B",
+      "prefetch": "populated",
+      "record_hash": "36d2fb73e6cfd9df46cd0763d7cedc43211ecdd42c00c3f9a9f16212582e6549",
+      "rep0f_positions": [
+        3
+      ],
+      "upstream_test_hash": "334b4712a3cbf5f129d8d94eb0b3c2757d465286"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144,
+          144,
+          144
+        ],
+        "ram": [
+          [
+            774697,
+            209
+          ],
+          [
+            774698,
+            113
+          ],
+          [
+            774699,
+            72
+          ]
+        ],
+        "regs": {
+          "di": 1226,
+          "flags": 62595,
+          "ip": 14896
+        }
+      },
+      "initial": {
+        "queue": [],
+        "ram": [
+          [
+            870764,
+            15
+          ],
+          [
+            870765,
+            57
+          ],
+          [
+            870766,
+            242
+          ],
+          [
+            870767,
+            15
+          ],
+          [
+            774696,
+            219
+          ],
+          [
+            774697,
+            177
+          ],
+          [
+            774698,
+            127
+          ],
+          [
+            774699,
+            78
+          ]
+        ],
+        "regs": {
+          "ax": 17294,
+          "bp": 65334,
+          "bx": 2672,
+          "cs": 53492,
+          "cx": 64526,
+          "di": 1224,
+          "ds": 31479,
+          "dx": 3085,
+          "es": 48342,
+          "flags": 62531,
+          "ip": 14892,
+          "si": 34565,
+          "sp": 19811,
+          "ss": 6740
+        }
+      },
+      "instruction_bytes": "0f39f20f",
+      "metadata_form": "0F39",
+      "prefetch": "empty",
+      "record_hash": "3890344b690ffb8791e7fcb25b1a9da3d4cbbe98231933f981c810124eab6abf",
+      "rep0f_positions": [
+        2
+      ],
+      "upstream_test_hash": "b573817ed121f4e3f6caeb1c3c1076ba27507e0a"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144,
+          144,
+          144
+        ],
+        "ram": [],
+        "regs": {
+          "bx": 0,
+          "flags": 62534,
+          "ip": 15627
+        }
+      },
+      "initial": {
+        "queue": [],
+        "ram": [
+          [
+            72423,
+            62
+          ],
+          [
+            72424,
+            193
+          ],
+          [
+            72425,
+            243
+          ],
+          [
+            72426,
+            15
+          ]
+        ],
+        "regs": {
+          "ax": 1890,
+          "bp": 34291,
+          "bx": 43264,
+          "cs": 3550,
+          "cx": 46881,
+          "di": 26376,
+          "ds": 4124,
+          "dx": 53053,
+          "es": 35348,
+          "flags": 62663,
+          "ip": 15623,
+          "si": 65490,
+          "sp": 20268,
+          "ss": 54127
+        }
+      },
+      "instruction_bytes": "3ec1f30f",
+      "metadata_form": "C1.6",
+      "prefetch": "empty",
+      "record_hash": "39c3b5d981cb2a811ac76ab55573bb43c04ad624ff6838b0e8072df450264fc4",
+      "rep0f_positions": [
+        2
+      ],
+      "upstream_test_hash": "0350125d15049f34797895db4eb8fe2114535f82"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144,
+          144,
+          144
+        ],
+        "ram": [],
+        "regs": {
+          "bx": 52992,
+          "flags": 61510,
+          "ip": 62979
+        }
+      },
+      "initial": {
+        "queue": [],
+        "ram": [
+          [
+            956079,
+            54
+          ],
+          [
+            956080,
+            192
+          ],
+          [
+            956081,
+            243
+          ],
+          [
+            956082,
+            15
+          ]
+        ],
+        "regs": {
+          "ax": 36607,
+          "bp": 29748,
+          "bx": 53224,
+          "cs": 55819,
+          "cx": 57633,
+          "di": 18960,
+          "ds": 197,
+          "dx": 46344,
+          "es": 8881,
+          "flags": 63571,
+          "ip": 62975,
+          "si": 52684,
+          "sp": 52114,
+          "ss": 15823
+        }
+      },
+      "instruction_bytes": "36c0f30f",
+      "metadata_form": "C0.6",
+      "prefetch": "empty",
+      "record_hash": "39d735cc374b61e5a23f77eac7035e0eb9c41eb9ba342493de3cb2b2a1830447",
+      "rep0f_positions": [
+        2
+      ],
+      "upstream_test_hash": "4f8e1b86a1f9da354a865c8e24257b6f6ff14e01"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144,
+          144,
+          144
+        ],
+        "ram": [
+          [
+            754472,
+            124
+          ],
+          [
+            754473,
+            204
+          ],
+          [
+            754474,
+            251
+          ]
+        ],
+        "regs": {
+          "di": 31065,
+          "flags": 62595,
+          "ip": 23474
+        }
+      },
+      "initial": {
+        "queue": [],
+        "ram": [
+          [
+            144814,
+            15
+          ],
+          [
+            144815,
+            57
+          ],
+          [
+            144816,
+            242
+          ],
+          [
+            144817,
+            15
+          ],
+          [
+            754471,
+            98
+          ],
+          [
+            754472,
+            126
+          ],
+          [
+            754473,
+            124
+          ],
+          [
+            754474,
+            251
+          ]
+        ],
+        "regs": {
+          "ax": 52348,
+          "bp": 54340,
+          "bx": 41568,
+          "cs": 7584,
+          "cx": 59726,
+          "di": 31063,
+          "ds": 54917,
+          "dx": 3848,
+          "es": 45213,
+          "flags": 62487,
+          "ip": 23470,
+          "si": 39047,
+          "sp": 41749,
+          "ss": 39931
+        }
+      },
+      "instruction_bytes": "0f39f20f",
+      "metadata_form": "0F39",
+      "prefetch": "empty",
+      "record_hash": "3b1fdf01889b6e6779b03e998366bea028fc4587ee0d42c311d7b58ecb37086a",
+      "rep0f_positions": [
+        2
+      ],
+      "upstream_test_hash": "de01125ea2910df8d2dc4ba9ad91a7a82aaa283d"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144,
+          144,
+          144
+        ],
+        "ram": [
+          [
+            384453,
+            37
+          ],
+          [
+            384454,
+            36
+          ]
+        ],
+        "regs": {
+          "di": 28453,
+          "flags": 61575,
+          "ip": 9632
+        }
+      },
+      "initial": {
+        "queue": [],
+        "ram": [
+          [
+            911740,
+            15
+          ],
+          [
+            911741,
+            57
+          ],
+          [
+            911742,
+            243
+          ],
+          [
+            911743,
+            15
+          ],
+          [
+            384451,
+            50
+          ],
+          [
+            384452,
+            147
+          ],
+          [
+            384453,
+            140
+          ],
+          [
+            384454,
+            42
+          ]
+        ],
+        "regs": {
+          "ax": 16985,
+          "bp": 16182,
+          "bx": 40460,
+          "cs": 56382,
+          "cx": 41569,
+          "di": 28451,
+          "ds": 64333,
+          "dx": 3305,
+          "es": 22250,
+          "flags": 63623,
+          "ip": 9628,
+          "si": 24544,
+          "sp": 27520,
+          "ss": 7975
+        }
+      },
+      "instruction_bytes": "0f39f30f",
+      "metadata_form": "0F39",
+      "prefetch": "empty",
+      "record_hash": "3bbfaefa5c4fb8a155b6c1f94729cc9d34573f63cef5895fef137c5fcbbef77e",
+      "rep0f_positions": [
+        2
+      ],
+      "upstream_test_hash": "cbb520a1604db772e3017d637bdf49d83d2cf2a4"
+    },
+    {
+      "expected_final": {
+        "queue": [],
+        "ram": [],
+        "regs": {
+          "ax": 4082,
+          "ip": 12561
+        }
+      },
+      "initial": {
+        "queue": [
+          184,
+          242,
+          15,
+          144
+        ],
+        "ram": [
+          [
+            385998,
+            184
+          ],
+          [
+            385999,
+            242
+          ],
+          [
+            386000,
+            15
+          ],
+          [
+            386001,
+            144
+          ]
+        ],
+        "regs": {
+          "ax": 50911,
+          "bp": 59409,
+          "bx": 45268,
+          "cs": 23340,
+          "cx": 2852,
+          "di": 53839,
+          "ds": 46219,
+          "dx": 23798,
+          "es": 5614,
+          "flags": 63555,
+          "ip": 12558,
+          "si": 25827,
+          "sp": 28995,
+          "ss": 45815
+        }
+      },
+      "instruction_bytes": "b8f20f",
+      "metadata_form": "B8",
+      "prefetch": "populated",
+      "record_hash": "3ca689aab2efb464c7bd0c21d5b1af36b7e59df3a5e4d3c910bec598e5265898",
+      "rep0f_positions": [
+        1
+      ],
+      "upstream_test_hash": "41880e3ac71c5fab11b59da53d264d54d5acc0e0"
+    },
+    {
+      "expected_final": {
+        "queue": [],
+        "ram": [],
+        "regs": {
+          "ip": 11145,
+          "sp": 49296
+        }
+      },
+      "initial": {
+        "queue": [
+          38,
+          194,
+          243,
+          15
+        ],
+        "ram": [
+          [
+            585917,
+            38
+          ],
+          [
+            585918,
+            194
+          ],
+          [
+            585919,
+            243
+          ],
+          [
+            585920,
+            15
+          ],
+          [
+            27403,
+            137
+          ],
+          [
+            27404,
+            43
+          ]
+        ],
+        "regs": {
+          "ax": 9184,
+          "bp": 59995,
+          "bx": 31327,
+          "cs": 32637,
+          "cx": 1948,
+          "di": 11949,
+          "ds": 45056,
+          "dx": 15925,
+          "es": 41479,
+          "flags": 63699,
+          "ip": 63725,
+          "si": 42229,
+          "sp": 45211,
+          "ss": 64423
+        }
+      },
+      "instruction_bytes": "26c2f30f",
+      "metadata_form": "C2",
+      "prefetch": "populated",
+      "record_hash": "4082a439bbfe83f96214741fb9275b0427e4023ddaafff7bf0d71d2be66f86ca",
+      "rep0f_positions": [
+        2
+      ],
+      "upstream_test_hash": "81cf4ec22678865f0d958ee396a43909dec6e801"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144,
+          144,
+          144
+        ],
+        "ram": [
+          [
+            1006634,
+            144
+          ],
+          [
+            1006635,
+            12
+          ],
+          [
+            1006636,
+            141
+          ],
+          [
+            1006637,
+            161
+          ]
+        ],
+        "regs": {
+          "di": 22332,
+          "flags": 62595,
+          "ip": 33086
+        }
+      },
+      "initial": {
+        "queue": [],
+        "ram": [
+          [
+            903866,
+            15
+          ],
+          [
+            903867,
+            57
+          ],
+          [
+            903868,
+            243
+          ],
+          [
+            903869,
+            15
+          ],
+          [
+            1006634,
+            16
+          ],
+          [
+            1006635,
+            6
+          ],
+          [
+            1006636,
+            233
+          ],
+          [
+            1006637,
+            161
+          ]
+        ],
+        "regs": {
+          "ax": 6681,
+          "bp": 57057,
+          "bx": 38663,
+          "cs": 54424,
+          "cx": 48556,
+          "di": 22330,
+          "ds": 7981,
+          "dx": 3505,
+          "es": 61519,
+          "flags": 62551,
+          "ip": 33082,
+          "si": 64300,
+          "sp": 51057,
+          "ss": 46750
+        }
+      },
+      "instruction_bytes": "0f39f30f",
+      "metadata_form": "0F39",
+      "prefetch": "empty",
+      "record_hash": "41bd85ff432d631740ca1e49a65d3d48c2bca1877c8fc36752f91f8304c3fa4e",
+      "rep0f_positions": [
+        2
+      ],
+      "upstream_test_hash": "f4ce3dd47f16c38e1e8c96e1a3a82f19ddfa1aaa"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144
+        ],
+        "ram": [],
+        "regs": {
+          "dx": 57846,
+          "flags": 61574,
+          "ip": 376
+        }
+      },
+      "initial": {
+        "queue": [
+          131,
+          242,
+          15,
+          144
+        ],
+        "ram": [
+          [
+            554565,
+            131
+          ],
+          [
+            554566,
+            242
+          ],
+          [
+            554567,
+            15
+          ],
+          [
+            554568,
+            144
+          ]
+        ],
+        "regs": {
+          "ax": 40777,
+          "bp": 38898,
+          "bx": 44096,
+          "cs": 34637,
+          "cx": 38639,
+          "di": 23808,
+          "ds": 24293,
+          "dx": 57849,
+          "es": 31752,
+          "flags": 63506,
+          "ip": 373,
+          "si": 55797,
+          "sp": 37304,
+          "ss": 38042
+        }
+      },
+      "instruction_bytes": "83f20f",
+      "metadata_form": "83.6",
+      "prefetch": "populated",
+      "record_hash": "41f2cc1ab30643be7b2eac1adf41ccd85233115154adfd1468a0e1f905ce22c5",
+      "rep0f_positions": [
+        1
+      ],
+      "upstream_test_hash": "f98d5321de21c4ea0769930ae78fb6b5c70c8cc3"
+    },
+    {
+      "expected_final": {
+        "queue": [],
+        "ram": [],
+        "regs": {
+          "flags": 62610,
+          "ip": 45827,
+          "si": 40759
+        }
+      },
+      "initial": {
+        "queue": [],
+        "ram": [
+          [
+            329343,
+            43
+          ],
+          [
+            329344,
+            181
+          ],
+          [
+            329345,
+            242
+          ],
+          [
+            329346,
+            15
+          ],
+          [
+            563051,
+            25
+          ],
+          [
+            563052,
+            91
+          ]
+        ],
+        "regs": {
+          "ax": 16908,
+          "bp": 30315,
+          "bx": 34957,
+          "cs": 17720,
+          "cx": 10770,
+          "di": 6905,
+          "ds": 34504,
+          "dx": 37076,
+          "es": 21941,
+          "flags": 62598,
+          "ip": 45823,
+          "si": 64080,
+          "sp": 28632,
+          "ss": 44002
+        }
+      },
+      "instruction_bytes": "2bb5f20f",
+      "metadata_form": "2B",
+      "prefetch": "empty",
+      "record_hash": "433ec299807f18151474e84796e0f413234b71863b1c3a7ef235fe431f0c7ab3",
+      "rep0f_positions": [
+        2
+      ],
+      "upstream_test_hash": "bd001219465f864e5b676bae0a224b4ee162682a"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144,
+          144,
+          144
+        ],
+        "ram": [
+          [
+            20321,
+            158
+          ],
+          [
+            20322,
+            185
+          ],
+          [
+            20323,
+            180
+          ],
+          [
+            20324,
+            74
+          ]
+        ],
+        "regs": {
+          "di": 54739,
+          "flags": 62595,
+          "ip": 19520
+        }
+      },
+      "initial": {
+        "queue": [
+          46,
+          15,
+          57,
+          242
+        ],
+        "ram": [
+          [
+            632315,
+            46
+          ],
+          [
+            632316,
+            15
+          ],
+          [
+            632317,
+            57
+          ],
+          [
+            632318,
+            242
+          ],
+          [
+            632319,
+            15
+          ],
+          [
+            20321,
+            66
+          ],
+          [
+            20322,
+            41
+          ],
+          [
+            20323,
+            180
+          ],
+          [
+            20324,
+            74
+          ]
+        ],
+        "regs": {
+          "ax": 11879,
+          "bp": 55420,
+          "bx": 8870,
+          "cs": 38300,
+          "cx": 40196,
+          "di": 54737,
+          "ds": 25825,
+          "dx": 3074,
+          "es": 63385,
+          "flags": 62471,
+          "ip": 19515,
+          "si": 8458,
+          "sp": 53795,
+          "ss": 9790
+        }
+      },
+      "instruction_bytes": "2e0f39f20f",
+      "metadata_form": "0F39",
+      "prefetch": "populated",
+      "record_hash": "45300ac50c3f00a2875329a61dbda9a1d9f9dcc047f50ccf04c3f3c305f7b671",
+      "rep0f_positions": [
+        3
+      ],
+      "upstream_test_hash": "3f227415b206aa7620ec585721c6ec329be7dcf7"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144,
+          144,
+          144
+        ],
+        "ram": [
+          [
+            394531,
+            163
+          ]
+        ],
+        "regs": {
+          "flags": 63703,
+          "ip": 43188
+        }
+      },
+      "initial": {
+        "queue": [],
+        "ram": [
+          [
+            616078,
+            38
+          ],
+          [
+            616079,
+            192
+          ],
+          [
+            616080,
+            152
+          ],
+          [
+            616081,
+            122
+          ],
+          [
+            616082,
+            242
+          ],
+          [
+            616083,
+            15
+          ],
+          [
+            394531,
+            244
+          ]
+        ],
+        "regs": {
+          "ax": 54629,
+          "bp": 2130,
+          "bx": 38809,
+          "cs": 35806,
+          "cx": 32290,
+          "di": 4831,
+          "ds": 54171,
+          "dx": 39020,
+          "es": 22266,
+          "flags": 63702,
+          "ip": 43182,
+          "si": 2928,
+          "sp": 63310,
+          "ss": 25465
+        }
+      },
+      "instruction_bytes": "26c0987af20f",
+      "metadata_form": "C0.3",
+      "prefetch": "empty",
+      "record_hash": "47c24beef2df1cce15846c21a220b9a3941d5ee65b636fc83f02495fd63a6b4d",
+      "rep0f_positions": [
+        4
+      ],
+      "upstream_test_hash": "e1a9da96770d8fac06fc85ef6d2dfe40f057031d"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144,
+          144,
+          144
+        ],
+        "ram": [],
+        "regs": {
+          "ax": 20904,
+          "flags": 63639,
+          "ip": 63499
+        }
+      },
+      "initial": {
+        "queue": [],
+        "ram": [
+          [
+            843478,
+            107
+          ],
+          [
+            843479,
+            133
+          ],
+          [
+            843480,
+            242
+          ],
+          [
+            843481,
+            15
+          ],
+          [
+            843482,
+            31
+          ],
+          [
+            33297,
+            88
+          ],
+          [
+            33298,
+            217
+          ]
+        ],
+        "regs": {
+          "ax": 470,
+          "bp": 19953,
+          "bx": 7043,
+          "cs": 48749,
+          "cx": 16013,
+          "di": 25439,
+          "ds": 236,
+          "dx": 62659,
+          "es": 56264,
+          "flags": 63698,
+          "ip": 63494,
+          "si": 47519,
+          "sp": 64915,
+          "ss": 56089
+        }
+      },
+      "instruction_bytes": "6b85f20f1f",
+      "metadata_form": "6B",
+      "prefetch": "empty",
+      "record_hash": "4861e11ca435418e6db2c60af84f6c8b184427d2414eb12792ff535122baf195",
+      "rep0f_positions": [
+        2
+      ],
+      "upstream_test_hash": "034e8b1abb03141391d5a900092169cda98e9e64"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144,
+          144,
+          144
+        ],
+        "ram": [
+          [
+            29606,
+            198
+          ],
+          [
+            29607,
+            191
+          ]
+        ],
+        "regs": {
+          "di": 64342,
+          "flags": 62595,
+          "ip": 64449
+        }
+      },
+      "initial": {
+        "queue": [
+          62,
+          15,
+          57,
+          242
+        ],
+        "ram": [
+          [
+            998716,
+            62
+          ],
+          [
+            998717,
+            15
+          ],
+          [
+            998718,
+            57
+          ],
+          [
+            998719,
+            242
+          ],
+          [
+            998720,
+            15
+          ],
+          [
+            29604,
+            115
+          ],
+          [
+            29605,
+            137
+          ],
+          [
+            29606,
+            138
+          ],
+          [
+            29607,
+            164
+          ]
+        ],
+        "regs": {
+          "ax": 65306,
+          "bp": 12141,
+          "bx": 46074,
+          "cs": 58392,
+          "cx": 41272,
+          "di": 64340,
+          "ds": 3882,
+          "dx": 526,
+          "es": 63365,
+          "flags": 64662,
+          "ip": 64444,
+          "si": 55682,
+          "sp": 57714,
+          "ss": 26543
+        }
+      },
+      "instruction_bytes": "3e0f39f20f",
+      "metadata_form": "0F39",
+      "prefetch": "populated",
+      "record_hash": "48d6c14534e38942d9069dc126f67f1e37efaf9e2c933c37866271b1fd786532",
+      "rep0f_positions": [
+        3
+      ],
+      "upstream_test_hash": "eb891112d82632d3e86a65e3075f5ca9dd7f6bd7"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144,
+          144,
+          144
+        ],
+        "ram": [],
+        "regs": {
+          "ax": 57028,
+          "flags": 62599,
+          "ip": 57534,
+          "si": 29559
+        }
+      },
+      "initial": {
+        "queue": [],
+        "ram": [
+          [
+            404154,
+            15
+          ],
+          [
+            404155,
+            59
+          ],
+          [
+            404156,
+            242
+          ],
+          [
+            404157,
+            15
+          ],
+          [
+            595285,
+            91
+          ],
+          [
+            595286,
+            19
+          ],
+          [
+            595287,
+            123
+          ],
+          [
+            595288,
+            23
+          ]
+        ],
+        "regs": {
+          "ax": 42223,
+          "bp": 55480,
+          "bx": 57881,
+          "cs": 21664,
+          "cx": 59420,
+          "di": 49369,
+          "ds": 35358,
+          "dx": 1034,
+          "es": 16920,
+          "flags": 62663,
+          "ip": 57530,
+          "si": 29557,
+          "sp": 7548,
+          "ss": 20304
+        }
+      },
+      "instruction_bytes": "0f3bf20f",
+      "metadata_form": "0F3B",
+      "prefetch": "empty",
+      "record_hash": "4df4b56d89e1fffd628d7d71a201234bfc89bf88212193e1bc79c528c7e5684e",
+      "rep0f_positions": [
+        2
+      ],
+      "upstream_test_hash": "feea78cd08470e86e9ec4da7d1c25e9813e78105"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144,
+          144,
+          144
+        ],
+        "ram": [],
+        "regs": {
+          "dx": 37888,
+          "flags": 62534,
+          "ip": 39882
+        }
+      },
+      "initial": {
+        "queue": [],
+        "ram": [
+          [
+            105542,
+            46
+          ],
+          [
+            105543,
+            192
+          ],
+          [
+            105544,
+            242
+          ],
+          [
+            105545,
+            15
+          ]
+        ],
+        "regs": {
+          "ax": 26777,
+          "bp": 63657,
+          "bx": 42180,
+          "cs": 4104,
+          "cx": 46088,
+          "di": 33367,
+          "ds": 7318,
+          "dx": 38011,
+          "es": 9339,
+          "flags": 64659,
+          "ip": 39878,
+          "si": 35833,
+          "sp": 11863,
+          "ss": 2590
+        }
+      },
+      "instruction_bytes": "2ec0f20f",
+      "metadata_form": "C0.6",
+      "prefetch": "empty",
+      "record_hash": "500021856944307212e82b88bf59059347f2ded5a7bc2357c4c7d52ffb22f262",
+      "rep0f_positions": [
+        2
+      ],
+      "upstream_test_hash": "44ca93ebf0f5d7dee23fa3695fecaf873aa3072e"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144,
+          144,
+          144
+        ],
+        "ram": [
+          [
+            639477,
+            65
+          ],
+          [
+            639478,
+            71
+          ]
+        ],
+        "regs": {
+          "ip": 56703
+        }
+      },
+      "initial": {
+        "queue": [],
+        "ram": [
+          [
+            579209,
+            38
+          ],
+          [
+            579210,
+            193
+          ],
+          [
+            579211,
+            138
+          ],
+          [
+            579212,
+            95
+          ],
+          [
+            579213,
+            243
+          ],
+          [
+            579214,
+            15
+          ],
+          [
+            639477,
+            160
+          ],
+          [
+            639478,
+            163
+          ]
+        ],
+        "regs": {
+          "ax": 42926,
+          "bp": 15750,
+          "bx": 20657,
+          "cs": 32657,
+          "cx": 31293,
+          "di": 58773,
+          "ds": 10215,
+          "dx": 14270,
+          "es": 37965,
+          "flags": 64658,
+          "ip": 56697,
+          "si": 19520,
+          "sp": 35537,
+          "ss": 31806
+        }
+      },
+      "instruction_bytes": "26c18a5ff30f",
+      "metadata_form": "C1.1",
+      "prefetch": "empty",
+      "record_hash": "51a74c9d753a5425cabf5df802b5003d7de3302115d4856aeb642528c49f07fc",
+      "rep0f_positions": [
+        4
+      ],
+      "upstream_test_hash": "3a637f00bd9637e64140bc70d008c78f69f66ed1"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144,
+          144,
+          144
+        ],
+        "ram": [
+          [
+            887808,
+            1
+          ],
+          [
+            887809,
+            0
+          ]
+        ],
+        "regs": {
+          "flags": 61443,
+          "ip": 8459
+        }
+      },
+      "initial": {
+        "queue": [],
+        "ram": [
+          [
+            585543,
+            193
+          ],
+          [
+            585544,
+            109
+          ],
+          [
+            585545,
+            242
+          ],
+          [
+            585546,
+            15
+          ],
+          [
+            887808,
+            144
+          ],
+          [
+            887809,
+            239
+          ]
+        ],
+        "regs": {
+          "ax": 60133,
+          "bp": 37944,
+          "bx": 36727,
+          "cs": 36068,
+          "cx": 13864,
+          "di": 57950,
+          "ds": 51867,
+          "dx": 50099,
+          "es": 18057,
+          "flags": 61587,
+          "ip": 8455,
+          "si": 24301,
+          "sp": 35359,
+          "ss": 10414
+        }
+      },
+      "instruction_bytes": "c16df20f",
+      "metadata_form": "C1.5",
+      "prefetch": "empty",
+      "record_hash": "5202522505c275f014c72ea3f753e5333d591790ab390e20875a9e8e81fc1a62",
+      "rep0f_positions": [
+        2
+      ],
+      "upstream_test_hash": "6aa5f991ab9031ee48f0d283eb057b55b05bb1a2"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144,
+          144,
+          144
+        ],
+        "ram": [],
+        "regs": {
+          "ax": 19304,
+          "flags": 61575,
+          "ip": 4977,
+          "si": 40848
+        }
+      },
+      "initial": {
+        "queue": [
+          62,
+          15,
+          59,
+          243
+        ],
+        "ram": [
+          [
+            122156,
+            62
+          ],
+          [
+            122157,
+            15
+          ],
+          [
+            122158,
+            59
+          ],
+          [
+            122159,
+            243
+          ],
+          [
+            122160,
+            15
+          ],
+          [
+            849246,
+            38
+          ],
+          [
+            849247,
+            29
+          ],
+          [
+            849248,
+            109
+          ],
+          [
+            849249,
+            137
+          ]
+        ],
+        "regs": {
+          "ax": 9962,
+          "bp": 29824,
+          "bx": 62477,
+          "cs": 7324,
+          "cx": 13030,
+          "di": 59017,
+          "ds": 50525,
+          "dx": 2385,
+          "es": 59556,
+          "flags": 61635,
+          "ip": 4972,
+          "si": 40846,
+          "sp": 11971,
+          "ss": 59558
+        }
+      },
+      "instruction_bytes": "3e0f3bf30f",
+      "metadata_form": "0F3B",
+      "prefetch": "populated",
+      "record_hash": "537f3a5d582a68e567a1e7efae5536ebf75ca39d110054782d4c4d7d80b9a50c",
+      "rep0f_positions": [
+        3
+      ],
+      "upstream_test_hash": "74a5710b67da9c797c8316ffca4d672e014129fb"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144,
+          144,
+          144
+        ],
+        "ram": [],
+        "regs": {
+          "ax": 11742,
+          "flags": 62595,
+          "ip": 13389,
+          "si": 9887
+        }
+      },
+      "initial": {
+        "queue": [],
+        "ram": [
+          [
+            211321,
+            15
+          ],
+          [
+            211322,
+            59
+          ],
+          [
+            211323,
+            243
+          ],
+          [
+            211324,
+            15
+          ],
+          [
+            890349,
+            19
+          ],
+          [
+            890350,
+            222
+          ],
+          [
+            890351,
+            45
+          ],
+          [
+            890352,
+            60
+          ]
+        ],
+        "regs": {
+          "ax": 32874,
+          "bp": 40734,
+          "bx": 57608,
+          "cs": 12371,
+          "cx": 55901,
+          "di": 16631,
+          "ds": 55029,
+          "dx": 80,
+          "es": 18153,
+          "flags": 64594,
+          "ip": 13385,
+          "si": 9885,
+          "sp": 51871,
+          "ss": 3264
+        }
+      },
+      "instruction_bytes": "0f3bf30f",
+      "metadata_form": "0F3B",
+      "prefetch": "empty",
+      "record_hash": "540b0f1c01052fa8bceb92b3cd4f5e2aa53d8f5ec5a3600e1050a0600069d38c",
+      "rep0f_positions": [
+        2
+      ],
+      "upstream_test_hash": "cfb5641bf8c8f363aad12419efcd523bd0b90df7"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144,
+          144,
+          144
+        ],
+        "ram": [],
+        "regs": {
+          "bx": 0,
+          "flags": 63559,
+          "ip": 9584
+        }
+      },
+      "initial": {
+        "queue": [
+          193,
+          243,
+          15,
+          144
+        ],
+        "ram": [
+          [
+            910749,
+            193
+          ],
+          [
+            910750,
+            243
+          ],
+          [
+            910751,
+            15
+          ],
+          [
+            910752,
+            144
+          ]
+        ],
+        "regs": {
+          "ax": 28470,
+          "bp": 42519,
+          "bx": 7790,
+          "cs": 56323,
+          "cx": 4381,
+          "di": 41114,
+          "ds": 15195,
+          "dx": 37982,
+          "es": 57482,
+          "flags": 61635,
+          "ip": 9581,
+          "si": 46662,
+          "sp": 49022,
+          "ss": 42184
+        }
+      },
+      "instruction_bytes": "c1f30f",
+      "metadata_form": "C1.6",
+      "prefetch": "populated",
+      "record_hash": "5c0a7991d5b91f93da5c3d0f8e75df9118baf2ea3caa4c2646dedc0521227581",
+      "rep0f_positions": [
+        1
+      ],
+      "upstream_test_hash": "b599c95c54b3d287385b3ea6a235f83822133ef0"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144,
+          144,
+          144
+        ],
+        "ram": [
+          [
+            621758,
+            12
+          ],
+          [
+            621759,
+            235
+          ],
+          [
+            621760,
+            229
+          ]
+        ],
+        "regs": {
+          "di": 27135,
+          "flags": 62599,
+          "ip": 31731
+        }
+      },
+      "initial": {
+        "queue": [],
+        "ram": [
+          [
+            858414,
+            38
+          ],
+          [
+            858415,
+            15
+          ],
+          [
+            858416,
+            57
+          ],
+          [
+            858417,
+            243
+          ],
+          [
+            858418,
+            15
+          ],
+          [
+            621757,
+            61
+          ],
+          [
+            621758,
+            100
+          ],
+          [
+            621759,
+            15
+          ],
+          [
+            621760,
+            231
+          ]
+        ],
+        "regs": {
+          "ax": 31427,
+          "bp": 8057,
+          "bx": 60170,
+          "cs": 51668,
+          "cx": 64071,
+          "di": 27133,
+          "ds": 63546,
+          "dx": 1335,
+          "es": 37164,
+          "flags": 62546,
+          "ip": 31726,
+          "si": 59403,
+          "sp": 12136,
+          "ss": 1259
+        }
+      },
+      "instruction_bytes": "260f39f30f",
+      "metadata_form": "0F39",
+      "prefetch": "empty",
+      "record_hash": "5d911796b0df9a83aaff79aae7168d124b4df179f051c76a27308818b40f0dbe",
+      "rep0f_positions": [
+        3
+      ],
+      "upstream_test_hash": "7ad2a1de19126b0c9648d2824da5c0b9e71f9baa"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144
+        ],
+        "ram": [
+          [
+            985203,
+            140
+          ]
+        ],
+        "regs": {
+          "flags": 62594,
+          "ip": 1169
+        }
+      },
+      "initial": {
+        "queue": [],
+        "ram": [
+          [
+            950668,
+            54
+          ],
+          [
+            950669,
+            32
+          ],
+          [
+            950670,
+            62
+          ],
+          [
+            950671,
+            243
+          ],
+          [
+            950672,
+            15
+          ],
+          [
+            985203,
+            158
+          ]
+        ],
+        "regs": {
+          "ax": 48109,
+          "bp": 59411,
+          "bx": 52675,
+          "cs": 59344,
+          "cx": 31581,
+          "di": 34279,
+          "ds": 48766,
+          "dx": 58964,
+          "es": 38484,
+          "flags": 64515,
+          "ip": 1164,
+          "si": 9910,
+          "sp": 15580,
+          "ss": 61320
+        }
+      },
+      "instruction_bytes": "36203ef30f",
+      "metadata_form": "20",
+      "prefetch": "empty",
+      "record_hash": "5f8ba4b15d35648e879c9f5bac1069dcb1c679d0044c64ea0fb7bedf9a9bee9c",
+      "rep0f_positions": [
+        3
+      ],
+      "upstream_test_hash": "05a893dcec85ebf70fca66555d02db7e2fd1262a"
+    },
+    {
+      "expected_final": {
+        "queue": [],
+        "ram": [
+          [
+            74870,
+            255
+          ],
+          [
+            74871,
+            187
+          ],
+          [
+            74868,
+            172
+          ],
+          [
+            74869,
+            146
+          ],
+          [
+            74866,
+            241
+          ],
+          [
+            74867,
+            42
+          ],
+          [
+            74864,
+            225
+          ],
+          [
+            74865,
+            8
+          ],
+          [
+            74862,
+            250
+          ],
+          [
+            74863,
+            191
+          ],
+          [
+            74860,
+            74
+          ],
+          [
+            74861,
+            144
+          ],
+          [
+            74858,
+            251
+          ],
+          [
+            74859,
+            76
+          ],
+          [
+            74856,
+            164
+          ],
+          [
+            74857,
+            71
+          ],
+          [
+            74854,
+            248
+          ],
+          [
+            74855,
+            97
+          ],
+          [
+            74852,
+            200
+          ],
+          [
+            74853,
+            152
+          ],
+          [
+            74850,
+            215
+          ],
+          [
+            74851,
+            97
+          ],
+          [
+            74848,
+            158
+          ],
+          [
+            74849,
+            255
+          ],
+          [
+            74846,
+            28
+          ],
+          [
+            74847,
+            194
+          ],
+          [
+            74844,
+            154
+          ],
+          [
+            74845,
+            96
+          ],
+          [
+            74842,
+            87
+          ],
+          [
+            74843,
+            188
+          ],
+          [
+            74840,
+            246
+          ],
+          [
+            74841,
+            128
+          ]
+        ],
+        "regs": {
+          "bp": 33014,
+          "ip": 39911,
+          "sp": 36250
+        }
+      },
+      "initial": {
+        "queue": [],
+        "ram": [
+          [
+            857779,
+            200
+          ],
+          [
+            857780,
+            62
+          ],
+          [
+            857781,
+            243
+          ],
+          [
+            857782,
+            15
+          ],
+          [
+            89981,
+            172
+          ],
+          [
+            89982,
+            146
+          ],
+          [
+            89979,
+            241
+          ],
+          [
+            89980,
+            42
+          ],
+          [
+            89977,
+            225
+          ],
+          [
+            89978,
+            8
+          ],
+          [
+            89975,
+            250
+          ],
+          [
+            89976,
+            191
+          ],
+          [
+            89973,
+            74
+          ],
+          [
+            89974,
+            144
+          ],
+          [
+            89971,
+            251
+          ],
+          [
+            89972,
+            76
+          ],
+          [
+            89969,
+            164
+          ],
+          [
+            89970,
+            71
+          ],
+          [
+            89967,
+            248
+          ],
+          [
+            89968,
+            97
+          ],
+          [
+            89965,
+            200
+          ],
+          [
+            89966,
+            152
+          ],
+          [
+            89963,
+            215
+          ],
+          [
+            89964,
+            97
+          ],
+          [
+            89961,
+            158
+          ],
+          [
+            89962,
+            255
+          ],
+          [
+            89959,
+            28
+          ],
+          [
+            89960,
+            194
+          ],
+          [
+            89957,
+            154
+          ],
+          [
+            89958,
+            96
+          ],
+          [
+            89955,
+            87
+          ],
+          [
+            89956,
+            188
+          ]
+        ],
+        "regs": {
+          "ax": 2999,
+          "bp": 48127,
+          "bx": 64289,
+          "cs": 51117,
+          "cx": 59433,
+          "di": 50116,
+          "ds": 19009,
+          "dx": 16886,
+          "es": 984,
+          "flags": 63571,
+          "ip": 39907,
+          "si": 48483,
+          "sp": 33016,
+          "ss": 2616
+        }
+      },
+      "instruction_bytes": "c83ef30f",
+      "metadata_form": "C8",
+      "prefetch": "empty",
+      "record_hash": "5f9d1b8085f90ee765d4651874673bf65d3d820010cd36bab4abf15b5263aca6",
+      "rep0f_positions": [
+        2
+      ],
+      "upstream_test_hash": "9e07a3723bcccd99d0a94cea832a74123cfb4c50"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144,
+          144,
+          144
+        ],
+        "ram": [],
+        "regs": {
+          "ax": 111,
+          "flags": 61571,
+          "ip": 60189,
+          "si": 44679
+        }
+      },
+      "initial": {
+        "queue": [
+          15,
+          59,
+          243,
+          15
+        ],
+        "ram": [
+          [
+            459849,
+            15
+          ],
+          [
+            459850,
+            59
+          ],
+          [
+            459851,
+            243
+          ],
+          [
+            459852,
+            15
+          ],
+          [
+            938533,
+            53
+          ],
+          [
+            938534,
+            251
+          ],
+          [
+            938535,
+            6
+          ],
+          [
+            938536,
+            112
+          ]
+        ],
+        "regs": {
+          "ax": 34342,
+          "bp": 11695,
+          "bx": 43788,
+          "cs": 24979,
+          "cx": 4779,
+          "di": 57719,
+          "ds": 55866,
+          "dx": 177,
+          "es": 38100,
+          "flags": 63682,
+          "ip": 60185,
+          "si": 44677,
+          "sp": 55412,
+          "ss": 32397
+        }
+      },
+      "instruction_bytes": "0f3bf30f",
+      "metadata_form": "0F3B",
+      "prefetch": "populated",
+      "record_hash": "6132ff97e6f08e23e4283b0c49a902e3d23c66eb618ddc69522ca68e0aa82387",
+      "rep0f_positions": [
+        2
+      ],
+      "upstream_test_hash": "2fa3846cd0444c80f9c192825daa34da74106ce3"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144
+        ],
+        "ram": [
+          [
+            986392,
+            156
+          ],
+          [
+            986393,
+            213
+          ]
+        ],
+        "regs": {
+          "flags": 61575,
+          "ip": 16363
+        }
+      },
+      "initial": {
+        "queue": [],
+        "ram": [
+          [
+            348740,
+            54
+          ],
+          [
+            348741,
+            129
+          ],
+          [
+            348742,
+            131
+          ],
+          [
+            348743,
+            242
+          ],
+          [
+            348744,
+            15
+          ],
+          [
+            348745,
+            224
+          ],
+          [
+            348746,
+            253
+          ],
+          [
+            986392,
+            188
+          ],
+          [
+            986393,
+            215
+          ]
+        ],
+        "regs": {
+          "ax": 423,
+          "bp": 12978,
+          "bx": 51073,
+          "cs": 20774,
+          "cx": 26608,
+          "di": 10196,
+          "ds": 23732,
+          "dx": 44788,
+          "es": 7516,
+          "flags": 63494,
+          "ip": 16356,
+          "si": 51063,
+          "sp": 47036,
+          "ss": 59946
+        }
+      },
+      "instruction_bytes": "368183f20fe0fd",
+      "metadata_form": "81.0",
+      "prefetch": "empty",
+      "record_hash": "61dd28036862028ae3c5c4255f458ac511fae68a5df2d4ca032cb537a43e259b",
+      "rep0f_positions": [
+        3
+      ],
+      "upstream_test_hash": "b393100d893d17ad0d493bf0cf02b704e0b3e903"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144,
+          144,
+          144
+        ],
+        "ram": [],
+        "regs": {
+          "ax": 56137,
+          "ip": 30675,
+          "si": 35909
+        }
+      },
+      "initial": {
+        "queue": [],
+        "ram": [
+          [
+            333182,
+            54
+          ],
+          [
+            333183,
+            15
+          ],
+          [
+            333184,
+            59
+          ],
+          [
+            333185,
+            243
+          ],
+          [
+            333186,
+            15
+          ],
+          [
+            703091,
+            221
+          ],
+          [
+            703092,
+            146
+          ],
+          [
+            703093,
+            180
+          ],
+          [
+            703094,
+            205
+          ]
+        ],
+        "regs": {
+          "ax": 561,
+          "bp": 44380,
+          "bx": 56076,
+          "cs": 18907,
+          "cx": 36976,
+          "di": 60649,
+          "ds": 58355,
+          "dx": 1127,
+          "es": 26982,
+          "flags": 61571,
+          "ip": 30670,
+          "si": 35907,
+          "sp": 64052,
+          "ss": 41699
+        }
+      },
+      "instruction_bytes": "360f3bf30f",
+      "metadata_form": "0F3B",
+      "prefetch": "empty",
+      "record_hash": "670b65edb19c3ec0ed1a1f71793bf25c8b69ac4df131178878eeed84a8c7343f",
+      "rep0f_positions": [
+        3
+      ],
+      "upstream_test_hash": "31a072c7f2b49646953b0cd470cb1c6d99b26392"
+    },
+    {
+      "expected_final": {
+        "queue": [],
+        "ram": [],
+        "regs": {
+          "ax": 2034,
+          "flags": 61442,
+          "ip": 45498
+        }
+      },
+      "initial": {
+        "queue": [
+          62,
+          37,
+          242,
+          15
+        ],
+        "ram": [
+          [
+            957782,
+            62
+          ],
+          [
+            957783,
+            37
+          ],
+          [
+            957784,
+            242
+          ],
+          [
+            957785,
+            15
+          ]
+        ],
+        "regs": {
+          "ax": 38902,
+          "bp": 6203,
+          "bx": 54433,
+          "cs": 57018,
+          "cx": 17715,
+          "di": 63492,
+          "ds": 37518,
+          "dx": 21314,
+          "es": 23278,
+          "flags": 61511,
+          "ip": 45494,
+          "si": 19014,
+          "sp": 13878,
+          "ss": 10461
+        }
+      },
+      "instruction_bytes": "3e25f20f",
+      "metadata_form": "25",
+      "prefetch": "populated",
+      "record_hash": "679f24fcca86cdd1d3d743216605e6d6b6eba3357c162056b28c3e83b577040e",
+      "rep0f_positions": [
+        2
+      ],
+      "upstream_test_hash": "1cd9001a2551ad3e151dea2e1237c56e2cf247b5"
+    },
+    {
+      "expected_final": {
+        "queue": [],
+        "ram": [
+          [
+            803123,
+            54
+          ],
+          [
+            803124,
+            166
+          ]
+        ],
+        "regs": {
+          "ip": 40231
+        }
+      },
+      "initial": {
+        "queue": [],
+        "ram": [
+          [
+            631251,
+            54
+          ],
+          [
+            631252,
+            163
+          ],
+          [
+            631253,
+            243
+          ],
+          [
+            631254,
+            15
+          ]
+        ],
+        "regs": {
+          "ax": 42550,
+          "bp": 7592,
+          "bx": 1340,
+          "cs": 36939,
+          "cx": 60356,
+          "di": 43522,
+          "ds": 18815,
+          "dx": 50222,
+          "es": 57096,
+          "flags": 61511,
+          "ip": 40227,
+          "si": 39676,
+          "sp": 46370,
+          "ss": 49940
+        }
+      },
+      "instruction_bytes": "36a3f30f",
+      "metadata_form": "A3",
+      "prefetch": "empty",
+      "record_hash": "67cbb2099abcdfdd0e9fc8e7cd9ce7f0e500821a882380d7ca4de0d38340dde6",
+      "rep0f_positions": [
+        2
+      ],
+      "upstream_test_hash": "c3de0558ff5d1e33ae8cf5cef5b45b002cf906fc"
+    },
+    {
+      "expected_final": {
+        "queue": [],
+        "ram": [
+          [
+            187218,
+            15
+          ],
+          [
+            187219,
+            242
+          ]
+        ],
+        "regs": {
+          "ip": 65436
+        }
+      },
+      "initial": {
+        "queue": [
+          38,
+          199,
+          157,
+          149
+        ],
+        "ram": [
+          [
+            647845,
+            38
+          ],
+          [
+            647846,
+            199
+          ],
+          [
+            647847,
+            157
+          ],
+          [
+            647848,
+            149
+          ],
+          [
+            647849,
+            242
+          ],
+          [
+            647850,
+            15
+          ],
+          [
+            647851,
+            242
+          ]
+        ],
+        "regs": {
+          "ax": 2656,
+          "bp": 1029,
+          "bx": 33083,
+          "cs": 36401,
+          "cx": 37220,
+          "di": 27213,
+          "ds": 2683,
+          "dx": 16643,
+          "es": 10215,
+          "flags": 62599,
+          "ip": 65429,
+          "si": 19510,
+          "sp": 1208,
+          "ss": 63923
+        }
+      },
+      "instruction_bytes": "26c79d95f20ff2",
+      "metadata_form": "C7",
+      "prefetch": "populated",
+      "record_hash": "6e32c46936996637b7c0fabdf9c4cddf23d5d8e804da38e14c3d84fafbe8286a",
+      "rep0f_positions": [
+        4
+      ],
+      "upstream_test_hash": "17ccf486ab6c61c14783d88fa87b6a05f5ab9110"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144,
+          144,
+          144
+        ],
+        "ram": [],
+        "regs": {
+          "ax": 15881,
+          "flags": 61575,
+          "ip": 47584,
+          "si": 43134
+        }
+      },
+      "initial": {
+        "queue": [],
+        "ram": [
+          [
+            554284,
+            15
+          ],
+          [
+            554285,
+            59
+          ],
+          [
+            554286,
+            243
+          ],
+          [
+            554287,
+            15
+          ],
+          [
+            645116,
+            154
+          ],
+          [
+            645117,
+            4
+          ],
+          [
+            645118,
+            31
+          ],
+          [
+            645119,
+            90
+          ]
+        ],
+        "regs": {
+          "ax": 60047,
+          "bp": 33888,
+          "bx": 11527,
+          "cs": 31669,
+          "cx": 21731,
+          "di": 29093,
+          "ds": 37624,
+          "dx": 691,
+          "es": 43214,
+          "flags": 63686,
+          "ip": 47580,
+          "si": 43132,
+          "sp": 26640,
+          "ss": 37708
+        }
+      },
+      "instruction_bytes": "0f3bf30f",
+      "metadata_form": "0F3B",
+      "prefetch": "empty",
+      "record_hash": "72c16bf506e73e373c36c23f246b8b5ce4ef4ba6ac840c38228d28ca607d1469",
+      "rep0f_positions": [
+        2
+      ],
+      "upstream_test_hash": "d1f2dbb462a7a0788aea26d4ba62d63a0650ca1d"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144,
+          144,
+          144
+        ],
+        "ram": [],
+        "regs": {
+          "ax": 6071,
+          "flags": 62599,
+          "ip": 31744,
+          "si": 59405
+        }
+      },
+      "initial": {
+        "queue": [],
+        "ram": [
+          [
+            846028,
+            15
+          ],
+          [
+            846029,
+            59
+          ],
+          [
+            846030,
+            242
+          ],
+          [
+            846031,
+            15
+          ],
+          [
+            1031355,
+            75
+          ],
+          [
+            1031356,
+            233
+          ],
+          [
+            1031357,
+            246
+          ],
+          [
+            1031358,
+            34
+          ]
+        ],
+        "regs": {
+          "ax": 22170,
+          "bp": 41854,
+          "bx": 9192,
+          "cs": 50893,
+          "cx": 22552,
+          "di": 61768,
+          "ds": 60747,
+          "dx": 3597,
+          "es": 60538,
+          "flags": 62594,
+          "ip": 31740,
+          "si": 59403,
+          "sp": 29824,
+          "ss": 42174
+        }
+      },
+      "instruction_bytes": "0f3bf20f",
+      "metadata_form": "0F3B",
+      "prefetch": "empty",
+      "record_hash": "72d5b7d0c2f74328fe36a8bd05ea97d005a405852965eceb7f3a248293abfeff",
+      "rep0f_positions": [
+        2
+      ],
+      "upstream_test_hash": "cadff36560597244e3522d418b04660bd696b682"
+    },
+    {
+      "expected_final": {
+        "queue": [],
+        "ram": [
+          [
+            18616,
+            15
+          ],
+          [
+            18617,
+            189
+          ]
+        ],
+        "regs": {
+          "ip": 17076
+        }
+      },
+      "initial": {
+        "queue": [
+          46,
+          199,
+          103,
+          243
+        ],
+        "ram": [
+          [
+            1019662,
+            46
+          ],
+          [
+            1019663,
+            199
+          ],
+          [
+            1019664,
+            103
+          ],
+          [
+            1019665,
+            243
+          ],
+          [
+            1019666,
+            15
+          ],
+          [
+            1019667,
+            189
+          ]
+        ],
+        "regs": {
+          "ax": 58166,
+          "bp": 48493,
+          "bx": 64613,
+          "cs": 62662,
+          "cx": 7619,
+          "di": 7403,
+          "ds": 33013,
+          "dx": 32505,
+          "es": 26294,
+          "flags": 63511,
+          "ip": 17070,
+          "si": 7253,
+          "sp": 25612,
+          "ss": 459
+        }
+      },
+      "instruction_bytes": "2ec767f30fbd",
+      "metadata_form": "C7",
+      "prefetch": "populated",
+      "record_hash": "7e4f8d47bb2a409066382a3fedd3772d884bdbe1d6096d092fb896ec583c9dfd",
+      "rep0f_positions": [
+        3
+      ],
+      "upstream_test_hash": "f5713adeaa2c7126773c438b66026f63267d3503"
+    },
+    {
+      "expected_final": {
+        "queue": [],
+        "ram": [],
+        "regs": {
+          "bx": 4082,
+          "ip": 55065
+        }
+      },
+      "initial": {
+        "queue": [
+          187,
+          242,
+          15,
+          144
+        ],
+        "ram": [
+          [
+            736182,
+            187
+          ],
+          [
+            736183,
+            242
+          ],
+          [
+            736184,
+            15
+          ],
+          [
+            736185,
+            144
+          ]
+        ],
+        "regs": {
+          "ax": 43665,
+          "bp": 1561,
+          "bx": 33776,
+          "cs": 42570,
+          "cx": 26629,
+          "di": 27684,
+          "ds": 50982,
+          "dx": 9976,
+          "es": 50579,
+          "flags": 64578,
+          "ip": 55062,
+          "si": 40352,
+          "sp": 29528,
+          "ss": 65082
+        }
+      },
+      "instruction_bytes": "bbf20f",
+      "metadata_form": "BB",
+      "prefetch": "populated",
+      "record_hash": "7ebb78965838f3d31a3e5ebea56a91e69ad6099b17535d9247fc6a67bb088d56",
+      "rep0f_positions": [
+        1
+      ],
+      "upstream_test_hash": "e0de7c6c42af2d0fa13590bb72b79b963edf3c2c"
+    },
+    {
+      "expected_final": {
+        "queue": [],
+        "ram": [
+          [
+            71053,
+            195
+          ],
+          [
+            71054,
+            240
+          ],
+          [
+            71051,
+            171
+          ],
+          [
+            71052,
+            255
+          ]
+        ],
+        "regs": {
+          "cs": 12010,
+          "ip": 61198,
+          "sp": 55579
+        }
+      },
+      "initial": {
+        "queue": [],
+        "ram": [
+          [
+            3031,
+            255
+          ],
+          [
+            3032,
+            154
+          ],
+          [
+            3033,
+            242
+          ],
+          [
+            3034,
+            15
+          ],
+          [
+            71790,
+            14
+          ],
+          [
+            71791,
+            239
+          ],
+          [
+            71792,
+            234
+          ],
+          [
+            71793,
+            46
+          ]
+        ],
+        "regs": {
+          "ax": 22353,
+          "bp": 60304,
+          "bx": 26951,
+          "cs": 61635,
+          "cx": 45517,
+          "di": 30059,
+          "ds": 48384,
+          "dx": 55471,
+          "es": 34846,
+          "flags": 61511,
+          "ip": 65447,
+          "si": 57468,
+          "sp": 55583,
+          "ss": 967
+        }
+      },
+      "instruction_bytes": "ff9af20f",
+      "metadata_form": "FF.3",
+      "prefetch": "empty",
+      "record_hash": "80dd10affe7599caf148497f073bec621cde57caa5ed8d7f9e7c49e55301fc62",
+      "rep0f_positions": [
+        2
+      ],
+      "upstream_test_hash": "ec01b7c1610338cd3d910a98c62806511f46dd9c"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144,
+          144,
+          144
+        ],
+        "ram": [
+          [
+            969236,
+            68
+          ],
+          [
+            969237,
+            186
+          ],
+          [
+            969238,
+            160
+          ],
+          [
+            969239,
+            200
+          ]
+        ],
+        "regs": {
+          "di": 28758,
+          "flags": 61575,
+          "ip": 12446
+        }
+      },
+      "initial": {
+        "queue": [
+          15,
+          57,
+          243,
+          15
+        ],
+        "ram": [
+          [
+            569738,
+            15
+          ],
+          [
+            569739,
+            57
+          ],
+          [
+            569740,
+            243
+          ],
+          [
+            569741,
+            15
+          ],
+          [
+            969236,
+            196
+          ],
+          [
+            969237,
+            242
+          ],
+          [
+            969238,
+            165
+          ],
+          [
+            969239,
+            200
+          ]
+        ],
+        "regs": {
+          "ax": 1490,
+          "bp": 38174,
+          "bx": 40965,
+          "cs": 34831,
+          "cx": 39663,
+          "di": 28756,
+          "ds": 6064,
+          "dx": 685,
+          "es": 58780,
+          "flags": 63702,
+          "ip": 12442,
+          "si": 65279,
+          "sp": 59608,
+          "ss": 31118
+        }
+      },
+      "instruction_bytes": "0f39f30f",
+      "metadata_form": "0F39",
+      "prefetch": "populated",
+      "record_hash": "8136ea4312bb50634ac55e652f2b721d41b5e8cf33e77d398732c9efcea39079",
+      "rep0f_positions": [
+        2
+      ],
+      "upstream_test_hash": "f338f110956f6bb08d44aa921e0cd0eafcc41622"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144,
+          144,
+          144
+        ],
+        "ram": [
+          [
+            639477,
+            255
+          ]
+        ],
+        "regs": {
+          "flags": 62599,
+          "ip": 56703
+        }
+      },
+      "initial": {
+        "queue": [],
+        "ram": [
+          [
+            579209,
+            38
+          ],
+          [
+            579210,
+            192
+          ],
+          [
+            579211,
+            186
+          ],
+          [
+            579212,
+            95
+          ],
+          [
+            579213,
+            243
+          ],
+          [
+            579214,
+            15
+          ],
+          [
+            639477,
+            160
+          ]
+        ],
+        "regs": {
+          "ax": 42926,
+          "bp": 15750,
+          "bx": 20657,
+          "cs": 32657,
+          "cx": 31293,
+          "di": 58773,
+          "ds": 10215,
+          "dx": 14270,
+          "es": 37965,
+          "flags": 64658,
+          "ip": 56697,
+          "si": 19520,
+          "sp": 35537,
+          "ss": 31806
+        }
+      },
+      "instruction_bytes": "26c0ba5ff30f",
+      "metadata_form": "C0.7",
+      "prefetch": "empty",
+      "record_hash": "85efe84407f1476f1597258938685b57730b743b8ffcbe74c564503298f1945b",
+      "rep0f_positions": [
+        4
+      ],
+      "upstream_test_hash": "083a37c3af77e816c63e03996c53dac847f834da"
+    },
+    {
+      "expected_final": {
+        "queue": [],
+        "ram": [],
+        "regs": {
+          "ip": 51647
+        }
+      },
+      "initial": {
+        "queue": [],
+        "ram": [
+          [
+            302216,
+            62
+          ],
+          [
+            302217,
+            233
+          ],
+          [
+            302218,
+            243
+          ],
+          [
+            302219,
+            15
+          ]
+        ],
+        "regs": {
+          "ax": 46349,
+          "bp": 32855,
+          "bx": 51836,
+          "cs": 15916,
+          "cx": 24663,
+          "di": 57802,
+          "ds": 38904,
+          "dx": 37319,
+          "es": 39724,
+          "flags": 64659,
+          "ip": 47560,
+          "si": 48233,
+          "sp": 34461,
+          "ss": 59679
+        }
+      },
+      "instruction_bytes": "3ee9f30f",
+      "metadata_form": "E9",
+      "prefetch": "empty",
+      "record_hash": "87a31d6e8b8dc70bb5f985425e66c69644109ab84c6645446168c9d3a2bcf376",
+      "rep0f_positions": [
+        2
+      ],
+      "upstream_test_hash": "827bd33c3904a1e037658e62ba79569475b2b285"
+    },
+    {
+      "expected_final": {
+        "queue": [],
+        "ram": [],
+        "regs": {
+          "flags": 61574,
+          "ip": 16363
+        }
+      },
+      "initial": {
+        "queue": [],
+        "ram": [
+          [
+            348740,
+            54
+          ],
+          [
+            348741,
+            247
+          ],
+          [
+            348742,
+            131
+          ],
+          [
+            348743,
+            242
+          ],
+          [
+            348744,
+            15
+          ],
+          [
+            348745,
+            224
+          ],
+          [
+            348746,
+            253
+          ],
+          [
+            986392,
+            188
+          ],
+          [
+            986393,
+            215
+          ]
+        ],
+        "regs": {
+          "ax": 423,
+          "bp": 12978,
+          "bx": 51073,
+          "cs": 20774,
+          "cx": 26608,
+          "di": 10196,
+          "ds": 23732,
+          "dx": 44788,
+          "es": 7516,
+          "flags": 63494,
+          "ip": 16356,
+          "si": 51063,
+          "sp": 47036,
+          "ss": 59946
+        }
+      },
+      "instruction_bytes": "36f783f20fe0fd",
+      "metadata_form": "F7.0",
+      "prefetch": "empty",
+      "record_hash": "893d5fd896d62e46ab481702c4ff4ecb4e2bd672139445068a551f16113f42c6",
+      "rep0f_positions": [
+        3
+      ],
+      "upstream_test_hash": "073c6a35fb898b470c14607f71c5551ff871bfc9"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144
+        ],
+        "ram": [
+          [
+            818472,
+            10
+          ]
+        ],
+        "regs": {
+          "flags": 62470,
+          "ip": 11491
+        }
+      },
+      "initial": {
+        "queue": [],
+        "ram": [
+          [
+            847854,
+            128
+          ],
+          [
+            847855,
+            163
+          ],
+          [
+            847856,
+            215
+          ],
+          [
+            847857,
+            243
+          ],
+          [
+            847858,
+            15
+          ],
+          [
+            818472,
+            250
+          ]
+        ],
+        "regs": {
+          "ax": 55420,
+          "bp": 37968,
+          "bx": 50459,
+          "cs": 52273,
+          "cx": 42310,
+          "di": 61137,
+          "ds": 20380,
+          "dx": 49552,
+          "es": 6159,
+          "flags": 64534,
+          "ip": 11486,
+          "si": 12944,
+          "sp": 44601,
+          "ss": 49251
+        }
+      },
+      "instruction_bytes": "80a3d7f30f",
+      "metadata_form": "80.4",
+      "prefetch": "empty",
+      "record_hash": "8c0b680bb6c745e9a9869f9361a19984e21f299453ed24242484c704226899f0",
+      "rep0f_positions": [
+        3
+      ],
+      "upstream_test_hash": "f65e190277e7aa5d4225fe98856da44207b4ffd7"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144,
+          144,
+          144
+        ],
+        "ram": [],
+        "regs": {
+          "ax": 21834,
+          "flags": 61575,
+          "ip": 16971,
+          "si": 58304
+        }
+      },
+      "initial": {
+        "queue": [
+          62,
+          15,
+          59,
+          242
+        ],
+        "ram": [
+          [
+            244966,
+            62
+          ],
+          [
+            244967,
+            15
+          ],
+          [
+            244968,
+            59
+          ],
+          [
+            244969,
+            242
+          ],
+          [
+            244970,
+            15
+          ],
+          [
+            371902,
+            96
+          ],
+          [
+            371903,
+            40
+          ],
+          [
+            371904,
+            85
+          ],
+          [
+            371905,
+            5
+          ]
+        ],
+        "regs": {
+          "ax": 34015,
+          "bp": 49090,
+          "bx": 65189,
+          "cs": 14250,
+          "cx": 63437,
+          "di": 13759,
+          "ds": 19600,
+          "dx": 1546,
+          "es": 33261,
+          "flags": 61570,
+          "ip": 16966,
+          "si": 58302,
+          "sp": 21485,
+          "ss": 35420
+        }
+      },
+      "instruction_bytes": "3e0f3bf20f",
+      "metadata_form": "0F3B",
+      "prefetch": "populated",
+      "record_hash": "8d1f857e38dc7926441d63bdf66dd8d2c5e0bbc41440c51fef238044d1017606",
+      "rep0f_positions": [
+        3
+      ],
+      "upstream_test_hash": "a4b89fbf29220ea02321e9563cb2c5eab73d5bf1"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144,
+          144,
+          144
+        ],
+        "ram": [
+          [
+            433798,
+            176
+          ],
+          [
+            433799,
+            42
+          ],
+          [
+            433800,
+            187
+          ]
+        ],
+        "regs": {
+          "di": 33831,
+          "flags": 61575,
+          "ip": 35798
+        }
+      },
+      "initial": {
+        "queue": [
+          15,
+          57,
+          243,
+          15
+        ],
+        "ram": [
+          [
+            745058,
+            15
+          ],
+          [
+            745059,
+            57
+          ],
+          [
+            745060,
+            243
+          ],
+          [
+            745061,
+            15
+          ],
+          [
+            433797,
+            81
+          ],
+          [
+            433798,
+            48
+          ],
+          [
+            433799,
+            56
+          ],
+          [
+            433800,
+            158
+          ]
+        ],
+        "regs": {
+          "ax": 30293,
+          "bp": 29861,
+          "bx": 43023,
+          "cs": 44329,
+          "cx": 44367,
+          "di": 33829,
+          "ds": 44100,
+          "dx": 1316,
+          "es": 24998,
+          "flags": 63571,
+          "ip": 35794,
+          "si": 34418,
+          "sp": 63038,
+          "ss": 36259
+        }
+      },
+      "instruction_bytes": "0f39f30f",
+      "metadata_form": "0F39",
+      "prefetch": "populated",
+      "record_hash": "8ffdbfcde9535b25cbc9fc14d89644e42879e2432a96eb2a97c73d4bbf30bfad",
+      "rep0f_positions": [
+        2
+      ],
+      "upstream_test_hash": "2b968f09ae7ca1a9fc730bd84567cd9cee5be8e8"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144,
+          144,
+          144
+        ],
+        "ram": [
+          [
+            460366,
+            139
+          ],
+          [
+            460367,
+            91
+          ],
+          [
+            460368,
+            174
+          ],
+          [
+            460369,
+            227
+          ]
+        ],
+        "regs": {
+          "di": 47888,
+          "flags": 61575,
+          "ip": 39627
+        }
+      },
+      "initial": {
+        "queue": [
+          54,
+          15,
+          57,
+          242
+        ],
+        "ram": [
+          [
+            911110,
+            54
+          ],
+          [
+            911111,
+            15
+          ],
+          [
+            911112,
+            57
+          ],
+          [
+            911113,
+            242
+          ],
+          [
+            911114,
+            15
+          ],
+          [
+            460366,
+            43
+          ],
+          [
+            460367,
+            4
+          ],
+          [
+            460368,
+            162
+          ],
+          [
+            460369,
+            227
+          ]
+        ],
+        "regs": {
+          "ax": 29404,
+          "bp": 30146,
+          "bx": 28687,
+          "cs": 54468,
+          "cx": 311,
+          "di": 47886,
+          "ds": 26166,
+          "dx": 1797,
+          "es": 25780,
+          "flags": 61459,
+          "ip": 39622,
+          "si": 30441,
+          "sp": 60896,
+          "ss": 10931
+        }
+      },
+      "instruction_bytes": "360f39f20f",
+      "metadata_form": "0F39",
+      "prefetch": "populated",
+      "record_hash": "931c5f5631a02e47c263bba02b5296529ab375d0624f669225798606c872dcdd",
+      "rep0f_positions": [
+        3
+      ],
+      "upstream_test_hash": "39ce1f1052474e18ae08493154af70736e4494b6"
+    },
+    {
+      "expected_final": {
+        "queue": [],
+        "ram": [
+          [
+            105907,
+            110
+          ],
+          [
+            105908,
+            27
+          ],
+          [
+            105905,
+            72
+          ],
+          [
+            105906,
+            43
+          ]
+        ],
+        "regs": {
+          "cs": 4083,
+          "ip": 25632,
+          "sp": 29505
+        }
+      },
+      "initial": {
+        "queue": [
+          154,
+          32,
+          100,
+          243
+        ],
+        "ram": [
+          [
+            123427,
+            154
+          ],
+          [
+            123428,
+            32
+          ],
+          [
+            123429,
+            100
+          ],
+          [
+            123430,
+            243
+          ],
+          [
+            123431,
+            15
+          ]
+        ],
+        "regs": {
+          "ax": 17713,
+          "bp": 63272,
+          "bx": 50776,
+          "cs": 7022,
+          "cx": 10413,
+          "di": 47150,
+          "ds": 30208,
+          "dx": 35823,
+          "es": 29563,
+          "flags": 63703,
+          "ip": 11075,
+          "si": 35875,
+          "sp": 29509,
+          "ss": 4775
+        }
+      },
+      "instruction_bytes": "9a2064f30f",
+      "metadata_form": "9A",
+      "prefetch": "populated",
+      "record_hash": "941ca3c80414eca798ff603fdb7a80b5e0de958edcacc8ee019d96933e22f9cb",
+      "rep0f_positions": [
+        3
+      ],
+      "upstream_test_hash": "3733c6d7eaa8c5c5c51f01c01f6f492af9de6a61"
+    },
+    {
+      "expected_final": {
+        "queue": [],
+        "ram": [],
+        "regs": {
+          "ip": 10696
+        }
+      },
+      "initial": {
+        "queue": [],
+        "ram": [
+          [
+            604243,
+            46
+          ],
+          [
+            604244,
+            15
+          ],
+          [
+            604245,
+            28
+          ],
+          [
+            604246,
+            243
+          ],
+          [
+            604247,
+            15
+          ]
+        ],
+        "regs": {
+          "ax": 46594,
+          "bp": 19239,
+          "bx": 28047,
+          "cs": 37097,
+          "cx": 19473,
+          "di": 6061,
+          "ds": 55641,
+          "dx": 48910,
+          "es": 11302,
+          "flags": 62599,
+          "ip": 10691,
+          "si": 3154,
+          "sp": 1340,
+          "ss": 44508
+        }
+      },
+      "instruction_bytes": "2e0f1cf30f",
+      "metadata_form": "0F1C",
+      "prefetch": "empty",
+      "record_hash": "97b0c3ebeac8a7b7d958017b3f9cbdd3f1478c6cbced7f18bd078301cdb5aeed",
+      "rep0f_positions": [
+        3
+      ],
+      "upstream_test_hash": "8f24fbba55778d7123b9606baa848a28fd3af068"
+    },
+    {
+      "expected_final": {
+        "queue": [],
+        "ram": [],
+        "regs": {
+          "flags": 62594,
+          "ip": 28975
+        }
+      },
+      "initial": {
+        "queue": [
+          129,
+          191,
+          198,
+          29
+        ],
+        "ram": [
+          [
+            109305,
+            129
+          ],
+          [
+            109306,
+            191
+          ],
+          [
+            109307,
+            198
+          ],
+          [
+            109308,
+            29
+          ],
+          [
+            109309,
+            243
+          ],
+          [
+            109310,
+            15
+          ],
+          [
+            233521,
+            183
+          ],
+          [
+            233522,
+            171
+          ]
+        ],
+        "regs": {
+          "ax": 36204,
+          "bp": 4184,
+          "bx": 4859,
+          "cs": 5021,
+          "cx": 18782,
+          "di": 6377,
+          "ds": 13815,
+          "dx": 14747,
+          "es": 12116,
+          "flags": 64646,
+          "ip": 28969,
+          "si": 46060,
+          "sp": 38871,
+          "ss": 27525
+        }
+      },
+      "instruction_bytes": "81bfc61df30f",
+      "metadata_form": "81.7",
+      "prefetch": "populated",
+      "record_hash": "9bf574c93f6543b49e960b1c64ceca3c52301adc36b1f6fcb4a030f747ee77dc",
+      "rep0f_positions": [
+        4
+      ],
+      "upstream_test_hash": "523c4094843627df744b969d887082e9226040a5"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144,
+          144,
+          144
+        ],
+        "ram": [
+          [
+            318189,
+            0
+          ]
+        ],
+        "regs": {
+          "flags": 62534,
+          "ip": 52845
+        }
+      },
+      "initial": {
+        "queue": [],
+        "ram": [
+          [
+            896839,
+            54
+          ],
+          [
+            896840,
+            192
+          ],
+          [
+            896841,
+            172
+          ],
+          [
+            896842,
+            225
+          ],
+          [
+            896843,
+            243
+          ],
+          [
+            896844,
+            15
+          ],
+          [
+            318189,
+            172
+          ]
+        ],
+        "regs": {
+          "ax": 28213,
+          "bp": 34876,
+          "bx": 45745,
+          "cs": 52750,
+          "cx": 19004,
+          "di": 47099,
+          "ds": 36403,
+          "dx": 34440,
+          "es": 2295,
+          "flags": 62482,
+          "ip": 52839,
+          "si": 61756,
+          "sp": 7517,
+          "ss": 16221
+        }
+      },
+      "instruction_bytes": "36c0ace1f30f",
+      "metadata_form": "C0.5",
+      "prefetch": "empty",
+      "record_hash": "9c323cdf27efe7d5bd06b699e78367692f82ecf28ecd5bd20c6f72ac45388131",
+      "rep0f_positions": [
+        4
+      ],
+      "upstream_test_hash": "cf45dc9dc8fcf48f984b554aa3b610af55b3df5a"
+    },
+    {
+      "expected_final": {
+        "queue": [],
+        "ram": [],
+        "regs": {
+          "ax": 50432,
+          "flags": 62614,
+          "ip": 47564
+        }
+      },
+      "initial": {
+        "queue": [],
+        "ram": [
+          [
+            302216,
+            62
+          ],
+          [
+            302217,
+            5
+          ],
+          [
+            302218,
+            243
+          ],
+          [
+            302219,
+            15
+          ]
+        ],
+        "regs": {
+          "ax": 46349,
+          "bp": 32855,
+          "bx": 51836,
+          "cs": 15916,
+          "cx": 24663,
+          "di": 57802,
+          "ds": 38904,
+          "dx": 37319,
+          "es": 39724,
+          "flags": 64659,
+          "ip": 47560,
+          "si": 48233,
+          "sp": 34461,
+          "ss": 59679
+        }
+      },
+      "instruction_bytes": "3e05f30f",
+      "metadata_form": "05",
+      "prefetch": "empty",
+      "record_hash": "9ee707e7920031c13a72936a121f4796fbe780de28974f46993667b69e794264",
+      "rep0f_positions": [
+        2
+      ],
+      "upstream_test_hash": "64ea8d684cd5d8a041441065c9340bd7191dcf6e"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144
+        ],
+        "ram": [
+          [
+            1409,
+            223
+          ]
+        ],
+        "regs": {
+          "flags": 62594,
+          "ip": 29061
+        }
+      },
+      "initial": {
+        "queue": [],
+        "ram": [
+          [
+            185345,
+            130
+          ],
+          [
+            185346,
+            76
+          ],
+          [
+            185347,
+            242
+          ],
+          [
+            185348,
+            15
+          ],
+          [
+            1409,
+            219
+          ]
+        ],
+        "regs": {
+          "ax": 56217,
+          "bp": 28706,
+          "bx": 42286,
+          "cs": 9768,
+          "cx": 48863,
+          "di": 47784,
+          "ds": 64405,
+          "dx": 63913,
+          "es": 7775,
+          "flags": 64598,
+          "ip": 29057,
+          "si": 19519,
+          "sp": 15033,
+          "ss": 47663
+        }
+      },
+      "instruction_bytes": "824cf20f",
+      "metadata_form": "82.1",
+      "prefetch": "empty",
+      "record_hash": "a36beb497f21f7285f68b45348d12e89b51aa6109dcc06f3677df29667dd965e",
+      "rep0f_positions": [
+        2
+      ],
+      "upstream_test_hash": "24abaaa492c8f3852e99b810f40695d28bfc1843"
+    },
+    {
+      "expected_final": {
+        "queue": [],
+        "ram": [],
+        "regs": {
+          "cs": 60485,
+          "ip": 11145,
+          "sp": 49298
+        }
+      },
+      "initial": {
+        "queue": [
+          202,
+          243,
+          15,
+          144
+        ],
+        "ram": [
+          [
+            585917,
+            202
+          ],
+          [
+            585918,
+            243
+          ],
+          [
+            585919,
+            15
+          ],
+          [
+            585920,
+            144
+          ],
+          [
+            27403,
+            137
+          ],
+          [
+            27404,
+            43
+          ],
+          [
+            27405,
+            69
+          ],
+          [
+            27406,
+            236
+          ]
+        ],
+        "regs": {
+          "ax": 9184,
+          "bp": 59995,
+          "bx": 31327,
+          "cs": 32637,
+          "cx": 1948,
+          "di": 11949,
+          "ds": 45056,
+          "dx": 15925,
+          "es": 41479,
+          "flags": 63699,
+          "ip": 63725,
+          "si": 42229,
+          "sp": 45211,
+          "ss": 64423
+        }
+      },
+      "instruction_bytes": "caf30f",
+      "metadata_form": "CA",
+      "prefetch": "populated",
+      "record_hash": "a490b580519b1881f95444dcd2b25a2b4b688966fe22856b9a92870f3ae34046",
+      "rep0f_positions": [
+        1
+      ],
+      "upstream_test_hash": "6822fb0f87844d0273ec7b395e9b37b5130ea0b9"
+    },
+    {
+      "expected_final": {
+        "queue": [],
+        "ram": [],
+        "regs": {
+          "dx": 11239,
+          "flags": 61446,
+          "ip": 14665
+        }
+      },
+      "initial": {
+        "queue": [
+          54,
+          129,
+          242,
+          15
+        ],
+        "ram": [
+          [
+            427812,
+            54
+          ],
+          [
+            427813,
+            129
+          ],
+          [
+            427814,
+            242
+          ],
+          [
+            427815,
+            15
+          ],
+          [
+            427816,
+            99
+          ]
+        ],
+        "regs": {
+          "ax": 37907,
+          "bp": 62985,
+          "bx": 62243,
+          "cs": 25822,
+          "cx": 35338,
+          "di": 33118,
+          "ds": 31605,
+          "dx": 18664,
+          "es": 4276,
+          "flags": 63618,
+          "ip": 14660,
+          "si": 54285,
+          "sp": 7797,
+          "ss": 32073
+        }
+      },
+      "instruction_bytes": "3681f20f63",
+      "metadata_form": "81.6",
+      "prefetch": "populated",
+      "record_hash": "ab6f969e9fccd06ca6c2804d5217f7539214f414c470df594115e349842addbb",
+      "rep0f_positions": [
+        2
+      ],
+      "upstream_test_hash": "306c3b016826410b77b4b75157dcf20d85df82d0"
+    },
+    {
+      "expected_final": {
+        "queue": [],
+        "ram": [],
+        "regs": {
+          "dx": 55776,
+          "ip": 31061
+        }
+      },
+      "initial": {
+        "queue": [
+          15,
+          31,
+          242,
+          15
+        ],
+        "ram": [
+          [
+            223665,
+            15
+          ],
+          [
+            223666,
+            31
+          ],
+          [
+            223667,
+            242
+          ],
+          [
+            223668,
+            15
+          ]
+        ],
+        "regs": {
+          "ax": 535,
+          "bp": 33655,
+          "bx": 42008,
+          "cs": 12038,
+          "cx": 60803,
+          "di": 12965,
+          "ds": 53046,
+          "dx": 23008,
+          "es": 56678,
+          "flags": 63558,
+          "ip": 31057,
+          "si": 37755,
+          "sp": 55867,
+          "ss": 23836
+        }
+      },
+      "instruction_bytes": "0f1ff20f",
+      "metadata_form": "0F1F",
+      "prefetch": "populated",
+      "record_hash": "aba7456b0e90aed6e56ed7f6de3d5c3c059a6fade05a7202a966cc90deac2366",
+      "rep0f_positions": [
+        2
+      ],
+      "upstream_test_hash": "e64c1846a3f5ab2e1c9d2413835b0f93f1886e3a"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144,
+          144,
+          144
+        ],
+        "ram": [
+          [
+            261066,
+            0
+          ]
+        ],
+        "regs": {
+          "flags": 62534,
+          "ip": 6873
+        }
+      },
+      "initial": {
+        "queue": [],
+        "ram": [
+          [
+            224851,
+            46
+          ],
+          [
+            224852,
+            192
+          ],
+          [
+            224853,
+            174
+          ],
+          [
+            224854,
+            190
+          ],
+          [
+            224855,
+            242
+          ],
+          [
+            224856,
+            15
+          ],
+          [
+            261066,
+            71
+          ]
+        ],
+        "regs": {
+          "ax": 64753,
+          "bp": 46476,
+          "bx": 7075,
+          "cs": 13624,
+          "cx": 59448,
+          "di": 37148,
+          "ds": 38578,
+          "dx": 50924,
+          "es": 43664,
+          "flags": 62614,
+          "ip": 6867,
+          "si": 16301,
+          "sp": 29569,
+          "ss": 49224
+        }
+      },
+      "instruction_bytes": "2ec0aebef20f",
+      "metadata_form": "C0.5",
+      "prefetch": "empty",
+      "record_hash": "ae6e778f270fe30cd69f3b3a85535c94293f72a114c39a2884564546c4f83dd6",
+      "rep0f_positions": [
+        4
+      ],
+      "upstream_test_hash": "1485fca7e39827af5d3abdf52577978b9e662e1d"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144,
+          144
+        ],
+        "ram": [
+          [
+            986392,
+            121
+          ],
+          [
+            986393,
+            175
+          ]
+        ],
+        "regs": {
+          "flags": 61447,
+          "ip": 16361
+        }
+      },
+      "initial": {
+        "queue": [],
+        "ram": [
+          [
+            348740,
+            54
+          ],
+          [
+            348741,
+            209
+          ],
+          [
+            348742,
+            131
+          ],
+          [
+            348743,
+            242
+          ],
+          [
+            348744,
+            15
+          ],
+          [
+            986392,
+            188
+          ],
+          [
+            986393,
+            215
+          ]
+        ],
+        "regs": {
+          "ax": 423,
+          "bp": 12978,
+          "bx": 51073,
+          "cs": 20774,
+          "cx": 26416,
+          "di": 10196,
+          "ds": 23732,
+          "dx": 44788,
+          "es": 7516,
+          "flags": 63494,
+          "ip": 16356,
+          "si": 51063,
+          "sp": 47036,
+          "ss": 59946
+        }
+      },
+      "instruction_bytes": "36d183f20f",
+      "metadata_form": "D1.0",
+      "prefetch": "empty",
+      "record_hash": "af2413815788236a5486d875893e59372989145ad15bccaa11264958d95f2799",
+      "rep0f_positions": [
+        3
+      ],
+      "upstream_test_hash": "897c6b8cb96bfd54e164dca329989269310fa407"
+    },
+    {
+      "expected_final": {
+        "queue": [],
+        "ram": [],
+        "regs": {
+          "flags": 61462,
+          "ip": 60233,
+          "sp": 31280
+        }
+      },
+      "initial": {
+        "queue": [],
+        "ram": [
+          [
+            683509,
+            129
+          ],
+          [
+            683510,
+            212
+          ],
+          [
+            683511,
+            243
+          ],
+          [
+            683512,
+            15
+          ]
+        ],
+        "regs": {
+          "ax": 45407,
+          "bp": 33141,
+          "bx": 22458,
+          "cs": 38955,
+          "cx": 32848,
+          "di": 29089,
+          "ds": 51301,
+          "dx": 31179,
+          "es": 14824,
+          "flags": 63687,
+          "ip": 60229,
+          "si": 59992,
+          "sp": 27196,
+          "ss": 39665
+        }
+      },
+      "instruction_bytes": "81d4f30f",
+      "metadata_form": "81.2",
+      "prefetch": "empty",
+      "record_hash": "b0bf4b7b4011eb4939d6f157243430981537b2b136bb5497d075861c3090bf1c",
+      "rep0f_positions": [
+        2
+      ],
+      "upstream_test_hash": "be59561b29f9eeb6ba648546bae41396b1e90127"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144,
+          144,
+          144
+        ],
+        "ram": [
+          [
+            561200,
+            90
+          ],
+          [
+            561201,
+            45
+          ]
+        ],
+        "regs": {
+          "di": 56370,
+          "flags": 61575,
+          "ip": 20533
+        }
+      },
+      "initial": {
+        "queue": [],
+        "ram": [
+          [
+            556529,
+            15
+          ],
+          [
+            556530,
+            57
+          ],
+          [
+            556531,
+            242
+          ],
+          [
+            556532,
+            15
+          ]
+        ],
+        "regs": {
+          "ax": 11610,
+          "bp": 44638,
+          "bx": 64541,
+          "cs": 33500,
+          "cx": 58853,
+          "di": 56368,
+          "ds": 5336,
+          "dx": 2560,
+          "es": 31552,
+          "flags": 61462,
+          "ip": 20529,
+          "si": 43935,
+          "sp": 53944,
+          "ss": 22134
+        }
+      },
+      "instruction_bytes": "0f39f20f",
+      "metadata_form": "0F39",
+      "prefetch": "empty",
+      "record_hash": "b1db8a421d155280a8d81697ba47e0892c9b6ba61369c969dce747d637386b66",
+      "rep0f_positions": [
+        2
+      ],
+      "upstream_test_hash": "e9c1a5e1d8f71637aaf4632c1693995f940230da"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144,
+          144,
+          144
+        ],
+        "ram": [
+          [
+            264605,
+            147
+          ]
+        ],
+        "regs": {
+          "flags": 63495,
+          "ip": 63429
+        }
+      },
+      "initial": {
+        "queue": [],
+        "ram": [
+          [
+            780368,
+            54
+          ],
+          [
+            780369,
+            192
+          ],
+          [
+            780370,
+            95
+          ],
+          [
+            780371,
+            243
+          ],
+          [
+            780372,
+            15
+          ],
+          [
+            264605,
+            242
+          ]
+        ],
+        "regs": {
+          "ax": 34365,
+          "bp": 56667,
+          "bx": 15354,
+          "cs": 44809,
+          "cx": 45357,
+          "di": 757,
+          "ds": 56937,
+          "dx": 63406,
+          "es": 28122,
+          "flags": 61446,
+          "ip": 63424,
+          "si": 1453,
+          "sp": 37851,
+          "ss": 15579
+        }
+      },
+      "instruction_bytes": "36c05ff30f",
+      "metadata_form": "C0.3",
+      "prefetch": "empty",
+      "record_hash": "b59c1af12af01a120ca324301861613e1b42993471a816a5757241aedd5d6a00",
+      "rep0f_positions": [
+        3
+      ],
+      "upstream_test_hash": "d876ec9113a8d4ab5390572a1e69b30bb5468261"
+    },
+    {
+      "expected_final": {
+        "queue": [],
+        "ram": [
+          [
+            1031684,
+            162
+          ],
+          [
+            1031685,
+            165
+          ],
+          [
+            1031682,
+            240
+          ],
+          [
+            1031683,
+            145
+          ]
+        ],
+        "regs": {
+          "cs": 50533,
+          "ip": 4082,
+          "sp": 42914
+        }
+      },
+      "initial": {
+        "queue": [],
+        "ram": [
+          [
+            715786,
+            38
+          ],
+          [
+            715787,
+            154
+          ],
+          [
+            715788,
+            242
+          ],
+          [
+            715789,
+            15
+          ],
+          [
+            715790,
+            101
+          ],
+          [
+            715791,
+            197
+          ]
+        ],
+        "regs": {
+          "ax": 62322,
+          "bp": 30319,
+          "bx": 65183,
+          "cs": 42402,
+          "cx": 22086,
+          "di": 38385,
+          "ds": 57509,
+          "dx": 33701,
+          "es": 28452,
+          "flags": 61522,
+          "ip": 37354,
+          "si": 55117,
+          "sp": 42918,
+          "ss": 61798
+        }
+      },
+      "instruction_bytes": "269af20f65c5",
+      "metadata_form": "9A",
+      "prefetch": "empty",
+      "record_hash": "bf44b10c3ac51f578767d35cc0080c280a667e7fe404463813855fe72c846788",
+      "rep0f_positions": [
+        2
+      ],
+      "upstream_test_hash": "ce45aad8d0eac91ccdaa19e2411e957261e6845c"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144,
+          144,
+          144
+        ],
+        "ram": [
+          [
+            853574,
+            165
+          ],
+          [
+            853575,
+            40
+          ],
+          [
+            853576,
+            139
+          ]
+        ],
+        "regs": {
+          "di": 40695,
+          "flags": 61575,
+          "ip": 19698
+        }
+      },
+      "initial": {
+        "queue": [],
+        "ram": [
+          [
+            1038269,
+            46
+          ],
+          [
+            1038270,
+            15
+          ],
+          [
+            1038271,
+            57
+          ],
+          [
+            1038272,
+            243
+          ],
+          [
+            1038273,
+            15
+          ],
+          [
+            853573,
+            247
+          ],
+          [
+            853574,
+            21
+          ],
+          [
+            853575,
+            224
+          ],
+          [
+            853576,
+            142
+          ]
+        ],
+        "regs": {
+          "ax": 45706,
+          "bp": 34195,
+          "bx": 60428,
+          "cs": 63661,
+          "cx": 22917,
+          "di": 40693,
+          "ds": 14666,
+          "dx": 1932,
+          "es": 50805,
+          "flags": 61463,
+          "ip": 19693,
+          "si": 46240,
+          "sp": 21622,
+          "ss": 49808
+        }
+      },
+      "instruction_bytes": "2e0f39f30f",
+      "metadata_form": "0F39",
+      "prefetch": "empty",
+      "record_hash": "c2a75a682cc44d346f8f74166eef541190e9c6d270b995d01b73ccd4f6441b16",
+      "rep0f_positions": [
+        3
+      ],
+      "upstream_test_hash": "304f40cc33384bdef482483d0392bcbc74ef62dc"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144,
+          144,
+          144
+        ],
+        "ram": [
+          [
+            961662,
+            70
+          ],
+          [
+            961663,
+            10
+          ],
+          [
+            961664,
+            171
+          ],
+          [
+            961665,
+            7
+          ]
+        ],
+        "regs": {
+          "di": 1248,
+          "flags": 62595,
+          "ip": 4218
+        }
+      },
+      "initial": {
+        "queue": [],
+        "ram": [
+          [
+            797845,
+            38
+          ],
+          [
+            797846,
+            15
+          ],
+          [
+            797847,
+            57
+          ],
+          [
+            797848,
+            243
+          ],
+          [
+            797849,
+            15
+          ],
+          [
+            961662,
+            246
+          ],
+          [
+            961663,
+            136
+          ],
+          [
+            961664,
+            175
+          ],
+          [
+            961665,
+            7
+          ]
+        ],
+        "regs": {
+          "ax": 45220,
+          "bp": 9885,
+          "bx": 6660,
+          "cs": 49602,
+          "cx": 45468,
+          "di": 1246,
+          "ds": 14839,
+          "dx": 1908,
+          "es": 60026,
+          "flags": 62674,
+          "ip": 4213,
+          "si": 2701,
+          "sp": 39285,
+          "ss": 32966
+        }
+      },
+      "instruction_bytes": "260f39f30f",
+      "metadata_form": "0F39",
+      "prefetch": "empty",
+      "record_hash": "c409588e21c47e9aa07d65167d4c19f6956016b43ab7e1d8d707a02b7a00bcb0",
+      "rep0f_positions": [
+        3
+      ],
+      "upstream_test_hash": "abf28e5a330c0a83ae0d71b1f9f076290cf71e62"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144,
+          144,
+          144
+        ],
+        "ram": [],
+        "regs": {
+          "ax": 22797,
+          "flags": 62599,
+          "ip": 58135,
+          "si": 27119
+        }
+      },
+      "initial": {
+        "queue": [
+          46,
+          15,
+          59,
+          242
+        ],
+        "ram": [
+          [
+            773426,
+            46
+          ],
+          [
+            773427,
+            15
+          ],
+          [
+            773428,
+            59
+          ],
+          [
+            773429,
+            242
+          ],
+          [
+            773430,
+            15
+          ],
+          [
+            742413,
+            149
+          ],
+          [
+            742414,
+            104
+          ],
+          [
+            742415,
+            200
+          ],
+          [
+            742416,
+            74
+          ]
+        ],
+        "regs": {
+          "ax": 55031,
+          "bp": 62385,
+          "bx": 28213,
+          "cs": 44706,
+          "cx": 5788,
+          "di": 27341,
+          "ds": 45449,
+          "dx": 1291,
+          "es": 27851,
+          "flags": 64726,
+          "ip": 58130,
+          "si": 27117,
+          "sp": 14737,
+          "ss": 62439
+        }
+      },
+      "instruction_bytes": "2e0f3bf20f",
+      "metadata_form": "0F3B",
+      "prefetch": "populated",
+      "record_hash": "c8534c4c658d8df5d91e4e88ad26970fffc584c34dca3204a8df03f2bfa527a9",
+      "rep0f_positions": [
+        3
+      ],
+      "upstream_test_hash": "65fc04a3b9af194a38aa8575b16f8622c5da8671"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144,
+          144,
+          144
+        ],
+        "ram": [],
+        "regs": {
+          "ax": 12402,
+          "flags": 61571,
+          "ip": 34497,
+          "si": 35221
+        }
+      },
+      "initial": {
+        "queue": [],
+        "ram": [
+          [
+            327901,
+            15
+          ],
+          [
+            327902,
+            59
+          ],
+          [
+            327903,
+            243
+          ],
+          [
+            327904,
+            15
+          ],
+          [
+            601587,
+            138
+          ],
+          [
+            601588,
+            229
+          ],
+          [
+            601589,
+            96
+          ],
+          [
+            601590,
+            26
+          ]
+        ],
+        "regs": {
+          "ax": 14801,
+          "bp": 52342,
+          "bx": 48137,
+          "cs": 18338,
+          "cx": 55179,
+          "di": 65451,
+          "ds": 35398,
+          "dx": 2343,
+          "es": 43377,
+          "flags": 63554,
+          "ip": 34493,
+          "si": 35219,
+          "sp": 6831,
+          "ss": 19340
+        }
+      },
+      "instruction_bytes": "0f3bf30f",
+      "metadata_form": "0F3B",
+      "prefetch": "empty",
+      "record_hash": "c867324fb33c20df2b22a653aae34f942fd826754e6a506e4359e8f9e6e44cac",
+      "rep0f_positions": [
+        2
+      ],
+      "upstream_test_hash": "600144d64b9a348b29dc1fc72372043c5cd3b78e"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144,
+          144,
+          144
+        ],
+        "ram": [
+          [
+            22078,
+            196
+          ],
+          [
+            22079,
+            107
+          ],
+          [
+            22080,
+            75
+          ]
+        ],
+        "regs": {
+          "di": 45439,
+          "flags": 62599,
+          "ip": 39723
+        }
+      },
+      "initial": {
+        "queue": [
+          46,
+          15,
+          57,
+          243
+        ],
+        "ram": [
+          [
+            206342,
+            46
+          ],
+          [
+            206343,
+            15
+          ],
+          [
+            206344,
+            57
+          ],
+          [
+            206345,
+            243
+          ],
+          [
+            206346,
+            15
+          ],
+          [
+            22077,
+            192
+          ],
+          [
+            22078,
+            68
+          ],
+          [
+            22079,
+            118
+          ],
+          [
+            22080,
+            76
+          ]
+        ],
+        "regs": {
+          "ax": 46780,
+          "bp": 45993,
+          "bx": 63756,
+          "cs": 10414,
+          "cx": 6380,
+          "di": 45437,
+          "ds": 54248,
+          "dx": 2179,
+          "es": 64076,
+          "flags": 64663,
+          "ip": 39718,
+          "si": 45340,
+          "sp": 53563,
+          "ss": 49038
+        }
+      },
+      "instruction_bytes": "2e0f39f30f",
+      "metadata_form": "0F39",
+      "prefetch": "populated",
+      "record_hash": "c919d6582d4f818cd2c9b156da94ca3c643559a875e69fed7de96a088acc7d2b",
+      "rep0f_positions": [
+        3
+      ],
+      "upstream_test_hash": "4258d2cf20c89557dc2640d8287c6d41e299380f"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144,
+          144,
+          144
+        ],
+        "ram": [],
+        "regs": {
+          "dx": 1792,
+          "flags": 62534,
+          "ip": 39340
+        }
+      },
+      "initial": {
+        "queue": [],
+        "ram": [
+          [
+            219161,
+            192
+          ],
+          [
+            219162,
+            242
+          ],
+          [
+            219163,
+            15
+          ]
+        ],
+        "regs": {
+          "ax": 13945,
+          "bp": 146,
+          "bx": 20325,
+          "cs": 11239,
+          "cx": 34098,
+          "di": 7316,
+          "ds": 32945,
+          "dx": 1809,
+          "es": 33328,
+          "flags": 62546,
+          "ip": 39337,
+          "si": 15516,
+          "sp": 16765,
+          "ss": 41741
+        }
+      },
+      "instruction_bytes": "c0f20f",
+      "metadata_form": "C0.6",
+      "prefetch": "empty",
+      "record_hash": "cb5506fbe6d86e4ae71244e6d88cd5efa4fad05cfe5760672a17f15b6a4b76b1",
+      "rep0f_positions": [
+        1
+      ],
+      "upstream_test_hash": "6bb08b105afdc535adc001d7703630aa5d761111"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144
+        ],
+        "ram": [
+          [
+            758553,
+            127
+          ],
+          [
+            758554,
+            36
+          ]
+        ],
+        "regs": {
+          "ip": 7323,
+          "sp": 3740
+        }
+      },
+      "initial": {
+        "queue": [],
+        "ram": [
+          [
+            283558,
+            38
+          ],
+          [
+            283559,
+            143
+          ],
+          [
+            283560,
+            133
+          ],
+          [
+            283561,
+            242
+          ],
+          [
+            283562,
+            15
+          ],
+          [
+            519690,
+            127
+          ],
+          [
+            519691,
+            36
+          ]
+        ],
+        "regs": {
+          "ax": 42775,
+          "bp": 65086,
+          "bx": 14709,
+          "cs": 17265,
+          "cx": 18122,
+          "di": 503,
+          "ds": 20768,
+          "dx": 22561,
+          "es": 47123,
+          "flags": 61462,
+          "ip": 7318,
+          "si": 39779,
+          "sp": 3738,
+          "ss": 32247
+        }
+      },
+      "instruction_bytes": "268f85f20f",
+      "metadata_form": "8F",
+      "prefetch": "empty",
+      "record_hash": "ce3bb7240fa67dece09777105da148866f598e6b200c326a652b0f5277ba4e17",
+      "rep0f_positions": [
+        3
+      ],
+      "upstream_test_hash": "1817a7595269c98dcf6654e176583bc896ee2695"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144,
+          144,
+          144
+        ],
+        "ram": [],
+        "regs": {
+          "ax": 16789,
+          "flags": 62595,
+          "ip": 16436,
+          "si": 52840
+        }
+      },
+      "initial": {
+        "queue": [
+          62,
+          15,
+          59,
+          243
+        ],
+        "ram": [
+          [
+            306751,
+            62
+          ],
+          [
+            306752,
+            15
+          ],
+          [
+            306753,
+            59
+          ],
+          [
+            306754,
+            243
+          ],
+          [
+            306755,
+            15
+          ],
+          [
+            689382,
+            13
+          ],
+          [
+            689383,
+            95
+          ],
+          [
+            689384,
+            25
+          ],
+          [
+            689385,
+            20
+          ]
+        ],
+        "regs": {
+          "ax": 29529,
+          "bp": 8912,
+          "bx": 268,
+          "cs": 18145,
+          "cx": 60219,
+          "di": 56192,
+          "ds": 39784,
+          "dx": 1386,
+          "es": 31732,
+          "flags": 64594,
+          "ip": 16431,
+          "si": 52838,
+          "sp": 46557,
+          "ss": 44211
+        }
+      },
+      "instruction_bytes": "3e0f3bf30f",
+      "metadata_form": "0F3B",
+      "prefetch": "populated",
+      "record_hash": "ce8dac1d3213c4388900b673e78c59cb2c0e6a2bf4d18c98cb4a592e93fea1cf",
+      "rep0f_positions": [
+        3
+      ],
+      "upstream_test_hash": "cfe7292f907b3f0b8148d8baec0db66f9dd236cd"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144,
+          144,
+          144
+        ],
+        "ram": [
+          [
+            181368,
+            0
+          ]
+        ],
+        "regs": {
+          "flags": 62534,
+          "ip": 54132
+        }
+      },
+      "initial": {
+        "queue": [
+          192,
+          120,
+          242,
+          15
+        ],
+        "ram": [
+          [
+            30880,
+            192
+          ],
+          [
+            30881,
+            120
+          ],
+          [
+            30882,
+            242
+          ],
+          [
+            30883,
+            15
+          ],
+          [
+            181368,
+            23
+          ]
+        ],
+        "regs": {
+          "ax": 49857,
+          "bp": 4377,
+          "bx": 4542,
+          "cs": 64083,
+          "cx": 52539,
+          "di": 17118,
+          "ds": 9567,
+          "dx": 43750,
+          "es": 17169,
+          "flags": 64535,
+          "ip": 54128,
+          "si": 23768,
+          "sp": 35387,
+          "ss": 42932
+        }
+      },
+      "instruction_bytes": "c078f20f",
+      "metadata_form": "C0.7",
+      "prefetch": "populated",
+      "record_hash": "d29e58013da423766fa64b367073f2495418b23b822500a7f7ca91abad6f1d2c",
+      "rep0f_positions": [
+        2
+      ],
+      "upstream_test_hash": "e210fb2b8269683472226a6e8183933a1c493926"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144,
+          144,
+          144
+        ],
+        "ram": [],
+        "regs": {
+          "ax": 41802,
+          "flags": 61575,
+          "ip": 2757,
+          "si": 57833
+        }
+      },
+      "initial": {
+        "queue": [],
+        "ram": [
+          [
+            702433,
+            15
+          ],
+          [
+            702434,
+            59
+          ],
+          [
+            702435,
+            242
+          ],
+          [
+            702436,
+            15
+          ],
+          [
+            148871,
+            89
+          ],
+          [
+            148872,
+            77
+          ],
+          [
+            148873,
+            105
+          ],
+          [
+            148874,
+            20
+          ]
+        ],
+        "regs": {
+          "ax": 60815,
+          "bp": 59111,
+          "bx": 7252,
+          "cs": 43730,
+          "cx": 21310,
+          "di": 43810,
+          "ds": 5690,
+          "dx": 525,
+          "es": 5383,
+          "flags": 63635,
+          "ip": 2753,
+          "si": 57831,
+          "sp": 61621,
+          "ss": 14141
+        }
+      },
+      "instruction_bytes": "0f3bf20f",
+      "metadata_form": "0F3B",
+      "prefetch": "empty",
+      "record_hash": "d3a51b078a64058488ffc6bf10206e4938c941e4ea04b3d35e4b1035d482742a",
+      "rep0f_positions": [
+        2
+      ],
+      "upstream_test_hash": "5ab2ab04e3e161c05ff61a8cc4384034ac8ddb50"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144,
+          144,
+          144
+        ],
+        "ram": [
+          [
+            420304,
+            185
+          ]
+        ],
+        "regs": {
+          "flags": 64659,
+          "ip": 10493
+        }
+      },
+      "initial": {
+        "queue": [],
+        "ram": [
+          [
+            899959,
+            62
+          ],
+          [
+            899960,
+            192
+          ],
+          [
+            899961,
+            153
+          ],
+          [
+            899962,
+            1
+          ],
+          [
+            899963,
+            242
+          ],
+          [
+            899964,
+            15
+          ],
+          [
+            420304,
+            119
+          ]
+        ],
+        "regs": {
+          "ax": 16406,
+          "bp": 31676,
+          "bx": 51963,
+          "cs": 55592,
+          "cx": 53566,
+          "di": 59956,
+          "ds": 23594,
+          "dx": 6249,
+          "es": 4326,
+          "flags": 62610,
+          "ip": 10487,
+          "si": 22061,
+          "sp": 53715,
+          "ss": 49481
+        }
+      },
+      "instruction_bytes": "3ec09901f20f",
+      "metadata_form": "C0.3",
+      "prefetch": "empty",
+      "record_hash": "d3c88f0fa076d6a9b74c62d2204db344871c37d32607229f27d3863e2882360d",
+      "rep0f_positions": [
+        4
+      ],
+      "upstream_test_hash": "4a5b181fd9797d8a4d92f493dbfab37fa3c7ba0e"
+    },
+    {
+      "expected_final": {
+        "queue": [],
+        "ram": [],
+        "regs": {
+          "ax": 63551,
+          "flags": 61574,
+          "ip": 59917
+        }
+      },
+      "initial": {
+        "queue": [
+          46,
+          53,
+          243,
+          15
+        ],
+        "ram": [
+          [
+            978121,
+            46
+          ],
+          [
+            978122,
+            53
+          ],
+          [
+            978123,
+            243
+          ],
+          [
+            978124,
+            15
+          ]
+        ],
+        "regs": {
+          "ax": 63436,
+          "bp": 64762,
+          "bx": 28049,
+          "cs": 57388,
+          "cx": 39423,
+          "di": 12952,
+          "ds": 34610,
+          "dx": 15754,
+          "es": 44509,
+          "flags": 63558,
+          "ip": 59913,
+          "si": 64186,
+          "sp": 18012,
+          "ss": 19157
+        }
+      },
+      "instruction_bytes": "2e35f30f",
+      "metadata_form": "35",
+      "prefetch": "populated",
+      "record_hash": "d7c89bc1cef34c66c0e85d40214acac2241262e9830e5ef3377c7b138479bb19",
+      "rep0f_positions": [
+        2
+      ],
+      "upstream_test_hash": "74642ed71559dcbe3001ff2cc395fabfb378666a"
+    },
+    {
+      "expected_final": {
+        "queue": [],
+        "ram": [],
+        "regs": {
+          "ip": 52803
+        }
+      },
+      "initial": {
+        "queue": [],
+        "ram": [
+          [
+            827166,
+            62
+          ],
+          [
+            827167,
+            217
+          ],
+          [
+            827168,
+            178
+          ],
+          [
+            827169,
+            243
+          ],
+          [
+            827170,
+            15
+          ],
+          [
+            430433,
+            226
+          ],
+          [
+            430434,
+            222
+          ]
+        ],
+        "regs": {
+          "ax": 14514,
+          "bp": 31510,
+          "bx": 51761,
+          "cs": 48398,
+          "cx": 7044,
+          "di": 9314,
+          "ds": 25437,
+          "dx": 9405,
+          "es": 52894,
+          "flags": 62551,
+          "ip": 52798,
+          "si": 53384,
+          "sp": 10615,
+          "ss": 12614
+        }
+      },
+      "instruction_bytes": "3ed9b2f30f",
+      "metadata_form": "D9",
+      "prefetch": "empty",
+      "record_hash": "db7f63ce977ce2c90e70df5ea5f637eaa485f3b8e5f117882f240c3df6b1dedb",
+      "rep0f_positions": [
+        3
+      ],
+      "upstream_test_hash": "58440e12993b0da435f6cf6b2984088c900c6270"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144
+        ],
+        "ram": [
+          [
+            498242,
+            15
+          ],
+          [
+            498243,
+            180
+          ]
+        ],
+        "regs": {
+          "flags": 62598,
+          "ip": 47545
+        }
+      },
+      "initial": {
+        "queue": [],
+        "ram": [
+          [
+            860994,
+            38
+          ],
+          [
+            860995,
+            129
+          ],
+          [
+            860996,
+            144
+          ],
+          [
+            860997,
+            53
+          ],
+          [
+            860998,
+            243
+          ],
+          [
+            860999,
+            15
+          ],
+          [
+            861000,
+            164
+          ],
+          [
+            498242,
+            0
+          ],
+          [
+            498243,
+            16
+          ]
+        ],
+        "regs": {
+          "ax": 17475,
+          "bp": 35301,
+          "bx": 41797,
+          "cs": 50841,
+          "cx": 52533,
+          "di": 19290,
+          "ds": 32192,
+          "dx": 36094,
+          "es": 27133,
+          "flags": 62466,
+          "ip": 47538,
+          "si": 25592,
+          "sp": 34186,
+          "ss": 44759
+        }
+      },
+      "instruction_bytes": "26819035f30fa4",
+      "metadata_form": "81.2",
+      "prefetch": "empty",
+      "record_hash": "de36be84030f61b621bada0d8bb45a24e2259c04ce40ac621b3d44aff6d12e77",
+      "rep0f_positions": [
+        4
+      ],
+      "upstream_test_hash": "386c41f82031dd713e70bfd57441c0d0bbe99956"
+    },
+    {
+      "expected_final": {
+        "queue": [],
+        "ram": [],
+        "regs": {
+          "dx": 33934,
+          "flags": 61574,
+          "ip": 39101
+        }
+      },
+      "initial": {
+        "queue": [],
+        "ram": [
+          [
+            834521,
+            54
+          ],
+          [
+            834522,
+            128
+          ],
+          [
+            834523,
+            242
+          ],
+          [
+            834524,
+            15
+          ]
+        ],
+        "regs": {
+          "ax": 35371,
+          "bp": 63960,
+          "bx": 40201,
+          "cs": 49714,
+          "cx": 27899,
+          "di": 59287,
+          "ds": 60031,
+          "dx": 33921,
+          "es": 63036,
+          "flags": 61635,
+          "ip": 39097,
+          "si": 33302,
+          "sp": 3263,
+          "ss": 22575
+        }
+      },
+      "instruction_bytes": "3680f20f",
+      "metadata_form": "80.6",
+      "prefetch": "empty",
+      "record_hash": "dfd9d5039033dbea0c47c0cef3c058419734f235783e26522c4c986714b054f7",
+      "rep0f_positions": [
+        2
+      ],
+      "upstream_test_hash": "0818c5afc887ab68c86649919d1c08b960b77c2d"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144
+        ],
+        "ram": [
+          [
+            539306,
+            40
+          ],
+          [
+            539307,
+            157
+          ]
+        ],
+        "regs": {
+          "flags": 61574,
+          "ip": 42220
+        }
+      },
+      "initial": {
+        "queue": [
+          54,
+          49,
+          168,
+          243
+        ],
+        "ram": [
+          [
+            545159,
+            54
+          ],
+          [
+            545160,
+            49
+          ],
+          [
+            545161,
+            168
+          ],
+          [
+            545162,
+            243
+          ],
+          [
+            545163,
+            15
+          ],
+          [
+            539306,
+            134
+          ],
+          [
+            539307,
+            210
+          ]
+        ],
+        "regs": {
+          "ax": 40949,
+          "bp": 20398,
+          "bx": 64802,
+          "cs": 31434,
+          "cx": 48352,
+          "di": 45664,
+          "ds": 36751,
+          "dx": 14317,
+          "es": 14276,
+          "flags": 63698,
+          "ip": 42215,
+          "si": 30869,
+          "sp": 23880,
+          "ss": 31568
+        }
+      },
+      "instruction_bytes": "3631a8f30f",
+      "metadata_form": "31",
+      "prefetch": "populated",
+      "record_hash": "ea8afc671f8abd568c03b643f36613845fdb0035c24cf92c78245052f4272c3f",
+      "rep0f_positions": [
+        3
+      ],
+      "upstream_test_hash": "a6f3297d406a891a92ec726fe9b2e01846775f6b"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144
+        ],
+        "ram": [
+          [
+            430433,
+            242
+          ]
+        ],
+        "regs": {
+          "ip": 52804
+        }
+      },
+      "initial": {
+        "queue": [],
+        "ram": [
+          [
+            827166,
+            62
+          ],
+          [
+            827167,
+            15
+          ],
+          [
+            827168,
+            21
+          ],
+          [
+            827169,
+            178
+          ],
+          [
+            827170,
+            243
+          ],
+          [
+            827171,
+            15
+          ],
+          [
+            430433,
+            226
+          ],
+          [
+            430434,
+            222
+          ]
+        ],
+        "regs": {
+          "ax": 14514,
+          "bp": 31510,
+          "bx": 51761,
+          "cs": 48398,
+          "cx": 7044,
+          "di": 9314,
+          "ds": 25437,
+          "dx": 9405,
+          "es": 52894,
+          "flags": 62551,
+          "ip": 52798,
+          "si": 53384,
+          "sp": 10615,
+          "ss": 12614
+        }
+      },
+      "instruction_bytes": "3e0f15b2f30f",
+      "metadata_form": "0F15",
+      "prefetch": "empty",
+      "record_hash": "ef37f126add60aa6abdbe5c5bdeb7fad50c90cddf53192b1258b4e9df99e85e8",
+      "rep0f_positions": [
+        4
+      ],
+      "upstream_test_hash": "24a6e515503d2ba7130da376d228991575ffd436"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144
+        ],
+        "ram": [],
+        "regs": {
+          "ax": 26648,
+          "ip": 12987
+        }
+      },
+      "initial": {
+        "queue": [
+          160,
+          243,
+          15,
+          144
+        ],
+        "ram": [
+          [
+            417224,
+            160
+          ],
+          [
+            417225,
+            243
+          ],
+          [
+            417226,
+            15
+          ],
+          [
+            417227,
+            144
+          ],
+          [
+            425571,
+            24
+          ]
+        ],
+        "regs": {
+          "ax": 26732,
+          "bp": 58561,
+          "bx": 47931,
+          "cs": 25265,
+          "cx": 47781,
+          "di": 100,
+          "ds": 26343,
+          "dx": 43214,
+          "es": 15600,
+          "flags": 62594,
+          "ip": 12984,
+          "si": 13085,
+          "sp": 61826,
+          "ss": 49720
+        }
+      },
+      "instruction_bytes": "a0f30f",
+      "metadata_form": "A0",
+      "prefetch": "populated",
+      "record_hash": "efa93fdb8cae458e20c3dd693dee1c895008550602b2b79bc811dd213ab0125b",
+      "rep0f_positions": [
+        1
+      ],
+      "upstream_test_hash": "e2faa1f70905cedb7d57891a0b7f22836927ad74"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144,
+          144,
+          144
+        ],
+        "ram": [],
+        "regs": {
+          "ax": 6234,
+          "flags": 61575,
+          "ip": 18321,
+          "si": 56409
+        }
+      },
+      "initial": {
+        "queue": [
+          38,
+          15,
+          59,
+          243
+        ],
+        "ram": [
+          [
+            429980,
+            38
+          ],
+          [
+            429981,
+            15
+          ],
+          [
+            429982,
+            59
+          ],
+          [
+            429983,
+            243
+          ],
+          [
+            429984,
+            15
+          ],
+          [
+            142487,
+            167
+          ],
+          [
+            142488,
+            22
+          ],
+          [
+            142489,
+            70
+          ],
+          [
+            142490,
+            127
+          ]
+        ],
+        "regs": {
+          "ax": 3071,
+          "bp": 40565,
+          "bx": 774,
+          "cs": 25729,
+          "cx": 51507,
+          "di": 35938,
+          "ds": 52328,
+          "dx": 3039,
+          "es": 5380,
+          "flags": 61459,
+          "ip": 18316,
+          "si": 56407,
+          "sp": 24202,
+          "ss": 5521
+        }
+      },
+      "instruction_bytes": "260f3bf30f",
+      "metadata_form": "0F3B",
+      "prefetch": "populated",
+      "record_hash": "f0068559a4f61b2944bac9bb44db7e615d40d6340e0d9121badee6c1d7046e52",
+      "rep0f_positions": [
+        3
+      ],
+      "upstream_test_hash": "e26eeb6f7264ce537692ee23ec2101ce3ab2fe52"
+    },
+    {
+      "expected_final": {
+        "queue": [],
+        "ram": [],
+        "regs": {
+          "dx": 51294,
+          "flags": 61442,
+          "ip": 63624
+        }
+      },
+      "initial": {
+        "queue": [],
+        "ram": [
+          [
+            787973,
+            128
+          ],
+          [
+            787974,
+            242
+          ],
+          [
+            787975,
+            15
+          ]
+        ],
+        "regs": {
+          "ax": 10760,
+          "bp": 57353,
+          "bx": 56886,
+          "cs": 45272,
+          "cx": 36160,
+          "di": 60014,
+          "ds": 64804,
+          "dx": 51281,
+          "es": 32637,
+          "flags": 61459,
+          "ip": 63621,
+          "si": 10892,
+          "sp": 44708,
+          "ss": 30665
+        }
+      },
+      "instruction_bytes": "80f20f",
+      "metadata_form": "80.6",
+      "prefetch": "empty",
+      "record_hash": "f53fbe148a182cc023c824d741bf63d60cca31828ec4828298c2a15bd88661eb",
+      "rep0f_positions": [
+        1
+      ],
+      "upstream_test_hash": "a3b77c91fc3a4e1edb6e7df69f909a87f4af054d"
+    },
+    {
+      "expected_final": {
+        "queue": [],
+        "ram": [],
+        "regs": {
+          "flags": 62598,
+          "ip": 50512
+        }
+      },
+      "initial": {
+        "queue": [],
+        "ram": [
+          [
+            264779,
+            62
+          ],
+          [
+            264780,
+            15
+          ],
+          [
+            264781,
+            25
+          ],
+          [
+            264782,
+            243
+          ],
+          [
+            264783,
+            15
+          ]
+        ],
+        "regs": {
+          "ax": 44222,
+          "bp": 47018,
+          "bx": 50452,
+          "cs": 13392,
+          "cx": 58827,
+          "di": 42290,
+          "ds": 52566,
+          "dx": 17896,
+          "es": 16328,
+          "flags": 62611,
+          "ip": 50507,
+          "si": 46685,
+          "sp": 42271,
+          "ss": 36646
+        }
+      },
+      "instruction_bytes": "3e0f19f30f",
+      "metadata_form": "0F19",
+      "prefetch": "empty",
+      "record_hash": "f9e7e0e0e813d334183728096e6608613e03abb013ed851473f6a719c1032981",
+      "rep0f_positions": [
+        3
+      ],
+      "upstream_test_hash": "9a0886955d391ba207025cf1610fe2c27c520f3f"
+    },
+    {
+      "expected_final": {
+        "queue": [],
+        "ram": [],
+        "regs": {
+          "cs": 35050,
+          "ip": 4082
+        }
+      },
+      "initial": {
+        "queue": [
+          54,
+          234,
+          242,
+          15
+        ],
+        "ram": [
+          [
+            605407,
+            54
+          ],
+          [
+            605408,
+            234
+          ],
+          [
+            605409,
+            242
+          ],
+          [
+            605410,
+            15
+          ],
+          [
+            605411,
+            234
+          ],
+          [
+            605412,
+            136
+          ]
+        ],
+        "regs": {
+          "ax": 60825,
+          "bp": 4262,
+          "bx": 16735,
+          "cs": 35944,
+          "cx": 11040,
+          "di": 35523,
+          "ds": 52716,
+          "dx": 18483,
+          "es": 5713,
+          "flags": 64534,
+          "ip": 30303,
+          "si": 32504,
+          "sp": 47738,
+          "ss": 3807
+        }
+      },
+      "instruction_bytes": "36eaf20fea88",
+      "metadata_form": "EA",
+      "prefetch": "populated",
+      "record_hash": "faa9283bb6c99b3c3fae07a902120e8979aaad54570c14591569a227c8490dde",
+      "rep0f_positions": [
+        2
+      ],
+      "upstream_test_hash": "fdf5357968993bc286e9562cb768ef5929c16a37"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144,
+          144,
+          144
+        ],
+        "ram": [
+          [
+            881494,
+            185
+          ],
+          [
+            881495,
+            125
+          ],
+          [
+            881496,
+            219
+          ]
+        ],
+        "regs": {
+          "di": 16983,
+          "flags": 61571,
+          "ip": 45653
+        }
+      },
+      "initial": {
+        "queue": [
+          15,
+          57,
+          242,
+          15
+        ],
+        "ram": [
+          [
+            272625,
+            15
+          ],
+          [
+            272626,
+            57
+          ],
+          [
+            272627,
+            242
+          ],
+          [
+            272628,
+            15
+          ],
+          [
+            881493,
+            57
+          ],
+          [
+            881494,
+            249
+          ],
+          [
+            881495,
+            206
+          ],
+          [
+            881496,
+            220
+          ]
+        ],
+        "regs": {
+          "ax": 56301,
+          "bp": 2852,
+          "bx": 37949,
+          "cs": 14186,
+          "cx": 59013,
+          "di": 16981,
+          "ds": 65115,
+          "dx": 2829,
+          "es": 54032,
+          "flags": 63558,
+          "ip": 45649,
+          "si": 56521,
+          "sp": 25003,
+          "ss": 24144
+        }
+      },
+      "instruction_bytes": "0f39f20f",
+      "metadata_form": "0F39",
+      "prefetch": "populated",
+      "record_hash": "fab6cd3708759905e572b59e12d0b78f85384d7fca9df3446dbe22bca0425f6a",
+      "rep0f_positions": [
+        2
+      ],
+      "upstream_test_hash": "cb0e16239f67ae0e9cfff027c668335a6077bb5c"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144,
+          144,
+          144
+        ],
+        "ram": [],
+        "regs": {
+          "ax": 25588,
+          "flags": 61571,
+          "ip": 21131,
+          "si": 48811
+        }
+      },
+      "initial": {
+        "queue": [],
+        "ram": [
+          [
+            241447,
+            15
+          ],
+          [
+            241448,
+            59
+          ],
+          [
+            241449,
+            242
+          ],
+          [
+            241450,
+            15
+          ],
+          [
+            566617,
+            240
+          ],
+          [
+            566618,
+            17
+          ],
+          [
+            566619,
+            250
+          ],
+          [
+            566620,
+            49
+          ]
+        ],
+        "regs": {
+          "ax": 34350,
+          "bp": 39180,
+          "bx": 49823,
+          "cs": 13770,
+          "cx": 5534,
+          "di": 47605,
+          "ds": 32363,
+          "dx": 1295,
+          "es": 51711,
+          "flags": 63634,
+          "ip": 21127,
+          "si": 48809,
+          "sp": 25953,
+          "ss": 516
+        }
+      },
+      "instruction_bytes": "0f3bf20f",
+      "metadata_form": "0F3B",
+      "prefetch": "empty",
+      "record_hash": "fcd36f62fc58c603ac110e90fb431b773a0f8064622ffc3f6d582c3b07d994cc",
+      "rep0f_positions": [
+        2
+      ],
+      "upstream_test_hash": "867afc7735b2a40cfe63642805c5757fe4ab8766"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144,
+          144,
+          144
+        ],
+        "ram": [
+          [
+            222428,
+            49
+          ],
+          [
+            222429,
+            89
+          ],
+          [
+            222430,
+            238
+          ],
+          [
+            222431,
+            96
+          ]
+        ],
+        "regs": {
+          "di": 49230,
+          "flags": 61571,
+          "ip": 49814
+        }
+      },
+      "initial": {
+        "queue": [],
+        "ram": [
+          [
+            988321,
+            54
+          ],
+          [
+            988322,
+            15
+          ],
+          [
+            988323,
+            57
+          ],
+          [
+            988324,
+            242
+          ],
+          [
+            988325,
+            15
+          ],
+          [
+            222428,
+            177
+          ],
+          [
+            222429,
+            213
+          ],
+          [
+            222430,
+            228
+          ],
+          [
+            222431,
+            96
+          ]
+        ],
+        "regs": {
+          "ax": 58771,
+          "bp": 1803,
+          "bx": 42902,
+          "cs": 58657,
+          "cx": 34249,
+          "di": 49228,
+          "ds": 34619,
+          "dx": 772,
+          "es": 10825,
+          "flags": 63507,
+          "ip": 49809,
+          "si": 60927,
+          "sp": 47200,
+          "ss": 58999
+        }
+      },
+      "instruction_bytes": "360f39f20f",
+      "metadata_form": "0F39",
+      "prefetch": "empty",
+      "record_hash": "fda2402d9252bae889ac1cb351738967b108a39f53ff3bbed37e290c314ce71b",
+      "rep0f_positions": [
+        3
+      ],
+      "upstream_test_hash": "eaabef88b2a84deca408a2132384b4663ffc5e7f"
+    },
+    {
+      "expected_final": {
+        "queue": [
+          144,
+          144,
+          144
+        ],
+        "ram": [],
+        "regs": {
+          "ax": 37315,
+          "flags": 61510,
+          "ip": 24222,
+          "si": 28168
+        }
+      },
+      "initial": {
+        "queue": [
+          62,
+          15,
+          59,
+          243
+        ],
+        "ram": [
+          [
+            617417,
+            62
+          ],
+          [
+            617418,
+            15
+          ],
+          [
+            617419,
+            59
+          ],
+          [
+            617420,
+            243
+          ],
+          [
+            617421,
+            15
+          ],
+          [
+            818406,
+            195
+          ],
+          [
+            818407,
+            145
+          ]
+        ],
+        "regs": {
+          "ax": 21677,
+          "bp": 43891,
+          "bx": 39936,
+          "cs": 37075,
+          "cx": 34665,
+          "di": 43584,
+          "ds": 49390,
+          "dx": 1656,
+          "es": 14713,
+          "flags": 61443,
+          "ip": 24217,
+          "si": 28166,
+          "sp": 64256,
+          "ss": 28416
+        }
+      },
+      "instruction_bytes": "3e0f3bf30f",
+      "metadata_form": "0F3B",
+      "prefetch": "populated",
+      "record_hash": "ff2879a00ac6c89088c415481568f9e693a23a6d21abf53af65f863f6df6bf9d",
+      "rep0f_positions": [
+        3
+      ],
+      "upstream_test_hash": "cbe40d5c6cdb134077ff82f7d9837e2556863e4d"
+    }
+  ],
+  "architectural_scope": "V20 evidence only; even a nonempty result would not by itself prove uPD9002 behavior",
+  "candidate_outcome_affected_record_hashes": {
+    "A_prefix_ignored": [],
+    "B_target_specific": [],
+    "C_reserved_or_undefined": [],
+    "D_second_byte_dependent": []
+  },
+  "comparison_with_current_vaeg": "no applicable records; the pinned V20 corpus supplies no F2/F3+0F oracle",
+  "dataset_id": "ssts-v20-9efbd02b8ec1a3aad347c2b59672ad25f3bcdb21-1d2e9c0e14101f05379d938245af68f3219c16f638fce019ad2a1946084930a4",
+  "dataset_records_scanned": 3125000,
+  "decoded_rep0f_record_count": 0,
+  "decoded_rep0f_records": [],
+  "empty_prefetch_rep0f_records": 0,
+  "metadata_form_counts": {},
+  "metadata_prefix_entries": {
+    "F2": {
+      "arch": "86",
+      "status": "prefix"
+    },
+    "F3": {
+      "arch": "86",
+      "status": "prefix"
+    }
+  },
+  "populated_prefetch_rep0f_records": 0,
+  "prefix_opcode_shards": [],
+  "schema": "vaeg-upd9002-rep0f-corpus-m47-v1",
+  "semantic_failure_intersections": {
+    "ci": [],
+    "full": []
+  }
+}

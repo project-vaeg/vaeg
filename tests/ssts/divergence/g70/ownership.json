@@ -1,0 +1,12 @@
+{
+  "all_records_have_one_owner": true,
+  "conflict_count": 0,
+  "m70": {
+    "owned_hash_count": 5908,
+    "population_digest": "240e0bf76de968b310ad13ef53de8d044637b185e267e1cfb2540f32ab6571e5",
+    "record_count": 19
+  },
+  "record_count": 31,
+  "schema": "vaeg-upd9002-g70-ownership-v1",
+  "schema_version": 1
+}

@@ -1,0 +1,128 @@
+M102 ZEXIY: the file-output ZEXALL with a replaced test table (ZEXIY.COM writes
+ZEXIY.TXT): INC/DEC IXH, IXL, IYH and IYL with the FD prefix for IY and each counter on the register under test (the stock iyh/iyl groups execute DD opcodes, and all four stock counters vary the wrong field); derived from incxh, incxl, incyh and incyl.
+
+This patch modifies ZEX and is distributed under the GPL-2.0-or-later terms
+stated in external/zex/zexall.src. tools/cpmva/zex/zexbuild.py applies it
+after zexall-fileout.patch. msbt and the original descriptors are unchanged.
+The expected CRCs of the new groups are those of the Zilog profile.
+
+--- a/external/zex/zexall.src
++++ b/external/zex/zexall.src
+@@ -94,7 +94,7 @@
+ 	ld	c,9
+ 	call	bdos
+ 
+-	ld	hl,tests	; first test case
++	ld	hl,testsiy	; vaeg ZEXIY: first test case
+ loop:	ld	a,(hl)		; end of list ?
+ 	inc	hl
+ 	or	(hl)
+@@ -109,6 +109,22 @@
+ 	call	fclose		; vaeg: flush and close the log file
+ 	jp	0		; warm boot
+ 
++; vaeg M102 ZEXIY test table: INC/DEC IXH, IXL, IYH and IYL; the IY groups use the FD prefix
++; and every counter varies the register under test (the stock groups
++; execute DD opcodes for IY and vary the wrong field). Every group runs with flag mask
++; D7h and FFh. This addition is distributed under the same GPL-2.0-or-later
++; terms as the rest of this file.
++testsiy:
++	dw	iyxhd7
++	dw	iyxhff
++	dw	iyxld7
++	dw	iyxlff
++	dw	iyyhd7
++	dw	iyyhff
++	dw	iyyld7
++	dw	iyylff
++	dw	0
++
+ tests:
+ 	dw	adc16
+ 	dw	add16
+@@ -711,6 +727,65 @@
+ 	db	0cch,063h,0f9h,08ah			; expected crc
+ 	tmsg	'<set,res> n,(<ix,iy>+1).......'
+ 
++; vaeg M102 ZEXIY descriptors, derived from the stock descriptors noted in
++; tools/cpmva/zex/zexiy.patch.
++
++iyxhd7:	db	0d7h		; flag mask
++	tstr	0ddh,024h,0,0,0b838h,0316ch,0c6d4h,03e01h,08358h,015b4h,081h,0deh,04259h
++	tstr	0,1,0,0,0,0,0ff00h,0,0,0,0,0,0
++	tstr	0,0,0,0,0,0,0,0,0,0,0d7h,0,0
++	db	0cfh,0c8h,0b6h,022h			; expected crc
++	tmsg	'inc,dec ixh (d7)..............'
++
++iyxhff:	db	0ffh		; flag mask
++	tstr	0ddh,024h,0,0,0b838h,0316ch,0c6d4h,03e01h,08358h,015b4h,081h,0deh,04259h
++	tstr	0,1,0,0,0,0,0ff00h,0,0,0,0,0,0
++	tstr	0,0,0,0,0,0,0,0,0,0,0d7h,0,0
++	db	007h,0e2h,038h,003h			; expected crc
++	tmsg	'inc,dec ixh (ff)..............'
++
++iyxld7:	db	0d7h		; flag mask
++	tstr	0ddh,02ch,0,0,04d14h,07460h,076d4h,006e7h,032a2h,0213ch,0d6h,0d7h,099a5h
++	tstr	0,1,0,0,0,0,0ffh,0,0,0,0,0,0
++	tstr	0,0,0,0,0,0,0,0,0,0,0d7h,0,0
++	db	0bbh,096h,0e4h,0c1h			; expected crc
++	tmsg	'inc,dec ixl (d7)..............'
++
++iyxlff:	db	0ffh		; flag mask
++	tstr	0ddh,02ch,0,0,04d14h,07460h,076d4h,006e7h,032a2h,0213ch,0d6h,0d7h,099a5h
++	tstr	0,1,0,0,0,0,0ffh,0,0,0,0,0,0
++	tstr	0,0,0,0,0,0,0,0,0,0,0d7h,0,0
++	db	012h,0a7h,0beh,0cdh			; expected crc
++	tmsg	'inc,dec ixl (ff)..............'
++
++iyyhd7:	db	0d7h		; flag mask
++	tstr	0fdh,024h,0,0,02836h,09f6fh,09116h,061b9h,082cbh,0e219h,092h,073h,0a98ch
++	tstr	0,1,0,0,0,0ff00h,0,0,0,0,0,0,0
++	tstr	0,0,0,0,0,0,0,0,0,0,0d7h,0,0
++	db	058h,007h,024h,0ceh			; expected crc
++	tmsg	'inc,dec iyh (d7)..............'
++
++iyyhff:	db	0ffh		; flag mask
++	tstr	0fdh,024h,0,0,02836h,09f6fh,09116h,061b9h,082cbh,0e219h,092h,073h,0a98ch
++	tstr	0,1,0,0,0,0ff00h,0,0,0,0,0,0,0
++	tstr	0,0,0,0,0,0,0,0,0,0,0d7h,0,0
++	db	077h,068h,0eah,01ch			; expected crc
++	tmsg	'inc,dec iyh (ff)..............'
++
++iyyld7:	db	0d7h		; flag mask
++	tstr	0fdh,02ch,0,0,0d7c6h,062d5h,0a09eh,07039h,03e7eh,09f12h,090h,0d9h,0220fh
++	tstr	0,1,0,0,0,0ffh,0,0,0,0,0,0,0
++	tstr	0,0,0,0,0,0,0,0,0,0,0d7h,0,0
++	db	029h,0b5h,00dh,035h			; expected crc
++	tmsg	'inc,dec iyl (d7)..............'
++
++iyylff:	db	0ffh		; flag mask
++	tstr	0fdh,02ch,0,0,0d7c6h,062d5h,0a09eh,07039h,03e7eh,09f12h,090h,0d9h,0220fh
++	tstr	0,1,0,0,0,0ffh,0,0,0,0,0,0,0
++	tstr	0,0,0,0,0,0,0,0,0,0,0d7h,0,0
++	db	0c5h,092h,044h,06bh			; expected crc
++	tmsg	'inc,dec iyl (ff)..............'
++
+ ; ld (<ix,iy>+1),<b,c,d,e> (1024 cycles)
+ st8ix1:	db	0ffh		; flag mask
+ 	tstr	0ddh,070h,1,0,0270dh,msbt-1,msbt-1,0b73ah,0887bh,099eeh,086h,070h,0ca07h
+@@ -1322,15 +1397,15 @@
+ 	call	5
+ 	ret
+ 
+-fcb:	db	0,'ZEXALL  TXT'
++fcb:	db	0,'ZEXIY   TXT'
+ 	db	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ fptr:	dw	fbuf
+ fcnt:	db	128
+-fmkerr:	db	'Cannot create ZEXALL.TXT',13,10,'$'
+-fwrerr:	db	13,10,'Write error on ZEXALL.TXT',13,10,'$'
++fmkerr:	db	'Cannot create ZEXIY.TXT',13,10,'$'
++fwrerr:	db	13,10,'Write error on ZEXIY.TXT',13,10,'$'
+ fbuf:	ds	128
+ 
+-msg1:	db	'Z80all instruction exerciser',13,10,'$'
++msg1:	db	'ZEXIY INC/DEC IXH/IXL/IYH/IYL exerciser',13,10,'$'
+ msg2:	db	'Tests complete',13,10,'$'
+ okmsg:	db	'  OK',13,10,'$'
+ ermsg1:	db	'  ERROR **** crc expected:$'

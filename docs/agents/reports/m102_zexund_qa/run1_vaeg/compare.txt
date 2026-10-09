@@ -1,0 +1,69 @@
+== FLAGPRB
+SKIP FILE_MISSING: FLAGPRB.TXT not found in docs/agents/reports/m102_zexund_qa/run1_vaeg/raw
+
+== ZEX13S
+SKIP FILE_MISSING: ZEX13S.TXT not found in docs/agents/reports/m102_zexund_qa/run1_vaeg/raw
+
+== ZEXIY.TXT
+inc,dec ixh (d7)               OK               BOTH
+inc,dec ixh (ff)               found cfc8b622   UPD9002
+inc,dec ixl (d7)               OK               BOTH
+inc,dec ixl (ff)               found bb96e4c1   UPD9002
+inc,dec iyh (d7)               OK               BOTH
+inc,dec iyh (ff)               found 580724ce   UPD9002
+inc,dec iyl (d7)               OK               BOTH
+inc,dec iyl (ff)               found 29b50d35   UPD9002
+
+== ZEXUND.TXT
+rot (ix,iy+d)->r (d7)          OK               BOTH
+rot (ix,iy+d)->r (ff)          found c3095ab8   UPD9002
+bit n,(ix,iy+d) all (d7)       found 5406abec   UPD9002
+bit n,(ix,iy+d) all (ff)       found 5406abec   UPD9002
+res,set (ix,iy+d)->r (d7)      OK               BOTH
+res,set (ix,iy+d)->r (ff)      OK               BOTH
+neg all encodings (d7)         OK               BOTH
+neg all encodings (ff)         found 20822885   UPD9002
+dd,fd inc,dec b-e (d7)         OK               BOTH
+dd,fd inc,dec b-e (ff)         found 8dc15253   UPD9002
+dd,fd inc,dec a (d7)           OK               BOTH
+dd,fd inc,dec a (ff)           found 7bc796c3   UPD9002
+
+== ZEXED.TXT
+ed 00-3f nop (d7)              OK               BOTH
+ed 00-3f nop (ff)              OK               BOTH
+ed 77,7f nop (d7)              OK               BOTH
+ed 77,7f nop (ff)              OK               BOTH
+ed 80-9f nop (d7)              OK               BOTH
+ed 80-9f nop (ff)              OK               BOTH
+ed a4-bf holes nop (d7)        OK               BOTH
+ed a4-bf holes nop (ff)        OK               BOTH
+ed c0-df nop (d7)              OK               BOTH
+ed c0-df nop (ff)              OK               BOTH
+ed e0-e3,e8-eb nop (d7)        OK               BOTH
+ed e0-e3,e8-eb nop (ff)        OK               BOTH
+ed e4-e7 nop (d7)              OK               BOTH
+ed e4-e7 nop (ff)              OK               BOTH
+ed ec,ee nop (d7)              OK               BOTH
+ed ec,ee nop (ff)              OK               BOTH
+ed f0-f7 nop (d7)              OK               BOTH
+ed f0-f7 nop (ff)              OK               BOTH
+ed f8-fb nop (d7)              OK               BOTH
+ed f8-fb nop (ff)              OK               BOTH
+ed fc,fe nop (d7)              OK               BOTH
+ed fc,fe nop (ff)              OK               BOTH
+ed ff nop (d7)                 OK               BOTH
+ed ff nop (ff)                 OK               BOTH
+
+SKIP FILE_MISSING: no ED??.TXT in docs/agents/reports/m102_zexund_qa/run1_vaeg/raw
+
+SKIP FILE_MISSING: CBPRB.TXT not found in docs/agents/reports/m102_zexund_qa/run1_vaeg/raw
+
+== ZEXDOC.TXT
+SKIP FILE_MISSING: ZEXDOC.TXT not found in docs/agents/reports/m102_zexund_qa/run1_vaeg/raw
+
+== ZEXALL.TXT
+SKIP FILE_MISSING: ZEXALL.TXT not found in docs/agents/reports/m102_zexund_qa/run1_vaeg/raw
+
+== DAADUMP
+SKIP FILE_MISSING: DAADUMP.TXT not found in docs/agents/reports/m102_zexund_qa/run1_vaeg/raw
+

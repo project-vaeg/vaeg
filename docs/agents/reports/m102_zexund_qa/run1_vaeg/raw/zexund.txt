@@ -1,0 +1,15 @@
+ZEXUND undocumented DDCB/NEG/prefix exerciser
+rot (ix,iy+d)->r (d7).........  OK
+rot (ix,iy+d)->r (ff).........  ERROR **** crc expected:15ef6011 found:c3095ab8
+bit n,(ix,iy+d) all (d7)......  ERROR **** crc expected:05dd9c19 found:5406abec
+bit n,(ix,iy+d) all (ff)......  ERROR **** crc expected:05dd9c19 found:5406abec
+res,set (ix,iy+d)->r (d7).....  OK
+res,set (ix,iy+d)->r (ff).....  OK
+neg all encodings (d7)........  OK
+neg all encodings (ff)........  ERROR **** crc expected:ae1c860c found:20822885
+dd,fd inc,dec b-e (d7)........  OK
+dd,fd inc,dec b-e (ff)........  ERROR **** crc expected:7ffc78a7 found:8dc15253
+dd,fd inc,dec a (d7)..........  OK
+dd,fd inc,dec a (ff)..........  ERROR **** crc expected:a8b7f15a found:7bc796c3
+Tests complete
+

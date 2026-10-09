@@ -1,0 +1,138 @@
+{
+  "schema_version": 1,
+  "sources": {
+    "cpmva": {
+      "discovery_url": "http://www.pc88.gr.jp/softlib/index.php?action=list_file&anum=2&gnum=424",
+      "resolved_url": "http://www.pc88.gr.jp:80/softlib/pub/2/424/CPMVA.LZH",
+      "sha256": "c5188efa73c80609e2184890d5a1ee5f0b274f8d29a3d73ae370fe7526d9dccd",
+      "size": 32896,
+      "archive_type": "lzh",
+      "expected_members": [
+        "BLOCKDEV.ASM",
+        "CHARDEV.ASM",
+        "CPMBIOS.COM",
+        "CPMBIOS.MAC",
+        "CPMVA.ASM",
+        "CPMVA.DOC",
+        "CPMVA.EXE",
+        "CPMVA.H",
+        "CRTOUT.ASM",
+        "DO.COM",
+        "DO.MAC",
+        "EXIT.COM",
+        "EXIT.MAC",
+        "FCONV.COM",
+        "FCONV.MAC",
+        "MAKEFILE",
+        "MKSYS.BAS",
+        "RDCPM.EXE",
+        "README.DOC",
+        "V30.MAC"
+      ]
+    },
+    "cpm22_asm": {
+      "discovery_url": "https://www.cpm.z80.de/source.html",
+      "resolved_url": "https://www.cpm.z80.de/download/cpm2-asm.zip",
+      "http_fallback_url": "http://www.cpm.z80.de/download/cpm2-asm.zip",
+      "sha256": "fb09f8bf32ae359d94c417fbf075e94431d734b9de0c857fc7a7901953469525",
+      "size": 60525,
+      "archive_type": "zip",
+      "expected_members": [
+        "CPM22.Z80"
+      ]
+    },
+    "cpm_license": {
+      "discovery_url": "https://www.cpm.z80.de/source.html",
+      "resolved_url": "https://www.cpm.z80.de/license.html",
+      "http_fallback_url": "http://www.cpm.z80.de/license.html",
+      "sha256": "99ae9c84442a8e75984fcd68a7557d941b9a5a9b5be57947274d371a98f2da5e",
+      "size": 4073,
+      "content_type": "text/html"
+    },
+    "vt100_games": {
+      "discovery_url": "https://git.imzadi.de/acn/vt100-games",
+      "resolved_url": "https://git.imzadi.de/acn/vt100-games/archive/12e2e2c26351022b3aea03c1fc4184398e7770e3.zip",
+      "commit": "12e2e2c26351022b3aea03c1fc4184398e7770e3",
+      "sha256": "7b38c166ac4428aafdb4b1b9de1039201186928e12891b25ef60812840d65dd0",
+      "size": 2134338,
+      "archive_type": "zip",
+      "expected_members": [
+        "vt100-games/HDimage/u0/FTM.COM",
+        "vt100-games/HDimage/u0/FTM.DOC",
+        "vt100-games/FindThatMine/ftm.c",
+        "vt100-games/FindThatMine/gpl-3.0.txt",
+        "vt100-games/HDimage/u0/ROBOTS.COM",
+        "vt100-games/HDimage/u0/ROBOTS.DOC",
+        "vt100-games/Robots/robots.c",
+        "vt100-games/Robots/robots.txt",
+        "vt100-games/Robots/copying.txt",
+        "vt100-games/HDimage/u0/BACKGMMN.COM",
+        "vt100-games/HDimage/u0/BACKGMMN.DOC",
+        "vt100-games/Backgammon/backgmmn.c",
+        "vt100-games/Backgammon/gameplan.c",
+        "vt100-games/Backgammon/gameplan.hdr",
+        "vt100-games/Backgammon/mylib2.c",
+        "vt100-games/HDimage/u0/CPMTRIS.COM",
+        "vt100-games/HDimage/u0/CPMTRIS.DOC",
+        "vt100-games/cpmtris/cpmtris.z",
+        "vt100-games/cpmtris/conio.z",
+        "vt100-games/cpmtris/rand.z",
+        "vt100-games/cpmtris/README.org",
+        "vt100-games/cpmtris/zmac/zmac.doc",
+        "vt100-games/cpmtris/zmac/COPYRIGHT",
+        "vt100-games/HDimage/u0/MAZEZAM.COM",
+        "vt100-games/HDimage/u0/MAZEZAM.DOC",
+        "vt100-games/MazezaM/mazezam.c",
+        "vt100-games/MazezaM/Makefile",
+        "vt100-games/FindThatMine/mescc/cc.com",
+        "vt100-games/FindThatMine/mescc/CCOPT.COM",
+        "vt100-games/FindThatMine/mescc/ZSM.COM",
+        "vt100-games/FindThatMine/mescc/HEXTOCOM.COM",
+        "vt100-games/FindThatMine/mescc/conio.h",
+        "vt100-games/FindThatMine/mescc/ctype.h",
+        "vt100-games/FindThatMine/mescc/mescc.h",
+        "vt100-games/FindThatMine/mescc/sprintf.h",
+        "vt100-games/FindThatMine/mescc/string.h",
+        "vt100-games/FindThatMine/mescc/xprintf.h",
+        "vt100-games/Robots/mescc/printf.h"
+      ]
+    },
+    "bdsc": {
+      "discovery_url": "https://www.bdsoft.com/resources/bdsc.html",
+      "resolved_url": "https://www.bdsoft.com/dist/bdsc-all.zip",
+      "sha256": "bf5ab207081acb50729471fd29bf40ee63b3800e7617144e358e7533da558c0c",
+      "size": 1585654,
+      "archive_type": "zip",
+      "expected_members": [
+        "bdsc160/CC.COM",
+        "bdsc160/CC2.COM",
+        "bdsc160/CCONFIG.COM",
+        "bdsc160/CLIB.COM",
+        "bdsc160/CLINK.COM",
+        "bdsc160/DEFF.CRL",
+        "bdsc160/DEFF2.CRL",
+        "bdsc160/C.CCC",
+        "bdsc160/C.SUB",
+        "bdsc160/-READ.ME",
+        "bdsc160/FILES.DOC",
+        "extra/BDSCIO.H",
+        "source/Readme.txt",
+        "README.txt"
+      ]
+    }
+  },
+  "assembler": {
+    "name": "z80asm",
+    "version": "1.8",
+    "source_url": "https://deb.debian.org/debian/pool/main/z/z80asm/z80asm_1.8.orig.tar.gz",
+    "source_sha256": "67fba9940582cddfa70113235818fb52d81e5be3db483dfb0816acb330515f64",
+    "source_size": 57269,
+    "license": "GPL-3.0-or-later"
+  },
+  "limits": {
+    "max_download_bytes": 16777216,
+    "max_archive_members": 1024,
+    "max_archive_bytes": 33554432,
+    "max_redirects": 5
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "accepted_scenarios": [
+    {
+      "cpu286_sha256": "6cbd3314a586ccf9c5f1d11a17b8836f76f1deaf10814de8b61ebdf96a792f89",
+      "has_protected_residue": false,
+      "protected_fields": {
+        "GDTR": "000000000000",
+        "IDTR": "000000000000",
+        "LDTR": "0000",
+        "LDTRC": "000000000000",
+        "MSW": "0000",
+        "TR": "0000",
+        "TRC": "000000000000"
+      },
+      "scenario": "reset",
+      "source": "committed M42 fixture and generated M42-M46 scenario"
+    },
+    {
+      "cpu286_sha256": "45d06e424fd332027817ca66db7ed0298e87695cf0cfed5582b7fe1348faa7fe",
+      "has_protected_residue": false,
+      "protected_fields": {
+        "GDTR": "000000000000",
+        "IDTR": "000000000000",
+        "LDTR": "0000",
+        "LDTRC": "000000000000",
+        "MSW": "0000",
+        "TR": "0000",
+        "TRC": "000000000000"
+      },
+      "scenario": "executed-3",
+      "source": "committed M42 fixture and generated M42-M46 scenario"
+    },
+    {
+      "cpu286_sha256": "7636def12b5f25c39540a1367166394a8308064cce74a15860c62a487a946ff7",
+      "has_protected_residue": false,
+      "protected_fields": {
+        "GDTR": "000000000000",
+        "IDTR": "000000000000",
+        "LDTR": "0000",
+        "LDTRC": "000000000000",
+        "MSW": "0000",
+        "TR": "0000",
+        "TRC": "000000000000"
+      },
+      "scenario": "cpu-shut-request",
+      "source": "committed M42 fixture and generated M42-M46 scenario"
+    }
+  ],
+  "accepted_test_generated_import": {
+    "accepted_by_current_import": true,
+    "opaque_roundtrip_verified": true,
+    "payload_committed": false,
+    "protected_residue": {
+      "GDTR.base": "0x1357",
+      "GDTR.base24": "0x24",
+      "GDTR.limit": "0xabcd",
+      "GDTR.reserved": "0x68",
+      "TRC.base24": "0x42",
+      "TRC.reserved": "0x86"
+    },
+    "source": "tests/upd9002/state_boundary.c:make_noncanonical"
+  },
+  "cpu286_payload_size": 112,
+  "fields": [
+    {
+      "name": "GDTR",
+      "offset": 64,
+      "size": 6
+    },
+    {
+      "name": "MSW",
+      "offset": 70,
+      "size": 2
+    },
+    {
+      "name": "IDTR",
+      "offset": 72,
+      "size": 6
+    },
+    {
+      "name": "LDTR",
+      "offset": 78,
+      "size": 2
+    },
+    {
+      "name": "LDTRC",
+      "offset": 80,
+      "size": 6
+    },
+    {
+      "name": "TR",
+      "offset": 86,
+      "size": 2
+    },
+    {
+      "name": "TRC",
+      "offset": 88,
+      "size": 6
+    }
+  ],
+  "schema": "vaeg-upd9002-protected-state-inventory-m47-v1",
+  "summary": {
+    "committed_or_matrix_scenarios": 3,
+    "scenarios_with_protected_residue": 0,
+    "test_generated_valid_imports_with_residue": 1
+  },
+  "user_visible_saved_state_corpus": {
+    "private_identities_recorded": false,
+    "provided": false,
+    "states_scanned": 0
+  }
+}

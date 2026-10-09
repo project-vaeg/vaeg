@@ -1,0 +1,285 @@
+{
+  "approved_evidence_sha": "c683fe502647918d8ded2b4c2243da1b787c9d0a",
+  "direct_harness": {
+    "historical_case_count": 156,
+    "historical_manifest_unchanged": true,
+    "live_generated_transition_rows": [
+      [
+        "patch-v30op_repe-0f",
+        "v30op_repe",
+        "0x0f",
+        "v30_repe_0f_diagnostic_stop",
+        "f30fc0000000000000",
+        "1",
+        "patched-root"
+      ],
+      [
+        "patch-v30op_repne-0f",
+        "v30op_repne",
+        "0x0f",
+        "v30_repne_0f_diagnostic_stop",
+        "f20fc0000000000000",
+        "1",
+        "patched-root"
+      ]
+    ],
+    "replacement_coverage": "dedicated 522-case diagnostic-stop regression"
+  },
+  "final_dispatch_transition": {
+    "added": [
+      [
+        "v30op_repe",
+        "0x0f",
+        "handler",
+        "v30_repe_0f_diagnostic_stop"
+      ],
+      [
+        "v30op_repne",
+        "0x0f",
+        "handler",
+        "v30_repne_0f_diagnostic_stop"
+      ]
+    ],
+    "added_count": 2,
+    "note": "18 removed rows are the derived CTS0/CTS1 reachability closure; no protected-mode source is deleted in M48",
+    "removed": [
+      [
+        "cts0_table",
+        "0x00",
+        "handler",
+        "_sldt"
+      ],
+      [
+        "cts0_table",
+        "0x01",
+        "handler",
+        "_str"
+      ],
+      [
+        "cts0_table",
+        "0x02",
+        "handler",
+        "_lldt"
+      ],
+      [
+        "cts0_table",
+        "0x03",
+        "handler",
+        "_ltr"
+      ],
+      [
+        "cts0_table",
+        "0x04",
+        "handler",
+        "_verr"
+      ],
+      [
+        "cts0_table",
+        "0x05",
+        "handler",
+        "_verw"
+      ],
+      [
+        "cts0_table",
+        "0x06",
+        "handler",
+        "_verr"
+      ],
+      [
+        "cts0_table",
+        "0x07",
+        "handler",
+        "_verw"
+      ],
+      [
+        "cts1_table",
+        "0x00",
+        "handler",
+        "_sgdt"
+      ],
+      [
+        "cts1_table",
+        "0x01",
+        "handler",
+        "_sidt"
+      ],
+      [
+        "cts1_table",
+        "0x02",
+        "handler",
+        "_lgdt"
+      ],
+      [
+        "cts1_table",
+        "0x03",
+        "handler",
+        "_lidt"
+      ],
+      [
+        "cts1_table",
+        "0x04",
+        "handler",
+        "_smsw"
+      ],
+      [
+        "cts1_table",
+        "0x05",
+        "handler",
+        "_smsw"
+      ],
+      [
+        "cts1_table",
+        "0x06",
+        "handler",
+        "_lmsw"
+      ],
+      [
+        "cts1_table",
+        "0x07",
+        "handler",
+        "_lmsw"
+      ],
+      [
+        "handler:i286c_cts",
+        "-",
+        "secondary-table",
+        "cts0_table"
+      ],
+      [
+        "handler:i286c_cts",
+        "-",
+        "secondary-table",
+        "cts1_table"
+      ],
+      [
+        "v30op_repe",
+        "0x0f",
+        "handler",
+        "i286c_cts"
+      ],
+      [
+        "v30op_repne",
+        "0x0f",
+        "handler",
+        "i286c_cts"
+      ]
+    ],
+    "removed_count": 20
+  },
+  "historical_artifact_sha256": {
+    "tests/ssts/baseline/upd9002_v20_known_gaps.json": "11ec1496a96d661c0656720b13939b1ade3448b693b923f8acf36576cd7048c1",
+    "tests/ssts/baseline/v20_native_ci.json": "a5db6a6cc82ae794fd2f60306c3d4a70136d6030e17e1aec733523bece864e31",
+    "tests/ssts/baseline/v20_native_full.json": "dd3247774afe5c5a19228d3a08f01ac6f614e6b67a3a6f454c1abc58f3dbf3d9",
+    "tests/upd9002/harness_manifest.csv": "14769ca59bf589921cbcf88dc0c357937f6da36e4fe0b78f9a46dc75b9098f2a",
+    "tests/upd9002/state_fixtures_m42.txt": "c8ed4bcf1a7df2a88964d71d85b846a6d7881f60a9233d8c9b787d3d5076f4fb",
+    "tools/qa/golden/upd9002_dispatch_provenance_m42.csv": "605e9af6761e3069f6c5af0ad9647ae574ab98252f7373969586cfee892cd6ba",
+    "tools/qa/golden/upd9002_final_dispatch_graph.csv": "e8c8fded6e1f44ef2d74ace93ba1063d64464b217bdd4f9180bf50e86e19df3d",
+    "tools/qa/golden/upd9002_support_map_m42.csv": "7b856f95d8c3d0356325483d188b9dde2d03a8e6cbe9b7fd0cacd004f1d09d13"
+  },
+  "instruction_matrix_case_count": 512,
+  "m43_transition": {
+    "applicable_record_hashes": [],
+    "dataset_id": "ssts-v20-9efbd02b8ec1a3aad347c2b59672ad25f3bcdb21-1d2e9c0e14101f05379d938245af68f3219c16f638fce019ad2a1946084930a4",
+    "failure_signatures": [],
+    "known_gap_record_hashes": [],
+    "reason": "the pinned dataset has zero decoded F2/F3+0F records",
+    "semantic_failure_record_hashes": []
+  },
+  "m48_artifact_sha256": {
+    "tools/qa/golden/upd9002_dispatch_provenance_m48.csv": "128698af06c4e4e98183e4ec0151b7025f427c4f812f95d9012f41417461027a",
+    "tools/qa/golden/upd9002_final_dispatch_graph_m48.csv": "fe9df28ad3d51cc55235afc3979ada890e86158b294762c15fa33c20d8a800a6",
+    "tools/qa/golden/upd9002_support_map_m48.csv": "21dd037c3eb11e1674805ad456ef03663f17804affbd7382c8db77291ab25279"
+  },
+  "policy": {
+    "dormant_descriptor_residue": "accepted and preserved when MSW.PE is clear",
+    "protected_state_import": "transactionally reject CPU286 payloads with MSW.PE set",
+    "rep0f": "emulator-level diagnostic stop before architectural state mutation; no architectural uPD9002/V52 claim"
+  },
+  "provenance_transition": {
+    "added": [
+      [
+        "v30op_repe",
+        "0x0f",
+        "i286op_repe",
+        "i286c_cts",
+        "patch",
+        "v30_repe_0f_diagnostic_stop"
+      ],
+      [
+        "v30op_repne",
+        "0x0f",
+        "i286op_repne",
+        "i286c_cts",
+        "patch",
+        "v30_repne_0f_diagnostic_stop"
+      ]
+    ],
+    "removed": [
+      [
+        "v30op_repe",
+        "0x0f",
+        "i286op_repe",
+        "i286c_cts",
+        "base",
+        "i286c_cts"
+      ],
+      [
+        "v30op_repne",
+        "0x0f",
+        "i286op_repne",
+        "i286c_cts",
+        "base",
+        "i286c_cts"
+      ]
+    ]
+  },
+  "schema": "vaeg-upd9002-rep0f-transition-manifest-m48-v1",
+  "state_transition": {
+    "accepted_fixture_changes": [],
+    "cpu_shut_changes": [],
+    "payload_layout_changed": false,
+    "rejected_field": "Cpu286StateCompat.MSW",
+    "rejected_mask": "0x0001 (MSW_PE)",
+    "serialized_offset": 70,
+    "serialized_size": 2,
+    "state_version_changed": false
+  },
+  "support_transition": {
+    "added": [
+      [
+        "v30op_repe",
+        "0x0f",
+        "-",
+        "v30_repe_0f_diagnostic_stop",
+        "implemented",
+        "final-root-target"
+      ],
+      [
+        "v30op_repne",
+        "0x0f",
+        "-",
+        "v30_repne_0f_diagnostic_stop",
+        "implemented",
+        "final-root-target"
+      ]
+    ],
+    "removed": [
+      [
+        "v30op_repe",
+        "0x0f",
+        "-",
+        "i286c_cts",
+        "implemented",
+        "final-root-target"
+      ],
+      [
+        "v30op_repne",
+        "0x0f",
+        "-",
+        "i286c_cts",
+        "implemented",
+        "final-root-target"
+      ]
+    ]
+  }
+}

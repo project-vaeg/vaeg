@@ -1,0 +1,107 @@
+{
+  "schema": "openai-artifact-sha256-manifest-v1",
+  "package": "upd9002_semantics_migration_v5",
+  "task_file_count": 17,
+  "files": [
+    {
+      "path": "README.md",
+      "size": 3575,
+      "sha256": "6740bb740cde536ffdc63576852e755cdd27dc5b180a69d0292b5b849cf7c162"
+    },
+    {
+      "path": "docs/agents/UPD9002_SEMANTICS_MIGRATION.md",
+      "size": 10859,
+      "sha256": "09858000ae254fc479e5d2753c57616c1a7a578937eea95c8a26508a04a0e8bb"
+    },
+    {
+      "path": "docs/agents/reports/TEMPLATE_upd9002_semantics_gate_report.md",
+      "size": 1259,
+      "sha256": "066eac9a7d3353c2aebfe42623f1bcb8f147ada849116053e7e773644485335b"
+    },
+    {
+      "path": "docs/agents/tasks/M59_upd9002_semantics_evidence_pack.md",
+      "size": 4957,
+      "sha256": "edf225ad0633edb9b24c8948c201a2fab871769b3e49ac9ed120e1ca06ddfad8"
+    },
+    {
+      "path": "docs/agents/tasks/M60a_upd9002_flags_materialization.md",
+      "size": 3295,
+      "sha256": "a4b44f2d7fbd7ab27aafb4c0724300edcab70c8197ca5c844b17a2e7902843b0"
+    },
+    {
+      "path": "docs/agents/tasks/M60b_upd9002_rom_authority_epoch.md",
+      "size": 5815,
+      "sha256": "8e41871922c552027f6cfdcfffd3b4f1739d0c2e88063419cd0ab018f4d71ac3"
+    },
+    {
+      "path": "docs/agents/tasks/M60c_upd9002_fpo2_main_dispatch_audit.md",
+      "size": 4500,
+      "sha256": "123e09af471ce20aa2732faa456aabe10734aa95f3185a1c489889d4780a4fe0"
+    },
+    {
+      "path": "docs/agents/tasks/M60d_upd9002_interrupt_frame.md",
+      "size": 2432,
+      "sha256": "59dfe22cf39c94cd8a7c5755fb70741e71e377007ae1711504bb86cf7e982f4b"
+    },
+    {
+      "path": "docs/agents/tasks/M60e_upd9002_iret.md",
+      "size": 1857,
+      "sha256": "1f72055a6905be8e6722fa43912a723a6dd96fe45b3bdd8db5c75f889d0eac22"
+    },
+    {
+      "path": "docs/agents/tasks/M61_upd9002_mov_immediate_register.md",
+      "size": 2210,
+      "sha256": "01a7fc5c235fc2b06c2dc5956df4bba0e2ef9997c3c37fe4ea6b67119d746d20"
+    },
+    {
+      "path": "docs/agents/tasks/M62a_upd9002_aam.md",
+      "size": 1908,
+      "sha256": "30ab7ea73c36455c03391a5775d049c8ab90f4ea250704077fd2d83fbd2d0abe"
+    },
+    {
+      "path": "docs/agents/tasks/M62b1_upd9002_ror4.md",
+      "size": 1765,
+      "sha256": "f1f8a4ca7bc72b1be9617aa82055cf4b83053e466d26215c70ccf7135994018a"
+    },
+    {
+      "path": "docs/agents/tasks/M62b2_upd9002_rol4.md",
+      "size": 2106,
+      "sha256": "30526d805313c149591fc229d5e32043f5bf4d480be69ce1546d86902ccae6bb"
+    },
+    {
+      "path": "docs/agents/tasks/M62c_upd9002_bcd_adjust.md",
+      "size": 1739,
+      "sha256": "def4e5b39d451edc1c6ce2d90449c416ab3394fe2e602890b0ca76907df39f73"
+    },
+    {
+      "path": "docs/agents/tasks/M63_upd9002_shift_semantics.md",
+      "size": 2006,
+      "sha256": "902650c0cbddd941d864367bdea3a2763ebdbe08a51ca01659fc4a1573cbd19c"
+    },
+    {
+      "path": "docs/agents/tasks/M64_upd9002_div_idiv.md",
+      "size": 1901,
+      "sha256": "ba525f93f88d99dc9e13daa3adb24534fa75f10f0c7e885079b6d118ee2d09c7"
+    },
+    {
+      "path": "docs/agents/tasks/M65_upd9002_residue_replan.md",
+      "size": 2909,
+      "sha256": "93b4dedf2d64dbe4f476b882f2cc411feab7d475b62578df985da1982a7491bc"
+    },
+    {
+      "path": "docs/agents/tasks/M66a_upd9002_drop_cpu286_state_compat.md",
+      "size": 2294,
+      "sha256": "8f116cada4ff9558e2ef9b0bc2f8838a009fe470bbbdd22637e66cd3dee7046b"
+    },
+    {
+      "path": "docs/agents/tasks/M66b_upd9002_remove_i286_identity.md",
+      "size": 2206,
+      "sha256": "15e84c83eb4849de7376de7b57f9405c3def708da87146cecdacc4f41f2562fe"
+    },
+    {
+      "path": "docs/agents/tasks/M67_upd9002_divergence_consolidation.md",
+      "size": 2411,
+      "sha256": "4b4975dd9f9166c43c2fab247b5752180c1410a8ccef932e5ecbcabd66b82b6b"
+    }
+  ]
+}

@@ -1,0 +1,138 @@
+{
+  "groups": [
+    {
+      "hash_set_sha256": "e07a935c78846a9bc91ba1c4ecda1093878f6a10b02b6e1a0c7a3f5bc9b82610",
+      "internal_id": "M65j.01",
+      "prohibition": "No implementation or official execution before evidence approval",
+      "question": "Establish positive uPD9002 target authority and executable semantic contract for this selector",
+      "selector_sha256": "0ef695e303e7428ea761ae302d7f2669ffd9e5ab6d83a3e799cae0c8ac0bee65"
+    },
+    {
+      "hash_set_sha256": "5fe60440784bfb67ac39758432603e734fc1ac4e1730ba0d13e3ba3cc90623ed",
+      "internal_id": "M65j.02",
+      "prohibition": "No implementation or official execution before evidence approval",
+      "question": "Establish positive uPD9002 target authority and executable semantic contract for this selector",
+      "selector_sha256": "13b196b0113ffce10cddbeacf73be5f15f1113381faa6705b471e57f3b310660"
+    },
+    {
+      "hash_set_sha256": "37320aacc63bf0fd2319a0ee580bd63d638a2634ecfb718138dcb575fe5d0faf",
+      "internal_id": "M65j.03",
+      "prohibition": "No implementation or official execution before evidence approval",
+      "question": "Establish positive uPD9002 target authority and executable semantic contract for this selector",
+      "selector_sha256": "1edaaafa50efb2dad760cb13d758ac8348a3c76fa25e910fbdb07bc161864196"
+    },
+    {
+      "hash_set_sha256": "a7ec1fd0428aa7d0cdb91e32f1567deccbb13261f3b236d09527180f9bdd8b13",
+      "internal_id": "M65j.04",
+      "prohibition": "No implementation or official execution before evidence approval",
+      "question": "Establish positive uPD9002 target authority and executable semantic contract for this selector",
+      "selector_sha256": "221c83a2565aaae979ce8da983aa3167d8a44a98346dff71a97475a05ac6abd8"
+    },
+    {
+      "hash_set_sha256": "a876a6b809f415f3f05b200c04c067c1d4d7bbc509d78250cde1d9815d16be7a",
+      "internal_id": "M65j.05",
+      "prohibition": "No implementation or official execution before evidence approval",
+      "question": "Establish positive uPD9002 target authority and executable semantic contract for this selector",
+      "selector_sha256": "273b34c27f68268dafe76f66e51bb07e2053d34a049558b1df2c57aeccf30503"
+    },
+    {
+      "hash_set_sha256": "7b88c728b3d87ba449b0993ccc9b338d6b224161d71f5baca438696442298aa5",
+      "internal_id": "M65j.06",
+      "prohibition": "No implementation or official execution before evidence approval",
+      "question": "Establish positive uPD9002 target authority and executable semantic contract for this selector",
+      "selector_sha256": "3bc52dec4cef1f200411b40deb23be772d1d94a8be765aceeb2618b5ae468e53"
+    },
+    {
+      "hash_set_sha256": "b53f2ca185052fce976fe6b9ad81267d9042147ef54e48aeb29f3ef78563ef32",
+      "internal_id": "M65j.07",
+      "prohibition": "No implementation or official execution before evidence approval",
+      "question": "Establish positive uPD9002 target authority and executable semantic contract for this selector",
+      "selector_sha256": "3d0c75d3f5eca2d34d07c97938a1f0f183d1f20399726fa9a812cad2b15c2802"
+    },
+    {
+      "hash_set_sha256": "5fce7f982fc2b3067cc0eba08e2e47309fc3008b9d0aeb9b6809fd9141436ca6",
+      "internal_id": "M65j.08",
+      "prohibition": "No implementation or official execution before evidence approval",
+      "question": "Establish positive uPD9002 target authority and executable semantic contract for this selector",
+      "selector_sha256": "522bcd03dc3bb3d599b6f209b662572675c554f78f042e53395e8a6a79001cf0"
+    },
+    {
+      "hash_set_sha256": "eb1e255fbc332369b6b90fb5db301eee74191cc8d22f88a827083969fe22cae5",
+      "internal_id": "M65j.09",
+      "prohibition": "No implementation or official execution before evidence approval",
+      "question": "Establish positive uPD9002 target authority and executable semantic contract for this selector",
+      "selector_sha256": "82ef687abb98b36d15a84c8e743313554ed63f3cd7f24d7b1e15b702067eaa5a"
+    },
+    {
+      "hash_set_sha256": "3f70b39696fb9a92bb4e4506e7871e7e0ce32da3bc691b7f156e19f0d62bb8d3",
+      "internal_id": "M65j.10",
+      "prohibition": "No implementation or official execution before evidence approval",
+      "question": "Establish positive uPD9002 target authority and executable semantic contract for this selector",
+      "selector_sha256": "8c341a6c9ceb1ac5bf8e4ee0207e2fbe812830cfeade7330f42ab86d64d0ff38"
+    },
+    {
+      "hash_set_sha256": "46405182543bad2955a307d47434aa5c9e69bf80045041a31615396a52b93af4",
+      "internal_id": "M65j.11",
+      "prohibition": "No implementation or official execution before evidence approval",
+      "question": "Establish positive uPD9002 target authority and executable semantic contract for this selector",
+      "selector_sha256": "a6b3913e95bed764f835057d39c3fd906ebae80352949225150544135a969800"
+    },
+    {
+      "hash_set_sha256": "46f1e313c21f5b4c5017d08ac5827d344cbd963c8bd45a0df68d5bb1968f64db",
+      "internal_id": "M65j.12",
+      "prohibition": "No implementation or official execution before evidence approval",
+      "question": "Establish positive uPD9002 target authority and executable semantic contract for this selector",
+      "selector_sha256": "a7ac825ea82f856770956b229807aecc2474e9f7086d7f4899eb53089911e168"
+    },
+    {
+      "hash_set_sha256": "dfc4d217d8ffc7bdadf9a1074fce90e2fbaa784fd35ebd549778c2311381e083",
+      "internal_id": "M65j.13",
+      "prohibition": "No implementation or official execution before evidence approval",
+      "question": "Establish positive uPD9002 target authority and executable semantic contract for this selector",
+      "selector_sha256": "b7cba77aa221f7fee563d964630039f762c570cd3921c14093bec5dc9dcea590"
+    },
+    {
+      "hash_set_sha256": "6cae8632cade30a2a4d30311dadfb45cbdfc956c3e79493b0b98fbe6a580efbe",
+      "internal_id": "M65j.14",
+      "prohibition": "No implementation or official execution before evidence approval",
+      "question": "Establish positive uPD9002 target authority and executable semantic contract for this selector",
+      "selector_sha256": "bb7b9f8f00a54ea76d0c8c00b0269df9eef91802b68fed4033f9cd215a9efa37"
+    },
+    {
+      "hash_set_sha256": "b8976e315c897ee4233f0c09176324515d70ff385ae63073ef561cda8497f5a6",
+      "internal_id": "M65j.15",
+      "prohibition": "No implementation or official execution before evidence approval",
+      "question": "Establish positive uPD9002 target authority and executable semantic contract for this selector",
+      "selector_sha256": "bc9d6973c279a728eeed10b9a3b78d5052bb02ed088a646938f8086e8695ca47"
+    },
+    {
+      "hash_set_sha256": "a5cd21c6be979ed1124fabc9e3e4b5294f22a03a2bf67ed398029dc0073a4ff1",
+      "internal_id": "M65j.16",
+      "prohibition": "No implementation or official execution before evidence approval",
+      "question": "Establish positive uPD9002 target authority and executable semantic contract for this selector",
+      "selector_sha256": "d86fa6dcf62094b832b5fab3699e261523fa457b51ab87ddc144a1296e08140c"
+    },
+    {
+      "hash_set_sha256": "ba669c017e305fa67beb1f58aa972270cad0476b5e293335d3aefc9e708c3041",
+      "internal_id": "M65j.17",
+      "prohibition": "No implementation or official execution before evidence approval",
+      "question": "Establish positive uPD9002 target authority and executable semantic contract for this selector",
+      "selector_sha256": "de75edf05484ac67470d86664a6c381f5433cebc053218cb665b1d056470f0cc"
+    },
+    {
+      "hash_set_sha256": "4d7399bf031acdc1ab74235d90ac9fcee711f4368471d78bfb71e87bc110a42e",
+      "internal_id": "M65j.18",
+      "prohibition": "No implementation or official execution before evidence approval",
+      "question": "Establish positive uPD9002 target authority and executable semantic contract for this selector",
+      "selector_sha256": "ebf1284c1dffd681507fd4e50ba5ce56f7922083699a073c1f1fd2d8c56a678e"
+    },
+    {
+      "hash_set_sha256": "1360a02f98f65fc5a46b99de881b9a19cacdc7ea431d9e0811682bc4733d6f08",
+      "internal_id": "M65j.19",
+      "prohibition": "No implementation or official execution before evidence approval",
+      "question": "Establish positive uPD9002 target authority and executable semantic contract for this selector",
+      "selector_sha256": "f5c6e142f83f14680227effb8d65d676a447263ed191f08610ae2b9ab46ce0d8"
+    }
+  ],
+  "schema": "vaeg-upd9002-m65j-evidence-backlog-v1"
+}

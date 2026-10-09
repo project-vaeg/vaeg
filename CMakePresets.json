@@ -1,0 +1,259 @@
+{
+  "version": 3,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 20,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "mingw-static-dependencies",
+      "hidden": true,
+      "cacheVariables": {
+        "VAEG_FETCH_SDL2": "ON",
+        "VAEG_STATIC_SDL2": "ON",
+        "VAEG_FETCH_LIBARCHIVE": "ON",
+        "VAEG_STATIC_LIBRASHADER": "ON",
+        "VAEG_LIBRASHADER_STATIC_LIBRARY": "${sourceDir}/build/mingw-static/librashader-git/target/x86_64-pc-windows-gnu/release/liblibrashader_capi.a",
+        "VAEG_LIBRASHADER_STATIC_NOTICES": "${sourceDir}/build/mingw-static/windows-audit/third-party-notices.txt",
+        "VAEG_LIBRASHADER_NATIVE_LIBS": "advapi32;cfgmgr32;gdi32;kernel32;msimg32;ole32;opengl32;shell32;user32;winspool;stdc++;ntdll;userenv;ws2_32;dbghelp"
+      }
+    },
+    {
+      "name": "linux-debug",
+      "displayName": "Linux Debug",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/linux-debug",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "VAEG_WERROR": "OFF"
+      }
+    },
+    {
+      "name": "linux-release",
+      "displayName": "Linux Release",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/linux-release",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "VAEG_FETCH_LIBARCHIVE": "ON",
+        "VAEG_WERROR": "OFF"
+      }
+    },
+    {
+      "name": "linux-ci-gcc",
+      "displayName": "Linux CI GCC Release",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/linux-ci-gcc",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "VAEG_ENABLE_TESTS": "ON",
+        "VAEG_Z80_COMPAT_INTEGRATION_TRACE": "ON",
+        "VAEG_WERROR": "OFF"
+      }
+    },
+    {
+      "name": "linux-ci-clang",
+      "displayName": "Linux CI Clang Release",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/linux-ci-clang",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "CMAKE_C_COMPILER": "clang",
+        "CMAKE_CXX_COMPILER": "clang++",
+        "VAEG_ENABLE_TESTS": "ON",
+        "VAEG_Z80_COMPAT_INTEGRATION_TRACE": "ON",
+        "VAEG_WERROR": "OFF"
+      }
+    },
+    {
+      "name": "linux-asan",
+      "displayName": "Linux ASan/UBSan Debug",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/asan",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_C_FLAGS": "-fsanitize=address,undefined",
+        "CMAKE_CXX_FLAGS": "-fsanitize=address,undefined",
+        "CMAKE_EXE_LINKER_FLAGS": "-fsanitize=address,undefined",
+        "VAEG_WERROR": "OFF"
+      }
+    },
+    {
+      "name": "linux-ci-asan",
+      "displayName": "Linux CI ASan/UBSan Debug",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/linux-ci-asan",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_C_FLAGS": "-fsanitize=address,undefined",
+        "CMAKE_CXX_FLAGS": "-fsanitize=address,undefined",
+        "CMAKE_EXE_LINKER_FLAGS": "-fsanitize=address,undefined",
+        "VAEG_ENABLE_TESTS": "ON",
+        "VAEG_Z80_COMPAT_INTEGRATION_TRACE": "ON",
+        "VAEG_WERROR": "OFF"
+      }
+    },
+    {
+      "name": "mingw-release",
+      "displayName": "Windows MinGW Release (MSYS2 native)",
+      "inherits": "mingw-static-dependencies",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/mingw-release",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "VAEG_WERROR": "OFF",
+        "VAEG_WINDOWS_CONSOLE": "OFF",
+        "VAEG_FETCH_SDL2": "ON",
+        "VAEG_STATIC_SDL2": "ON",
+        "VAEG_FETCH_LIBARCHIVE": "ON"
+      }
+    },
+    {
+      "name": "mingw-cross",
+      "displayName": "Windows MinGW-w64 Cross Release",
+      "inherits": "mingw-static-dependencies",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/mingw-cross",
+      "toolchainFile": "${sourceDir}/cmake/mingw-w64-x86_64.cmake",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "VAEG_WERROR": "OFF",
+        "VAEG_WINDOWS_CONSOLE": "OFF",
+        "VAEG_FETCH_SDL2": "ON",
+        "VAEG_STATIC_SDL2": "ON",
+        "VAEG_FETCH_LIBARCHIVE": "ON"
+      }
+    },
+    {
+      "name": "mingw-ci",
+      "displayName": "Windows MinGW CI Release (MSYS2 native)",
+      "inherits": "mingw-static-dependencies",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/mingw-ci",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "VAEG_ENABLE_TESTS": "ON",
+        "VAEG_Z80_COMPAT_INTEGRATION_TRACE": "ON",
+        "VAEG_WERROR": "OFF",
+        "VAEG_WINDOWS_CONSOLE": "ON",
+        "VAEG_FETCH_SDL2": "ON",
+        "VAEG_STATIC_SDL2": "ON",
+        "VAEG_FETCH_LIBARCHIVE": "ON"
+      }
+    },
+    {
+      "name": "macos-release",
+      "displayName": "macOS Release (static FetchContent SDL2)",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/macos-release",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "VAEG_FETCH_SDL2": "ON",
+        "VAEG_STATIC_SDL2": "ON",
+        "VAEG_FETCH_LIBARCHIVE": "ON",
+        "VAEG_WERROR": "OFF"
+      }
+    },
+    {
+      "name": "macos-macports",
+      "displayName": "macOS Development (MacPorts SDL2)",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/macos-macports",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "CMAKE_PREFIX_PATH": "/opt/local",
+        "VAEG_WERROR": "OFF"
+      },
+      "environment": {
+        "PKG_CONFIG_PATH": "/opt/local/lib/pkgconfig:$penv{PKG_CONFIG_PATH}"
+      }
+    },
+    {
+      "name": "macos-asan",
+      "displayName": "macOS ASan/UBSan Debug (MacPorts)",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/macos-asan",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_PREFIX_PATH": "/opt/local",
+        "CMAKE_C_FLAGS": "-fsanitize=address,undefined",
+        "CMAKE_CXX_FLAGS": "-fsanitize=address,undefined",
+        "CMAKE_EXE_LINKER_FLAGS": "-fsanitize=address,undefined",
+        "VAEG_WERROR": "OFF"
+      },
+      "environment": {
+        "PKG_CONFIG_PATH": "/opt/local/lib/pkgconfig:$penv{PKG_CONFIG_PATH}"
+      }
+    },
+    {
+      "name": "macos-ci",
+      "displayName": "macOS CI Release (FetchContent SDL2)",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/macos-ci",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "VAEG_ENABLE_TESTS": "ON",
+        "VAEG_Z80_COMPAT_INTEGRATION_TRACE": "ON",
+        "VAEG_FETCH_SDL2": "ON",
+        "VAEG_STATIC_SDL2": "ON",
+        "VAEG_FETCH_LIBARCHIVE": "ON",
+        "VAEG_WERROR": "OFF"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "linux-debug",
+      "configurePreset": "linux-debug"
+    },
+    {
+      "name": "linux-release",
+      "configurePreset": "linux-release"
+    },
+    {
+      "name": "linux-ci-gcc",
+      "configurePreset": "linux-ci-gcc"
+    },
+    {
+      "name": "linux-ci-clang",
+      "configurePreset": "linux-ci-clang"
+    },
+    {
+      "name": "linux-asan",
+      "configurePreset": "linux-asan"
+    },
+    {
+      "name": "linux-ci-asan",
+      "configurePreset": "linux-ci-asan"
+    },
+    {
+      "name": "mingw-release",
+      "configurePreset": "mingw-release"
+    },
+    {
+      "name": "mingw-cross",
+      "configurePreset": "mingw-cross"
+    },
+    {
+      "name": "mingw-ci",
+      "configurePreset": "mingw-ci"
+    },
+    {
+      "name": "macos-release",
+      "configurePreset": "macos-release"
+    },
+    {
+      "name": "macos-macports",
+      "configurePreset": "macos-macports"
+    },
+    {
+      "name": "macos-asan",
+      "configurePreset": "macos-asan"
+    },
+    {
+      "name": "macos-ci",
+      "configurePreset": "macos-ci"
+    }
+  ]
+}

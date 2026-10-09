@@ -1,0 +1,139 @@
+{
+  "applicable_set_after": {
+    "ci": "6f10f47cd0f939145f99dbe6b1d820c79082c90083963b61cd39b5f56503537f",
+    "full": "4f0f19a6496f4c4463da092c7d5df7a9a0365a951821d9428eac8662d0c76e7c"
+  },
+  "applicable_set_before": {
+    "ci": "6f10f47cd0f939145f99dbe6b1d820c79082c90083963b61cd39b5f56503537f",
+    "full": "4f0f19a6496f4c4463da092c7d5df7a9a0365a951821d9428eac8662d0c76e7c"
+  },
+  "campaign_base_gate": "G65",
+  "campaign_base_sha": "efd96b7e46717e7ee56e086f7d27ba42b04b49d3",
+  "campaign_branch": "topic/m65-residue-campaign",
+  "campaign_predecessor_sha": "ef7d88938944532606c46bf1d6032ccdfd635c6a",
+  "canonical_task_path": "docs/agents/tasks/M65d_upd9002_ff6.md",
+  "classification_after": "applicable",
+  "classification_before": "applicable",
+  "evidence_artifacts": {
+    "case_table": {
+      "path": "tests/ssts/campaigns/g65m/reconstruction/m65d_ff6_cases.json.gz",
+      "sha256": "d89d590396faf77266f27a389ed5713630c8837d112d02b628cc90c66d4ecfec"
+    },
+    "contract": {
+      "path": "tests/ssts/campaigns/g65m/reconstruction/m65d_contract.json",
+      "sha256": "b87e8baf6a3126d7886222531e608f8bfc3dea036e5c0f53c290c05e393d8559"
+    },
+    "execution_spec": {
+      "path": "tests/ssts/campaigns/g65m/execution_specs/m65d.json",
+      "sha256": "aae4eeb7dfb95f05bc06e75241ce1eee1bce38f2efac9fc3eac29e74896f2f09"
+    },
+    "replay_summary": {
+      "path": "tests/ssts/campaigns/g65m/checkpoints/m65d_replay_summary.json",
+      "sha256": "38df2df030075b7a0d3e4ba14a9036d89096371030a3d701e983280b623398e2"
+    }
+  },
+  "focused_tests": [
+    {
+      "command": "ctest --test-dir build/linux-ci-gcc -R 'vaeg_upd9002_m65(a_ff7|b_bound|c_f72|d_ff6)' --output-on-failure",
+      "result": "4/4 pass"
+    },
+    {
+      "command": "python3 tools/qa/upd9002_m65d_ff6.py selftest",
+      "result": "pass"
+    },
+    {
+      "command": "python3 tools/qa/upd9002_m65d_ff6.py verify --root . --shard-root /tmp/ssts-v20-v1_native --worker build/linux-ci-gcc/sdl2/vaeg --write-summary",
+      "result": "pass"
+    },
+    {
+      "command": "python3 tools/qa/upd9002_m65_reconstruct.py verify --root .",
+      "result": "pass"
+    },
+    {
+      "command": "python3 tools/qa/milestone_ids.py --selftest --audit --discover",
+      "result": "pass"
+    },
+    {
+      "command": "ctest --test-dir build/linux-ci-gcc -LE external --output-on-failure",
+      "result": "68/68 pass"
+    },
+    {
+      "command": "git diff --check",
+      "result": "pass"
+    }
+  ],
+  "full_ff_6_population": {
+    "fail": 0,
+    "hash_set_sha256": "a2b73b7e4b6e53dc95214b0a384ce4f7549c58c0364dd1b30ab22be5fc27b67a",
+    "pass": 5000,
+    "predecessor_passes_preserved": 4856,
+    "selected_count": 5000
+  },
+  "gap_kind_after": null,
+  "gap_kind_before": null,
+  "milestone": "M65d",
+  "newly_applicable": 0,
+  "newly_failing": 0,
+  "newly_passing": 144,
+  "owned_hash_count": 144,
+  "owned_hash_set_sha256": "ce1bc644ee5a5bc73ae872440ad4446cb0dbccbad626ba93372082fe7add9076",
+  "owned_selectors": [
+    "FF /6 PUSH r/m16"
+  ],
+  "production_semantic_change": true,
+  "protected_bound_frame_result": {
+    "count": 3565,
+    "fail": 0,
+    "hash_set_sha256": "15862f179608f8745f76bb3565197106ae6f63cba6c3363dd307fb29e6bbd746",
+    "pass": 3565,
+    "selector": "62 BOUND former frame-only"
+  },
+  "protected_m65a_result": {
+    "count": 5000,
+    "fail": 0,
+    "hash_set_sha256": "6028d5dcd4b6a3dcded2aaf69fb186e502f7f5a4d094180572f802c86240039a",
+    "pass": 5000,
+    "selector": "FF /7"
+  },
+  "protected_m65b_result": {
+    "count": 1244,
+    "fail": 0,
+    "hash_set_sha256": "2fd0e1053b264042031c657ebf55796858e8ff2405509b3cc1d17ace71ae4f0d",
+    "pass": 1244,
+    "selector": "62 BOUND"
+  },
+  "protected_m65c_result": {
+    "fail": 0,
+    "full_hash_set_sha256": "ff7c9f1988e9e9b1f73309501059c84fdbaf545604f942bfd533aed8ab987df6",
+    "full_selected_count": 5000,
+    "owned_count": 1113,
+    "owned_hash_set_sha256": "69bf316c8a0751f7aed67504d0ea606fd2530e8d254b2b4e73ead66ccbc30ccc",
+    "pass": 5000,
+    "selector": "F7 /2 word NOT r/m16"
+  },
+  "protected_m65e_guard": {
+    "count": 10,
+    "hash_set_sha256": "7b228418bf0391884381514282e60ea9ccaf3af8c0f1f7f5a1b038a24de230a1",
+    "official_failures_preserved": 10,
+    "selector": "exact ten-case tail"
+  },
+  "report_path": "docs/agents/reports/m65d_upd9002_ff6.md",
+  "selected_applicable_no_change": true,
+  "selected_set_after": {
+    "ci": "d30dd9c864fbbaa74c661e1b829c66264f2184a8fbbb72b654b2baa825664ae6",
+    "full": "0aa3dbb24323223b3a9595a0bd7cfd5666596741157c14b60f6969318475f8f7"
+  },
+  "selected_set_before": {
+    "ci": "d30dd9c864fbbaa74c661e1b829c66264f2184a8fbbb72b654b2baa825664ae6",
+    "full": "0aa3dbb24323223b3a9595a0bd7cfd5666596741157c14b60f6969318475f8f7"
+  },
+  "status": "complete_pending_campaign_gate",
+  "target_policy_after": "upd9002-g64-37ae2b706a9cbbe2d36cf7c98372c0cae7ca4b8d90e4f738973bc0ed3248eed6",
+  "target_policy_before": "upd9002-g64-37ae2b706a9cbbe2d36cf7c98372c0cae7ca4b8d90e4f738973bc0ed3248eed6",
+  "task_checkpoint_sha": "supplied_by_handoff",
+  "task_evaluated_sha": "5cfc3540b5f1d78a7aace699d51729d272529552",
+  "task_evidence_sha": "supplied_by_handoff",
+  "task_start_sha": "ef7d88938944532606c46bf1d6032ccdfd635c6a",
+  "validator_only_sha": "b425a806833e6a33bdcffe47960ba11e3ae6d95c",
+  "worker_sha256": "12e690896d67534258217488371132c020e8d4b87930886267d4a1ad0d318d29"
+}

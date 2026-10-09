@@ -1,0 +1,67 @@
+{
+  "campaign_base_gate": "G65",
+  "campaign_base_sha": "efd96b7e46717e7ee56e086f7d27ba42b04b49d3",
+  "campaign_branch": "topic/m65-residue-campaign",
+  "campaign_predecessor_sha": "46e68ffeb6343ed844246d4b961ec871c4c38fa3",
+  "canonical_task_path": "docs/agents/tasks/M65a_upd9002_ff7.md",
+  "classification_after": "applicable",
+  "classification_before": "applicable",
+  "evidence_artifacts": {
+    "case_table": {
+      "path": "tests/ssts/campaigns/g65m/reconstruction/m65a_ff7_cases.json.gz",
+      "sha256": "f46c51049f1440e92f01be09700959e53ca7cf32f66e4945aa70ecb0ea08cdca"
+    },
+    "contract": {
+      "path": "tests/ssts/campaigns/g65m/reconstruction/m65a_contract.json",
+      "sha256": "b0fe3a10802baffcfe2891c8d7e51408b4e0a331aa052bc6446968600ac50e22"
+    },
+    "replay_summary": {
+      "path": "tests/ssts/campaigns/g65m/checkpoints/m65a_replay_summary.json",
+      "sha256": "9a9c20f3da7909ab7841ae27f0811e842c2a9f7e0d67885f64720b947462994e"
+    }
+  },
+  "focused_tests": [
+    {
+      "command": "ctest --test-dir build/linux-ci-gcc -R vaeg_upd9002_m65a_ff7 --output-on-failure",
+      "result": "pass"
+    },
+    {
+      "command": "python3 tools/qa/upd9002_m65a_ff7.py verify --shard-root /tmp/ssts-v20-v1_native --worker build/linux-ci-gcc/sdl2/vaeg --write-summary",
+      "result": "pass"
+    },
+    {
+      "command": "ctest --test-dir build/linux-ci-gcc -LE external --output-on-failure",
+      "result": "65/65 pass"
+    }
+  ],
+  "gap_kind_after": null,
+  "gap_kind_before": null,
+  "m65d_guard": {
+    "count": 144,
+    "hash_set_sha256": "ce1bc644ee5a5bc73ae872440ad4446cb0dbccbad626ba93372082fe7add9076",
+    "official_failures_preserved": 144,
+    "selector": "FF /6 SP alias"
+  },
+  "milestone": "M65a",
+  "newly_applicable": 0,
+  "newly_failing": 0,
+  "newly_passing": 5000,
+  "owned_hash_count": 5000,
+  "owned_hash_set_sha256": "6028d5dcd4b6a3dcded2aaf69fb186e502f7f5a4d094180572f802c86240039a",
+  "owned_selectors": [
+    "FF /7"
+  ],
+  "production_semantic_change": true,
+  "report_path": "docs/agents/reports/m65a_upd9002_ff7.md",
+  "selected_set_after": "unchanged",
+  "selected_set_before": "unchanged",
+  "status": "complete_pending_campaign_gate",
+  "target_policy_after": "unchanged",
+  "target_policy_before": "unchanged",
+  "task_checkpoint_sha": "supplied_by_handoff",
+  "task_evaluated_sha": "15f2ac8e861c3cfedbc12acc9ef470925d00716c",
+  "task_evidence_sha": "supplied_by_handoff",
+  "task_start_sha": "46e68ffeb6343ed844246d4b961ec871c4c38fa3",
+  "validator_only_sha": "207bf2149c0ac05e3b12b20485da611b65cfc977",
+  "worker_sha256": "9787537d0ce251081b5d33a352196b34b2255bd4ce1581dae5d35a7b78668664"
+}

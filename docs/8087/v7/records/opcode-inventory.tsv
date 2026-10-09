@@ -1,0 +1,128 @@
+# Copyright (c) 2026 Nakata Maho
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+# 1. Redistributions of source code must retain the above copyright notice,
+#    this list of conditions and the following disclaimer.
+# 2. Redistributions in binary form must reproduce the above copyright notice,
+#    this list of conditions and the following disclaimer in the documentation
+#    and/or other materials provided with the distribution.
+#
+# THIS SOFTWARE IS PROVIDED BY THE AUTHOR "AS IS" AND ANY EXPRESS OR IMPLIED
+# WARRANTIES ARE DISCLAIMED.
+#
+# This is a hand-authored source inventory.  A memory row expands to mod=00,
+# 01,10 and rm=0..7.  A register row expands to mod=11 and the listed bytes.
+# It is intentionally independent of cpu/upd8087/upd8087.c.
+form_id	opcode	modrm	form	class	source
+D8M0	D8	00-7F	FADD m32real	memory-arithmetic	I04 Table 6-9; I01 Table 5
+D8M1	D8	00-7F	FMUL m32real	memory-arithmetic	I04 Table 6-9; I01 Table 5
+D8M2	D8	00-7F	FCOM m32real	memory-compare	I04 Table 6-11; I01 Table 5
+D8M3	D8	00-7F	FCOMP m32real	memory-compare	I04 Table 6-11; I01 Table 5
+D8M4	D8	00-7F	FSUB m32real	memory-arithmetic	I04 Table 6-9; I01 Table 5
+D8M5	D8	00-7F	FSUBR m32real	memory-arithmetic	I04 Table 6-9; I01 Table 5
+D8M6	D8	00-7F	FDIV m32real	memory-arithmetic	I04 Table 6-9; I01 Table 5
+D8M7	D8	00-7F	FDIVR m32real	memory-arithmetic	I04 Table 6-9; I01 Table 5
+D9M0	D9	00-7F	FLD m32real	memory-transfer	I04 Table 6-8; I01 Table 5
+D9M2	D9	00-7F	FST m32real	memory-transfer	I04 Table 6-8; I01 Table 5
+D9M3	D9	00-7F	FSTP m32real	memory-transfer	I04 Table 6-8; I01 Table 5
+D9M4	D9	00-7F	FLDENV m14	memory-environment	I04 Figure 6-2
+D9M5	D9	00-7F	FLDCW m16	memory-control	I04 Figure 6-1
+D9M6	D9	00-7F	FSTENV m14	memory-environment	I04 Figure 6-2
+D9M7	D9	00-7F	FSTCW m16	memory-control	I04 Figure 6-1
+DAM0	DA	00-7F	FIADD m32int	memory-integer	I04 Table 6-9; I01 Table 5
+DAM1	DA	00-7F	FIMUL m32int	memory-integer	I04 Table 6-9; I01 Table 5
+DAM2	DA	00-7F	FICOM m32int	memory-compare	I04 Table 6-11; I01 Table 5
+DAM3	DA	00-7F	FICOMP m32int	memory-compare	I04 Table 6-11; I01 Table 5
+DAM4	DA	00-7F	FISUB m32int	memory-integer	I04 Table 6-9; I01 Table 5
+DAM5	DA	00-7F	FISUBR m32int	memory-integer	I04 Table 6-9; I01 Table 5
+DAM6	DA	00-7F	FIDIV m32int	memory-integer	I04 Table 6-9; I01 Table 5
+DAM7	DA	00-7F	FIDIVR m32int	memory-integer	I04 Table 6-9; I01 Table 5
+DBM0	DB	00-7F	FILD m32int	memory-integer	I04 Table 6-8; I01 Table 5
+DBM2	DB	00-7F	FIST m32int	memory-integer	I04 Table 6-8; I01 Table 5
+DBM3	DB	00-7F	FISTP m32int	memory-integer	I04 Table 6-8; I01 Table 5
+DBM5	DB	00-7F	FLD m80real	memory-transfer	I04 Table 6-8; I01 Table 5
+DBM7	DB	00-7F	FSTP m80real	memory-transfer	I04 Table 6-8; I01 Table 5
+DCM0	DC	00-7F	FADD m64real	memory-arithmetic	I04 Table 6-9; I01 Table 5
+DCM1	DC	00-7F	FMUL m64real	memory-arithmetic	I04 Table 6-9; I01 Table 5
+DCM2	DC	00-7F	FCOM m64real	memory-compare	I04 Table 6-11; I01 Table 5
+DCM3	DC	00-7F	FCOMP m64real	memory-compare	I04 Table 6-11; I01 Table 5
+DCM4	DC	00-7F	FSUB m64real	memory-arithmetic	I04 Table 6-9; I01 Table 5
+DCM5	DC	00-7F	FSUBR m64real	memory-arithmetic	I04 Table 6-9; I01 Table 5
+DCM6	DC	00-7F	FDIV m64real	memory-arithmetic	I04 Table 6-9; I01 Table 5
+DCM7	DC	00-7F	FDIVR m64real	memory-arithmetic	I04 Table 6-9; I01 Table 5
+DDM0	DD	00-7F	FLD m64real	memory-transfer	I04 Table 6-8; I01 Table 5
+DDM2	DD	00-7F	FST m64real	memory-transfer	I04 Table 6-8; I01 Table 5
+DDM3	DD	00-7F	FSTP m64real	memory-transfer	I04 Table 6-8; I01 Table 5
+DDM4	DD	00-7F	FRSTOR m94	memory-environment	I04 Figure 6-4
+DDM6	DD	00-7F	FSAVE m94	memory-environment	I04 Figure 6-4
+DDM7	DD	00-7F	FSTSW m16	memory-control	I04 Table 6-14
+DEM0	DE	00-7F	FIADD m16int	memory-integer	I04 Table 6-9; I01 Table 5
+DEM1	DE	00-7F	FIMUL m16int	memory-integer	I04 Table 6-9; I01 Table 5
+DEM2	DE	00-7F	FICOM m16int	memory-compare	I04 Table 6-11; I01 Table 5
+DEM3	DE	00-7F	FICOMP m16int	memory-compare	I04 Table 6-11; I01 Table 5
+DEM4	DE	00-7F	FISUBR m16int	memory-integer	I04 Table 6-9; I01 Table 5
+DEM5	DE	00-7F	FISUB m16int	memory-integer	I04 Table 6-9; I01 Table 5
+DEM6	DE	00-7F	FIDIVR m16int	memory-integer	I04 Table 6-9; I01 Table 5
+DEM7	DE	00-7F	FIDIV m16int	memory-integer	I04 Table 6-9; I01 Table 5
+DFM0	DF	00-7F	FILD m16int	memory-integer	I04 Table 6-8; I01 Table 5
+DFM2	DF	00-7F	FIST m16int	memory-integer	I04 Table 6-8; I01 Table 5
+DFM3	DF	00-7F	FISTP m16int	memory-integer	I04 Table 6-8; I01 Table 5
+DFM4	DF	00-7F	FBLD m10bcd	packed-bcd	I04 Table 6-8; I01 Table 5
+DFM5	DF	00-7F	FILD m64int	memory-integer	I04 Table 6-8; I01 Table 5
+DFM6	DF	00-7F	FBSTP m10bcd	packed-bcd	I04 Table 6-8; I01 Table 5
+DFM7	DF	00-7F	FISTP m64int	memory-integer	I04 Table 6-8; I01 Table 5
+D8R0	D8	C0-C7	FADD ST,ST(i)	register-arithmetic	I04 Table 6-9
+D8R1	D8	C8-CF	FMUL ST,ST(i)	register-arithmetic	I04 Table 6-9
+D8R2	D8	D0-D7	FCOM ST(i)	register-compare	I04 Table 6-11
+D8R3	D8	D8-DF	FCOMP ST(i)	register-compare	I04 Table 6-11
+D8R4	D8	E0-E7	FSUB ST,ST(i)	register-arithmetic	I04 Table 6-9
+D8R5	D8	E8-EF	FSUBR ST,ST(i)	register-arithmetic	I04 Table 6-9
+D8R6	D8	F0-F7	FDIV ST,ST(i)	register-arithmetic	I04 Table 6-9
+D8R7	D8	F8-FF	FDIVR ST,ST(i)	register-arithmetic	I04 Table 6-9
+D9R0	D9	C0-C7	FLD ST(i)	register-transfer	I04 Table 6-8
+D9R1	D9	C8-CF	FXCH ST(i)	register-transfer	I04 Table 6-8
+D9D0	D9	D0	FNOP	register-control	I04 No operation
+D9E0	D9	E0	FCHS	register-control	I04 Table 6-9
+D9E1	D9	E1	FABS	register-control	I04 Table 6-9
+D9E4	D9	E4	FTST	register-compare	I04 Table 6-11
+D9E5	D9	E5	FXAM	register-compare	I04 Table 6-11
+D9E8	D9	E8	FLD1	constant	I04 Table 6-13
+D9E9	D9	E9	FLDL2T	constant	I04 Table 6-13
+D9EA	D9	EA	FLDL2E	constant	I04 Table 6-13
+D9EB	D9	EB	FLDPI	constant	I04 Table 6-13
+D9EC	D9	EC	FLDLG2	constant	I04 Table 6-13
+D9ED	D9	ED	FLDLN2	constant	I04 Table 6-13
+D9EE	D9	EE	FLDZ	constant	I04 Table 6-13
+D9F0	D9	F0	F2XM1	transcendental	I04 Table 6-12
+D9F1	D9	F1	FYL2X	transcendental	I04 Table 6-12
+D9F2	D9	F2	FPTAN	transcendental	I04 Table 6-12
+D9F3	D9	F3	FPATAN	transcendental	I04 Table 6-12
+D9F4	D9	F4	FXTRACT	transcendental	I04 Table 6-9
+D9F6	D9	F6	FDECSTP	register-control	I04 Table 6-14
+D9F7	D9	F7	FINCSTP	register-control	I04 Table 6-14
+D9F8	D9	F8	FPREM	transcendental	I04 Table 6-9
+D9F9	D9	F9	FYL2XP1	transcendental	I04 Table 6-12
+D9FA	D9	FA	FSQRT	register-arithmetic	I04 Table 6-9
+D9FC	D9	FC	FRNDINT	register-arithmetic	I04 Table 6-9
+D9FD	D9	FD	FSCALE	transcendental	I04 Table 6-12
+DBE0	DB	E0	FENI	register-control	I04 Table 6-14
+DBE1	DB	E1	FDISI	register-control	I04 Table 6-14
+DBE2	DB	E2	FCLEX	register-control	I04 Table 6-14
+DBE3	DB	E3	FINIT	register-control	I04 Table 6-14
+DCR0	DC	C0-C7	FADD ST(i),ST	register-arithmetic	I04 Table 6-9
+DCR1	DC	C8-CF	FMUL ST(i),ST	register-arithmetic	I04 Table 6-9
+DCR4	DC	E0-E7	FSUBR ST(i),ST	register-arithmetic	I04 Table 6-9
+DCR5	DC	E8-EF	FSUB ST(i),ST	register-arithmetic	I04 Table 6-9
+DCR6	DC	F0-F7	FDIVR ST(i),ST	register-arithmetic	I04 Table 6-9
+DCR7	DC	F8-FF	FDIV ST(i),ST	register-arithmetic	I04 Table 6-9
+DDR0	DD	C0-C7	FFREE ST(i)	register-control	I04 Table 6-14
+DDR2	DD	D0-D7	FST ST(i)	register-transfer	I04 Table 6-8
+DDR3	DD	D8-DF	FSTP ST(i)	register-transfer	I04 Table 6-8
+DER0	DE	C0-C7	FADDP ST(i),ST	register-arithmetic	I04 Table 6-9
+DER1	DE	C8-CF	FMULP ST(i),ST	register-arithmetic	I04 Table 6-9
+DER3	DE	D9	FCOMPP	register-compare	I04 Table 6-11
+DER4	DE	E0-E7	FSUBRP ST(i),ST	register-arithmetic	I04 Table 6-9
+DER5	DE	E8-EF	FSUBP ST(i),ST	register-arithmetic	I04 Table 6-9
+DER6	DE	F0-F7	FDIVRP ST(i),ST	register-arithmetic	I04 Table 6-9
+DER7	DE	F8-FF	FDIVP ST(i),ST	register-arithmetic	I04 Table 6-9

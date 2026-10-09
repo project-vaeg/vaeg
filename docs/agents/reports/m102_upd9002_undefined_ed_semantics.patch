@@ -1,0 +1,173 @@
+From 3cc3e221bb00dfb91532b18d6584ee57e1a0f13a Mon Sep 17 00:00:00 2001
+From: Nakata Maho <maho.nakata@gmail.com>
+Date: Fri, 2 Oct 2026 12:16:57 +0900
+Subject: [PATCH] Add measured uPD9002 undefined ED opcode semantics
+
+Measured on a real PC-88VA2 (vaeg report m102_zexund_qa, runs 2-8):
+ED 00-3F/74/75/77 load the selected pair with a little-endian word from
+the native-side physical page 0 (the x86 IVT of the emulation host,
+reachable through the new upd9002VectorRead callback), ED 4C duplicates
+RETN, ED 64/65 and 6C/6D are RRD/RLD variants that also change (HL+1),
+ED 7C/7D/7F, 80-9F and A4-A7 copy one word from (HL) to (DE) with BC-1,
+AD-AF and B4-B7 repeat that until BC is zero, BC-EC consume one operand
+byte without any visible effect, and FE/FF are two-byte NOPs. The
+emulation-mode exits (54/55/AC/EE-FC), the 5C hang and the 5D fault keep
+the Zilog fallback. Zilog profile behaviour is unchanged.
+---
+ z80.hpp | 127 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 127 insertions(+)
+
+diff --git a/z80.hpp b/z80.hpp
+index 47b4283..3b86cf7 100644
+--- a/z80.hpp
++++ b/z80.hpp
+@@ -133,6 +133,19 @@ class Z80
+     }
+     FlagProfile getFlagProfile() const { return flagProfile; }
+ 
++    // Upd9002 only: reader for the first page of the CPU's native-side
++    // physical memory (the x86-style interrupt vector table of the uPD9002's
++    // emulation host). The undefined ED 00-3F/74/75/77 opcodes load a
++    // register pair with a little-endian word from this page, indexed by C
++    // with modulo-256 wrap (measured on a real PC-88VA2; see the vaeg report
++    // docs/agents/reports/m102_zexund_qa, runs 7 and 8). When unset the page
++    // reads as 0x00.
++#ifdef Z80_NO_FUNCTIONAL
++    unsigned char (*upd9002VectorRead)(void*, unsigned char) = nullptr;
++#else
++    std::function<unsigned char(void*, unsigned char)> upd9002VectorRead;
++#endif
++
+   private: // Internal functions & variables
+     FlagProfile flagProfile = FlagProfile::Zilog;
+     inline bool isUpd9002() const { return flagProfile == FlagProfile::Upd9002; }
+@@ -692,12 +705,126 @@ class Z80
+     }
+ 
+ #ifdef Z80_NO_EXCEPTION
++    inline unsigned char upd9002VectorByte(unsigned char index)
++    {
++        return upd9002VectorRead ? upd9002VectorRead(CB.arg, index) : 0x00;
++    }
++
++    // Undefined ED 00-3F, 74, 75, 77 on the uPD9002: the pair selected by
++    // bits 5-4 (74/75/77: SP) is loaded with the little-endian word at bytes
++    // C and (C+1) mod 256 of the native-side physical page 0; F becomes the
++    // sign of the high byte, zero of the whole word and the parity of the
++    // low byte, all other flags cleared (PC-88VA2 measurements,
++    // EDPRB2-EDPRB4).
++    inline void upd9002VectorLoad(unsigned char rpIndex)
++    {
++        unsigned char lo = upd9002VectorByte(reg.pair.C);
++        unsigned char hi = upd9002VectorByte((reg.pair.C + 1) & 0xFF);
++        unsigned short value = make16BitsFromLE(lo, hi);
++        switch (rpIndex) {
++            case 0: setBC(value); break;
++            case 1: setDE(value); break;
++            case 2: setHL(value); break;
++            default: reg.SP = value;
++        }
++        reg.pair.F = (hi & flagS()) | (value ? 0 : flagZ()) | (isEvenNumberBits(lo) ? flagPV() : 0);
++        consumeClock(8);
++    }
++
++    // Undefined ED 64/65 (RRD-like) and 6C/6D (RLD-like) on the uPD9002:
++    // A and (HL) change exactly as in RRD/RLD, and (HL+1) also changes:
++    // 64/65 replace its low nibble with the old low nibble of (HL); 6C/6D
++    // replace it with old-A-low:old-(HL)-high. F becomes the parity of the
++    // new A, all other flags cleared.
++    inline void upd9002RRD2(bool left)
++    {
++        unsigned short hl = getHL();
++        unsigned char n = readByte(hl);
++        unsigned char n2 = readByte((unsigned short)(hl + 1));
++        unsigned char aL = reg.pair.A & 0b00001111;
++        if (left) {
++            reg.pair.A = (reg.pair.A & 0b11110000) | (n >> 4);
++            writeByte(hl, (unsigned char)((n << 4) | aL));
++            writeByte((unsigned short)(hl + 1), (unsigned char)((aL << 4) | (n >> 4)));
++        } else {
++            reg.pair.A = (reg.pair.A & 0b11110000) | (n & 0b00001111);
++            writeByte(hl, (unsigned char)((aL << 4) | (n >> 4)));
++            writeByte((unsigned short)(hl + 1), (unsigned char)((n2 & 0b11110000) | (n & 0b00001111)));
++        }
++        reg.pair.F = isEvenNumberBits(reg.pair.A) ? flagPV() : 0;
++        consumeClock(2);
++    }
++
++    // Undefined ED 7C/7D/7F, 80-9F and A4-A7 on the uPD9002: one word is
++    // copied from (HL) to (DE); BC-1, DE+2, HL+2; F is unchanged. AD-AF and
++    // B4-B7 repeat this until BC is zero. The behaviour of the repeated form
++    // with BC=0000h on entry is unmeasured and mirrors LDIR (65536 words).
++    inline void upd9002WordLDI()
++    {
++        unsigned short hl = getHL();
++        unsigned short de = getDE();
++        writeByte(de, readByte(hl));
++        writeByte((unsigned short)(de + 1), readByte((unsigned short)(hl + 1)));
++        setHL((unsigned short)(hl + 2));
++        setDE((unsigned short)(de + 2));
++        setBC((unsigned short)(getBC() - 1));
++    }
++
++    inline void upd9002WordLDIR()
++    {
++        do {
++            upd9002WordLDI();
++        } while (getBC() != 0);
++    }
++
++    // Dispatch the measured uPD9002 behaviour of an undefined ED opcode;
++    // returns false for the opcodes whose behaviour is not emulated (the
++    // emulation-mode exits 54/55/AC/EE-FC, the 5C hang and the 5D fault
++    // observed on the real machine) so that they keep the Zilog fallback.
++    inline bool upd9002UndefinedED(unsigned char op)
++    {
++        if (op < 0x40) {
++            upd9002VectorLoad((op >> 4) & 3);
++            return true;
++        }
++        switch (op) {
++            case 0x4C: RETN(); return true; // duplicate of ED 45
++            case 0x64: case 0x65: upd9002RRD2(false); return true;
++            case 0x6C: case 0x6D: upd9002RRD2(true); return true;
++            case 0x74: case 0x75: case 0x77: upd9002VectorLoad(3); return true;
++            case 0x7C: case 0x7D: case 0x7F: upd9002WordLDI(); return true;
++        }
++        if (0x80 <= op && op <= 0x9F) {
++            upd9002WordLDI();
++            return true;
++        }
++        if (0xA4 <= op && op <= 0xA7) {
++            upd9002WordLDI();
++            return true;
++        }
++        if ((0xAD <= op && op <= 0xAF) || (0xB4 <= op && op <= 0xB7)) {
++            upd9002WordLDIR();
++            return true;
++        }
++        if (0xBC <= op && op <= 0xEC) {
++            fetch(4); // consumes one operand byte without any visible effect
++            return true;
++        }
++        if (op == 0xFE || op == 0xFF) {
++            return true; // two-byte NOP
++        }
++        return false;
++    }
++
+     // Without exceptions, an opcode that has no handler is executed as on a
+     // Zilog Z80 instead of calling a null handler: NEG, RETN and IM
+     // duplicates behave as the base instruction, and every other undefined
+     // ED opcode is a two-byte NOP (8 clocks, consumed by the two fetches).
++    // FlagProfile::Upd9002 first applies the behaviour measured on a real
++    // PC-88VA2 (vaeg report m102_zexund_qa, runs 2-8).
+     inline void undefinedED(unsigned char operandNumber)
+     {
++        if (isUpd9002() && upd9002UndefinedED(operandNumber)) return;
+         switch (operandNumber) {
+             case 0x4C:
+             case 0x54:
+-- 
+2.43.0
+

@@ -1,0 +1,8 @@
+{
+  "compressed_artifact_bytes": 1882440,
+  "compressed_artifact_path": "active_identity_allowlist.json.gz",
+  "compressed_artifact_sha256": "f17a42880270d7b3a3483e739f01d5dfee46f682c6708051cece3184b5479bc3",
+  "entry_count": 262447,
+  "entry_digest": "efc46b0b154a7df3cb48027439192cd382ee82824b5b7bade485184fbe4a7df4",
+  "schema": "upd9002-m66b-identity-allowlist-pointer-v1"
+}

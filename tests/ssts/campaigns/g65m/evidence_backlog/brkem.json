@@ -1,0 +1,37 @@
+{
+  "applicable_change": "none",
+  "blocks_G65m": false,
+  "blocks_M66_after_G65m": false,
+  "corpus_status": {
+    "approved_executable_corpus": false,
+    "fabricated_cases": false,
+    "metadata_present": true,
+    "selected": 0,
+    "officially_executed": 0
+  },
+  "disposition": "approved_nonblocking_defer",
+  "encoding": "0F FF imm8",
+  "evidence_domain": "corpus_required_before_implementation",
+  "implemented": false,
+  "monitor_authority": "present",
+  "owned_hash_count": 0,
+  "owned_hash_set_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "passing_claim": false,
+  "policy_change": "none",
+  "required_stage_1_gate": [
+    "lawful source and provenance",
+    "content-addressed corpus",
+    "exact instruction cases",
+    "expected architectural state",
+    "immediate/vector coverage",
+    "stack or frame coverage",
+    "mode-state representation",
+    "return-address representation",
+    "termination",
+    "dataset-manifest integration",
+    "human approval before implementation"
+  ],
+  "schema": "vaeg-upd9002-m65g-brkem-backlog-v1",
+  "selected_applicable_change": "none",
+  "task_id": "M65g"
+}

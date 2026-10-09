@@ -1,0 +1,36 @@
+== FLAGPRB
+SKIP FILE_MISSING: FLAGPRB.TXT not found in docs/agents/reports/m102_zexund_qa/run6_pc88va2/raw
+
+== ZEX13S
+SKIP FILE_MISSING: ZEX13S.TXT not found in docs/agents/reports/m102_zexund_qa/run6_pc88va2/raw
+
+== ZEXIY.TXT
+SKIP FILE_MISSING: ZEXIY.TXT not found in docs/agents/reports/m102_zexund_qa/run6_pc88va2/raw
+
+== ZEXUND.TXT
+SKIP FILE_MISSING: ZEXUND.TXT not found in docs/agents/reports/m102_zexund_qa/run6_pc88va2/raw
+
+== ZEXED.TXT
+SKIP FILE_MISSING: ZEXED.TXT not found in docs/agents/reports/m102_zexund_qa/run6_pc88va2/raw
+
+SKIP FILE_MISSING: no ED??.TXT in docs/agents/reports/m102_zexund_qa/run6_pc88va2/raw
+
+SKIP FILE_MISSING: CBPRB.TXT not found in docs/agents/reports/m102_zexund_qa/run6_pc88va2/raw
+
+SKIP FILE_MISSING: no E2??.TXT in docs/agents/reports/m102_zexund_qa/run6_pc88va2/raw
+
+SKIP FILE_MISSING: no S2??.TXT in docs/agents/reports/m102_zexund_qa/run6_pc88va2/raw
+
+SKIP FILE_MISSING: INPRB.TXT not found in /tmp/m102ref8/ref/zilog
+
+SKIP FILE_MISSING: EDPRB3.TXT not found in docs/agents/reports/m102_zexund_qa/run6_pc88va2/raw
+
+== ZEXDOC.TXT
+SKIP FILE_MISSING: ZEXDOC.TXT not found in docs/agents/reports/m102_zexund_qa/run6_pc88va2/raw
+
+== ZEXALL.TXT
+SKIP FILE_MISSING: ZEXALL.TXT not found in docs/agents/reports/m102_zexund_qa/run6_pc88va2/raw
+
+== DAADUMP
+SKIP FILE_MISSING: DAADUMP.TXT not found in docs/agents/reports/m102_zexund_qa/run6_pc88va2/raw
+

@@ -1,0 +1,27 @@
+{
+  "applicable_change": "none",
+  "blocks_G65m": false,
+  "blocks_M66_after_G65m": false,
+  "disposition": "approved_nonblocking_defer",
+  "evidence_domain": "prefix_or_restart_semantics",
+  "implemented": false,
+  "owned_hash_count": 0,
+  "owned_hash_set_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "passing_claim": false,
+  "policy_change": "none",
+  "prefix_scope": [
+    "REPC",
+    "REPNC",
+    "REPE",
+    "REPNE",
+    "multiple prefixes",
+    "segment overrides",
+    "LOCK",
+    "restart after interrupt or exception",
+    "trace and saved IP"
+  ],
+  "result": "No exact G65 applicable-failure owner or implementation-missing selector is assigned to M65l. No current target-policy, selected-set, applicable-set, or SST-result transition is authorized by this checkpoint.",
+  "schema": "vaeg-upd9002-m65l-prefix-restart-backlog-v1",
+  "selected_applicable_change": "none",
+  "task_id": "M65l"
+}

@@ -1,0 +1,159 @@
+M102 ZEXUND: the file-output ZEXALL with a replaced test table (ZEXUND.COM writes
+ZEXUND.TXT): undocumented DDCB/FDCB register-copy and BIT forms, all NEG encodings, and redundant DD/FD prefixes before INC/DEC B-E and A; derived from rotxy, bitx, srzx, negop and incb.
+
+This patch modifies ZEX and is distributed under the GPL-2.0-or-later terms
+stated in external/zex/zexall.src. tools/cpmva/zex/zexbuild.py applies it
+after zexall-fileout.patch. msbt and the original descriptors are unchanged.
+The expected CRCs of the new groups are those of the Zilog profile.
+
+--- a/external/zex/zexall.src
++++ b/external/zex/zexall.src
+@@ -94,7 +94,7 @@
+ 	ld	c,9
+ 	call	bdos
+ 
+-	ld	hl,tests	; first test case
++	ld	hl,testsund	; vaeg ZEXUND: first test case
+ loop:	ld	a,(hl)		; end of list ?
+ 	inc	hl
+ 	or	(hl)
+@@ -109,6 +109,25 @@
+ 	call	fclose		; vaeg: flush and close the log file
+ 	jp	0		; warm boot
+ 
++; vaeg M102 ZEXUND test table: undocumented DDCB/FDCB register-copy and BIT forms, all NEG
++; encodings, and redundant DD/FD prefixes before INC/DEC B-E and A. Every group runs with flag mask
++; D7h and FFh. This addition is distributed under the same GPL-2.0-or-later
++; terms as the rest of this file.
++testsund:
++	dw	unrotd7
++	dw	unrotff
++	dw	unbitd7
++	dw	unbitff
++	dw	unsrd7
++	dw	unsrff
++	dw	unnegd7
++	dw	unnegff
++	dw	unpbed7
++	dw	unpbeff
++	dw	unpad7
++	dw	unpaff
++	dw	0
++
+ tests:
+ 	dw	adc16
+ 	dw	add16
+@@ -711,6 +730,93 @@
+ 	db	0cch,063h,0f9h,08ah			; expected crc
+ 	tmsg	'<set,res> n,(<ix,iy>+1).......'
+ 
++; vaeg M102 ZEXUND descriptors, derived from the stock descriptors noted in
++; tools/cpmva/zex/zexund.patch.
++
++unrotd7:	db	0d7h		; flag mask
++	tstr	0ddh,0cbh,1,0,0ddafh,msbt-1,msbt-1,0ff3ch,0dbf6h,094f4h,082h,080h,061d9h
++	tstr	020h,0,0,03fh,0,0,0,0,0,0,080h,0,0
++	tstr	0,0,0,0,0ffh,0,0,0,0,0,057h,0,0
++	db	0c3h,009h,05ah,0b8h			; expected crc
++	tmsg	'rot (ix,iy+d)->r (d7).........'
++
++unrotff:	db	0ffh		; flag mask
++	tstr	0ddh,0cbh,1,0,0ddafh,msbt-1,msbt-1,0ff3ch,0dbf6h,094f4h,082h,080h,061d9h
++	tstr	020h,0,0,03fh,0,0,0,0,0,0,080h,0,0
++	tstr	0,0,0,0,0ffh,0,0,0,0,0,057h,0,0
++	db	015h,0efh,060h,011h			; expected crc
++	tmsg	'rot (ix,iy+d)->r (ff).........'
++
++unbitd7:	db	0d7h		; flag mask
++	tstr	0ddh,0cbh,1,040h,02075h,msbt-1,msbt-1,03cfch,0a79ah,03d74h,051h,027h,0ca14h
++	tstr	020h,0,0,03fh,0,0,0,0,0,0,053h,0,0
++	tstr	0,0,0,0,0ffh,0,0,0,0,0,0,0,0
++	db	005h,0ddh,09ch,019h			; expected crc
++	tmsg	'bit n,(ix,iy+d) all (d7)......'
++
++unbitff:	db	0ffh		; flag mask
++	tstr	0ddh,0cbh,1,040h,02075h,msbt-1,msbt-1,03cfch,0a79ah,03d74h,051h,027h,0ca14h
++	tstr	020h,0,0,03fh,0,0,0,0,0,0,053h,0,0
++	tstr	0,0,0,0,0ffh,0,0,0,0,0,0,0,0
++	db	005h,0ddh,09ch,019h			; expected crc
++	tmsg	'bit n,(ix,iy+d) all (ff)......'
++
++unsrd7:	db	0d7h		; flag mask
++	tstr	0ddh,0cbh,1,080h,0fb44h,msbt-1,msbt-1,0ba09h,068beh,032d8h,010h,05eh,0a867h
++	tstr	020h,0,0,07fh,0,0,0,0,0,0,0,0,0
++	tstr	0,0,0,0,0ffh,0,0,0,0,0,0d7h,0,0
++	db	030h,0bdh,0cch,04ch			; expected crc
++	tmsg	'res,set (ix,iy+d)->r (d7).....'
++
++unsrff:	db	0ffh		; flag mask
++	tstr	0ddh,0cbh,1,080h,0fb44h,msbt-1,msbt-1,0ba09h,068beh,032d8h,010h,05eh,0a867h
++	tstr	020h,0,0,07fh,0,0,0,0,0,0,0,0,0
++	tstr	0,0,0,0,0ffh,0,0,0,0,0,0d7h,0,0
++	db	030h,0bdh,0cch,04ch			; expected crc
++	tmsg	'res,set (ix,iy+d)->r (ff).....'
++
++unnegd7:	db	0d7h		; flag mask
++	tstr	0edh,044h,0,0,038a2h,05f6bh,0d934h,057e4h,0d2d6h,04642h,043h,05ah,009cch
++	tstr	0,038h,0,0,0,0,0,0,0,0,0d7h,-1,0
++	tstr	0,0,0,0,0,0,0,0,0,0,0,0,0
++	db	020h,082h,028h,085h			; expected crc
++	tmsg	'neg all encodings (d7)........'
++
++unnegff:	db	0ffh		; flag mask
++	tstr	0edh,044h,0,0,038a2h,05f6bh,0d934h,057e4h,0d2d6h,04642h,043h,05ah,009cch
++	tstr	0,038h,0,0,0,0,0,0,0,0,0d7h,-1,0
++	tstr	0,0,0,0,0,0,0,0,0,0,0,0,0
++	db	0aeh,01ch,086h,00ch			; expected crc
++	tmsg	'neg all encodings (ff)........'
++
++unpbed7:	db	0d7h		; flag mask
++	tstr	0ddh,004h,0,0,0c4a5h,0c4c7h,0d226h,0a050h,058eah,08566h,0c6h,0deh,09bc9h
++	tstr	020h,019h,0,0,0,0,0,0,0,0,0,0,0
++	tstr	0,0,0,0,0,0,0,0,-1,-1,0d7h,0,0
++	db	08dh,0c1h,052h,053h			; expected crc
++	tmsg	'dd,fd inc,dec b-e (d7)........'
++
++unpbeff:	db	0ffh		; flag mask
++	tstr	0ddh,004h,0,0,0c4a5h,0c4c7h,0d226h,0a050h,058eah,08566h,0c6h,0deh,09bc9h
++	tstr	020h,019h,0,0,0,0,0,0,0,0,0,0,0
++	tstr	0,0,0,0,0,0,0,0,-1,-1,0d7h,0,0
++	db	07fh,0fch,078h,0a7h			; expected crc
++	tmsg	'dd,fd inc,dec b-e (ff)........'
++
++unpad7:	db	0d7h		; flag mask
++	tstr	0ddh,03ch,0,0,0c4a5h,0c4c7h,0d226h,0a050h,058eah,08566h,0c6h,0deh,09bc9h
++	tstr	020h,1,0,0,0,0,0,0,0,0,0,0ffh,0
++	tstr	0,0,0,0,0,0,0,0,0,0,0d7h,0,0
++	db	07bh,0c7h,096h,0c3h			; expected crc
++	tmsg	'dd,fd inc,dec a (d7)..........'
++
++unpaff:	db	0ffh		; flag mask
++	tstr	0ddh,03ch,0,0,0c4a5h,0c4c7h,0d226h,0a050h,058eah,08566h,0c6h,0deh,09bc9h
++	tstr	020h,1,0,0,0,0,0,0,0,0,0,0ffh,0
++	tstr	0,0,0,0,0,0,0,0,0,0,0d7h,0,0
++	db	0a8h,0b7h,0f1h,05ah			; expected crc
++	tmsg	'dd,fd inc,dec a (ff)..........'
++
+ ; ld (<ix,iy>+1),<b,c,d,e> (1024 cycles)
+ st8ix1:	db	0ffh		; flag mask
+ 	tstr	0ddh,070h,1,0,0270dh,msbt-1,msbt-1,0b73ah,0887bh,099eeh,086h,070h,0ca07h
+@@ -1322,15 +1428,15 @@
+ 	call	5
+ 	ret
+ 
+-fcb:	db	0,'ZEXALL  TXT'
++fcb:	db	0,'ZEXUND  TXT'
+ 	db	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ fptr:	dw	fbuf
+ fcnt:	db	128
+-fmkerr:	db	'Cannot create ZEXALL.TXT',13,10,'$'
+-fwrerr:	db	13,10,'Write error on ZEXALL.TXT',13,10,'$'
++fmkerr:	db	'Cannot create ZEXUND.TXT',13,10,'$'
++fwrerr:	db	13,10,'Write error on ZEXUND.TXT',13,10,'$'
+ fbuf:	ds	128
+ 
+-msg1:	db	'Z80all instruction exerciser',13,10,'$'
++msg1:	db	'ZEXUND undocumented DDCB/NEG/prefix exerciser',13,10,'$'
+ msg2:	db	'Tests complete',13,10,'$'
+ okmsg:	db	'  OK',13,10,'$'
+ ermsg1:	db	'  ERROR **** crc expected:$'

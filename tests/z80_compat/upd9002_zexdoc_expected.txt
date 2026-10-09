@@ -1,0 +1,93 @@
+# Copyright (c) 2026 Nakata Maho
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+# 1. Redistributions of source code must retain the above copyright notice,
+#    this list of conditions and the following disclaimer.
+# 2. Redistributions in binary form must reproduce the above copyright notice,
+#    this list of conditions and the following disclaimer in the documentation
+#    and/or other materials provided with the distribution.
+#
+# THIS SOFTWARE IS PROVIDED BY THE AUTHOR "AS IS" AND ANY EXPRESS OR IMPLIED
+# WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+# MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
+# EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+# EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+# PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+# OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+# OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
+# OF THE POSSIBILITY OF SUCH DAMAGE.
+#
+# Expected stock ZEXDOC group results under the uPD9002 flag profile.
+# Format: <group> OK | <group> ERROR <expected-crc> <found-crc>
+# Every line equals the real PC-88VA2 result: the first run recorded in
+# docs/modernization/uPD9002-zex-results.md and the M101 re-run in
+# docs/agents/reports/m101_zexall_qa/pc88va2/, which agree group for group.
+1 OK
+2 OK
+3 OK
+4 OK
+5 ERROR 48799360 12967d59
+6 ERROR fe43b016 4f797917
+7 ERROR a4026d5a 6d7397f5
+8 ERROR e849676e 4142bbf8
+9 ERROR a8ee0867 5a40ec5a
+10 ERROR 7b55e6c8 9ae7950f
+11 OK
+12 OK
+13 ERROR 9b4ba675 6096b6aa
+14 OK
+15 OK
+16 OK
+17 OK
+18 OK
+19 OK
+20 OK
+21 OK
+22 OK
+23 OK
+24 OK
+25 OK
+26 OK
+27 OK
+28 OK
+29 OK
+30 OK
+31 OK
+32 OK
+33 OK
+34 OK
+35 OK
+36 OK
+37 OK
+38 OK
+39 OK
+40 OK
+41 OK
+42 OK
+43 OK
+44 OK
+45 OK
+46 OK
+47 OK
+48 OK
+49 OK
+50 OK
+51 OK
+52 OK
+53 ERROR 94f42769 ec734af4
+54 ERROR 5a907ed4 3958c2d0
+55 ERROR 9abdf6b5 e23a9b28
+56 ERROR eb59891b 49a0684e
+57 OK
+58 OK
+59 ERROR 251330ae 9ac609b5
+60 OK
+61 OK
+62 OK
+63 OK
+64 OK
+65 OK
+66 OK
+67 OK

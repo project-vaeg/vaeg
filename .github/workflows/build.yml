@@ -1,0 +1,421 @@
+# Copyright (c) 2026 Nakata Maho
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions
+# are met:
+# 1. Redistributions of source code must retain the above copyright
+#    notice, this list of conditions and the following disclaimer.
+# 2. Redistributions in binary form must reproduce the above copyright
+#    notice, this list of conditions and the following disclaimer in the
+#    documentation and/or other materials provided with the distribution.
+#
+# THIS SOFTWARE IS PROVIDED BY THE AUTHOR "AS IS" AND ANY EXPRESS OR
+# IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+# WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+# DISCLAIMED. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT,
+# INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+# (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+# SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+# HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
+# STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
+# IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+# POSSIBILITY OF SUCH DAMAGE.
+
+name: build
+
+on:
+  push:
+    branches:
+      - '**'
+    tags:
+      - '**'
+      - '!archive/**'
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+# CI intentionally has no ROMs or disk images. The smoke test therefore
+# runs reduced-scope when ROMs are absent: SDL init, core loop, one GUI
+# frame, and clean exit. Human gates remain the behavioral ROM/disk check.
+
+jobs:
+  lint:
+    name: repo invariants
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check encoding
+        run: python3 tools/repo/check_encoding.py --expect utf8
+      - name: Check EOL
+        run: python3 tools/repo/check_eol.py --enforce
+      - name: Check path case
+        run: python3 tools/repo/check_case.py
+
+  guest-drivers:
+    name: PC-88VA guest-driver distribution
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y nasm
+      - name: Build and validate guest drivers
+        run: >-
+          tools/pc88va/build-guest-driver-bundle.sh
+          --output build/pc88va-guest-drivers
+      - name: Verify bundle manifest
+        run: |
+          cd build/pc88va-guest-drivers
+          sha256sum --check SHA256SUMS
+      - name: Upload guest-driver artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: vaeg-pc88va-guest-drivers
+          path: build/pc88va-guest-drivers/
+
+  upd9002-ssts:
+    name: uPD9002 architectural SST ratchet
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake ninja-build pkg-config libsdl2-dev gcc g++
+      - name: Cache verified V20 corpus
+        uses: actions/cache@v4
+        with:
+          path: build/ssts-v20-cache
+          key: ssts-v20-9efbd02b8ec1a3aad347c2b59672ad25f3bcdb21
+      - name: Acquire and verify V20 corpus
+        run: |
+          python3 tools/qa/upd9002_ssts.py acquire \
+            --cache-root build/ssts-v20-cache
+          python3 tools/qa/upd9002_ssts.py verify \
+            --dataset-root build/ssts-v20-cache/singlesteptests-v20-9efbd02b8ec1a3aad347c2b59672ad25f3bcdb21 \
+            --manifest tests/ssts/v20_dataset_manifest.json
+      - name: Configure verified SST build
+        run: >-
+          cmake --preset linux-ci-gcc
+          -DVAEG_SSTS_V20_ROOT=${{ github.workspace }}/build/ssts-v20-cache/singlesteptests-v20-9efbd02b8ec1a3aad347c2b59672ad25f3bcdb21
+      - name: Build verified SST worker
+        run: cmake --build --preset linux-ci-gcc --target vaeg_sdl2
+      - name: Enforce architectural CI ratchet
+        run: >-
+          ctest --test-dir build/linux-ci-gcc --output-on-failure
+          -R '^vaeg_upd9002_(ssts_(selftest|ratchet_selftest|ratchet_static|evidence_selftest|evidence_static|worker_selftest|ci_external)|m60a_evidence_(selftest|static)|m60b_authority_(selftest|static)|m60c_(erratum|audit)_(selftest|static)|m60d_frame_(selftest|static))$'
+
+  linux:
+    name: ubuntu ${{ matrix.compiler }} compatibility
+    runs-on: ubuntu-latest
+    needs: guest-drivers
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - compiler: gcc
+            preset: linux-ci-gcc
+          - compiler: clang
+            preset: linux-ci-clang
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake ninja-build pkg-config libsdl2-dev gcc g++ clang
+      - name: Configure
+        run: cmake --preset ${{ matrix.preset }}
+      - name: Build
+        run: cmake --build --preset ${{ matrix.preset }}
+      - name: Smoke
+        run: SDL_VIDEODRIVER=dummy SDL_AUDIODRIVER=dummy ./build/${{ matrix.preset }}/sdl2/vaeg --smoke
+      - name: Unit tests
+        run: ctest --test-dir build/${{ matrix.preset }} --output-on-failure
+      - name: Download PC-88VA guest drivers
+        uses: actions/download-artifact@v4
+        with:
+          name: vaeg-pc88va-guest-drivers
+          path: build/${{ matrix.preset }}/artifact
+      - name: Stage and verify artifact
+        run: |
+          cp build/${{ matrix.preset }}/sdl2/vaeg \
+            build/${{ matrix.preset }}/artifact/
+          cd build/${{ matrix.preset }}/artifact
+          sha256sum --check SHA256SUMS
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: vaeg-linux-${{ matrix.compiler }}-compat
+          path: build/${{ matrix.preset }}/artifact/
+
+  compat-conformance:
+    name: standalone compatibility conformance
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake ninja-build pkg-config libsdl2-dev gcc g++
+      - name: Cache external ZEX inputs
+        uses: actions/cache@v4
+        with:
+          path: build/zex-cache
+          key: zex-e3926769-b3015112-fbb1bb5d
+      - name: Acquire and verify external ZEX inputs
+        run: python3 tests/z80_compat/fetch_zex.py --output-dir build/zex-cache
+      - name: Configure standalone conformance
+        run: >-
+          cmake --preset linux-ci-gcc
+          -DVAEG_ZEX_ARTIFACT_DIR=${{ github.workspace }}/build/zex-cache
+      - name: Build standalone conformance
+        run: >-
+          cmake --build --preset linux-ci-gcc --target
+          vaeg_z80_compat_header_default
+          vaeg_z80_compat_header_no_functional
+          vaeg_z80_compat_header_debug_default
+          vaeg_z80_compat_header_release
+          vaeg_z80_compat_interrupt_default
+          vaeg_z80_compat_interrupt_no_functional
+          vaeg_z80_compat_flag_profile
+          vaeg_z80_compat_zex_runner
+          vaeg_z80_compat_wrapper_default
+          vaeg_z80_compat_wrapper_no_functional_test
+          vaeg_z80_compat_wrapper_zex_runner
+          vaeg_z80_compat_trace_reference
+          vaeg_z80_compat_trace_repeat
+          vaeg_z80_compat_trace_compare
+      - name: Run standalone conformance
+        run: >-
+          ctest --test-dir build/linux-ci-gcc --output-on-failure
+          -R '^vaeg_z80_compat_(header|interrupt|flag_profile|wrapper|zex|regression)'
+      - name: Verify source archive contains only recorded ZEX sources
+        run: |
+          git archive --format=tar.gz --output=/tmp/vaeg-source.tar.gz HEAD
+          python3 tests/z80_compat/check_zex_archive.py --mode source /tmp/vaeg-source.tar.gz
+
+  linux-asan:
+    name: ubuntu asan compatibility
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake ninja-build pkg-config libsdl2-dev gcc g++
+      - name: Configure
+        run: cmake --preset linux-ci-asan
+      - name: Build
+        run: cmake --build --preset linux-ci-asan
+      - name: Smoke
+        run: |
+          # UBSan reports for the documented backlog are expected output.
+          # Sanitizer failures still fail this step through the process exit.
+          SDL_VIDEODRIVER=dummy SDL_AUDIODRIVER=dummy ASAN_OPTIONS=detect_leaks=0 \
+            ./build/linux-ci-asan/sdl2/vaeg --smoke
+      - name: Unit tests
+        run: |
+          SDL_VIDEODRIVER=dummy SDL_AUDIODRIVER=dummy ASAN_OPTIONS=detect_leaks=0 \
+            ctest --test-dir build/linux-ci-asan --output-on-failure
+
+  windows:
+    name: windows msys2 mingw64 compatibility
+    runs-on: windows-latest
+    needs: guest-drivers
+    defaults:
+      run:
+        shell: msys2 {0}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: msys2/setup-msys2@v2
+        with:
+          msystem: MINGW64
+          update: true
+          # MSYS2 package names can drift; keep this list explicit so failures
+          # identify dependency churn rather than hiding behind a meta package.
+          install: >-
+            git
+            mingw-w64-x86_64-cmake
+            mingw-w64-x86_64-ninja
+            mingw-w64-x86_64-gcc
+            mingw-w64-x86_64-pkgconf
+            python
+      - uses: dtolnay/rust-toolchain@1.88.0
+        with:
+          targets: x86_64-pc-windows-gnu
+      - name: Build pinned static librashader
+        run: |
+          export PATH="$(cygpath -u "${USERPROFILE}")/.cargo/bin:${PATH}"
+          tools/release/build-mingw-static-librashader.sh
+      - name: Configure
+        run: cmake --preset mingw-ci
+      - name: Build
+        run: cmake --build --preset mingw-ci
+      - name: Smoke
+        run: SDL_VIDEODRIVER=dummy SDL_AUDIODRIVER=dummy ./build/mingw-ci/sdl2/vaeg.exe --smoke
+      - name: Unit tests
+        run: |
+          set +e
+          ctest --test-dir build/mingw-ci --output-on-failure 2>&1 | tee ctest.log
+          status=${PIPESTATUS[0]}
+          if [ "${status}" -ne 0 ]; then
+            failed_tests="$(cat build/mingw-ci/Testing/Temporary/LastTestsFailed.log 2>/dev/null | tr '\n' ' ')"
+            echo "CTest failed tests: ${failed_tests}" >&2
+            echo "::error title=CTest failed tests::${failed_tests}"
+            failure_tail="$(tail -n 160 ctest.log | tr '\r\n' ' ')"
+            echo "::error title=CTest failure tail::${failure_tail}"
+            failed_names="$(sed -n 's/^[0-9][0-9]*:\([^ ]*\).*/\1/p' build/mingw-ci/Testing/Temporary/LastTestsFailed.log 2>/dev/null)"
+            for failed_name in ${failed_names}; do
+              start_line="$(grep -n "Start .*: ${failed_name}" ctest.log | head -n 1 | cut -d: -f1)"
+              if [ -n "${start_line}" ]; then
+                end_line=$((start_line + 80))
+                echo "CTest failed test output: ${failed_name}" >&2
+                sed -n "${start_line},${end_line}p" ctest.log | tail -n 80 >&2
+              fi
+            done
+          fi
+          exit "${status}"
+      - name: Verify Windows runtime imports
+        run: python3 tools/release/check-static-windows-imports.py --binary build/mingw-ci/sdl2/vaeg.exe
+      - name: Download PC-88VA guest drivers
+        uses: actions/download-artifact@v4
+        with:
+          name: vaeg-pc88va-guest-drivers
+          path: build/mingw-ci/artifact
+      - name: Verify PC-88VA guest drivers
+        run: |
+          cd build/mingw-ci/artifact
+          sha256sum --check SHA256SUMS
+      - name: Stage artifact
+        run: |
+          # vaeg.exe embeds the GUI font and statically links SDL2 plus
+          # the MinGW gcc/libstdc++/winpthread runtimes.
+          mkdir -p build/mingw-ci/artifact
+          cp build/mingw-ci/sdl2/vaeg.exe build/mingw-ci/artifact/
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: vaeg-windows-mingw64-compat
+          path: build/mingw-ci/artifact/
+
+  windows-release:
+    name: windows msys2 mingw64 release artifact
+    runs-on: windows-latest
+    needs: guest-drivers
+    defaults:
+      run:
+        shell: msys2 {0}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: msys2/setup-msys2@v2
+        with:
+          msystem: MINGW64
+          update: true
+          # Keep the package list aligned with the Windows test job. This job
+          # intentionally uses mingw-release so the uploaded executable is the
+          # runtime/manual-test build, not the tests-and-trace CI binary.
+          install: >-
+            git
+            mingw-w64-x86_64-cmake
+            mingw-w64-x86_64-ninja
+            mingw-w64-x86_64-gcc
+            mingw-w64-x86_64-pkgconf
+            python
+      - uses: dtolnay/rust-toolchain@1.88.0
+        with:
+          targets: x86_64-pc-windows-gnu
+      - name: Build pinned static librashader
+        run: |
+          export PATH="$(cygpath -u "${USERPROFILE}")/.cargo/bin:${PATH}"
+          tools/release/build-mingw-static-librashader.sh
+      - name: Configure
+        run: cmake --preset mingw-release
+      - name: Build
+        run: cmake --build --preset mingw-release
+      - name: Smoke
+        run: SDL_VIDEODRIVER=dummy SDL_AUDIODRIVER=dummy ./build/mingw-release/sdl2/vaeg.exe --smoke
+      - name: Verify Windows runtime imports
+        run: python3 tools/release/check-static-windows-imports.py --binary build/mingw-release/sdl2/vaeg.exe
+      - name: Download PC-88VA guest drivers
+        uses: actions/download-artifact@v4
+        with:
+          name: vaeg-pc88va-guest-drivers
+          path: build/mingw-release/artifact
+      - name: Verify PC-88VA guest drivers
+        run: |
+          cd build/mingw-release/artifact
+          sha256sum --check SHA256SUMS
+      - name: Stage release artifact
+        run: |
+          # This is the manual-runtime Windows release artifact. Unlike
+          # mingw-ci, this build keeps VAEG_ENABLE_TESTS and
+          # VAEG_Z80_COMPAT_INTEGRATION_TRACE disabled.
+          mkdir -p build/mingw-release/artifact
+          cp build/mingw-release/sdl2/vaeg.exe build/mingw-release/artifact/
+      - name: Upload release artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: vaeg-windows-mingw64-release
+          path: build/mingw-release/artifact/
+
+  macos:
+    name: macos fetch-sdl2 compatibility
+    runs-on: macos-latest
+    needs: guest-drivers
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Install build tools
+        run: brew install cmake ninja
+      - name: Configure
+        run: |
+          # Maintainer baseline is MacPorts, but MacPorts is impractical on
+          # hosted runners. CI uses pinned FetchContent SDL2 and links it
+          # statically through macos-ci, as recorded in ADR-0006.
+          cmake --preset macos-ci
+      - name: Build
+        run: |
+          set +e
+          cmake --build --preset macos-ci >macos-build.log 2>&1
+          status=$?
+          cat macos-build.log
+          if test "${status}" -ne 0; then
+            tail -n 60 macos-build.log |
+              while IFS= read -r line; do
+                echo "::error title=macOS build log::${line}"
+              done
+          fi
+          exit "${status}"
+      - name: Smoke
+        run: SDL_VIDEODRIVER=dummy SDL_AUDIODRIVER=dummy ./build/macos-ci/sdl2/vaeg --smoke
+      - name: Unit tests
+        run: ctest --test-dir build/macos-ci --output-on-failure
+      - name: Download PC-88VA guest drivers
+        uses: actions/download-artifact@v4
+        with:
+          name: vaeg-pc88va-guest-drivers
+          path: build/macos-ci/artifact
+      - name: Stage and verify artifact
+        run: |
+          cp build/macos-ci/sdl2/vaeg build/macos-ci/artifact/
+          cd build/macos-ci/artifact
+          shasum -a 256 --check SHA256SUMS
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: vaeg-macos-compat
+          path: build/macos-ci/artifact/

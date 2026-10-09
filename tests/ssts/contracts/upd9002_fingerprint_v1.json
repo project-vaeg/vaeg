@@ -1,0 +1,18 @@
+{
+  "blocking": false,
+  "bus_timing": "excluded",
+  "comparison_contract_id": "upd9002-v20-fingerprint-v1",
+  "copyright": "Copyright (c) 2026 Nakata Maho",
+  "cycles": "excluded",
+  "final_flags": "all-16-bits",
+  "final_general_registers": "byte-exact",
+  "final_instruction_pointer": "byte-exact",
+  "final_io_events": "architectural-event-sequence-exact",
+  "final_ram": "sst-represented-bytes-exact",
+  "final_segment_registers": "byte-exact",
+  "license": "BSD-2-Clause",
+  "prefetch": "excluded",
+  "schema": "vaeg-upd9002-ssts-comparison-contract-v1",
+  "schema_version": 1,
+  "termination": "architectural-class-exact"
+}

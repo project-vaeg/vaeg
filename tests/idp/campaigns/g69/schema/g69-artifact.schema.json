@@ -1,0 +1,1 @@
+{"$schema":"https://json-schema.org/draft/2020-12/schema","additionalProperties":true,"properties":{"approved_g68_sha":{"pattern":"^[0-9a-f]{40}$","type":"string"},"campaign":{"const":"g69"},"milestone":{"const":"M69"}},"required":["campaign","milestone","approved_g68_sha"],"title":"G69 artifact family schema","type":"object"}

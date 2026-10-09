@@ -1,0 +1,137 @@
+From 60b725f129979c4179fa6e08b6385d20fd69f85e Mon Sep 17 00:00:00 2001
+From: Nakata Maho <maho.nakata@gmail.com>
+Date: Wed, 30 Sep 2026 18:11:58 +0900
+Subject: [PATCH] Add DDCB/FDCB register-form rules to FlagProfile::Upd9002
+
+A one-by-one probe of every DD CB d xx and FD CB d xx opcode on a real
+PC-88VA2 (two input sets) shows that, when the low three bits select a
+register (not 6):
+
+  R12  DD/FD CB d 40-7F (BIT n,(i+d),r) tests register r, not memory
+  R13  DD/FD CB d 80-FF (RES/SET n,(i+d),r) modifies register r only;
+       memory is not written
+
+The rotate/shift forms (00-3F) keep the Zilog behaviour (operate on
+memory and copy the result to r). With these rules the Upd9002 profile
+reproduces all 1024 probe records and the ZEX CRCs of the corresponding
+groups measured on the real machine.
+---
+ README.md                  |  4 +++-
+ test/test-flag-profile.cpp | 38 ++++++++++++++++++++++++++++++++++++++
+ z80.hpp                    | 16 ++++++++++++++--
+ 3 files changed, 55 insertions(+), 3 deletions(-)
+
+diff --git a/README.md b/README.md
+index aa41ea9..6fbb326 100644
+--- a/README.md
++++ b/README.md
+@@ -400,7 +400,7 @@ ReturnHandler will be called back immediately **before** a branch by a RET instr
+ By default the flags follow the Zilog Z80, including the undocumented bits 5 and 3 (`Z80::FlagProfile::Zilog`).
+ 
+ The NEC uPD9002 used in the PC-88VA has a Z80 emulation mode whose flags differ.
+-`Z80::FlagProfile::Upd9002` reproduces the behaviour measured on a real PC-88VA2 (ZEXDOC/ZEXALL, direct flag probes, and exhaustive DAA/CPL/SCF/CCF dumps):
++`Z80::FlagProfile::Upd9002` reproduces the behaviour measured on a real PC-88VA2 (ZEXDOC/ZEXALL, direct flag probes, exhaustive DAA/CPL/SCF/CCF dumps, and DD/FD CB probes):
+ 
+ | Rule | Instructions | uPD9002 behaviour |
+ |:-|:-|:-|
+@@ -415,6 +415,8 @@ The NEC uPD9002 used in the PC-88VA has a Z80 emulation mode whose flags differ.
+ | R9 | `SCF` | only C is set (H and N are not changed) |
+ | R10 | `CCF` | only C is complemented (H and N are not changed) |
+ | R11 | `DAA` | see below |
++| R12 | `BIT n,(IX+d),r` / `(IY+d)` (DD/FD CB d 40–7F, low bits ≠ 6) | tests register r instead of memory |
++| R13 | `RES`/`SET n,(IX+d),r` / `(IY+d)` (DD/FD CB d 80–FF, low bits ≠ 6) | modifies register r only; memory is not written |
+ 
+ R11 (`DAA`): the low step (±$06) runs when H=1 or the low nibble of A is above 9; the high step (±$60) runs when C=1 or A is above $99 (H=0) or above $9F (H=1), both tested on the original A; N selects add or subtract.
+ S and Z come from the result, H is set when the low step ran, P/V is the signed overflow of A ± the adjustment (not parity), C is set when the high step ran, and N is not changed.
+diff --git a/test/test-flag-profile.cpp b/test/test-flag-profile.cpp
+index 864a6f5..949aa46 100644
+--- a/test/test-flag-profile.cpp
++++ b/test/test-flag-profile.cpp
+@@ -110,5 +110,43 @@ int main()
+             if (!ok) failures++;
+         }
+     }
++    // R12/R13: DD CB d xx with a register operand (low three bits != 6)
++    const struct {
++        const char* name;
++        unsigned char op;
++        unsigned char zilogB, zilogMem, upd9002B, upd9002Mem;
++        unsigned char zilogF, upd9002F;
++    } cbCases[] = {
++        {"RES 0,(IX+2),B", 0x80, 0x80, 0x80, 0x0A, 0x81, 0x00, 0x00}, // B=0B, (IX+2)=81
++        {"SET 7,(IX+2),B", 0xF8, 0x81, 0x81, 0x8B, 0x81, 0x00, 0x00},
++        {"BIT 0,(IX+2) [B]", 0x40, 0x0B, 0x81, 0x0B, 0x81, 0x10, 0x00}, // Zilog tests (IX+2), uPD9002 tests B
++        {"BIT 2,(IX+2) [B]", 0x50, 0x0B, 0x81, 0x0B, 0x81, 0x54, 0x44},
++    };
++    for (int profile = 0; profile < 2; profile++) {
++        for (const auto& c : cbCases) {
++            memset(memory, 0, sizeof(memory));
++            const unsigned char code[] = {0x06, 0x0B, 0xDD, 0xCB, 0x02, c.op, 0xF5, 0xD1}; // LD B,0B; op; PUSH AF; POP DE
++            memcpy(memory, code, sizeof(code));
++            memory[0x5002] = 0x81;
++            Z80 z80([&memory](void* arg, unsigned short addr) { return memory[addr]; },
++                    [&memory](void* arg, unsigned short addr, unsigned char value) { memory[addr] = value; },
++                    [](void* arg, unsigned short port) { return (unsigned char)0xFF; },
++                    [](void* arg, unsigned short port, unsigned char value) {},
++                    &z80);
++            z80.setFlagProfile(profile ? Z80::FlagProfile::Upd9002 : Z80::FlagProfile::Zilog);
++            z80.reg.SP = 0xF000;
++            z80.reg.IX = 0x5000;
++            z80.reg.pair.A = 0x00;
++            z80.reg.pair.F = 0x00;
++            while (z80.reg.PC != sizeof(code)) z80.execute(1);
++            unsigned char b = profile ? c.upd9002B : c.zilogB;
++            unsigned char m = profile ? c.upd9002Mem : c.zilogMem;
++            unsigned char f = profile ? c.upd9002F : c.zilogF;
++            bool ok = z80.reg.pair.B == b && memory[0x5002] == m && z80.reg.pair.E == f;
++            printf("%s: %-8s %-20s B=$%02X (IX+2)=$%02X F=$%02X (expected B=$%02X (IX+2)=$%02X F=$%02X)\n", ok ? "OK" : "NG",
++                   profile ? "Upd9002" : "Zilog", c.name, z80.reg.pair.B, memory[0x5002], z80.reg.pair.E, b, m, f);
++            if (!ok) failures++;
++        }
++    }
+     return failures ? -1 : 0;
+ }
+diff --git a/z80.hpp b/z80.hpp
+index 87d9758..22bba75 100644
+--- a/z80.hpp
++++ b/z80.hpp
+@@ -120,8 +120,8 @@ class Z80
+     // Zilog: documented and undocumented Zilog Z80 flag behaviour. This is the
+     // default and the existing behaviour.
+     // Upd9002: NEC uPD9002 Z80 emulation mode (PC-88VA V1/V2 mode). Rules
+-    // R1-R11 were measured on a real PC-88VA2 (ZEXDOC/ZEXALL, direct flag
+-    // probes and exhaustive DAA/CPL/SCF/CCF dumps).
++    // R1-R13 were measured on a real PC-88VA2 (ZEXDOC/ZEXALL, direct flag
++    // probes and exhaustive DAA/CPL/SCF/CCF and DDCB/FDCB probes).
+     enum class FlagProfile {
+         Zilog,
+         Upd9002
+@@ -806,6 +806,12 @@ class Z80
+ #ifndef Z80_DISABLE_BREAKPOINT
+         ctx->checkBreakOperandIX4(op4);
+ #endif
++        if (ctx->isUpd9002() && op4 >= 0x40 && (op4 & 0x07) != 0x06) {
++            // R12/R13: BIT/RES/SET n,(i+d),r act on register r only, like the
++            // unprefixed CB opcode; memory is not modified
++            ctx->opSetCB[op4](ctx);
++            return;
++        }
+         ctx->opSetIX4[op4](ctx, op3);
+     }
+ 
+@@ -816,6 +822,12 @@ class Z80
+ #ifndef Z80_DISABLE_BREAKPOINT
+         ctx->checkBreakOperandIY4(op4);
+ #endif
++        if (ctx->isUpd9002() && op4 >= 0x40 && (op4 & 0x07) != 0x06) {
++            // R12/R13: BIT/RES/SET n,(i+d),r act on register r only, like the
++            // unprefixed CB opcode; memory is not modified
++            ctx->opSetCB[op4](ctx);
++            return;
++        }
+         ctx->opSetIY4[op4](ctx, op3);
+     }
+ 
+-- 
+2.43.0
+

@@ -1,0 +1,14 @@
+{
+  "applicable_changed": false,
+  "classification": "known_target_gap",
+  "count_after": 5908,
+  "count_before": 5908,
+  "gap_kind_after": "target_support_unverified",
+  "gap_kind_before": "implementation_missing",
+  "newly_applicable": [],
+  "newly_failing": [],
+  "newly_passing": [],
+  "schema": "vaeg-upd9002-m65j-policy-transition-v1",
+  "selected_changed": false,
+  "transition_kind": "target_authority_evidence_classification_correction"
+}

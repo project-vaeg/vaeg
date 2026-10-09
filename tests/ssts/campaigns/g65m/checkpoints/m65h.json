@@ -1,0 +1,56 @@
+{
+  "applicable_set_after": {
+    "ci": "6f10f47cd0f939145f99dbe6b1d820c79082c90083963b61cd39b5f56503537f",
+    "full": "4f0f19a6496f4c4463da092c7d5df7a9a0365a951821d9428eac8662d0c76e7c"
+  },
+  "applicable_set_before": {
+    "ci": "6f10f47cd0f939145f99dbe6b1d820c79082c90083963b61cd39b5f56503537f",
+    "full": "4f0f19a6496f4c4463da092c7d5df7a9a0365a951821d9428eac8662d0c76e7c"
+  },
+  "blocks_G65m": false,
+  "blocks_M66_after_G65m": false,
+  "campaign_base_gate": "G65",
+  "campaign_base_sha": "efd96b7e46717e7ee56e086f7d27ba42b04b49d3",
+  "campaign_branch": "topic/m65-residue-campaign",
+  "campaign_predecessor_sha": "2f3a49aaaf0fa905afe4146d815f684b86494ecd",
+  "canonical_task_path": "docs/agents/tasks/M65h_upd9002_brkfem_evidence.md",
+  "classification_after": "known_target_gap",
+  "classification_before": "known_target_gap",
+  "disposition": "approved_nonblocking_defer",
+  "evidence_artifacts": {
+    "backlog": {
+      "path": "tests/ssts/campaigns/g65m/evidence_backlog/brkfem.json",
+      "sha256": "52e83177d66eae30d744e5342903e8a9396b3a92fa55497ff1f008f0490e5fbb"
+    },
+    "zero_coverage_inventory": {
+      "path": "tests/ssts/evidence/g65/zero_coverage_inventory.json"
+    }
+  },
+  "implemented": false,
+  "milestone": "M65h",
+  "newly_applicable": 0,
+  "newly_failing": 0,
+  "newly_passing": 0,
+  "officially_executed": false,
+  "owned_hash_count": 0,
+  "owned_hash_set_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "passing_claim": false,
+  "production_semantic_change": false,
+  "report_path": "docs/agents/reports/m65h_upd9002_brkfem_evidence.md",
+  "selected_applicable_no_change": true,
+  "selected_set_after": {
+    "ci": "d30dd9c864fbbaa74c661e1b829c66264f2184a8fbbb72b654b2baa825664ae6",
+    "full": "0aa3dbb24323223b3a9595a0bd7cfd5666596741157c14b60f6969318475f8f7"
+  },
+  "selected_set_before": {
+    "ci": "d30dd9c864fbbaa74c661e1b829c66264f2184a8fbbb72b654b2baa825664ae6",
+    "full": "0aa3dbb24323223b3a9595a0bd7cfd5666596741157c14b60f6969318475f8f7"
+  },
+  "status": "complete_pending_campaign_gate",
+  "target_policy_after": "upd9002-g64-37ae2b706a9cbbe2d36cf7c98372c0cae7ca4b8d90e4f738973bc0ed3248eed6",
+  "target_policy_before": "upd9002-g64-37ae2b706a9cbbe2d36cf7c98372c0cae7ca4b8d90e4f738973bc0ed3248eed6",
+  "task_checkpoint_sha": "supplied_by_handoff",
+  "task_evaluated_sha": "2f3a49aaaf0fa905afe4146d815f684b86494ecd",
+  "task_evidence_sha": "supplied_by_handoff",
+  "task_start_sha": "2f3a49aaaf0fa905afe4146d815f684b86494ecd"
+}

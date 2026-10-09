@@ -1,0 +1,21 @@
+{
+  "active_occurrence_count": 0,
+  "classification_counts": {
+    "architecture_reference_preserve": 33,
+    "historical_record_preserve": 262294,
+    "negative_test_preserve": 97,
+    "third_party_provenance_preserve": 13,
+    "unrelated_numeric_286": 10
+  },
+  "compressed_artifact_bytes": 14766463,
+  "compressed_artifact_path": "identity_inventory_after.json.gz",
+  "compressed_artifact_sha256": "e8172f26153e2391a273158ffae37a14e5a75a039939d3ac3ca9dce764f98690",
+  "occurrence_count": 262447,
+  "schema": "upd9002-m66b-identity-inventory-pointer-v1",
+  "skipped_self_referential_outputs": [
+    "tests/ssts/campaigns/g66b/active_identity_allowlist.json",
+    "tests/ssts/campaigns/g66b/active_identity_allowlist.json.gz",
+    "tests/ssts/campaigns/g66b/identity_inventory_after.json",
+    "tests/ssts/campaigns/g66b/identity_inventory_after.json.gz"
+  ]
+}

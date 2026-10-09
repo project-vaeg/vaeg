@@ -1,0 +1,47 @@
+{
+  "applicable_change": "none",
+  "blocks_G65m": false,
+  "blocks_M66_after_G65m": false,
+  "disposition": "approved_nonblocking_defer",
+  "evidence_domain": "reserved_opcode_policy",
+  "implemented": false,
+  "owned_hash_count": 0,
+  "owned_hash_set_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "passing_claim": false,
+  "policy_change": "none",
+  "protected_decisions": [
+    {
+      "selector": "FF /7",
+      "status": "M65a implemented observable G65 applicable-failure contract; not treated as target-absent reserved behavior"
+    },
+    {
+      "selector": "6C-6F",
+      "status": "documented_silicon_absent evidence backlog; not returned to blocking denominator"
+    },
+    {
+      "selector": "66/67/FPO2",
+      "status": "upstream_nonblocking monitor-disassembler target absence with silicon support underdetermined"
+    },
+    {
+      "selector": "BRKEM",
+      "status": "zero executable corpus; separate corpus/evidence gate required"
+    },
+    {
+      "selector": "BRKFEM",
+      "status": "monitor/debugger authority without executable architectural contract; evidence gate required"
+    },
+    {
+      "selector": "M65j target-support-unverified backlog",
+      "status": "19 exact groups and 5,908 hashes remain non-applicable evidence backlog"
+    }
+  ],
+  "required_future_evidence": [
+    "target-wide reserved and undefined opcode behavior must be established by selector-specific target evidence",
+    "debugger and disassembler presentation must be separated from CPU execution semantics",
+    "production cleanup must not remove behavior without a protected semantic or evidence disposition",
+    "policy transitions require executable passing coverage or a separate authority correction"
+  ],
+  "schema": "vaeg-upd9002-m65k-reserved-opcode-policy-backlog-v1",
+  "selected_applicable_change": "none",
+  "task_id": "M65k"
+}

@@ -1,0 +1,7 @@
+{
+  "architectural_failure_count": 7511,
+  "implementation_missing_count": 5908,
+  "owner_sets_pairwise_disjoint": true,
+  "schema": "vaeg-upd9002-m65-coverage-v1",
+  "unowned": []
+}

@@ -1,0 +1,18 @@
+{
+  "milestone": "M65j",
+  "campaign_branch": "topic/m65-residue-campaign",
+  "campaign_base_gate": "G65",
+  "campaign_base_sha": "efd96b7e46717e7ee56e086f7d27ba42b04b49d3",
+  "campaign_predecessor_sha": "302540c5dff776890f205059235d3710d53a1636",
+  "task_start_sha": "302540c5dff776890f205059235d3710d53a1636",
+  "task_evaluated_sha": "ee47650d65247c0582303207b74da52411a8d10d",
+  "task_evidence_sha": "ee47650d65247c0582303207b74da52411a8d10d",
+  "canonical_task_path": "docs/agents/tasks/M65j_upd9002_nec_0f.md",
+  "report_path": "docs/agents/reports/m65j_upd9002_selector_decomposition.md",
+  "owned_count": 5908,
+  "owned_hash_set_sha256": "240e0bf76de968b310ad13ef53de8d044637b185e267e1cfb2540f32ab6571e5",
+  "classification_before": "known_target_gap",
+  "classification_after": "known_target_gap",
+  "status": "complete_pending_campaign_gate",
+  "production_semantic_change": false
+}

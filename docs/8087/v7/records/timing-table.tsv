@@ -1,0 +1,136 @@
+# Copyright (c) 2026 Nakata Maho
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+# 1. Redistributions of source code must retain the above copyright notice,
+#    this list of conditions and the following disclaimer.
+# 2. Redistributions in binary form must reproduce the above copyright notice,
+#    this list of conditions and the following disclaimer in the documentation
+#    and/or other materials provided with the distribution.
+#
+# THIS SOFTWARE IS PROVIDED BY THE AUTHOR "AS IS" AND ANY EXPRESS OR IMPLIED
+# WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+# MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
+# EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+# SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+# PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+# OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+# OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+# ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+#
+# Nominal NDP execution clocks transcribed from I04's execution-clocks table.
+# ea=1 means the documented value is nominal + effective-address clocks.
+# typical_min/max are the documented base range, excluding EA.
+form_id	opcode	modrm	nominal_ndp_clocks	ea	typical_min	typical_max	source
+D8M0	D8	00-7F	105	1	90	120	I04 execution-clocks table
+D8M1	D8	00-7F	118	1	110	125	I04 execution-clocks table
+D8M2	D8	00-7F	65	1	60	70	I04 execution-clocks table
+D8M3	D8	00-7F	68	1	63	73	I04 execution-clocks table
+D8M4	D8	00-7F	105	1	90	120	I04 execution-clocks table
+D8M5	D8	00-7F	105	1	90	120	I04 execution-clocks table
+D8M6	D8	00-7F	220	1	215	225	I04 execution-clocks table
+D8M7	D8	00-7F	221	1	216	226	I04 execution-clocks table
+D9M0	D9	00-7F	43	1	38	56	I04 execution-clocks table
+D9M2	D9	00-7F	87	1	84	90	I04 execution-clocks table
+D9M3	D9	00-7F	89	1	86	92	I04 execution-clocks table
+D9M4	D9	00-7F	40	1	35	45	I04 execution-clocks table
+D9M5	D9	00-7F	10	1	7	14	I04 execution-clocks table
+D9M6	D9	00-7F	45	1	40	50	I04 execution-clocks table
+D9M7	D9	00-7F	15	1	12	18	I04 execution-clocks table
+DAM0	DA	00-7F	125	1	108	143	I04 execution-clocks table
+DAM1	DA	00-7F	136	1	130	144	I04 execution-clocks table
+DAM2	DA	00-7F	85	1	78	91	I04 execution-clocks table
+DAM3	DA	00-7F	87	1	80	93	I04 execution-clocks table
+DAM4	DA	00-7F	125	1	108	143	I04 execution-clocks table
+DAM5	DA	00-7F	125	1	109	144	I04 execution-clocks table
+DAM6	DA	00-7F	236	1	230	243	I04 execution-clocks table
+DAM7	DA	00-7F	237	1	231	245	I04 execution-clocks table
+DBM0	DB	00-7F	56	1	52	60	I04 execution-clocks table
+DBM2	DB	00-7F	88	1	82	92	I04 execution-clocks table
+DBM3	DB	00-7F	90	1	84	94	I04 execution-clocks table
+DBM5	DB	00-7F	57	1	53	65	I04 execution-clocks table
+DBM7	DB	00-7F	55	1	52	58	I04 execution-clocks table
+DCM0	DC	00-7F	110	1	95	125	I04 execution-clocks table
+DCM1	DC	00-7F	161	1	154	168	I04 execution-clocks table
+DCM2	DC	00-7F	70	1	65	75	I04 execution-clocks table
+DCM3	DC	00-7F	72	1	67	77	I04 execution-clocks table
+DCM4	DC	00-7F	110	1	95	125	I04 execution-clocks table
+DCM5	DC	00-7F	110	1	95	125	I04 execution-clocks table
+DCM6	DC	00-7F	225	1	220	230	I04 execution-clocks table
+DCM7	DC	00-7F	226	1	221	231	I04 execution-clocks table
+DDM0	DD	00-7F	46	1	40	60	I04 execution-clocks table
+DDM2	DD	00-7F	100	1	96	104	I04 execution-clocks table
+DDM3	DD	00-7F	102	1	98	106	I04 execution-clocks table
+DDM4	DD	00-7F	202	1	197	207	I04 execution-clocks table
+DDM6	DD	00-7F	202	1	197	207	I04 execution-clocks table
+DDM7	DD	00-7F	15	1	12	18	I04 execution-clocks table
+DEM0	DE	00-7F	120	1	102	137	I04 execution-clocks table
+DEM1	DE	00-7F	130	1	124	138	I04 execution-clocks table
+DEM2	DE	00-7F	80	1	72	86	I04 execution-clocks table
+DEM3	DE	00-7F	82	1	74	88	I04 execution-clocks table
+DEM4	DE	00-7F	120	1	103	139	I04 execution-clocks table
+DEM5	DE	00-7F	120	1	102	137	I04 execution-clocks table
+DEM6	DE	00-7F	230	1	225	239	I04 execution-clocks table
+DEM7	DE	00-7F	230	1	224	238	I04 execution-clocks table
+DFM0	DF	00-7F	50	1	46	54	I04 execution-clocks table
+DFM2	DF	00-7F	86	1	80	90	I04 execution-clocks table
+DFM3	DF	00-7F	88	1	82	92	I04 execution-clocks table
+DFM4	DF	00-7F	300	1	290	310	I04 execution-clocks table
+DFM5	DF	00-7F	64	1	60	68	I04 execution-clocks table
+DFM6	DF	00-7F	530	1	520	540	I04 execution-clocks table
+DFM7	DF	00-7F	100	1	94	105	I04 execution-clocks table
+D8R0	D8	C0-C7	85	0	70	100	I04 execution-clocks table
+D8R1	D8	C8-CF	138	0	130	145	I04 execution-clocks table
+D8R2	D8	D0-D7	45	0	40	50	I04 execution-clocks table
+D8R3	D8	D8-DF	47	0	42	52	I04 execution-clocks table
+D8R4	D8	E0-E7	85	0	70	100	I04 execution-clocks table
+D8R5	D8	E8-EF	87	0	70	100	I04 execution-clocks table
+D8R6	D8	F0-F7	198	0	193	203	I04 execution-clocks table
+D8R7	D8	F8-FF	199	0	194	204	I04 execution-clocks table
+D9R0	D9	C0-C7	20	0	17	22	I04 execution-clocks table
+D9R1	D9	C8-CF	12	0	10	15	I04 execution-clocks table
+D9D0	D9	D0	13	0	10	16	I04 execution-clocks table
+D9E0	D9	E0	15	0	10	17	I04 execution-clocks table
+D9E1	D9	E1	14	0	10	17	I04 execution-clocks table
+D9E4	D9	E4	42	0	38	48	I04 execution-clocks table
+D9E5	D9	E5	17	0	12	23	I04 execution-clocks table
+D9E8	D9	E8	18	0	15	21	I04 execution-clocks table
+D9E9	D9	E9	19	0	16	22	I04 execution-clocks table
+D9EA	D9	EA	18	0	15	21	I04 execution-clocks table
+D9EB	D9	EB	19	0	16	22	I04 execution-clocks table
+D9EC	D9	EC	21	0	18	24	I04 execution-clocks table
+D9ED	D9	ED	20	0	17	23	I04 execution-clocks table
+D9EE	D9	EE	14	0	11	17	I04 execution-clocks table
+D9F0	D9	F0	500	0	310	630	I04 execution-clocks table
+D9F1	D9	F1	950	0	900	1100	I04 execution-clocks table
+D9F2	D9	F2	450	0	30	540	I04 execution-clocks table
+D9F3	D9	F3	650	0	250	800	I04 execution-clocks table
+D9F4	D9	F4	50	0	27	55	I04 execution-clocks table
+D9F6	D9	F6	9	0	6	12	I04 execution-clocks table
+D9F7	D9	F7	9	0	6	12	I04 execution-clocks table
+D9F8	D9	F8	125	0	15	190	I04 execution-clocks table
+D9F9	D9	F9	850	0	700	1000	I04 execution-clocks table
+D9FA	D9	FA	183	0	180	186	I04 execution-clocks table
+D9FC	D9	FC	45	0	16	50	I04 execution-clocks table
+D9FD	D9	FD	35	0	32	38	I04 execution-clocks table
+DBE0	DB	E0	5	0	2	8	I04 execution-clocks table
+DBE1	DB	E1	5	0	2	8	I04 execution-clocks table
+DBE2	DB	E2	5	0	2	8	I04 execution-clocks table
+DBE3	DB	E3	5	0	2	8	I04 execution-clocks table
+DCR0	DC	C0-C7	85	0	70	100	I04 execution-clocks table
+DCR1	DC	C8-CF	138	0	130	145	I04 execution-clocks table
+DCR4	DC	E0-E7	87	0	70	100	I04 execution-clocks table
+DCR5	DC	E8-EF	85	0	70	100	I04 execution-clocks table
+DCR6	DC	F0-F7	199	0	194	204	I04 execution-clocks table
+DCR7	DC	F8-FF	198	0	193	203	I04 execution-clocks table
+DDR0	DD	C0-C7	11	0	9	16	I04 execution-clocks table
+DDR2	DD	D0-D7	18	0	15	22	I04 execution-clocks table
+DDR3	DD	D8-DF	20	0	17	24	I04 execution-clocks table
+DER0	DE	C0-C7	90	0	75	105	I04 execution-clocks table
+DER1	DE	C8-CF	142	0	134	148	I04 execution-clocks table
+DER3	DE	D9	50	0	45	55	I04 execution-clocks table
+DER4	DE	E0-E7	90	0	75	105	I04 execution-clocks table
+DER5	DE	E8-EF	90	0	75	105	I04 execution-clocks table
+DER6	DE	F0-F7	203	0	198	208	I04 execution-clocks table
+DER7	DE	F8-FF	202	0	197	207	I04 execution-clocks table

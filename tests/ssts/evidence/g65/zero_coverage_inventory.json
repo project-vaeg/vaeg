@@ -1,0 +1,27 @@
+{
+  "items": [
+    {
+      "corpus_shard": false,
+      "executed": 0,
+      "implemented": false,
+      "item": "BRKEM",
+      "metadata": true,
+      "opcode": "0FFF",
+      "passing": false,
+      "selected": 0,
+      "status": "deferred_to_stage_1_corpus_gate"
+    },
+    {
+      "corpus_shard": false,
+      "executed": 0,
+      "implemented": false,
+      "item": "BRKFEM",
+      "metadata": true,
+      "opcode": "0FFE",
+      "passing": false,
+      "selected": 0,
+      "status": "evidence_required"
+    }
+  ],
+  "schema": "vaeg-upd9002-m65-zero-coverage-v1"
+}

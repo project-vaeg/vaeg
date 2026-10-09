@@ -1,0 +1,860 @@
+{
+  "groups": [
+    {
+      "baseline_classification": "known_target_gap",
+      "baseline_disposition": "approved_nonblocking_defer",
+      "baseline_gap_kind": "target_support_unverified",
+      "fingerprint_full_applicable_count": 0,
+      "fingerprint_full_selected_count": 0,
+      "group_digest": "37320aacc63bf0fd2319a0ee580bd63d638a2634ecfb718138dcb575fe5d0faf",
+      "hash_count": 309,
+      "instruction_family": "string",
+      "instruction_name": "MOVSB",
+      "prefix_byte": "65",
+      "primary_opcode": "A4",
+      "profile_baseline": {
+        "architectural_ci": {
+          "applicable": 0,
+          "executed": 0,
+          "selected": 0
+        },
+        "architectural_full": {
+          "applicable": 0,
+          "executed": 0,
+          "selected": 0
+        },
+        "fingerprint_full": {
+          "applicable": 0,
+          "executed": 0,
+          "selected": 0
+        }
+      },
+      "record_id": "upd9002.target_unverified.v30_reserved_repc.group_003",
+      "repeat_prefix": "REPC",
+      "source_artifact": "tests/ssts/campaigns/g65m/m65j/selector_decomposition.json",
+      "source_record_selector": {
+        "lock_prefix_constraint": "dispatch-neutral-any",
+        "metadata_form": "A4",
+        "modrm_reg": null,
+        "opcode": "0xa4",
+        "repeat_prefix": "repc",
+        "second_byte": null,
+        "segment_prefix_constraint": "dispatch-neutral-any",
+        "support_mode": "v30op_repc",
+        "support_subopcode": "-",
+        "support_target": "v30_reserved_repc"
+      }
+    },
+    {
+      "baseline_classification": "known_target_gap",
+      "baseline_disposition": "approved_nonblocking_defer",
+      "baseline_gap_kind": "target_support_unverified",
+      "fingerprint_full_applicable_count": 0,
+      "fingerprint_full_selected_count": 0,
+      "group_digest": "b53f2ca185052fce976fe6b9ad81267d9042147ef54e48aeb29f3ef78563ef32",
+      "hash_count": 327,
+      "instruction_family": "string",
+      "instruction_name": "MOVSW",
+      "prefix_byte": "65",
+      "primary_opcode": "A5",
+      "profile_baseline": {
+        "architectural_ci": {
+          "applicable": 0,
+          "executed": 0,
+          "selected": 0
+        },
+        "architectural_full": {
+          "applicable": 0,
+          "executed": 0,
+          "selected": 0
+        },
+        "fingerprint_full": {
+          "applicable": 0,
+          "executed": 0,
+          "selected": 0
+        }
+      },
+      "record_id": "upd9002.target_unverified.v30_reserved_repc.group_007",
+      "repeat_prefix": "REPC",
+      "source_artifact": "tests/ssts/campaigns/g65m/m65j/selector_decomposition.json",
+      "source_record_selector": {
+        "lock_prefix_constraint": "dispatch-neutral-any",
+        "metadata_form": "A5",
+        "modrm_reg": null,
+        "opcode": "0xa5",
+        "repeat_prefix": "repc",
+        "second_byte": null,
+        "segment_prefix_constraint": "dispatch-neutral-any",
+        "support_mode": "v30op_repc",
+        "support_subopcode": "-",
+        "support_target": "v30_reserved_repc"
+      }
+    },
+    {
+      "baseline_classification": "known_target_gap",
+      "baseline_disposition": "approved_nonblocking_defer",
+      "baseline_gap_kind": "target_support_unverified",
+      "fingerprint_full_applicable_count": 0,
+      "fingerprint_full_selected_count": 0,
+      "group_digest": "a7ec1fd0428aa7d0cdb91e32f1567deccbb13261f3b236d09527180f9bdd8b13",
+      "hash_count": 317,
+      "instruction_family": "string",
+      "instruction_name": "CMPSB",
+      "prefix_byte": "65",
+      "primary_opcode": "A6",
+      "profile_baseline": {
+        "architectural_ci": {
+          "applicable": 0,
+          "executed": 0,
+          "selected": 0
+        },
+        "architectural_full": {
+          "applicable": 0,
+          "executed": 0,
+          "selected": 0
+        },
+        "fingerprint_full": {
+          "applicable": 0,
+          "executed": 0,
+          "selected": 0
+        }
+      },
+      "record_id": "upd9002.target_unverified.v30_reserved_repc.group_004",
+      "repeat_prefix": "REPC",
+      "source_artifact": "tests/ssts/campaigns/g65m/m65j/selector_decomposition.json",
+      "source_record_selector": {
+        "lock_prefix_constraint": "dispatch-neutral-any",
+        "metadata_form": "A6",
+        "modrm_reg": null,
+        "opcode": "0xa6",
+        "repeat_prefix": "repc",
+        "second_byte": null,
+        "segment_prefix_constraint": "dispatch-neutral-any",
+        "support_mode": "v30op_repc",
+        "support_subopcode": "-",
+        "support_target": "v30_reserved_repc"
+      }
+    },
+    {
+      "baseline_classification": "known_target_gap",
+      "baseline_disposition": "approved_nonblocking_defer",
+      "baseline_gap_kind": "target_support_unverified",
+      "fingerprint_full_applicable_count": 0,
+      "fingerprint_full_selected_count": 0,
+      "group_digest": "46f1e313c21f5b4c5017d08ac5827d344cbd963c8bd45a0df68d5bb1968f64db",
+      "hash_count": 317,
+      "instruction_family": "string",
+      "instruction_name": "CMPSW",
+      "prefix_byte": "65",
+      "primary_opcode": "A7",
+      "profile_baseline": {
+        "architectural_ci": {
+          "applicable": 0,
+          "executed": 0,
+          "selected": 0
+        },
+        "architectural_full": {
+          "applicable": 0,
+          "executed": 0,
+          "selected": 0
+        },
+        "fingerprint_full": {
+          "applicable": 0,
+          "executed": 0,
+          "selected": 0
+        }
+      },
+      "record_id": "upd9002.target_unverified.v30_reserved_repc.group_012",
+      "repeat_prefix": "REPC",
+      "source_artifact": "tests/ssts/campaigns/g65m/m65j/selector_decomposition.json",
+      "source_record_selector": {
+        "lock_prefix_constraint": "dispatch-neutral-any",
+        "metadata_form": "A7",
+        "modrm_reg": null,
+        "opcode": "0xa7",
+        "repeat_prefix": "repc",
+        "second_byte": null,
+        "segment_prefix_constraint": "dispatch-neutral-any",
+        "support_mode": "v30op_repc",
+        "support_subopcode": "-",
+        "support_target": "v30_reserved_repc"
+      }
+    },
+    {
+      "baseline_classification": "known_target_gap",
+      "baseline_disposition": "approved_nonblocking_defer",
+      "baseline_gap_kind": "target_support_unverified",
+      "fingerprint_full_applicable_count": 0,
+      "fingerprint_full_selected_count": 0,
+      "group_digest": "ba669c017e305fa67beb1f58aa972270cad0476b5e293335d3aefc9e708c3041",
+      "hash_count": 332,
+      "instruction_family": "string",
+      "instruction_name": "STOSB",
+      "prefix_byte": "65",
+      "primary_opcode": "AA",
+      "profile_baseline": {
+        "architectural_ci": {
+          "applicable": 0,
+          "executed": 0,
+          "selected": 0
+        },
+        "architectural_full": {
+          "applicable": 0,
+          "executed": 0,
+          "selected": 0
+        },
+        "fingerprint_full": {
+          "applicable": 0,
+          "executed": 0,
+          "selected": 0
+        }
+      },
+      "record_id": "upd9002.target_unverified.v30_reserved_repc.group_017",
+      "repeat_prefix": "REPC",
+      "source_artifact": "tests/ssts/campaigns/g65m/m65j/selector_decomposition.json",
+      "source_record_selector": {
+        "lock_prefix_constraint": "dispatch-neutral-any",
+        "metadata_form": "AA",
+        "modrm_reg": null,
+        "opcode": "0xaa",
+        "repeat_prefix": "repc",
+        "second_byte": null,
+        "segment_prefix_constraint": "dispatch-neutral-any",
+        "support_mode": "v30op_repc",
+        "support_subopcode": "-",
+        "support_target": "v30_reserved_repc"
+      }
+    },
+    {
+      "baseline_classification": "known_target_gap",
+      "baseline_disposition": "approved_nonblocking_defer",
+      "baseline_gap_kind": "target_support_unverified",
+      "fingerprint_full_applicable_count": 0,
+      "fingerprint_full_selected_count": 0,
+      "group_digest": "7b88c728b3d87ba449b0993ccc9b338d6b224161d71f5baca438696442298aa5",
+      "hash_count": 325,
+      "instruction_family": "string",
+      "instruction_name": "STOSW",
+      "prefix_byte": "65",
+      "primary_opcode": "AB",
+      "profile_baseline": {
+        "architectural_ci": {
+          "applicable": 0,
+          "executed": 0,
+          "selected": 0
+        },
+        "architectural_full": {
+          "applicable": 0,
+          "executed": 0,
+          "selected": 0
+        },
+        "fingerprint_full": {
+          "applicable": 0,
+          "executed": 0,
+          "selected": 0
+        }
+      },
+      "record_id": "upd9002.target_unverified.v30_reserved_repc.group_006",
+      "repeat_prefix": "REPC",
+      "source_artifact": "tests/ssts/campaigns/g65m/m65j/selector_decomposition.json",
+      "source_record_selector": {
+        "lock_prefix_constraint": "dispatch-neutral-any",
+        "metadata_form": "AB",
+        "modrm_reg": null,
+        "opcode": "0xab",
+        "repeat_prefix": "repc",
+        "second_byte": null,
+        "segment_prefix_constraint": "dispatch-neutral-any",
+        "support_mode": "v30op_repc",
+        "support_subopcode": "-",
+        "support_target": "v30_reserved_repc"
+      }
+    },
+    {
+      "baseline_classification": "known_target_gap",
+      "baseline_disposition": "approved_nonblocking_defer",
+      "baseline_gap_kind": "target_support_unverified",
+      "fingerprint_full_applicable_count": 0,
+      "fingerprint_full_selected_count": 0,
+      "group_digest": "5fce7f982fc2b3067cc0eba08e2e47309fc3008b9d0aeb9b6809fd9141436ca6",
+      "hash_count": 317,
+      "instruction_family": "string",
+      "instruction_name": "LODSB",
+      "prefix_byte": "65",
+      "primary_opcode": "AC",
+      "profile_baseline": {
+        "architectural_ci": {
+          "applicable": 0,
+          "executed": 0,
+          "selected": 0
+        },
+        "architectural_full": {
+          "applicable": 0,
+          "executed": 0,
+          "selected": 0
+        },
+        "fingerprint_full": {
+          "applicable": 0,
+          "executed": 0,
+          "selected": 0
+        }
+      },
+      "record_id": "upd9002.target_unverified.v30_reserved_repc.group_008",
+      "repeat_prefix": "REPC",
+      "source_artifact": "tests/ssts/campaigns/g65m/m65j/selector_decomposition.json",
+      "source_record_selector": {
+        "lock_prefix_constraint": "dispatch-neutral-any",
+        "metadata_form": "AC",
+        "modrm_reg": null,
+        "opcode": "0xac",
+        "repeat_prefix": "repc",
+        "second_byte": null,
+        "segment_prefix_constraint": "dispatch-neutral-any",
+        "support_mode": "v30op_repc",
+        "support_subopcode": "-",
+        "support_target": "v30_reserved_repc"
+      }
+    },
+    {
+      "baseline_classification": "known_target_gap",
+      "baseline_disposition": "approved_nonblocking_defer",
+      "baseline_gap_kind": "target_support_unverified",
+      "fingerprint_full_applicable_count": 0,
+      "fingerprint_full_selected_count": 0,
+      "group_digest": "46405182543bad2955a307d47434aa5c9e69bf80045041a31615396a52b93af4",
+      "hash_count": 290,
+      "instruction_family": "string",
+      "instruction_name": "LODSW",
+      "prefix_byte": "65",
+      "primary_opcode": "AD",
+      "profile_baseline": {
+        "architectural_ci": {
+          "applicable": 0,
+          "executed": 0,
+          "selected": 0
+        },
+        "architectural_full": {
+          "applicable": 0,
+          "executed": 0,
+          "selected": 0
+        },
+        "fingerprint_full": {
+          "applicable": 0,
+          "executed": 0,
+          "selected": 0
+        }
+      },
+      "record_id": "upd9002.target_unverified.v30_reserved_repc.group_011",
+      "repeat_prefix": "REPC",
+      "source_artifact": "tests/ssts/campaigns/g65m/m65j/selector_decomposition.json",
+      "source_record_selector": {
+        "lock_prefix_constraint": "dispatch-neutral-any",
+        "metadata_form": "AD",
+        "modrm_reg": null,
+        "opcode": "0xad",
+        "repeat_prefix": "repc",
+        "second_byte": null,
+        "segment_prefix_constraint": "dispatch-neutral-any",
+        "support_mode": "v30op_repc",
+        "support_subopcode": "-",
+        "support_target": "v30_reserved_repc"
+      }
+    },
+    {
+      "baseline_classification": "known_target_gap",
+      "baseline_disposition": "approved_nonblocking_defer",
+      "baseline_gap_kind": "target_support_unverified",
+      "fingerprint_full_applicable_count": 0,
+      "fingerprint_full_selected_count": 0,
+      "group_digest": "4d7399bf031acdc1ab74235d90ac9fcee711f4368471d78bfb71e87bc110a42e",
+      "hash_count": 292,
+      "instruction_family": "string",
+      "instruction_name": "SCASW",
+      "prefix_byte": "65",
+      "primary_opcode": "AF",
+      "profile_baseline": {
+        "architectural_ci": {
+          "applicable": 0,
+          "executed": 0,
+          "selected": 0
+        },
+        "architectural_full": {
+          "applicable": 0,
+          "executed": 0,
+          "selected": 0
+        },
+        "fingerprint_full": {
+          "applicable": 0,
+          "executed": 0,
+          "selected": 0
+        }
+      },
+      "record_id": "upd9002.target_unverified.v30_reserved_repc.group_018",
+      "repeat_prefix": "REPC",
+      "source_artifact": "tests/ssts/campaigns/g65m/m65j/selector_decomposition.json",
+      "source_record_selector": {
+        "lock_prefix_constraint": "dispatch-neutral-any",
+        "metadata_form": "AF",
+        "modrm_reg": null,
+        "opcode": "0xaf",
+        "repeat_prefix": "repc",
+        "second_byte": null,
+        "segment_prefix_constraint": "dispatch-neutral-any",
+        "support_mode": "v30op_repc",
+        "support_subopcode": "-",
+        "support_target": "v30_reserved_repc"
+      }
+    },
+    {
+      "baseline_classification": "known_target_gap",
+      "baseline_disposition": "approved_nonblocking_defer",
+      "baseline_gap_kind": "target_support_unverified",
+      "fingerprint_full_applicable_count": 0,
+      "fingerprint_full_selected_count": 0,
+      "group_digest": "6cae8632cade30a2a4d30311dadfb45cbdfc956c3e79493b0b98fbe6a580efbe",
+      "hash_count": 302,
+      "instruction_family": "string",
+      "instruction_name": "MOVSB",
+      "prefix_byte": "64",
+      "primary_opcode": "A4",
+      "profile_baseline": {
+        "architectural_ci": {
+          "applicable": 0,
+          "executed": 0,
+          "selected": 0
+        },
+        "architectural_full": {
+          "applicable": 0,
+          "executed": 0,
+          "selected": 0
+        },
+        "fingerprint_full": {
+          "applicable": 0,
+          "executed": 0,
+          "selected": 0
+        }
+      },
+      "record_id": "upd9002.target_unverified.v30_reserved_0f.group_014",
+      "repeat_prefix": "REPNC",
+      "source_artifact": "tests/ssts/campaigns/g65m/m65j/selector_decomposition.json",
+      "source_record_selector": {
+        "lock_prefix_constraint": "dispatch-neutral-any",
+        "metadata_form": "A4",
+        "modrm_reg": null,
+        "opcode": "0xa4",
+        "repeat_prefix": "repnc",
+        "second_byte": null,
+        "segment_prefix_constraint": "dispatch-neutral-any",
+        "support_mode": "v30op",
+        "support_subopcode": "-",
+        "support_target": "v30_reserved_0x0f"
+      }
+    },
+    {
+      "baseline_classification": "known_target_gap",
+      "baseline_disposition": "approved_nonblocking_defer",
+      "baseline_gap_kind": "target_support_unverified",
+      "fingerprint_full_applicable_count": 0,
+      "fingerprint_full_selected_count": 0,
+      "group_digest": "5fe60440784bfb67ac39758432603e734fc1ac4e1730ba0d13e3ba3cc90623ed",
+      "hash_count": 305,
+      "instruction_family": "string",
+      "instruction_name": "MOVSW",
+      "prefix_byte": "64",
+      "primary_opcode": "A5",
+      "profile_baseline": {
+        "architectural_ci": {
+          "applicable": 0,
+          "executed": 0,
+          "selected": 0
+        },
+        "architectural_full": {
+          "applicable": 0,
+          "executed": 0,
+          "selected": 0
+        },
+        "fingerprint_full": {
+          "applicable": 0,
+          "executed": 0,
+          "selected": 0
+        }
+      },
+      "record_id": "upd9002.target_unverified.v30_reserved_0f.group_002",
+      "repeat_prefix": "REPNC",
+      "source_artifact": "tests/ssts/campaigns/g65m/m65j/selector_decomposition.json",
+      "source_record_selector": {
+        "lock_prefix_constraint": "dispatch-neutral-any",
+        "metadata_form": "A5",
+        "modrm_reg": null,
+        "opcode": "0xa5",
+        "repeat_prefix": "repnc",
+        "second_byte": null,
+        "segment_prefix_constraint": "dispatch-neutral-any",
+        "support_mode": "v30op",
+        "support_subopcode": "-",
+        "support_target": "v30_reserved_0x0f"
+      }
+    },
+    {
+      "baseline_classification": "known_target_gap",
+      "baseline_disposition": "approved_nonblocking_defer",
+      "baseline_gap_kind": "target_support_unverified",
+      "fingerprint_full_applicable_count": 0,
+      "fingerprint_full_selected_count": 0,
+      "group_digest": "eb1e255fbc332369b6b90fb5db301eee74191cc8d22f88a827083969fe22cae5",
+      "hash_count": 306,
+      "instruction_family": "string",
+      "instruction_name": "CMPSB",
+      "prefix_byte": "64",
+      "primary_opcode": "A6",
+      "profile_baseline": {
+        "architectural_ci": {
+          "applicable": 0,
+          "executed": 0,
+          "selected": 0
+        },
+        "architectural_full": {
+          "applicable": 0,
+          "executed": 0,
+          "selected": 0
+        },
+        "fingerprint_full": {
+          "applicable": 0,
+          "executed": 0,
+          "selected": 0
+        }
+      },
+      "record_id": "upd9002.target_unverified.v30_reserved_0f.group_009",
+      "repeat_prefix": "REPNC",
+      "source_artifact": "tests/ssts/campaigns/g65m/m65j/selector_decomposition.json",
+      "source_record_selector": {
+        "lock_prefix_constraint": "dispatch-neutral-any",
+        "metadata_form": "A6",
+        "modrm_reg": null,
+        "opcode": "0xa6",
+        "repeat_prefix": "repnc",
+        "second_byte": null,
+        "segment_prefix_constraint": "dispatch-neutral-any",
+        "support_mode": "v30op",
+        "support_subopcode": "-",
+        "support_target": "v30_reserved_0x0f"
+      }
+    },
+    {
+      "baseline_classification": "known_target_gap",
+      "baseline_disposition": "approved_nonblocking_defer",
+      "baseline_gap_kind": "target_support_unverified",
+      "fingerprint_full_applicable_count": 0,
+      "fingerprint_full_selected_count": 0,
+      "group_digest": "3f70b39696fb9a92bb4e4506e7871e7e0ce32da3bc691b7f156e19f0d62bb8d3",
+      "hash_count": 306,
+      "instruction_family": "string",
+      "instruction_name": "CMPSW",
+      "prefix_byte": "64",
+      "primary_opcode": "A7",
+      "profile_baseline": {
+        "architectural_ci": {
+          "applicable": 0,
+          "executed": 0,
+          "selected": 0
+        },
+        "architectural_full": {
+          "applicable": 0,
+          "executed": 0,
+          "selected": 0
+        },
+        "fingerprint_full": {
+          "applicable": 0,
+          "executed": 0,
+          "selected": 0
+        }
+      },
+      "record_id": "upd9002.target_unverified.v30_reserved_0f.group_010",
+      "repeat_prefix": "REPNC",
+      "source_artifact": "tests/ssts/campaigns/g65m/m65j/selector_decomposition.json",
+      "source_record_selector": {
+        "lock_prefix_constraint": "dispatch-neutral-any",
+        "metadata_form": "A7",
+        "modrm_reg": null,
+        "opcode": "0xa7",
+        "repeat_prefix": "repnc",
+        "second_byte": null,
+        "segment_prefix_constraint": "dispatch-neutral-any",
+        "support_mode": "v30op",
+        "support_subopcode": "-",
+        "support_target": "v30_reserved_0x0f"
+      }
+    },
+    {
+      "baseline_classification": "known_target_gap",
+      "baseline_disposition": "approved_nonblocking_defer",
+      "baseline_gap_kind": "target_support_unverified",
+      "fingerprint_full_applicable_count": 0,
+      "fingerprint_full_selected_count": 0,
+      "group_digest": "a876a6b809f415f3f05b200c04c067c1d4d7bbc509d78250cde1d9815d16be7a",
+      "hash_count": 290,
+      "instruction_family": "string",
+      "instruction_name": "STOSB",
+      "prefix_byte": "64",
+      "primary_opcode": "AA",
+      "profile_baseline": {
+        "architectural_ci": {
+          "applicable": 0,
+          "executed": 0,
+          "selected": 0
+        },
+        "architectural_full": {
+          "applicable": 0,
+          "executed": 0,
+          "selected": 0
+        },
+        "fingerprint_full": {
+          "applicable": 0,
+          "executed": 0,
+          "selected": 0
+        }
+      },
+      "record_id": "upd9002.target_unverified.v30_reserved_0f.group_005",
+      "repeat_prefix": "REPNC",
+      "source_artifact": "tests/ssts/campaigns/g65m/m65j/selector_decomposition.json",
+      "source_record_selector": {
+        "lock_prefix_constraint": "dispatch-neutral-any",
+        "metadata_form": "AA",
+        "modrm_reg": null,
+        "opcode": "0xaa",
+        "repeat_prefix": "repnc",
+        "second_byte": null,
+        "segment_prefix_constraint": "dispatch-neutral-any",
+        "support_mode": "v30op",
+        "support_subopcode": "-",
+        "support_target": "v30_reserved_0x0f"
+      }
+    },
+    {
+      "baseline_classification": "known_target_gap",
+      "baseline_disposition": "approved_nonblocking_defer",
+      "baseline_gap_kind": "target_support_unverified",
+      "fingerprint_full_applicable_count": 0,
+      "fingerprint_full_selected_count": 0,
+      "group_digest": "a5cd21c6be979ed1124fabc9e3e4b5294f22a03a2bf67ed398029dc0073a4ff1",
+      "hash_count": 334,
+      "instruction_family": "string",
+      "instruction_name": "STOSW",
+      "prefix_byte": "64",
+      "primary_opcode": "AB",
+      "profile_baseline": {
+        "architectural_ci": {
+          "applicable": 0,
+          "executed": 0,
+          "selected": 0
+        },
+        "architectural_full": {
+          "applicable": 0,
+          "executed": 0,
+          "selected": 0
+        },
+        "fingerprint_full": {
+          "applicable": 0,
+          "executed": 0,
+          "selected": 0
+        }
+      },
+      "record_id": "upd9002.target_unverified.v30_reserved_0f.group_016",
+      "repeat_prefix": "REPNC",
+      "source_artifact": "tests/ssts/campaigns/g65m/m65j/selector_decomposition.json",
+      "source_record_selector": {
+        "lock_prefix_constraint": "dispatch-neutral-any",
+        "metadata_form": "AB",
+        "modrm_reg": null,
+        "opcode": "0xab",
+        "repeat_prefix": "repnc",
+        "second_byte": null,
+        "segment_prefix_constraint": "dispatch-neutral-any",
+        "support_mode": "v30op",
+        "support_subopcode": "-",
+        "support_target": "v30_reserved_0x0f"
+      }
+    },
+    {
+      "baseline_classification": "known_target_gap",
+      "baseline_disposition": "approved_nonblocking_defer",
+      "baseline_gap_kind": "target_support_unverified",
+      "fingerprint_full_applicable_count": 0,
+      "fingerprint_full_selected_count": 0,
+      "group_digest": "e07a935c78846a9bc91ba1c4ecda1093878f6a10b02b6e1a0c7a3f5bc9b82610",
+      "hash_count": 306,
+      "instruction_family": "string",
+      "instruction_name": "LODSB",
+      "prefix_byte": "64",
+      "primary_opcode": "AC",
+      "profile_baseline": {
+        "architectural_ci": {
+          "applicable": 0,
+          "executed": 0,
+          "selected": 0
+        },
+        "architectural_full": {
+          "applicable": 0,
+          "executed": 0,
+          "selected": 0
+        },
+        "fingerprint_full": {
+          "applicable": 0,
+          "executed": 0,
+          "selected": 0
+        }
+      },
+      "record_id": "upd9002.target_unverified.v30_reserved_0f.group_001",
+      "repeat_prefix": "REPNC",
+      "source_artifact": "tests/ssts/campaigns/g65m/m65j/selector_decomposition.json",
+      "source_record_selector": {
+        "lock_prefix_constraint": "dispatch-neutral-any",
+        "metadata_form": "AC",
+        "modrm_reg": null,
+        "opcode": "0xac",
+        "repeat_prefix": "repnc",
+        "second_byte": null,
+        "segment_prefix_constraint": "dispatch-neutral-any",
+        "support_mode": "v30op",
+        "support_subopcode": "-",
+        "support_target": "v30_reserved_0x0f"
+      }
+    },
+    {
+      "baseline_classification": "known_target_gap",
+      "baseline_disposition": "approved_nonblocking_defer",
+      "baseline_gap_kind": "target_support_unverified",
+      "fingerprint_full_applicable_count": 0,
+      "fingerprint_full_selected_count": 0,
+      "group_digest": "dfc4d217d8ffc7bdadf9a1074fce90e2fbaa784fd35ebd549778c2311381e083",
+      "hash_count": 319,
+      "instruction_family": "string",
+      "instruction_name": "LODSW",
+      "prefix_byte": "64",
+      "primary_opcode": "AD",
+      "profile_baseline": {
+        "architectural_ci": {
+          "applicable": 0,
+          "executed": 0,
+          "selected": 0
+        },
+        "architectural_full": {
+          "applicable": 0,
+          "executed": 0,
+          "selected": 0
+        },
+        "fingerprint_full": {
+          "applicable": 0,
+          "executed": 0,
+          "selected": 0
+        }
+      },
+      "record_id": "upd9002.target_unverified.v30_reserved_0f.group_013",
+      "repeat_prefix": "REPNC",
+      "source_artifact": "tests/ssts/campaigns/g65m/m65j/selector_decomposition.json",
+      "source_record_selector": {
+        "lock_prefix_constraint": "dispatch-neutral-any",
+        "metadata_form": "AD",
+        "modrm_reg": null,
+        "opcode": "0xad",
+        "repeat_prefix": "repnc",
+        "second_byte": null,
+        "segment_prefix_constraint": "dispatch-neutral-any",
+        "support_mode": "v30op",
+        "support_subopcode": "-",
+        "support_target": "v30_reserved_0x0f"
+      }
+    },
+    {
+      "baseline_classification": "known_target_gap",
+      "baseline_disposition": "approved_nonblocking_defer",
+      "baseline_gap_kind": "target_support_unverified",
+      "fingerprint_full_applicable_count": 0,
+      "fingerprint_full_selected_count": 0,
+      "group_digest": "b8976e315c897ee4233f0c09176324515d70ff385ae63073ef561cda8497f5a6",
+      "hash_count": 301,
+      "instruction_family": "string",
+      "instruction_name": "SCASB",
+      "prefix_byte": "64",
+      "primary_opcode": "AE",
+      "profile_baseline": {
+        "architectural_ci": {
+          "applicable": 0,
+          "executed": 0,
+          "selected": 0
+        },
+        "architectural_full": {
+          "applicable": 0,
+          "executed": 0,
+          "selected": 0
+        },
+        "fingerprint_full": {
+          "applicable": 0,
+          "executed": 0,
+          "selected": 0
+        }
+      },
+      "record_id": "upd9002.target_unverified.v30_reserved_0f.group_015",
+      "repeat_prefix": "REPNC",
+      "source_artifact": "tests/ssts/campaigns/g65m/m65j/selector_decomposition.json",
+      "source_record_selector": {
+        "lock_prefix_constraint": "dispatch-neutral-any",
+        "metadata_form": "AE",
+        "modrm_reg": null,
+        "opcode": "0xae",
+        "repeat_prefix": "repnc",
+        "second_byte": null,
+        "segment_prefix_constraint": "dispatch-neutral-any",
+        "support_mode": "v30op",
+        "support_subopcode": "-",
+        "support_target": "v30_reserved_0x0f"
+      }
+    },
+    {
+      "baseline_classification": "known_target_gap",
+      "baseline_disposition": "approved_nonblocking_defer",
+      "baseline_gap_kind": "target_support_unverified",
+      "fingerprint_full_applicable_count": 0,
+      "fingerprint_full_selected_count": 0,
+      "group_digest": "1360a02f98f65fc5a46b99de881b9a19cacdc7ea431d9e0811682bc4733d6f08",
+      "hash_count": 313,
+      "instruction_family": "string",
+      "instruction_name": "SCASW",
+      "prefix_byte": "64",
+      "primary_opcode": "AF",
+      "profile_baseline": {
+        "architectural_ci": {
+          "applicable": 0,
+          "executed": 0,
+          "selected": 0
+        },
+        "architectural_full": {
+          "applicable": 0,
+          "executed": 0,
+          "selected": 0
+        },
+        "fingerprint_full": {
+          "applicable": 0,
+          "executed": 0,
+          "selected": 0
+        }
+      },
+      "record_id": "upd9002.target_unverified.v30_reserved_0f.group_019",
+      "repeat_prefix": "REPNC",
+      "source_artifact": "tests/ssts/campaigns/g65m/m65j/selector_decomposition.json",
+      "source_record_selector": {
+        "lock_prefix_constraint": "dispatch-neutral-any",
+        "metadata_form": "AF",
+        "modrm_reg": null,
+        "opcode": "0xaf",
+        "repeat_prefix": "repnc",
+        "second_byte": null,
+        "segment_prefix_constraint": "dispatch-neutral-any",
+        "support_mode": "v30op",
+        "support_subopcode": "-",
+        "support_target": "v30_reserved_0x0f"
+      }
+    }
+  ],
+  "schema": "vaeg-upd9002-m70-population-groups-v1"
+}

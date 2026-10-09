@@ -1,0 +1,26 @@
+{
+  "allowed_semantic_scope": "none during materialization",
+  "campaign_base_gate": "G65",
+  "campaign_base_sha": "efd96b7e46717e7ee56e086f7d27ba42b04b49d3",
+  "canonical_owner": "M65j",
+  "case_table_path": null,
+  "case_table_sha256": null,
+  "evidence_sources": [
+    "canonical task and G65 manifests"
+  ],
+  "owned_hash_count": 0,
+  "owned_hash_set_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "owned_selectors": [],
+  "prohibited_scope": [
+    "CPU semantics",
+    "policy changes",
+    "fixture changes"
+  ],
+  "proven_contract": false,
+  "readiness_status": "conditional_nonblocking",
+  "stop_conditions": [
+    "canonical evidence contract unavailable"
+  ],
+  "task_id": "M65j",
+  "task_kind": "evidence_or_closure"
+}
